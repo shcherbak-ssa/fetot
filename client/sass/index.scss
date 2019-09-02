@@ -1,0 +1,17 @@
+@import 'src/fonts';
+@import 'src/vars';
+@import 'src/mixin';
+
+body {
+  font-family: 'Roboto';
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+@import 'modules/loading';
+
+#app {
+  position: absolute;
+  @include full-sizes;
+}

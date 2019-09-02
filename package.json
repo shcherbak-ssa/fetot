@@ -1,0 +1,21 @@
+{
+  "name": "fetot",
+  "version": "0.0.1",
+  "description": "application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "scss2css": "node scss2css.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://shcherbak_ssa@bitbucket.org/shcherbak_ssa/fetot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/shcherbak_ssa/fetot#readme",
+  "dependencies": {
+    "node-sass": "^4.12.0",
+    "ws": "^7.1.2"
+  }
+}
