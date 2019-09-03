@@ -1,5 +1,86 @@
 #loading {
+  flex-direction: column;
   position: absolute;
   z-index: 1;
+  @include flex-center;
   @include full-sizes;
+
+  .logo {
+    animation: logo-start .7s .6s forwards;
+    overflow: hidden;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 50px;
+    position: relative;
+
+    .icon {
+      animation: show-logo-icon .6s .2s forwards;
+      border-radius: 20px 0 20px 0;
+      background: $azure;
+      width: 0;
+      height: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 1;
+      @include box-shadow;
+    }
+    .name {
+      animation: show-logo-name .7s .6s forwards;
+      color: #fff;
+      font: 3rem 'Roboto-bold';
+      text-align: center;
+      width: 136px;
+      height: 64px;
+      position: absolute;
+      top: 0;
+      left: -140px;
+      @include text-shadow;
+    }
+  }
+  .quote {
+    color: $dark-gray;
+    font-size: 1.5rem;
+    text-align: center;
+    width: 420px;
+    height: 150px;
+    position: relative;
+    @include flex-center;
+
+    &::after, &::before {
+      background: $dark-gray;
+      content: '';
+      display: block;
+      width: 100%;
+      height: 2px;
+      position: absolute;
+      left: 0;
+      @include box-shadow;
+    }
+    &::before {
+      top: 0;
+    }
+    &::after {
+      bottom: 0;
+    }
+  }
+}
+@keyframes logo-start {
+  to {
+    width: 200px;
+  }
+}
+@keyframes show-logo-icon {
+  to {
+    width: 64px;
+    height: 64px;
+    left: 0;
+    top: 0;
+  }
+}
+@keyframes show-logo-name {
+  to {
+    left: 64px;
+    color: $dark-blue;
+  }
 }
