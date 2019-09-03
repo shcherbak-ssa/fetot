@@ -5,8 +5,8 @@ const fs = require('fs'),
 	sass = require('node-sass');
 
 renderScss2Css({
-	input: path.join(__dirname, 'client/sass/index.scss'),
-	output: path.join(__dirname, 'public/loading.css')
+	input: path.join(__dirname, 'loading/sass/index.scss'),
+	output: path.join(__dirname, 'loading/loading.css')
 });
 
 function renderScss2Css(config) {
