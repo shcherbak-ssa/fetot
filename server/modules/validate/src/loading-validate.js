@@ -2,24 +2,28 @@
 
 const path = require('path'),
 	projectDirname = process.cwd(),
-	loadingDirname = path.join(projectDirname, 'loading');
+	publicDirname = path.join(projectDirname, 'public');
 
 module.exports = {
 	html: {
-		valid: [ 'index' ],
-		dirname: loadingDirname
+		valid: [ 'login' ],
+		dirname: path.join(publicDirname, 'html')
 	},
 	css: {
-		valid: [ 'loading' ],
-		dirname: loadingDirname
+		valid: [ 'login' ],
+		dirname: path.join(publicDirname, 'css')
 	},
 	js: {
-		valid: [ 'loading' ],
-		dirname: loadingDirname
+		valid: [ 'login' ],
+		dirname: path.join(publicDirname, 'js')
 	},
 	ttf: {
 		valid: [ 'fRobotoBold', 'fRobotoReqular' ],
-		dirname: path.join(loadingDirname, 'fonts')
+		dirname: path.join(publicDirname, 'assets/fonts')
+	},
+	svg: {
+		valid: [ 'fullname', 'username', 'mail', 'password' ],
+		dirname: path.join(publicDirname, 'assets')
 	},
 	404: path.join(projectDirname, 'public/html/404.html')
 };

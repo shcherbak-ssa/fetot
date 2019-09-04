@@ -1,9 +1,10 @@
 Components.input = {
-	template: [
+	$template: [
 		[
 			'<div class="input" data-label="',
 			'"><div class="ph">',
-			'</div><input type="text" class="item"><div class="error"></div></div>`'
+			'</div><input type="text" class="item"><div class="error">' +
+			'</div></div>`'
 		],
 		''
 	],
@@ -12,5 +13,25 @@ Components.input = {
 		'.placeholder',
 		'$error'
 	],
-	
+	events: {
+		click() {
+		
+		},
+		input() {
+		
+		},
+		change() {
+		
+		}
+	},
+	src: {
+		styles: {
+			name: '',
+			data: {}
+		},
+		template: {
+			name: '',
+			data: {}
+		}
+	}
 };
