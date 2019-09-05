@@ -16,7 +16,6 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/shcherbak_ssa/fetot#readme",
   "dependencies": {
-    "node-sass": "^4.12.0",
     "ws": "^7.1.2"
   }
 }
