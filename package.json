@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "scss2css": "node scss2css.js",
-    "server": "node server"
+    "fetot": "node server"
   },
   "repository": {
     "type": "git",

@@ -1,0 +1,20 @@
+{
+  "name": "Fetot",
+  "short_name": "Fetot",
+  "icons": [
+    {
+      "src": "ilogo192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "ilogo512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "login.html",
+  "display": "fullscreen",
+  "background_color": "#F1F1F5",
+  "theme_color": "#004466"
+}
