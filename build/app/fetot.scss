@@ -1,0 +1,31 @@
+@import '../scss/src';
+
+.fetot {
+  //background-image: url('logo-bg.png');
+  background-size: cover;
+  @include flex-center;
+  @include full-sizes;
+
+  .login {
+    background: #fff;
+    width: 510px;
+    height: 315px;
+    @include flex-column;
+  }
+  .title {
+    color: $fetot-dark-blue;
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+  }
+  .link {
+    color: $fetot-blue;
+    font-size: 14px;
+    font-weight: lighter;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

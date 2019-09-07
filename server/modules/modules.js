@@ -2,5 +2,5 @@
 
 const modules = module.exports = {};
 
-modules.validate = require('./validate');
+modules.request = require('./request');
 modules.send = require('./send');

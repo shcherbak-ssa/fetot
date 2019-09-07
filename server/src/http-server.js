@@ -1,10 +1,9 @@
 'use strict';
 
 const http = require('http'),
-	path = require('path'),
 	httpServer = http.createServer();
 
-module.exports = ({validate, send}) => {
+module.exports = ({request: getRequestUrl, send}) => {
 	return async (port, hostname) => {
 		httpServer.on('request', httpServerWorker);
 		return httpServer.listen(port, hostname, () => {
@@ -13,22 +12,13 @@ module.exports = ({validate, send}) => {
 	};
 	
 	async function httpServerWorker(request, response) {
-		let {method, url} = request;
-		if( method !== 'GET' ) {
-			response.end('Oops');
-			return;
-		}
+		if( request.method !== 'GET' ) return response.end('Oops');
 		
 		try {
-			// let filename = await validate.httpGetRequest(url);
-			let filename = path.resolve(__dirname, '../../client');
-			if( /\.html$/.test(url) ) filename = path.join(filename, 'view', url);
-			else filename = path.join(filename, 'js', url);
-			
+			let filename = await getRequestUrl(request.url);
 			await send.fileForGetRequest(filename, response);
 		} catch( err ) {
-			if( typeof err !== 'string' ) return console.log(err);
-			
+			if( typeof err === 'object' ) return console.log(err);
 			await send.error404(err, response);
 		}
 	}

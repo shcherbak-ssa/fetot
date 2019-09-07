@@ -1,10 +1,12 @@
 import Vue from 'vue/dist/vue'
-import App from './App.vue'
+import './scss/index.scss'
+
+import Fetot from './app/Fetot.vue'
 
 // Vue.config.productionTip = false;
 
 new Vue({
-	el: '#app',
-	template: '<App/>',
-	components: { App }
+	el: '#fetot',
+	template: '<Fetot/>',
+	components: { Fetot }
 });

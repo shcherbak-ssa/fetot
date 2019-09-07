@@ -1,0 +1,16 @@
+@mixin full-sizes {
+  width: 100%;
+  height: 100%;
+}
+@mixin box-sizing {
+  box-sizing: border-box;
+}
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

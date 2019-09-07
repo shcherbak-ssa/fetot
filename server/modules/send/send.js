@@ -16,6 +16,9 @@ send.fileForGetRequest = (filename, response) => {
 		.on('end', () => {
 			response.end();
 		})
+		.on('error', (err) => {
+			return Promise.reject(err)
+		})
 };
 send.error404 = (errorFilename, response) => {
 	return send.fileForGetRequest(errorFilename, response)
