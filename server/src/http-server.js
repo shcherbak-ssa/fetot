@@ -1,6 +1,7 @@
 'use strict';
 
 const http = require('http'),
+	path = require('path'),
 	httpServer = http.createServer();
 
 module.exports = ({validate, send}) => {
@@ -19,7 +20,11 @@ module.exports = ({validate, send}) => {
 		}
 		
 		try {
-			let filename = await validate.httpGetRequest(url);
+			// let filename = await validate.httpGetRequest(url);
+			let filename = path.resolve(__dirname, '../../client');
+			if( /\.html$/.test(url) ) filename = path.join(filename, 'view', url);
+			else filename = path.join(filename, 'js', url);
+			
 			await send.fileForGetRequest(filename, response);
 		} catch( err ) {
 			if( typeof err !== 'string' ) return console.log(err);
