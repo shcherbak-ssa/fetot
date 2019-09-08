@@ -1,0 +1,8 @@
+@import 'variables';
+
+@mixin static-shadow {
+  box-shadow: 0 2px 2px $fetot-dark-gray-40;
+}
+@mixin hover-shadow {
+  box-shadow: 0 2px 6px $fetot-dark-gray-40;
+}
