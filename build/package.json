@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "build-hot": "webpack-dev-server --hot"
+    "build-app": "webpack app --env.currentModule=app",
+    "build-login": "webpack --env.currentModule=login",
+    "cli": "node cli"
   },
   "author": "Friends.IT",
   "license": "ISC",

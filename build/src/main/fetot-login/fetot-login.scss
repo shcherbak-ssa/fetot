@@ -1,0 +1,7 @@
+@import '../../scss/src.scss';
+
+.fetot-login {
+  background: $fetot-light-gray;
+  @include flex-center;
+  @include full-sizes;
+}

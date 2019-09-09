@@ -11,7 +11,7 @@ module.exports = new Map([
 	[
 		/\.html$/,
 		{
-			valid: new Set(['index']),
+			valid: new Set(['app', 'login']),
 			filename(base) {
 				return setFilename('view', ( base === '/' ? 'index.html' : base))
 			}
@@ -20,7 +20,7 @@ module.exports = new Map([
 	[
 		/\.js$/,
 		{
-			valid: new Set(['index']),
+			valid: new Set(['login', 'app']),
 			filename(base) {
 				return setFilename('js', base)
 			}
