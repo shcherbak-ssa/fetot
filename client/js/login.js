@@ -81,32 +81,44 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/fetot-login.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/babel-loader/lib/index.js!./src/components/f-button/f-button.js?vue&type=script&lang=js&":
-/*!******************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./src/components/f-button/f-button.js?vue&type=script&lang=js& ***!
-  \******************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js!./src/components/fetot-input/fetot-input.js?vue&type=script&lang=js&":
+/*!************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./src/components/fetot-input/fetot-input.js?vue&type=script&lang=js& ***!
+  \************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  name: 'f-button'\n});\n\n//# sourceURL=webpack:///./src/components/f-button/f-button.js?./node_modules/babel-loader/lib");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  name: 'fetot-input',\n\n  data() {\n    return {\n      status: {\n        'is-active': false,\n        'has-value': false,\n        'has-error': false\n      }\n    };\n  },\n\n  methods: {\n    isActive() {\n      this.status['is-active'] = true;\n    },\n\n    checkValue({\n      target\n    }) {\n      if (target.value !== '') {\n        this.status['is-active'] = true; // this.status['has-value'] = true;\n      } else {\n        this.status['is-active'] = false; // this.status['has-value'] = true;\n      }\n    }\n\n  }\n});\n\n//# sourceURL=webpack:///./src/components/fetot-input/fetot-input.js?./node_modules/babel-loader/lib");
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js!./src/components/f-input/f-input.js?vue&type=script&lang=js&":
-/*!****************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./src/components/f-input/f-input.js?vue&type=script&lang=js& ***!
-  \****************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js!./src/components/fetot-login/fetot-login.js?vue&type=script&lang=js&":
+/*!************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./src/components/fetot-login/fetot-login.js?vue&type=script&lang=js& ***!
+  \************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  name: 'f-input'\n});\n\n//# sourceURL=webpack:///./src/components/f-input/f-input.js?./node_modules/babel-loader/lib");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _login_form_login_form_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../login-form/login-form.vue */ \"./src/components/login-form/login-form.vue\");\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  name: 'fetot-login',\n\n  data() {\n    return {\n      isLogin: false,\n      content: {\n        singIn: {\n          title: 'Sing in',\n          link: 'Already have an account?'\n        },\n        login: {\n          title: 'Log in',\n          link: 'Don\\'t have an account?'\n        }\n      }\n    };\n  },\n\n  components: {\n    'login-form': _login_form_login_form_vue__WEBPACK_IMPORTED_MODULE_0__[\"default\"]\n  },\n  methods: {\n    checkIsLogin(label) {\n      return this.isLogin ? this.content.login[label] : this.content.singIn[label];\n    }\n\n  },\n  computed: {\n    getTitle() {\n      return this.checkIsLogin('title');\n    },\n\n    getLink() {\n      return this.checkIsLogin('link');\n    }\n\n  }\n});\n\n//# sourceURL=webpack:///./src/components/fetot-login/fetot-login.js?./node_modules/babel-loader/lib");
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js!./src/components/fetot/fetot.js?vue&type=script&lang=js&":
+/*!************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./src/components/fetot/fetot.js?vue&type=script&lang=js& ***!
+  \************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _fetot_login_fetot_login_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../fetot-login/fetot-login.vue */ \"./src/components/fetot-login/fetot-login.vue\");\n // import fetotSettings from '../fetot-settings/fetot-settings.vue'\n// import fetotApp from '../fetot-app/fetot-app.vue'\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  name: 'fetot',\n  components: {\n    'fetot-login': _fetot_login_fetot_login_vue__WEBPACK_IMPORTED_MODULE_0__[\"default\"]\n  }\n});\n\n//# sourceURL=webpack:///./src/components/fetot/fetot.js?./node_modules/babel-loader/lib");
 
 /***/ }),
 
@@ -118,19 +130,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _f_button_f_button_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../f-button/f-button.vue */ \"./src/components/f-button/f-button.vue\");\n/* harmony import */ var _f_input_f_input_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../f-input/f-input.vue */ \"./src/components/f-input/f-input.vue\");\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  name: 'login-form',\n  data: () => {\n    return {\n      title: 'Sing in',\n      link: 'Already have an account?'\n    };\n  },\n  components: {\n    'fetot-button': _f_button_f_button_vue__WEBPACK_IMPORTED_MODULE_0__[\"default\"],\n    'fetot-input': _f_input_f_input_vue__WEBPACK_IMPORTED_MODULE_1__[\"default\"]\n  }\n});\n\n//# sourceURL=webpack:///./src/components/login-form/login-form.js?./node_modules/babel-loader/lib");
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js!./src/main/fetot-login/fetot-login.js?vue&type=script&lang=js&":
-/*!******************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./src/main/fetot-login/fetot-login.js?vue&type=script&lang=js& ***!
-  \******************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _components_login_form_login_form_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/login-form/login-form.vue */ \"./src/components/login-form/login-form.vue\");\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  name: 'fetot-login',\n  components: {\n    'login-form': _components_login_form_login_form_vue__WEBPACK_IMPORTED_MODULE_0__[\"default\"]\n  }\n});\n\n//# sourceURL=webpack:///./src/main/fetot-login/fetot-login.js?./node_modules/babel-loader/lib");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _fetot_input_fetot_input_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../fetot-input/fetot-input.vue */ \"./src/components/fetot-input/fetot-input.vue\");\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  name: 'login-form',\n  components: {\n    'fetot-input': _fetot_input_fetot_input_vue__WEBPACK_IMPORTED_MODULE_0__[\"default\"]\n  }\n});\n\n//# sourceURL=webpack:///./src/components/login-form/login-form.js?./node_modules/babel-loader/lib");
 
 /***/ }),
 
@@ -145,25 +145,36 @@ eval("exports = module.exports = __webpack_require__(/*! ../../node_modules/css-
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/components/f-button/f-button.scss?vue&type=style&index=0&id=3a4599ef&lang=scss&scoped=true&":
-/*!***********************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/components/f-button/f-button.scss?vue&type=style&index=0&id=3a4599ef&lang=scss&scoped=true& ***!
-  \***********************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/components/fetot-input/fetot-input.scss?vue&type=style&index=0&id=6cdbd502&lang=scss&scoped=true&":
+/*!*****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/components/fetot-input/fetot-input.scss?vue&type=style&index=0&id=6cdbd502&lang=scss&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \"\", \"\"]);\n\n\n//# sourceURL=webpack:///./src/components/f-button/f-button.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js");
+eval("exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \".fetot-input[data-v-6cdbd502] {\\n  width: 300px;\\n  height: 42px;\\n  margin-bottom: 30px;\\n  position: relative;\\n}\\n.fetot-input .input[data-v-6cdbd502] {\\n    color: #393E46;\\n    font: 18px sans-serif;\\n    position: absolute;\\n    z-index: 2;\\n    padding-left: 6px;\\n    box-sizing: border-box;\\n    background: transparent;\\n    display: block;\\n    width: 100%;\\n    height: 100%;\\n}\\n.fetot-input .placeholder[data-v-6cdbd502] {\\n    color: rgba(57, 62, 70, 0.6);\\n    font: 18px sans-serif;\\n    position: absolute;\\n    left: 30px;\\n    z-index: 1;\\n    transition: .2s;\\n    top: 50%;\\n    transform: translateY(-50%);\\n}\\n.fetot-input .icon[data-v-6cdbd502] {\\n    display: none;\\n}\\n.fetot-input .error[data-v-6cdbd502] {\\n    display: none;\\n}\\n.fetot-input[data-v-6cdbd502]::after {\\n    background: #393E46;\\n    width: 100%;\\n    height: 2px;\\n    bottom: 0;\\n    left: 0;\\n    transition: .4s;\\n    content: '';\\n    display: block;\\n    position: absolute;\\n}\\n.fetot-input.is-active[data-v-6cdbd502]::after, .fetot-input[data-v-6cdbd502]:hover::after {\\n    background: #fff;\\n    height: 100%;\\n    box-shadow: 0 2px 6px rgba(57, 62, 70, 0.4);\\n}\\n.fetot-input.is-active .placeholder[data-v-6cdbd502] {\\n    color: rgba(57, 62, 70, 0.8);\\n    font: lighter 14px sans-serif;\\n    transform: none;\\n    top: -15px;\\n    left: 6px;\\n}\\n\", \"\"]);\n\n\n//# sourceURL=webpack:///./src/components/fetot-input/fetot-input.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js");
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/components/f-input/f-input.scss?vue&type=style&index=0&id=41f1f052&lang=scss&scoped=true&":
-/*!*********************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/components/f-input/f-input.scss?vue&type=style&index=0&id=41f1f052&lang=scss&scoped=true& ***!
-  \*********************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/components/fetot-login/fetot-login.scss?vue&type=style&index=0&id=96118186&lang=scss&scoped=true&":
+/*!*****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/components/fetot-login/fetot-login.scss?vue&type=style&index=0&id=96118186&lang=scss&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \"\", \"\"]);\n\n\n//# sourceURL=webpack:///./src/components/f-input/f-input.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js");
+eval("exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \".fetot-login[data-v-96118186] {\\n  background: #fff;\\n  padding: 36px;\\n  width: 510px;\\n  transition: .4s;\\n  box-sizing: border-box;\\n  align-items: center;\\n  display: flex;\\n  flex-direction: column;\\n  box-shadow: 0 2px 2px rgba(57, 62, 70, 0.4);\\n}\\n.fetot-login[data-v-96118186]:hover {\\n    box-shadow: 0 2px 6px rgba(57, 62, 70, 0.4);\\n}\\n.fetot-login .title[data-v-96118186] {\\n    color: #004466;\\n    font: bold 1.5rem sans-serif;\\n    margin-bottom: 30px;\\n}\\n.fetot-login .link[data-v-96118186] {\\n    color: #5BB7D4;\\n    cursor: pointer;\\n    font: lighter .875rem sans-serif;\\n}\\n.fetot-login .link[data-v-96118186]:hover {\\n      text-decoration: underline;\\n}\\n\", \"\"]);\n\n\n//# sourceURL=webpack:///./src/components/fetot-login/fetot-login.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js");
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/components/fetot/fetot.scss?vue&type=style&index=0&id=c503a476&lang=scss&scoped=true&":
+/*!*****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/components/fetot/fetot.scss?vue&type=style&index=0&id=c503a476&lang=scss&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \".fetot[data-v-c503a476] {\\n  background: #F1F1F5;\\n  width: 100%;\\n  height: 100%;\\n  display: flex;\\n  justify-content: center;\\n  align-items: center;\\n}\\n\", \"\"]);\n\n\n//# sourceURL=webpack:///./src/components/fetot/fetot.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js");
 
 /***/ }),
 
@@ -174,18 +185,7 @@ eval("exports = module.exports = __webpack_require__(/*! ../../../node_modules/c
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \".login-form[data-v-54ee450f] {\\n  background: #fff;\\n  padding: 24px;\\n  width: 510px;\\n  height: 315px;\\n  transition: .4s;\\n  border-radius: 6px;\\n  box-shadow: 0 2px 2px rgba(57, 62, 70, 0.4);\\n  box-sizing: border-box;\\n  display: flex;\\n  flex-direction: column;\\n}\\n.login-form[data-v-54ee450f]:hover {\\n    box-shadow: 0 2px 6px rgba(57, 62, 70, 0.4);\\n}\\n.login-form .title[data-v-54ee450f] {\\n    color: #004466;\\n    font-weight: bold;\\n    font-size: 1.5rem;\\n    text-align: center;\\n    margin-bottom: 30px;\\n}\\n.login-form .form[data-v-54ee450f] {\\n    margin-bottom: 30px;\\n    width: 100%;\\n    align-items: center;\\n    display: flex;\\n    flex-direction: column;\\n}\\n.login-form .link[data-v-54ee450f] {\\n    color: #016699;\\n    cursor: pointer;\\n    font-size: 14px;\\n    font-weight: lighter;\\n    text-align: center;\\n}\\n.login-form .link[data-v-54ee450f]:hover {\\n      text-decoration: underline;\\n}\\n\", \"\"]);\n\n\n//# sourceURL=webpack:///./src/components/login-form/login-form.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js");
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/main/fetot-login/fetot-login.scss?vue&type=style&index=0&id=58ca57c0&lang=scss&scoped=true&":
-/*!***********************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/main/fetot-login/fetot-login.scss?vue&type=style&index=0&id=58ca57c0&lang=scss&scoped=true& ***!
-  \***********************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \".fetot-login[data-v-58ca57c0] {\\n  background: #F1F1F5;\\n  display: flex;\\n  justify-content: center;\\n  align-items: center;\\n  width: 100%;\\n  height: 100%;\\n}\\n\", \"\"]);\n\n\n//# sourceURL=webpack:///./src/main/fetot-login/fetot-login.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js");
+eval("exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \".login-form[data-v-54ee450f] {\\n  width: 100%;\\n  margin-bottom: 30px;\\n  align-items: center;\\n  display: flex;\\n  flex-direction: column;\\n}\\n\", \"\"]);\n\n\n//# sourceURL=webpack:///./src/components/login-form/login-form.scss?./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js");
 
 /***/ }),
 
@@ -234,27 +234,39 @@ eval("/* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/f-button/f-button.vue?vue&type=template&id=3a4599ef&scoped=true&":
-/*!***********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/f-button/f-button.vue?vue&type=template&id=3a4599ef&scoped=true& ***!
-  \***********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/fetot-input/fetot-input.vue?vue&type=template&id=6cdbd502&scoped=true&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/fetot-input/fetot-input.vue?vue&type=template&id=6cdbd502&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\"div\", { staticClass: \"f-button\" })\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack:///./src/components/f-button/f-button.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\n    \"div\",\n    {\n      staticClass: \"fetot-input\",\n      class: _vm.status,\n      on: { click: _vm.isActive }\n    },\n    [\n      _c(\"input\", {\n        staticClass: \"input\",\n        attrs: { type: \"text\" },\n        on: { blur: _vm.checkValue }\n      }),\n      _vm._v(\" \"),\n      _c(\"div\", { staticClass: \"placeholder\" }, [_vm._v(\"Placeholder\")]),\n      _vm._v(\" \"),\n      _c(\"div\", { staticClass: \"icon\" }),\n      _vm._v(\" \"),\n      _c(\"div\", { staticClass: \"error\" })\n    ]\n  )\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack:///./src/components/fetot-input/fetot-input.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/f-input/f-input.vue?vue&type=template&id=41f1f052&scoped=true&":
-/*!*********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/f-input/f-input.vue?vue&type=template&id=41f1f052&scoped=true& ***!
-  \*********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/fetot-login/fetot-login.vue?vue&type=template&id=96118186&scoped=true&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/fetot-login/fetot-login.vue?vue&type=template&id=96118186&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\"div\", { staticClass: \"f-input\" })\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack:///./src/components/f-input/f-input.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\n    \"div\",\n    { staticClass: \"fetot-login\" },\n    [\n      _c(\"div\", { staticClass: \"title\" }, [_vm._v(_vm._s(_vm.getTitle))]),\n      _vm._v(\" \"),\n      _c(\"login-form\"),\n      _vm._v(\" \"),\n      _c(\n        \"div\",\n        {\n          staticClass: \"link\",\n          on: {\n            click: function($event) {\n              _vm.isLogin = !_vm.isLogin\n            }\n          }\n        },\n        [_vm._v(_vm._s(_vm.getLink))]\n      )\n    ],\n    1\n  )\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack:///./src/components/fetot-login/fetot-login.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/fetot/fetot.vue?vue&type=template&id=c503a476&scoped=true&":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/fetot/fetot.vue?vue&type=template&id=c503a476&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\"div\", { staticClass: \"fetot\" }, [_c(\"fetot-login\")], 1)\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack:///./src/components/fetot/fetot.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
 
 /***/ }),
 
@@ -266,19 +278,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\"div\", { staticClass: \"login-form\" }, [\n    _c(\"div\", { staticClass: \"title\" }, [_vm._v(_vm._s(_vm.title))]),\n    _vm._v(\" \"),\n    _c(\"div\", { staticClass: \"form\" }),\n    _vm._v(\" \"),\n    _c(\"div\", { staticClass: \"link\" }, [_vm._v(_vm._s(_vm.link))])\n  ])\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack:///./src/components/login-form/login-form.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/main/fetot-login/fetot-login.vue?vue&type=template&id=58ca57c0&scoped=true&":
-/*!***********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/main/fetot-login/fetot-login.vue?vue&type=template&id=58ca57c0&scoped=true& ***!
-  \***********************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\"div\", { staticClass: \"fetot-login\" }, [_c(\"login-form\")], 1)\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack:///./src/main/fetot-login/fetot-login.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\"div\", { staticClass: \"login-form\" }, [_c(\"fetot-input\")], 1)\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack:///./src/components/login-form/login-form.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
 
 /***/ }),
 
@@ -294,25 +294,36 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 /***/ }),
 
-/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/components/f-button/f-button.scss?vue&type=style&index=0&id=3a4599ef&lang=scss&scoped=true&":
-/*!*******************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-style-loader!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/components/f-button/f-button.scss?vue&type=style&index=0&id=3a4599ef&lang=scss&scoped=true& ***!
-  \*******************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/components/fetot-input/fetot-input.scss?vue&type=style&index=0&id=6cdbd502&lang=scss&scoped=true&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-style-loader!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/components/fetot-input/fetot-input.scss?vue&type=style&index=0&id=6cdbd502&lang=scss&scoped=true& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("// style-loader: Adds some css to the DOM by adding a <style> tag\n\n// load the styles\nvar content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/sass-loader/dist/cjs.js!./f-button.scss?vue&type=style&index=0&id=3a4599ef&lang=scss&scoped=true& */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/components/f-button/f-button.scss?vue&type=style&index=0&id=3a4599ef&lang=scss&scoped=true&\");\nif(typeof content === 'string') content = [[module.i, content, '']];\nif(content.locals) module.exports = content.locals;\n// add the styles to the DOM\nvar add = __webpack_require__(/*! ../../../node_modules/vue-style-loader/lib/addStylesClient.js */ \"./node_modules/vue-style-loader/lib/addStylesClient.js\").default\nvar update = add(\"19f4cfec\", content, false, {});\n// Hot Module Replacement\nif(false) {}\n\n//# sourceURL=webpack:///./src/components/f-button/f-button.scss?./node_modules/vue-style-loader!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js");
+eval("// style-loader: Adds some css to the DOM by adding a <style> tag\n\n// load the styles\nvar content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/sass-loader/dist/cjs.js!./fetot-input.scss?vue&type=style&index=0&id=6cdbd502&lang=scss&scoped=true& */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/components/fetot-input/fetot-input.scss?vue&type=style&index=0&id=6cdbd502&lang=scss&scoped=true&\");\nif(typeof content === 'string') content = [[module.i, content, '']];\nif(content.locals) module.exports = content.locals;\n// add the styles to the DOM\nvar add = __webpack_require__(/*! ../../../node_modules/vue-style-loader/lib/addStylesClient.js */ \"./node_modules/vue-style-loader/lib/addStylesClient.js\").default\nvar update = add(\"30432650\", content, false, {});\n// Hot Module Replacement\nif(false) {}\n\n//# sourceURL=webpack:///./src/components/fetot-input/fetot-input.scss?./node_modules/vue-style-loader!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js");
 
 /***/ }),
 
-/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/components/f-input/f-input.scss?vue&type=style&index=0&id=41f1f052&lang=scss&scoped=true&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-style-loader!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/components/f-input/f-input.scss?vue&type=style&index=0&id=41f1f052&lang=scss&scoped=true& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/components/fetot-login/fetot-login.scss?vue&type=style&index=0&id=96118186&lang=scss&scoped=true&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-style-loader!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/components/fetot-login/fetot-login.scss?vue&type=style&index=0&id=96118186&lang=scss&scoped=true& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("// style-loader: Adds some css to the DOM by adding a <style> tag\n\n// load the styles\nvar content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/sass-loader/dist/cjs.js!./f-input.scss?vue&type=style&index=0&id=41f1f052&lang=scss&scoped=true& */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/components/f-input/f-input.scss?vue&type=style&index=0&id=41f1f052&lang=scss&scoped=true&\");\nif(typeof content === 'string') content = [[module.i, content, '']];\nif(content.locals) module.exports = content.locals;\n// add the styles to the DOM\nvar add = __webpack_require__(/*! ../../../node_modules/vue-style-loader/lib/addStylesClient.js */ \"./node_modules/vue-style-loader/lib/addStylesClient.js\").default\nvar update = add(\"10a01d43\", content, false, {});\n// Hot Module Replacement\nif(false) {}\n\n//# sourceURL=webpack:///./src/components/f-input/f-input.scss?./node_modules/vue-style-loader!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js");
+eval("// style-loader: Adds some css to the DOM by adding a <style> tag\n\n// load the styles\nvar content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/sass-loader/dist/cjs.js!./fetot-login.scss?vue&type=style&index=0&id=96118186&lang=scss&scoped=true& */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/components/fetot-login/fetot-login.scss?vue&type=style&index=0&id=96118186&lang=scss&scoped=true&\");\nif(typeof content === 'string') content = [[module.i, content, '']];\nif(content.locals) module.exports = content.locals;\n// add the styles to the DOM\nvar add = __webpack_require__(/*! ../../../node_modules/vue-style-loader/lib/addStylesClient.js */ \"./node_modules/vue-style-loader/lib/addStylesClient.js\").default\nvar update = add(\"d5d6d136\", content, false, {});\n// Hot Module Replacement\nif(false) {}\n\n//# sourceURL=webpack:///./src/components/fetot-login/fetot-login.scss?./node_modules/vue-style-loader!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js");
+
+/***/ }),
+
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/components/fetot/fetot.scss?vue&type=style&index=0&id=c503a476&lang=scss&scoped=true&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-style-loader!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/components/fetot/fetot.scss?vue&type=style&index=0&id=c503a476&lang=scss&scoped=true& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("// style-loader: Adds some css to the DOM by adding a <style> tag\n\n// load the styles\nvar content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/sass-loader/dist/cjs.js!./fetot.scss?vue&type=style&index=0&id=c503a476&lang=scss&scoped=true& */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/components/fetot/fetot.scss?vue&type=style&index=0&id=c503a476&lang=scss&scoped=true&\");\nif(typeof content === 'string') content = [[module.i, content, '']];\nif(content.locals) module.exports = content.locals;\n// add the styles to the DOM\nvar add = __webpack_require__(/*! ../../../node_modules/vue-style-loader/lib/addStylesClient.js */ \"./node_modules/vue-style-loader/lib/addStylesClient.js\").default\nvar update = add(\"cd7bf7f4\", content, false, {});\n// Hot Module Replacement\nif(false) {}\n\n//# sourceURL=webpack:///./src/components/fetot/fetot.scss?./node_modules/vue-style-loader!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js");
 
 /***/ }),
 
@@ -324,17 +335,6 @@ eval("// style-loader: Adds some css to the DOM by adding a <style> tag\n\n// lo
 /***/ (function(module, exports, __webpack_require__) {
 
 eval("// style-loader: Adds some css to the DOM by adding a <style> tag\n\n// load the styles\nvar content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/sass-loader/dist/cjs.js!./login-form.scss?vue&type=style&index=0&id=54ee450f&lang=scss&scoped=true& */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/components/login-form/login-form.scss?vue&type=style&index=0&id=54ee450f&lang=scss&scoped=true&\");\nif(typeof content === 'string') content = [[module.i, content, '']];\nif(content.locals) module.exports = content.locals;\n// add the styles to the DOM\nvar add = __webpack_require__(/*! ../../../node_modules/vue-style-loader/lib/addStylesClient.js */ \"./node_modules/vue-style-loader/lib/addStylesClient.js\").default\nvar update = add(\"7035d852\", content, false, {});\n// Hot Module Replacement\nif(false) {}\n\n//# sourceURL=webpack:///./src/components/login-form/login-form.scss?./node_modules/vue-style-loader!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js");
-
-/***/ }),
-
-/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/main/fetot-login/fetot-login.scss?vue&type=style&index=0&id=58ca57c0&lang=scss&scoped=true&":
-/*!*******************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-style-loader!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/main/fetot-login/fetot-login.scss?vue&type=style&index=0&id=58ca57c0&lang=scss&scoped=true& ***!
-  \*******************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("// style-loader: Adds some css to the DOM by adding a <style> tag\n\n// load the styles\nvar content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/sass-loader/dist/cjs.js!./fetot-login.scss?vue&type=style&index=0&id=58ca57c0&lang=scss&scoped=true& */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/main/fetot-login/fetot-login.scss?vue&type=style&index=0&id=58ca57c0&lang=scss&scoped=true&\");\nif(typeof content === 'string') content = [[module.i, content, '']];\nif(content.locals) module.exports = content.locals;\n// add the styles to the DOM\nvar add = __webpack_require__(/*! ../../../node_modules/vue-style-loader/lib/addStylesClient.js */ \"./node_modules/vue-style-loader/lib/addStylesClient.js\").default\nvar update = add(\"01ac6186\", content, false, {});\n// Hot Module Replacement\nif(false) {}\n\n//# sourceURL=webpack:///./src/main/fetot-login/fetot-login.scss?./node_modules/vue-style-loader!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js");
 
 /***/ }),
 
@@ -384,99 +384,147 @@ eval("var g;\n\n// This works in non-strict mode\ng = (function() {\n\treturn th
 
 /***/ }),
 
-/***/ "./src/components/f-button/f-button.js?vue&type=script&lang=js&":
-/*!**********************************************************************!*\
-  !*** ./src/components/f-button/f-button.js?vue&type=script&lang=js& ***!
-  \**********************************************************************/
+/***/ "./src/components/fetot-input/fetot-input.js?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./src/components/fetot-input/fetot-input.js?vue&type=script&lang=js& ***!
+  \****************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_babel_loader_lib_index_js_f_button_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib!./f-button.js?vue&type=script&lang=js& */ \"./node_modules/babel-loader/lib/index.js!./src/components/f-button/f-button.js?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_babel_loader_lib_index_js_f_button_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack:///./src/components/f-button/f-button.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_babel_loader_lib_index_js_fetot_input_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib!./fetot-input.js?vue&type=script&lang=js& */ \"./node_modules/babel-loader/lib/index.js!./src/components/fetot-input/fetot-input.js?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_babel_loader_lib_index_js_fetot_input_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack:///./src/components/fetot-input/fetot-input.js?");
 
 /***/ }),
 
-/***/ "./src/components/f-button/f-button.scss?vue&type=style&index=0&id=3a4599ef&lang=scss&scoped=true&":
-/*!*********************************************************************************************************!*\
-  !*** ./src/components/f-button/f-button.scss?vue&type=style&index=0&id=3a4599ef&lang=scss&scoped=true& ***!
-  \*********************************************************************************************************/
+/***/ "./src/components/fetot-input/fetot-input.scss?vue&type=style&index=0&id=6cdbd502&lang=scss&scoped=true&":
+/*!***************************************************************************************************************!*\
+  !*** ./src/components/fetot-input/fetot-input.scss?vue&type=style&index=0&id=6cdbd502&lang=scss&scoped=true& ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_f_button_scss_vue_type_style_index_0_id_3a4599ef_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-style-loader!../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/sass-loader/dist/cjs.js!./f-button.scss?vue&type=style&index=0&id=3a4599ef&lang=scss&scoped=true& */ \"./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/components/f-button/f-button.scss?vue&type=style&index=0&id=3a4599ef&lang=scss&scoped=true&\");\n/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_f_button_scss_vue_type_style_index_0_id_3a4599ef_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_f_button_scss_vue_type_style_index_0_id_3a4599ef_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);\n/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_f_button_scss_vue_type_style_index_0_id_3a4599ef_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_f_button_scss_vue_type_style_index_0_id_3a4599ef_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));\n /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_f_button_scss_vue_type_style_index_0_id_3a4599ef_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); \n\n//# sourceURL=webpack:///./src/components/f-button/f-button.scss?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_fetot_input_scss_vue_type_style_index_0_id_6cdbd502_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-style-loader!../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/sass-loader/dist/cjs.js!./fetot-input.scss?vue&type=style&index=0&id=6cdbd502&lang=scss&scoped=true& */ \"./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/components/fetot-input/fetot-input.scss?vue&type=style&index=0&id=6cdbd502&lang=scss&scoped=true&\");\n/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_fetot_input_scss_vue_type_style_index_0_id_6cdbd502_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_fetot_input_scss_vue_type_style_index_0_id_6cdbd502_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);\n/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_fetot_input_scss_vue_type_style_index_0_id_6cdbd502_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_fetot_input_scss_vue_type_style_index_0_id_6cdbd502_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));\n /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_fetot_input_scss_vue_type_style_index_0_id_6cdbd502_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); \n\n//# sourceURL=webpack:///./src/components/fetot-input/fetot-input.scss?");
 
 /***/ }),
 
-/***/ "./src/components/f-button/f-button.vue":
-/*!**********************************************!*\
-  !*** ./src/components/f-button/f-button.vue ***!
-  \**********************************************/
+/***/ "./src/components/fetot-input/fetot-input.vue":
+/*!****************************************************!*\
+  !*** ./src/components/fetot-input/fetot-input.vue ***!
+  \****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _f_button_vue_vue_type_template_id_3a4599ef_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./f-button.vue?vue&type=template&id=3a4599ef&scoped=true& */ \"./src/components/f-button/f-button.vue?vue&type=template&id=3a4599ef&scoped=true&\");\n/* harmony import */ var _f_button_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./f-button.js?vue&type=script&lang=js& */ \"./src/components/f-button/f-button.js?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _f_button_scss_vue_type_style_index_0_id_3a4599ef_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./f-button.scss?vue&type=style&index=0&id=3a4599ef&lang=scss&scoped=true& */ \"./src/components/f-button/f-button.scss?vue&type=style&index=0&id=3a4599ef&lang=scss&scoped=true&\");\n/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__[\"default\"])(\n  _f_button_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _f_button_vue_vue_type_template_id_3a4599ef_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _f_button_vue_vue_type_template_id_3a4599ef_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  \"3a4599ef\",\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"src/components/f-button/f-button.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack:///./src/components/f-button/f-button.vue?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _fetot_input_vue_vue_type_template_id_6cdbd502_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fetot-input.vue?vue&type=template&id=6cdbd502&scoped=true& */ \"./src/components/fetot-input/fetot-input.vue?vue&type=template&id=6cdbd502&scoped=true&\");\n/* harmony import */ var _fetot_input_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fetot-input.js?vue&type=script&lang=js& */ \"./src/components/fetot-input/fetot-input.js?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _fetot_input_scss_vue_type_style_index_0_id_6cdbd502_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./fetot-input.scss?vue&type=style&index=0&id=6cdbd502&lang=scss&scoped=true& */ \"./src/components/fetot-input/fetot-input.scss?vue&type=style&index=0&id=6cdbd502&lang=scss&scoped=true&\");\n/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__[\"default\"])(\n  _fetot_input_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _fetot_input_vue_vue_type_template_id_6cdbd502_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _fetot_input_vue_vue_type_template_id_6cdbd502_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  \"6cdbd502\",\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"src/components/fetot-input/fetot-input.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack:///./src/components/fetot-input/fetot-input.vue?");
 
 /***/ }),
 
-/***/ "./src/components/f-button/f-button.vue?vue&type=template&id=3a4599ef&scoped=true&":
-/*!*****************************************************************************************!*\
-  !*** ./src/components/f-button/f-button.vue?vue&type=template&id=3a4599ef&scoped=true& ***!
-  \*****************************************************************************************/
+/***/ "./src/components/fetot-input/fetot-input.vue?vue&type=template&id=6cdbd502&scoped=true&":
+/*!***********************************************************************************************!*\
+  !*** ./src/components/fetot-input/fetot-input.vue?vue&type=template&id=6cdbd502&scoped=true& ***!
+  \***********************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_f_button_vue_vue_type_template_id_3a4599ef_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./f-button.vue?vue&type=template&id=3a4599ef&scoped=true& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/f-button/f-button.vue?vue&type=template&id=3a4599ef&scoped=true&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_f_button_vue_vue_type_template_id_3a4599ef_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_f_button_vue_vue_type_template_id_3a4599ef_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack:///./src/components/f-button/f-button.vue?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_fetot_input_vue_vue_type_template_id_6cdbd502_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./fetot-input.vue?vue&type=template&id=6cdbd502&scoped=true& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/fetot-input/fetot-input.vue?vue&type=template&id=6cdbd502&scoped=true&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_fetot_input_vue_vue_type_template_id_6cdbd502_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_fetot_input_vue_vue_type_template_id_6cdbd502_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack:///./src/components/fetot-input/fetot-input.vue?");
 
 /***/ }),
 
-/***/ "./src/components/f-input/f-input.js?vue&type=script&lang=js&":
-/*!********************************************************************!*\
-  !*** ./src/components/f-input/f-input.js?vue&type=script&lang=js& ***!
-  \********************************************************************/
+/***/ "./src/components/fetot-login/fetot-login.js?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./src/components/fetot-login/fetot-login.js?vue&type=script&lang=js& ***!
+  \****************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_babel_loader_lib_index_js_f_input_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib!./f-input.js?vue&type=script&lang=js& */ \"./node_modules/babel-loader/lib/index.js!./src/components/f-input/f-input.js?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_babel_loader_lib_index_js_f_input_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack:///./src/components/f-input/f-input.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_babel_loader_lib_index_js_fetot_login_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib!./fetot-login.js?vue&type=script&lang=js& */ \"./node_modules/babel-loader/lib/index.js!./src/components/fetot-login/fetot-login.js?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_babel_loader_lib_index_js_fetot_login_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack:///./src/components/fetot-login/fetot-login.js?");
 
 /***/ }),
 
-/***/ "./src/components/f-input/f-input.scss?vue&type=style&index=0&id=41f1f052&lang=scss&scoped=true&":
-/*!*******************************************************************************************************!*\
-  !*** ./src/components/f-input/f-input.scss?vue&type=style&index=0&id=41f1f052&lang=scss&scoped=true& ***!
-  \*******************************************************************************************************/
+/***/ "./src/components/fetot-login/fetot-login.scss?vue&type=style&index=0&id=96118186&lang=scss&scoped=true&":
+/*!***************************************************************************************************************!*\
+  !*** ./src/components/fetot-login/fetot-login.scss?vue&type=style&index=0&id=96118186&lang=scss&scoped=true& ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_f_input_scss_vue_type_style_index_0_id_41f1f052_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-style-loader!../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/sass-loader/dist/cjs.js!./f-input.scss?vue&type=style&index=0&id=41f1f052&lang=scss&scoped=true& */ \"./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/components/f-input/f-input.scss?vue&type=style&index=0&id=41f1f052&lang=scss&scoped=true&\");\n/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_f_input_scss_vue_type_style_index_0_id_41f1f052_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_f_input_scss_vue_type_style_index_0_id_41f1f052_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);\n/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_f_input_scss_vue_type_style_index_0_id_41f1f052_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_f_input_scss_vue_type_style_index_0_id_41f1f052_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));\n /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_f_input_scss_vue_type_style_index_0_id_41f1f052_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); \n\n//# sourceURL=webpack:///./src/components/f-input/f-input.scss?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_fetot_login_scss_vue_type_style_index_0_id_96118186_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-style-loader!../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/sass-loader/dist/cjs.js!./fetot-login.scss?vue&type=style&index=0&id=96118186&lang=scss&scoped=true& */ \"./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/components/fetot-login/fetot-login.scss?vue&type=style&index=0&id=96118186&lang=scss&scoped=true&\");\n/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_fetot_login_scss_vue_type_style_index_0_id_96118186_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_fetot_login_scss_vue_type_style_index_0_id_96118186_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);\n/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_fetot_login_scss_vue_type_style_index_0_id_96118186_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_fetot_login_scss_vue_type_style_index_0_id_96118186_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));\n /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_fetot_login_scss_vue_type_style_index_0_id_96118186_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); \n\n//# sourceURL=webpack:///./src/components/fetot-login/fetot-login.scss?");
 
 /***/ }),
 
-/***/ "./src/components/f-input/f-input.vue":
-/*!********************************************!*\
-  !*** ./src/components/f-input/f-input.vue ***!
-  \********************************************/
+/***/ "./src/components/fetot-login/fetot-login.vue":
+/*!****************************************************!*\
+  !*** ./src/components/fetot-login/fetot-login.vue ***!
+  \****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _f_input_vue_vue_type_template_id_41f1f052_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./f-input.vue?vue&type=template&id=41f1f052&scoped=true& */ \"./src/components/f-input/f-input.vue?vue&type=template&id=41f1f052&scoped=true&\");\n/* harmony import */ var _f_input_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./f-input.js?vue&type=script&lang=js& */ \"./src/components/f-input/f-input.js?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _f_input_scss_vue_type_style_index_0_id_41f1f052_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./f-input.scss?vue&type=style&index=0&id=41f1f052&lang=scss&scoped=true& */ \"./src/components/f-input/f-input.scss?vue&type=style&index=0&id=41f1f052&lang=scss&scoped=true&\");\n/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__[\"default\"])(\n  _f_input_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _f_input_vue_vue_type_template_id_41f1f052_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _f_input_vue_vue_type_template_id_41f1f052_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  \"41f1f052\",\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"src/components/f-input/f-input.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack:///./src/components/f-input/f-input.vue?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _fetot_login_vue_vue_type_template_id_96118186_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fetot-login.vue?vue&type=template&id=96118186&scoped=true& */ \"./src/components/fetot-login/fetot-login.vue?vue&type=template&id=96118186&scoped=true&\");\n/* harmony import */ var _fetot_login_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fetot-login.js?vue&type=script&lang=js& */ \"./src/components/fetot-login/fetot-login.js?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _fetot_login_scss_vue_type_style_index_0_id_96118186_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./fetot-login.scss?vue&type=style&index=0&id=96118186&lang=scss&scoped=true& */ \"./src/components/fetot-login/fetot-login.scss?vue&type=style&index=0&id=96118186&lang=scss&scoped=true&\");\n/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__[\"default\"])(\n  _fetot_login_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _fetot_login_vue_vue_type_template_id_96118186_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _fetot_login_vue_vue_type_template_id_96118186_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  \"96118186\",\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"src/components/fetot-login/fetot-login.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack:///./src/components/fetot-login/fetot-login.vue?");
 
 /***/ }),
 
-/***/ "./src/components/f-input/f-input.vue?vue&type=template&id=41f1f052&scoped=true&":
-/*!***************************************************************************************!*\
-  !*** ./src/components/f-input/f-input.vue?vue&type=template&id=41f1f052&scoped=true& ***!
-  \***************************************************************************************/
+/***/ "./src/components/fetot-login/fetot-login.vue?vue&type=template&id=96118186&scoped=true&":
+/*!***********************************************************************************************!*\
+  !*** ./src/components/fetot-login/fetot-login.vue?vue&type=template&id=96118186&scoped=true& ***!
+  \***********************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_f_input_vue_vue_type_template_id_41f1f052_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./f-input.vue?vue&type=template&id=41f1f052&scoped=true& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/f-input/f-input.vue?vue&type=template&id=41f1f052&scoped=true&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_f_input_vue_vue_type_template_id_41f1f052_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_f_input_vue_vue_type_template_id_41f1f052_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack:///./src/components/f-input/f-input.vue?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_fetot_login_vue_vue_type_template_id_96118186_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./fetot-login.vue?vue&type=template&id=96118186&scoped=true& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/fetot-login/fetot-login.vue?vue&type=template&id=96118186&scoped=true&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_fetot_login_vue_vue_type_template_id_96118186_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_fetot_login_vue_vue_type_template_id_96118186_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack:///./src/components/fetot-login/fetot-login.vue?");
+
+/***/ }),
+
+/***/ "./src/components/fetot/fetot.js?vue&type=script&lang=js&":
+/*!****************************************************************!*\
+  !*** ./src/components/fetot/fetot.js?vue&type=script&lang=js& ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_babel_loader_lib_index_js_fetot_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib!./fetot.js?vue&type=script&lang=js& */ \"./node_modules/babel-loader/lib/index.js!./src/components/fetot/fetot.js?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_babel_loader_lib_index_js_fetot_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack:///./src/components/fetot/fetot.js?");
+
+/***/ }),
+
+/***/ "./src/components/fetot/fetot.scss?vue&type=style&index=0&id=c503a476&lang=scss&scoped=true&":
+/*!***************************************************************************************************!*\
+  !*** ./src/components/fetot/fetot.scss?vue&type=style&index=0&id=c503a476&lang=scss&scoped=true& ***!
+  \***************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_fetot_scss_vue_type_style_index_0_id_c503a476_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-style-loader!../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/sass-loader/dist/cjs.js!./fetot.scss?vue&type=style&index=0&id=c503a476&lang=scss&scoped=true& */ \"./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/components/fetot/fetot.scss?vue&type=style&index=0&id=c503a476&lang=scss&scoped=true&\");\n/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_fetot_scss_vue_type_style_index_0_id_c503a476_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_fetot_scss_vue_type_style_index_0_id_c503a476_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);\n/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_fetot_scss_vue_type_style_index_0_id_c503a476_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_fetot_scss_vue_type_style_index_0_id_c503a476_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));\n /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_fetot_scss_vue_type_style_index_0_id_c503a476_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); \n\n//# sourceURL=webpack:///./src/components/fetot/fetot.scss?");
+
+/***/ }),
+
+/***/ "./src/components/fetot/fetot.vue":
+/*!****************************************!*\
+  !*** ./src/components/fetot/fetot.vue ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _fetot_vue_vue_type_template_id_c503a476_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fetot.vue?vue&type=template&id=c503a476&scoped=true& */ \"./src/components/fetot/fetot.vue?vue&type=template&id=c503a476&scoped=true&\");\n/* harmony import */ var _fetot_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fetot.js?vue&type=script&lang=js& */ \"./src/components/fetot/fetot.js?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _fetot_scss_vue_type_style_index_0_id_c503a476_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./fetot.scss?vue&type=style&index=0&id=c503a476&lang=scss&scoped=true& */ \"./src/components/fetot/fetot.scss?vue&type=style&index=0&id=c503a476&lang=scss&scoped=true&\");\n/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__[\"default\"])(\n  _fetot_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _fetot_vue_vue_type_template_id_c503a476_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _fetot_vue_vue_type_template_id_c503a476_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  \"c503a476\",\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"src/components/fetot/fetot.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack:///./src/components/fetot/fetot.vue?");
+
+/***/ }),
+
+/***/ "./src/components/fetot/fetot.vue?vue&type=template&id=c503a476&scoped=true&":
+/*!***********************************************************************************!*\
+  !*** ./src/components/fetot/fetot.vue?vue&type=template&id=c503a476&scoped=true& ***!
+  \***********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_fetot_vue_vue_type_template_id_c503a476_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./fetot.vue?vue&type=template&id=c503a476&scoped=true& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/fetot/fetot.vue?vue&type=template&id=c503a476&scoped=true&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_fetot_vue_vue_type_template_id_c503a476_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_fetot_vue_vue_type_template_id_c503a476_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack:///./src/components/fetot/fetot.vue?");
 
 /***/ }),
 
@@ -528,63 +576,15 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _nod
 
 /***/ }),
 
-/***/ "./src/fetot-login.js":
-/*!****************************!*\
-  !*** ./src/fetot-login.js ***!
-  \****************************/
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var vue_dist_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue/dist/vue */ \"./node_modules/vue/dist/vue.js\");\n/* harmony import */ var vue_dist_vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_dist_vue__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./scss/main.scss */ \"./src/scss/main.scss\");\n/* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_scss_main_scss__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _main_fetot_login_fetot_login_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./main/fetot-login/fetot-login.vue */ \"./src/main/fetot-login/fetot-login.vue\");\n\n\n\nnew vue_dist_vue__WEBPACK_IMPORTED_MODULE_0___default.a({\n  el: '#fetot',\n  template: '<fetot-login/>',\n  components: {\n    'fetot-login': _main_fetot_login_fetot_login_vue__WEBPACK_IMPORTED_MODULE_2__[\"default\"]\n  }\n});\n\n//# sourceURL=webpack:///./src/fetot-login.js?");
-
-/***/ }),
-
-/***/ "./src/main/fetot-login/fetot-login.js?vue&type=script&lang=js&":
-/*!**********************************************************************!*\
-  !*** ./src/main/fetot-login/fetot-login.js?vue&type=script&lang=js& ***!
-  \**********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_babel_loader_lib_index_js_fetot_login_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib!./fetot-login.js?vue&type=script&lang=js& */ \"./node_modules/babel-loader/lib/index.js!./src/main/fetot-login/fetot-login.js?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_babel_loader_lib_index_js_fetot_login_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack:///./src/main/fetot-login/fetot-login.js?");
-
-/***/ }),
-
-/***/ "./src/main/fetot-login/fetot-login.scss?vue&type=style&index=0&id=58ca57c0&lang=scss&scoped=true&":
-/*!*********************************************************************************************************!*\
-  !*** ./src/main/fetot-login/fetot-login.scss?vue&type=style&index=0&id=58ca57c0&lang=scss&scoped=true& ***!
-  \*********************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_fetot_login_scss_vue_type_style_index_0_id_58ca57c0_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-style-loader!../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/sass-loader/dist/cjs.js!./fetot-login.scss?vue&type=style&index=0&id=58ca57c0&lang=scss&scoped=true& */ \"./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/sass-loader/dist/cjs.js!./src/main/fetot-login/fetot-login.scss?vue&type=style&index=0&id=58ca57c0&lang=scss&scoped=true&\");\n/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_fetot_login_scss_vue_type_style_index_0_id_58ca57c0_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_fetot_login_scss_vue_type_style_index_0_id_58ca57c0_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);\n/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_fetot_login_scss_vue_type_style_index_0_id_58ca57c0_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_fetot_login_scss_vue_type_style_index_0_id_58ca57c0_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));\n /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_sass_loader_dist_cjs_js_fetot_login_scss_vue_type_style_index_0_id_58ca57c0_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); \n\n//# sourceURL=webpack:///./src/main/fetot-login/fetot-login.scss?");
-
-/***/ }),
-
-/***/ "./src/main/fetot-login/fetot-login.vue":
-/*!**********************************************!*\
-  !*** ./src/main/fetot-login/fetot-login.vue ***!
-  \**********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _fetot_login_vue_vue_type_template_id_58ca57c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fetot-login.vue?vue&type=template&id=58ca57c0&scoped=true& */ \"./src/main/fetot-login/fetot-login.vue?vue&type=template&id=58ca57c0&scoped=true&\");\n/* harmony import */ var _fetot_login_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fetot-login.js?vue&type=script&lang=js& */ \"./src/main/fetot-login/fetot-login.js?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _fetot_login_scss_vue_type_style_index_0_id_58ca57c0_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./fetot-login.scss?vue&type=style&index=0&id=58ca57c0&lang=scss&scoped=true& */ \"./src/main/fetot-login/fetot-login.scss?vue&type=style&index=0&id=58ca57c0&lang=scss&scoped=true&\");\n/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__[\"default\"])(\n  _fetot_login_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _fetot_login_vue_vue_type_template_id_58ca57c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _fetot_login_vue_vue_type_template_id_58ca57c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  \"58ca57c0\",\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"src/main/fetot-login/fetot-login.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack:///./src/main/fetot-login/fetot-login.vue?");
-
-/***/ }),
-
-/***/ "./src/main/fetot-login/fetot-login.vue?vue&type=template&id=58ca57c0&scoped=true&":
-/*!*****************************************************************************************!*\
-  !*** ./src/main/fetot-login/fetot-login.vue?vue&type=template&id=58ca57c0&scoped=true& ***!
-  \*****************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_fetot_login_vue_vue_type_template_id_58ca57c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./fetot-login.vue?vue&type=template&id=58ca57c0&scoped=true& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/main/fetot-login/fetot-login.vue?vue&type=template&id=58ca57c0&scoped=true&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_fetot_login_vue_vue_type_template_id_58ca57c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_fetot_login_vue_vue_type_template_id_58ca57c0_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack:///./src/main/fetot-login/fetot-login.vue?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var vue_dist_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue/dist/vue */ \"./node_modules/vue/dist/vue.js\");\n/* harmony import */ var vue_dist_vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_dist_vue__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./scss/main.scss */ \"./src/scss/main.scss\");\n/* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_scss_main_scss__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _components_fetot_fetot_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/fetot/fetot.vue */ \"./src/components/fetot/fetot.vue\");\n\n\n\nnew vue_dist_vue__WEBPACK_IMPORTED_MODULE_0___default.a({\n  el: '#fetot',\n  template: '<fetot/>',\n  components: {\n    fetot: _components_fetot_fetot_vue__WEBPACK_IMPORTED_MODULE_2__[\"default\"]\n  }\n});\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ }),
 

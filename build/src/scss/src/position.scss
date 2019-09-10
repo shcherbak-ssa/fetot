@@ -1,4 +1,8 @@
-@mixin vert-center {
+@mixin position-vert-center {
   top: 50%;
   transform: translateY(-50%);
+}
+@mixin position-gor-center {
+  left: 50%;
+  transform: translateX(-50%);
 }

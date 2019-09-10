@@ -1,0 +1,30 @@
+@import '../../scss/src.scss';
+
+.fetot-login {
+  background: #fff;
+  padding: 36px;
+  width: 510px;
+  transition: .4s;
+  @include box-sizing;
+  @include flex-center-column;
+  @include static-shadow;
+
+  &:hover {
+    @include hover-shadow;
+  }
+
+  .title {
+    color: $fetot-dark-blue;
+    font: bold 1.5rem sans-serif;
+    margin-bottom: 30px;
+  }
+  .link {
+    color: $fetot-azure;
+    cursor: pointer;
+    font: lighter .875rem sans-serif;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

@@ -1,10 +1,6 @@
 <template>
   <div class="login-form">
-    <div class="title">{{ title }}</div>
-    <div class="form">
-
-    </div>
-    <div class="link">{{ link }}</div>
+    <fetot-input/>
   </div>
 </template>
 <script src="./login-form.js"></script>

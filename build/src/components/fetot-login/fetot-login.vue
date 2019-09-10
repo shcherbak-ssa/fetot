@@ -1,6 +1,8 @@
 <template>
   <div class="fetot-login">
-      <login-form/>
+    <div class="title">{{ getTitle }}</div>
+    <login-form/>
+    <div class="link" @click="isLogin = !isLogin">{{ getLink }}</div>
   </div>
 </template>
 <script src="./fetot-login.js"></script>
