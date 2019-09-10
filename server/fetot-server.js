@@ -1,11 +1,10 @@
 'use strict';
 
-const modules = require('./modules'),
-	 httpServer = require('./src/http-server')(modules);
+const runHttpServer = require('./http-server');
 
 let port = 8080, host = 'localhost';
 
-httpServer(port, host)
+runHttpServer(port, host)
 	.then(() => {
 		console.log(`Test server run at http://${host}:${port}/index.html`)
 	});

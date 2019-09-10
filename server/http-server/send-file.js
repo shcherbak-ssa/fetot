@@ -1,10 +1,8 @@
 'use strict';
 
-const send = module.exports = {},
-	fs = require('fs'),
-	path = require('path');
+const fs = require('fs');
 
-send.fileForGetRequest = (filename, response) => {
+function sendFile(filename, response) {
 	let readStream = new fs.ReadStream(filename);
 	response.statusCode = 200;
 	
@@ -19,7 +17,6 @@ send.fileForGetRequest = (filename, response) => {
 		.on('error', (err) => {
 			return Promise.reject(err)
 		})
-};
-send.error404 = (errorFilename, response) => {
-	return send.fileForGetRequest(errorFilename, response)
-};
+}
+
+module.exports = sendFile;
