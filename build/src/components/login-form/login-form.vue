@@ -1,6 +1,8 @@
 <template>
   <div class="login-form">
-    <fetot-input/>
+    <fetot-input :input="login.inputs.mail"/>
+    <fetot-input :input="login.inputs.password" v-if="login.isLogin"/>
+    <fetot-button @button-click="$emit('button-click')" :name="login.button"/>
   </div>
 </template>
 <script src="./login-form.js"></script>

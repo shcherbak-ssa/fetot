@@ -1,0 +1,27 @@
+@import '../../scss/src.scss';
+
+.fetot-button {
+  background: $fetot-blue;
+  color: $fetot-light-gray;
+  cursor: pointer;
+  width: 300px;
+  height: 42px;
+  transition: .4s;
+  @include flex-center;
+  @include static-shadow;
+  @include border-radius-3;
+
+  &.type-text {
+    font: 18px sans-serif;
+  }
+  &.type-icon {
+
+  }
+  &:hover {
+    background: $fetot-dark-blue;
+    @include hover-shadow;
+  }
+  &:active {
+    box-shadow: none;
+  }
+}

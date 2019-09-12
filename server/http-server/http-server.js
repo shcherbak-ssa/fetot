@@ -19,7 +19,7 @@ async function httpServerWorker(request, response) {
 		if( request.headers.connection.toLowerCase() === 'upgrade' &&
 			  request.headers.upgrade.toLowerCase() === 'websocket' ) {
 			console.log('hello');
-			return response.end();
+			return response.end('hello');
 		}
 		
 		filename = await httpRequest(request.url);

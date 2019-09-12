@@ -8,6 +8,7 @@
   @include box-sizing;
   @include flex-center-column;
   @include static-shadow;
+  @include border-radius-6;
 
   &:hover {
     @include hover-shadow;

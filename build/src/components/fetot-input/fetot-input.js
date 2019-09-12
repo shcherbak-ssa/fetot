@@ -1,5 +1,8 @@
 export default {
   name: 'fetot-input',
+	props: {
+  	input: Object
+	},
 	data() {
   	return {
   		status: {
@@ -12,15 +15,26 @@ export default {
 	methods: {
   	isActive() {
 		  this.status['is-active'] = true;
+		  this.status['has-value'] = false;
 	  },
   	checkValue({target}) {
-  		if( target.value !== '' ) {
-  			this.status['is-active'] = true;
-			  // this.status['has-value'] = true;
-		  } else {
-			  this.status['is-active'] = false;
-			  // this.status['has-value'] = true;
-		  }
-	  }
+		  this.status['is-active'] = false;
+		  if( target.value !== '' ) this.status['has-value'] = true;
+	  },
+		setValue({target}) {
+  		this.input.value = target.value;
+		}
+	},
+	computed: {
+		toggleError() {
+			let isError = !!this.input.error;
+			this.status['has-error'] = isError;
+			
+			if( isError ) {
+			
+			}
+			
+			return this.input.error;
+		}
 	}
 }

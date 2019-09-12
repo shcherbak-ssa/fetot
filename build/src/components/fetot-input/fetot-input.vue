@@ -1,13 +1,13 @@
 <template>
-  <div class="fetot-input"
-       :class="status"
-       @click="isActive">
-    <input type="text"
+  <div class="fetot-input" :class="status" @click="isActive">
+    <input :type="input.type"
+           :value="input.value"
            class="input"
-           @blur="checkValue">
-    <div class="placeholder">Placeholder</div>
-    <div class="icon"></div>
-    <div class="error"></div>
+           @blur="checkValue"
+           @input="setValue">
+    <div class="placeholder">{{ input.placeholder }}</div>
+    <div class="icon">{{ input.icon }}</div>
+    <div class="error">{{ toggleError }}</div>
   </div>
 </template>
 <script src="./fetot-input.js"></script>

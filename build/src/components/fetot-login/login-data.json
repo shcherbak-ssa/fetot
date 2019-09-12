@@ -1,0 +1,34 @@
+{
+  "content": {
+    "singIn": {
+      "title": "Sing in",
+      "link": "Already have an account?"
+    },
+    "login": {
+      "title": "Log in",
+      "link": "Don't have an account?"
+    }
+  },
+  "login": {
+    "isLogin": "",
+    "inputs": {
+      "mail": {
+        "value": "",
+        "type": "text",
+        "placeholder": "E-mail",
+        "icon": "@",
+        "error": "",
+        "label": "mail"
+      },
+      "password": {
+        "value": "",
+        "type": "password",
+        "placeholder": "Password",
+        "icon": "#",
+        "error": "",
+        "label": "password"
+      }
+    },
+    "button": ""
+  }
+}

@@ -1,7 +1,7 @@
 <template>
   <div class="fetot-login">
     <div class="title">{{ getTitle }}</div>
-    <login-form/>
+    <login-form @button-click="submitData" :login="setLoginData"/>
     <div class="link" @click="isLogin = !isLogin">{{ getLink }}</div>
   </div>
 </template>

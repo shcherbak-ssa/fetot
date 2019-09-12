@@ -18,10 +18,7 @@ module.exports = (env) => {
 			rules: [
 				{
 					test: /\.vue$/,
-					loader: 'vue-loader',
-					// exclude: file => (
-					// 	/\.(png|ttf|svg|woff|woff2|eot)$/.test(file)
-					// )
+					loader: 'vue-loader'
 				},
 				{
 					test: /\.js$/,
@@ -37,16 +34,11 @@ module.exports = (env) => {
 						'vue-style-loader',
 						'css-loader',
 						'sass-loader'
-					],
-					// exclude: file => (
-					// 	/\.(png|ttf|svg|woff|woff2|eot)$/.test(file)
-					// )
-				}
+					]
+				},
 				// {
 				// 	test: /\.(png|ttf|svg|woff|woff2|eot)$/,
-				// 	exclude: file => (
-				// 		/\.(png|ttf|svg|woff|woff2|eot)$/.test(file)
-				// 	)
+				// 	exclude: /src/
 				// }
 			]
 		},
