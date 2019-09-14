@@ -1,10 +1,20 @@
 @import '../../scss/src.scss';
 
-.login-form {
+.check-email-mess {
   width: 100%;
   margin-bottom: 30px;
   @include flex-center-column;
 
+  .mail {
+    color: $fetot-dark-gray;
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+  .message {
+    color: $fetot-dark-blue;
+    font-size: 24px;
+    text-align: center;
+  }
   &.to-hide {
     display: none;
     //visibility: hidden;

@@ -15,9 +15,8 @@ async function runFetotServer() {
 		const httpServer = await runHttpServer(port, host);
 		console.log(`Test server run at http://${host}:${port}`);
 		
-		const mongoClient = await runMongodbClient();
-		console.log('mongo run');
-		
+		// const mongoClient = await runMongodbClient();
+		// console.log('mongo run');
 		// mongoClient.close();
 	} catch( err ) {
 		return Promise.reject(err);

@@ -69,21 +69,15 @@
       left: 6px;
     }
   }
-  &.has-value {
-    .placeholder {
-      opacity: 0;
-    }
+  &.has-value .placeholder {
+    opacity: 0;
   }
   &.is-active .icon, &.has-value .icon {
     color: $fetot-dark-blue;
     left: -30px;
   }
   &.has-error {
-    .placeholder {
-      color: $fetot-red;
-      opacity: 0;
-    }
-    .icon {
+    .placeholder, .icon {
       color: $fetot-red;
     }
     .error {

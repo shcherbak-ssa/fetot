@@ -1,4 +1,6 @@
 import loginForm from '../login-form/login-form.vue';
+import checkEmailMessage from '../check-email-mess/check-email-mess.vue'
+
 import {content, login} from './login-data.json';
 import validation from '../../modules/validation';
 
@@ -7,16 +9,22 @@ export default {
 	data() {
   	return {
 		  isLogin: false,
+		  isContinue: false,
 		  content,
 		  login
 	  }
 	},
 	components: {
-  	'login-form': loginForm
+  	'login-form': loginForm,
+		'check-email-message': checkEmailMessage
 	},
 	methods: {
+		changeContent() {
+			this.isLogin = !this.isLogin;
+			// this.isContinue = !this.isContinue;
+		},
   	checkIsLogin(label) {
-  		return this.isLogin ? this.content.login[label] : this.content.singIn[label];
+  		return this.isLogin ? this.content.login[label] : this.content.sing[label];
 	  },
 		submitData() {
   		let {mail, password} = this.login.inputs,

@@ -1,5 +1,5 @@
 <template>
-  <div class="fetot-input" :class="status" @click="isActive">
+  <div class="fetot-input" :class="states" @click="isActive">
     <input :type="input.type"
            :value="input.value"
            class="input"

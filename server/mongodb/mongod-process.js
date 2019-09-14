@@ -15,7 +15,7 @@ const fs = require('fs'),
 let p = '2019-09-13T18:50:59.059+0300 I  NETWORK  [initandlisten] Listening on 127.0.0.1' +
 	'2019-09-13T18:50:59.062+0300 I  NETWORK  [initandlisten] waiting for connections on port 27017';
 
-function runMongodProcess() {
+const runMongodProcess = () => {
 	return new Promise((success, error) => {
 		let mongodProcess = childProcess.spawn(processCommand, processArgs, processOptions);
 		
@@ -31,7 +31,8 @@ function runMongodProcess() {
 		console.log('mongod process run');
 		return success();
 	})
-}
+};
+
 function createTempFile() {
 	if( !fs.existsSync(logDirname) ) fs.mkdirSync(logDirname);
 }

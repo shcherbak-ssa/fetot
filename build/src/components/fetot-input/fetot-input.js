@@ -5,7 +5,7 @@ export default {
 	},
 	data() {
   	return {
-  		status: {
+  		states: {
 			  'is-active': false,
 			  'has-value': false,
 			  'has-error': false
@@ -14,12 +14,12 @@ export default {
 	},
 	methods: {
   	isActive() {
-		  this.status['is-active'] = true;
-		  this.status['has-value'] = false;
+		  this.states['is-active'] = true;
+		  this.states['has-value'] = false;
 	  },
   	checkValue({target}) {
-		  this.status['is-active'] = false;
-		  if( target.value !== '' ) this.status['has-value'] = true;
+		  this.states['is-active'] = false;
+		  if( target.value !== '' ) this.states['has-value'] = true;
 	  },
 		setValue({target}) {
   		this.input.value = target.value;
@@ -28,11 +28,10 @@ export default {
 	computed: {
 		toggleError() {
 			let isError = !!this.input.error;
-			this.status['has-error'] = isError;
 			
-			if( isError ) {
-			
-			}
+			this.states['is-active'] = isError;
+			this.states['has-error'] = isError;
+			this.states['has-value'] = false;
 			
 			return this.input.error;
 		}

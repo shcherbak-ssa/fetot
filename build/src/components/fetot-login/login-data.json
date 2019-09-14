@@ -1,8 +1,12 @@
 {
   "content": {
-    "singIn": {
+    "sing": {
       "title": "Sing in",
       "link": "Already have an account?"
+    },
+    "check": {
+      "title": "Sing in",
+      "link": "Change e-mail address"
     },
     "login": {
       "title": "Log in",

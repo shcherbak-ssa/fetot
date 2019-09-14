@@ -1,12 +1,12 @@
 'use strict';
 
-const runMongodProcess = require('./mongod-process');
+// const runMongodProcess = require('./mongod-process');
 
 const {MongoClient} = require('mongodb'),
 	mongoUrl = 'mongodb://localhost:27017',
 	mongoOptions = { useNewUrlParser: true, useUnifiedTopology: true };
 
-async function runMongodbClient() {
+const runMongodbClient = async () => {
 	try {
 		let mongoClient = new MongoClient(mongoUrl, mongoOptions);
 		
@@ -15,7 +15,8 @@ async function runMongodbClient() {
 	} catch( err ) {
 		return Promise.reject(err);
 	}
-}
+};
+
 function mongoClientConnect(mongoClient) {
 	return new Promise((success, error) => {
 		return mongoClient.connect((err, client) => {
