@@ -5,10 +5,11 @@ const path = require('path'),
 
 module.exports = (env) => {
 	let outputFilename = `${env.currentModule}.js`;
+	let entryFilename = `./${env.currentModule}/index.js`;
 	
 	return {
 		mode: 'development',
-		entry: './src/index.js',
+		entry: entryFilename,
 		output: {
 			path: path.resolve(__dirname, '../client/js/'),
 			filename: outputFilename,
@@ -41,6 +42,14 @@ module.exports = (env) => {
 				// 	exclude: /src/
 				// }
 			]
+		},
+		resolve: {
+			alias: {
+				'fetot-main-scss': path.join(__dirname, 'src/scss/main.scss'),
+				'fetot-src-scss': path.join(__dirname, 'src/scss/src.scss'),
+				'fetot-components': path.join(__dirname, 'src/components'),
+				'fetot-js-module': path.join(__dirname, 'src/modules')
+			}
 		},
 		plugins: [
 			new VueLoader()

@@ -1,18 +1,4 @@
 {
-  "content": {
-    "sing": {
-      "title": "Sing in",
-      "link": "Already have an account?"
-    },
-    "check": {
-      "title": "Sing in",
-      "link": "Change e-mail address"
-    },
-    "login": {
-      "title": "Log in",
-      "link": "Don't have an account?"
-    }
-  },
   "login": {
     "isLogin": "",
     "inputs": {

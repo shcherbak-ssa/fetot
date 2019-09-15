@@ -15,7 +15,7 @@ let componentsDirname = path.resolve(__dirname, `../src/components`),
 
 cli.prompt();
 cli.on('line', (name) => {
-	let componentFiles = JSON.stringify(require('./component-files.json')),
+	let componentFiles = JSON.stringify(require('./files.json')),
 		componentPathname = path.join(componentsDirname, name);
 	
 	fs.mkdir(componentPathname, (err) => {

@@ -1,6 +1,6 @@
-@import '../../scss/src.scss';
+@import 'fetot-src-scss';
 
-.fetot-login {
+.workspace {
   background: #fff;
   padding: 36px;
   width: 510px;
@@ -17,7 +17,6 @@
   .title {
     color: $fetot-dark-blue;
     font: bold 1.5rem sans-serif;
-    margin-bottom: 30px;
   }
   .link {
     color: $fetot-azure;

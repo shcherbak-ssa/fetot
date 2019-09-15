@@ -1,0 +1,14 @@
+{
+  "sing-in": {
+    "title": "Sing in",
+    "link": "Already have an account"
+  },
+  "login": {
+    "title": "Login",
+    "link": "Do not have an account"
+  },
+  "check-email": {
+    "title": "Is correct",
+    "link": "Change e-mail address"
+  }
+}

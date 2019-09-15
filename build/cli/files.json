@@ -5,7 +5,7 @@
     "}"
   ],
   "$.scss": [
-    "@import '../../scss/src.scss';",
+    "@import 'fetot-src-scss';",
     "",
     ".$ {",
     "  ",
