@@ -17,7 +17,7 @@ export default {
 		  this.states['is-active'] = true;
 		  this.states['has-value'] = false;
 	  },
-  	checkValue({target}) {
+		isBlur({target}) {
 		  this.states['is-active'] = false;
 		  if( target.value !== '' ) this.states['has-value'] = true;
 	  },

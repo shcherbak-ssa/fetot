@@ -1,14 +1,32 @@
 {
-  "sing-in": {
-    "title": "Sing in",
-    "link": "Already have an account"
+  "content": {
+    "sing-in": {
+      "title": "Sing in",
+      "link": "Already have an account"
+    },
+    "login": {
+      "title": "Login",
+      "link": "Do not have an account"
+    },
+    "check-email": {
+      "title": "Is correct",
+      "link": "Change e-mail address"
+    }
   },
-  "login": {
-    "title": "Login",
-    "link": "Do not have an account"
-  },
-  "check-email": {
-    "title": "Is correct",
-    "link": "Change e-mail address"
+  "inputs": {
+    "mail": {
+      "type": "text",
+      "value": "",
+      "placeholder": "E-mail",
+      "icon": "@",
+      "error": ""
+    },
+    "password": {
+      "type": "password",
+      "value": "",
+      "placeholder": "Password",
+      "icon": "#",
+      "error": ""
+    }
   }
 }

@@ -4,7 +4,9 @@
 
 const {MongoClient} = require('mongodb'),
 	mongoUrl = 'mongodb://localhost:27017',
-	mongoOptions = { useNewUrlParser: true, useUnifiedTopology: true };
+	mongoOptions = { useNewUrlParser: true, useUnifiedTopology: true },
+	
+	MongoWorker = require('./mongo-worker');
 
 const runMongodbClient = async () => {
 	try {
@@ -20,13 +22,7 @@ const runMongodbClient = async () => {
 function mongoClientConnect(mongoClient) {
 	return new Promise((success, error) => {
 		return mongoClient.connect((err, client) => {
-			if( err ) {
-				console.log('mongo client error');
-				return error(err);
-			}
-			
-			console.log('mongo client connect run');
-			return success(client)
+			return err ? error(err) : success(new MongoWorker(client))
 		})
 	})
 }

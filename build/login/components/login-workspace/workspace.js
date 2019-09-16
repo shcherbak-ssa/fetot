@@ -1,12 +1,13 @@
-import loginContent from '../login-content/content.vue';
-import data from './data.json'
+import loginContent from '../content.vue';
+import {content, inputs} from './data.json'
 
 export default {
   name: 'workspace',
 	data() {
   	return {
   		current: 'sing-in',
-  		content: data
+  		content,
+		  inputs
 	  }
 	},
 	components: {

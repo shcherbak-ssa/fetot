@@ -11,11 +11,8 @@
   @include static-shadow;
   @include border-radius-3;
 
-  &.type-text {
+  .txt {
     font: 18px sans-serif;
-  }
-  &.type-icon {
-
   }
   &:hover {
     background: $fetot-dark-blue;

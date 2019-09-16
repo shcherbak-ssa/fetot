@@ -1,10 +1,8 @@
 <template>
   <div class="fetot-input" :class="states" @click="isActive">
-    <input :type="input.type"
-           :value="input.value"
-           class="input"
-           @blur="checkValue"
-           @input="setValue">
+    <input class="input"
+           :type="input.type" :value="input.value"
+           @blur="isBlur" @input="setValue">
     <div class="placeholder">{{ input.placeholder }}</div>
     <div class="icon">{{ input.icon }}</div>
     <div class="error">{{ toggleError }}</div>
