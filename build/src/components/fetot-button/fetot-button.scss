@@ -7,6 +7,7 @@
   width: 300px;
   height: 42px;
   transition: .4s;
+  user-select: none;
   @include flex-center;
   @include static-shadow;
   @include border-radius-3;

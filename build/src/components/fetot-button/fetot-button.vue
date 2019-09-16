@@ -1,5 +1,5 @@
 <template>
-  <div class="fetot-button">
+  <div class="fetot-button" @click="$emit('button-click')">
     <icon v-if="type === 'icon'" :icon="value"/>
     <div class="txt" v-else>{{ value }}</div>
   </div>
