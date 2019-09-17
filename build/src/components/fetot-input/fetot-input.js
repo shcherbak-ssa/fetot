@@ -14,26 +14,27 @@ export default {
 	},
 	methods: {
   	isActive() {
-		  this.states['is-active'] = true;
-		  this.states['has-value'] = false;
+		  this.setStates(1, 0, 0)
 	  },
 		isBlur({target}) {
-		  this.states['is-active'] = false;
-		  if( target.value !== '' ) this.states['has-value'] = true;
-	  },
+  		this.setStates(0, !!target.value,0)
+		},
 		setValue({target}) {
   		this.input.value = target.value;
+		},
+		setStates(isActive, hasValue, hasError) {
+			this.states['is-active'] = !!isActive;
+			this.states['has-value'] = !!hasValue;
+			this.states['has-error'] = !!hasError;
 		}
 	},
 	computed: {
 		toggleError() {
-			let isError = !!this.input.error;
-			
-			this.states['is-active'] = isError;
-			this.states['has-error'] = isError;
-			this.states['has-value'] = false;
-			
-			return this.input.error;
+			if( this.input.error ) this.setStates(1, 0, 1);
+			return this.input.error
 		}
+	},
+	mounted() {
+  	this.setStates(0, !!this.input.value, 0);
 	}
 }

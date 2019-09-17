@@ -8,5 +8,6 @@
     <div class="error">{{ toggleError }}</div>
   </div>
 </template>
-<script src="./fetot-input.js"></script>
-<style src="./fetot-input.scss" lang="scss" scoped></style>
+
+<script src="./fetot-input/fetot-input.js"></script>
+<style src="./fetot-input/fetot-input.scss" lang="scss" scoped></style>

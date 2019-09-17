@@ -10,8 +10,8 @@
 </template>
 
 <script>
-  import fetotInput from 'fetot-components/fetot-input/fetot-input.vue';
-  import fetotButton from 'fetot-components/fetot-button/fetot-button.vue';
+  import fetotInput from 'fetot-components/fetot-input.vue';
+  import fetotButton from 'fetot-components/fetot-button.vue';
   import checkEmailMessage from './src/check-email-message.vue';
 
   import validation from 'fetot-js-modules/validation';
@@ -38,19 +38,35 @@
 				this.mode === 'sing-in' ? this.isSinginMode() : this.isLoginMode()
 			},
       isSinginMode() {
-				let {value} = this.inputs.mail,
-          valid = validation('mail', value);
+	      this.setErrorMessage('mail', '');
+        let mailValue = this.checkInputValue('mail');
 
-				if( valid ) return this.inputs.mail.error = valid;
-
-	      this.inputs.mail.error = '';
-				this.sendData({ type: this.mode, mail: value })
+        if( mailValue ) websocket.sendData({ type: this.mode, mail: mailValue })
       },
       isLoginMode() {
+	      this.setErrorMessage('mail', '');
+	      this.setErrorMessage('password', '');
 
+	      let mailValue = this.checkInputValue('mail');
+	      if( !mailValue ) return;
+
+	      let passwordValue = this.checkInputValue('password');
+	      if( !passwordValue ) return;
+
+				websocket.sendData({type: this.mode, mail: mailValue, password: passwordValue});
       },
-      sendData(data) {
-	      websocket.sendData(data)
+      setErrorMessage(label, message) {
+				this.inputs[label].error = message
+      },
+      checkInputValue(label) {
+	      let {value} = this.inputs[label];
+
+	      let valid = validation(label, value);
+	      if( !!valid ) {
+		      this.setErrorMessage(label, valid);
+		      return false
+	      }
+	      return value;
       },
 			singinMessageHandler({error, message}) {
 				if( error ) return this.inputs.mail.error = message;

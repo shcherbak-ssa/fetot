@@ -1,6 +1,6 @@
 const validation = {
 	mail(value) {
-		return /[^\s@]+@(gmail|mail)\.(ru|com)/.test(value) ? false : 'Invalid e-mail.';
+		return /[^\s@]+@(gmail|mail)\.(ru|com)/.test(value) ? false : 'Invalid e-mail address';
 	},
 	password(value) {
 		return value.length < 8 ? 'A password cannot be under 8 symbols' : false;
@@ -8,7 +8,7 @@ const validation = {
 };
 
 function checkEmpty(value) {
-	return value ? false : 'Current field doesn\'t be empty.'
+	return value ? false : 'Current field doesn\'t be empty'
 }
 
 export default (label, value) => {
