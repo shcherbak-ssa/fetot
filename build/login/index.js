@@ -10,5 +10,5 @@ new Vue({
 	components: { 'fetot-login': fetotLogin }
 });
 
-websocket.initWebSocketModule('ws://localhost:8080/');
+websocket.initWebSocketModule('ws://localhost:8080/', 'login');
 websocket.initMessageHandler();

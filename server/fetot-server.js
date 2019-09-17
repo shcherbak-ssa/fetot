@@ -1,6 +1,8 @@
 'use strict';
 
-const runHttpServer = require('./src/http-server'),
+const runFetotApplication = require('./fetot'),
+	
+	runHttpServer = require('./src/http-server'),
 	runWebSocketServer = require('./src/ws-server'),
 	runMongodbClient = require('./src/mongodb');
 
@@ -18,7 +20,8 @@ async function runFetotServer() {
 		const webSockerWorker = await runWebSocketServer(httpServer);
 		// const mongoWorker = await runMongodbClient();
 		
-		console.log(`Server run`);
+		await runFetotApplication(webSockerWorker, {});
+		console.log(`Application run`);
 	} catch( err ) {
 		return Promise.reject(err);
 	}

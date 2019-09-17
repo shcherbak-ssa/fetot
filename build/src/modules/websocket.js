@@ -2,11 +2,12 @@
 
 let websocket = '';
 
-function initWebSocketModule(url) {
+function initWebSocketModule(url, fetotModule) {
 	websocket = new WebSocket(url);
 
 	websocket.onopen = () => {
-		console.log('WebSocket is open')
+		console.log('WebSocket is open');
+		sendData({ type: 'connection', message: {id: 1, 'fetot-module': fetotModule}})
 	};
 	websocket.onerror = (error) => {
 		console.log(error);
