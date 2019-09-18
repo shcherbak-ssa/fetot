@@ -16,11 +16,11 @@ async function runFetotServer() {
 		host = 'localhost';
 	
 	try {
-		const httpServer = await runHttpServer(port, host);
-		const webSockerWorker = await runWebSocketServer(httpServer);
+		const httpServer = await runHttpServer(port, host),
+			WebSocketWorker = await runWebSocketServer(httpServer);
 		// const mongoWorker = await runMongodbClient();
 		
-		await runFetotApplication(webSockerWorker, {});
+		await runFetotApplication(WebSocketWorker, {});
 		console.log(`Application run`);
 	} catch( err ) {
 		return Promise.reject(err);

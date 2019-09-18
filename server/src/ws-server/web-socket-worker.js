@@ -1,18 +1,50 @@
 'use strict';
 
-const SocketWorker = require('./socket-worker');
-
 class WebSocketWorker {
-	constructor(websocket) {
-		this.websocket = websocket;
-		this.sockets = new Map();
+	constructor(socket) {
+		this.socket = socket;
+		this.socketID = '';
 	}
 	
-	start(FetotUser) {
-		this.websocket.on('connection', (socket) => {
-			socket = new SocketWorker(socket, this.websocket);
-			FetotUser.eventEmitter.emit('connection', socket.init())
+	/*** static properties and methods ***/
+	static webSocket = {};
+	static sockets = new Map();
+	
+	static async init(websocket) {
+		WebSocketWorker.webSocket = websocket;
+		return WebSocketWorker;
+	}
+	static async start(fetotEventEmitter) {
+		WebSocketWorker.webSocket.on('connection', (socket) => {
+			const webSocketWorker = new WebSocketWorker(socket);
+			fetotEventEmitter.emit('connection', webSocketWorker)
 		})
+	}
+	
+	/*** work methods ***/
+	async start(fetotEventEmitter) {
+		this.socket.on('message', (message) => {
+			fetotEventEmitter.emit('message', message, this);
+		});
+		this.socket.on('close', (event) => {
+			console.log(event);
+			this.removeSocket();
+		})
+	}
+	
+	setSocketID(id) {
+		this.socketID = id;
+	}
+	async sendMessage(message) {
+		message = JSON.stringify(message);
+		this.socket.send(message);
+	}
+	async close(reason) {
+		this.socket.close(1000, reason);
+		this.removeSocket();
+	}
+	removeSocket() {
+		WebSocketWorker.sockets.delete(this.socketID);
 	}
 }
 

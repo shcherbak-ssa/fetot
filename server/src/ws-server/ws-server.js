@@ -5,7 +5,7 @@ const webSocket = require('ws'),
 
 async function webSocketServer(httpServer) {
 	const websocket = new webSocket.Server({ server: httpServer });
-	return new WebSocketWorker(websocket);
+	return WebSocketWorker.init(websocket);
 }
 
 module.exports = webSocketServer;

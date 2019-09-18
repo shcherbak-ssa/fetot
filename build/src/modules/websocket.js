@@ -2,18 +2,19 @@
 
 let websocket = '';
 
-function initWebSocketModule(url, fetotModule) {
+function initWebSocketModule(url, fetotMode) {
 	websocket = new WebSocket(url);
 
 	websocket.onopen = () => {
 		console.log('WebSocket is open');
-		sendData({ type: 'connection', message: {id: 1, 'fetot-module': fetotModule}})
+		sendData({ clientID: 1, type: 'connection', message: {'fetot-mode': fetotMode}})
 	};
 	websocket.onerror = (error) => {
 		console.log(error);
 	};
-	websocket.onclose = () => {
-		console.log('WebSocket is close');
+	websocket.onclose = (event) => {
+		if( event.wasClean ) console.log(`WebSocket is close: ${event.code} : ${event.reason}`);
+		else console.log('wtf?');
 	};
 	
 	return websocket;
@@ -21,9 +22,9 @@ function initWebSocketModule(url, fetotModule) {
 function initMessageHandler() {
 	websocket.onmessage = ({data}) => {
 		data = JSON.parse(data);
-		document.dispatchEvent(new CustomEvent(data.type, {
-			detail: data.message
-		}))
+		if( 'event' in data ) {
+			document.dispatchEvent(new CustomEvent(data.event, {detail: data.message}))
+		} else console.log(data);
 	}
 }
 function setMessageEvent(eventName, messageHandler) {
