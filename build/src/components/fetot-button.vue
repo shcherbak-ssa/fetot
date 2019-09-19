@@ -1,7 +1,9 @@
 <template>
   <div class="fetot-button" @click="$emit('button-click')">
-    <icon v-if="type === 'icon'" :icon="value"/>
-    <div class="txt" v-else>{{ value }}</div>
+    <transition name="change-value" mode="out-in">
+      <icon v-if="type === 'icon'" :icon="value"/>
+      <div class="txt" :key="value" v-else>{{ value }}</div>
+    </transition>
   </div>
 </template>
 
@@ -35,6 +37,7 @@
 
     .txt {
       font: 18px sans-serif;
+      transition: .2s;
     }
     &:hover {
       background: $fetot-dark-blue;
@@ -42,6 +45,20 @@
     }
     &:active {
       box-shadow: none;
+    }
+  }
+  .change-value {
+    &-enter-active, &-leave-active {
+      transition: opacity .2s;
+    }
+    &-enter, &-leave-to {
+      opacity: 0;
+    }
+    &-enter {
+      transform: translateX(-50%);
+    }
+    &-leave-to {
+      transform: translateX(50%);
     }
   }
 </style>

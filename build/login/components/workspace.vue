@@ -1,8 +1,12 @@
 <template>
-  <div class="workspace">
-    <div class="title">{{ setCurrentTitle }}</div>
+  <div class="workspace" >
+    <transition name="change-mode" mode="out-in">
+      <div class="title" :key="mode">{{ setCurrentTitle }}</div>
+    </transition>
     <login-content @check-email="checkEmailHandler" :mode="mode" :inputs="inputs"/>
-    <div class="link" @click="changeMode">{{ setCurrentLink }}</div>
+    <transition name="change-mode" mode="out-in">
+      <div class="link" :key="mode" @click="changeMode">{{ setCurrentLink }}</div>
+    </transition>
   </div>
 </template>
 
@@ -15,6 +19,8 @@
 		data() {
 			return {
 				mode: 'sing-in',
+        currentTitle: '',
+        currentLink: '',
 				content,
 				inputs
 			}
@@ -42,9 +48,9 @@
 		computed: {
 			setCurrentTitle() {
 				return this.content[this.mode].title
-			},
+      },
 			setCurrentLink() {
-				return this.content[this.mode].link
+				return this.content[this.mode].link;
 			}
 		}
 	}
@@ -68,10 +74,12 @@
     }
 
     .title {
+      transition: .2s;
       color: $fetot-dark-blue;
       font: bold 1.5rem sans-serif;
     }
     .link {
+      transition: .2s;
       color: $fetot-azure;
       cursor: pointer;
       font: lighter .875rem sans-serif;
@@ -79,6 +87,21 @@
       &:hover {
         text-decoration: underline;
       }
+    }
+  }
+
+  .change-mode {
+    &-enter-active, &-leave-active {
+      transition: opacity .2s;
+    }
+    &-enter, &-leave-to {
+      opacity: 0;
+    }
+    &-enter {
+      transform: translateX(-50%);
+    }
+    &-leave-to {
+      transform: translateX(50%);
     }
   }
 </style>

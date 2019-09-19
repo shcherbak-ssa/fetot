@@ -1,8 +1,8 @@
 <template>
   <div class="content">
-    <div class="form" v-if="/(sing-in|login)/.test(mode)">
+    <div class="form" :class="changeMode" v-if="/(sing-in|login)/.test(mode)">
       <fetot-input :input="inputs.mail"/>
-      <fetot-input v-if="mode === 'login'" :input="inputs.password"/>
+      <fetot-input :input="inputs.password"/>
       <fetot-button @button-click="buttonClickHandler" type="text" :value="setButtonValue"/>
     </div>
     <check-email-message v-else :mail="inputs.mail.value"/>
@@ -23,11 +23,6 @@
 			mode: String,
       inputs: Object
 		},
-    data() {
-			return {
-				websocketMessage: {}
-      }
-    },
 		components: {
 			'fetot-input': fetotInput,
 			'fetot-button': fetotButton,
@@ -37,6 +32,7 @@
 			buttonClickHandler() {
 				this.mode === 'sing-in' ? this.isSinginMode() : this.isLoginMode()
 			},
+
       isSinginMode() {
 	      this.setErrorMessage('mail', '');
         let mailValue = this.checkInputValue('mail');
@@ -64,6 +60,7 @@
           }
 				});
       },
+
       setErrorMessage(label, message) {
 				this.inputs[label].error = message
       },
@@ -77,6 +74,7 @@
 	      }
 	      return value;
       },
+
 			singinMessageHandler({error, message}) {
 				if( error ) return this.inputs.mail.error = message;
         this.$emit('check-email')
@@ -89,7 +87,10 @@
 		computed: {
 			setButtonValue() {
 				return this.mode === 'sing-in' ? 'Continue' : 'Enter'
-			}
+			},
+      changeMode() {
+				return { 'is-login': this.mode === 'login' }
+      }
 		},
     created() {
 			websocket.setMessageEvent('fetot-sing-in' ,this.singinMessageHandler);
@@ -107,6 +108,25 @@
 
     .form {
       margin: 30px 0;
+      transition: .4s;
+      position: relative;
+
+      .fetot-input:nth-child(2) {
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      &.is-login {
+        .fetot-input:nth-child(1) {
+          margin-bottom: 102px;
+        }
+        .fetot-input:nth-child(2) {
+          opacity: 1;
+          top: 72px;
+        }
+      }
     }
   }
 </style>
