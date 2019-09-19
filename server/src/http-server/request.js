@@ -10,7 +10,7 @@ async function httpRequest(url) {
 	if( /[^a-z.1-9\/]/ig.test(url) ) return error404();
 	
 	let {base, name, ext: extname} = path.parse(url);
-	for( let [key, {valid, filename}] of validation ) if( key !== 404 && key.test(extname) )
+	for( let [key, {valid, filename}] of validation ) if( key !== 404 && (new RegExp(key)).test(extname) )
 		return valid.has(name) ? filename(base) : error404();
 	
 	return error404();
