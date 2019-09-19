@@ -3,10 +3,11 @@
 class WebSocketWorker {
 	constructor(socket) {
 		this.socket = socket;
-		this.socketID = '';
+		this.clientID = '';
 	}
 	
 	/*** static properties and methods ***/
+	static outputMessageTemplate = { type: '', message: {} };
 	static webSocket = {};
 	static sockets = new Map();
 	
@@ -32,19 +33,21 @@ class WebSocketWorker {
 		})
 	}
 	
-	setSocketID(id) {
-		this.socketID = id;
+	async setClientID(id) {
+		this.clientID = id;
 	}
 	async sendMessage(message) {
-		message = JSON.stringify(message);
-		this.socket.send(message);
+		let sendMessage = Object.assign(WebSocketWorker.outputMessageTemplate, message);
+		sendMessage = JSON.stringify(sendMessage);
+		
+		this.socket.send(sendMessage);
 	}
 	async close(reason) {
 		this.socket.close(1000, reason);
 		this.removeSocket();
 	}
 	removeSocket() {
-		WebSocketWorker.sockets.delete(this.socketID);
+		WebSocketWorker.sockets.delete(this.clientID);
 	}
 }
 

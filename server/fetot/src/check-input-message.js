@@ -2,7 +2,7 @@
 
 const validInputMassage = require('./valid-input-message');
 
-async function checkInputMessage(message) {
+async function checkInputMessage({message}) {
 	if( /[\0]/.test(message) ) throw new Error('Invalid symbol \'\\0\'');
 	
 	message = await JSON.parse(message);

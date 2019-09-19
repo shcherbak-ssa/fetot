@@ -41,7 +41,10 @@
 	      this.setErrorMessage('mail', '');
         let mailValue = this.checkInputValue('mail');
 
-        if( mailValue ) websocket.sendData({ type: this.mode, mail: mailValue })
+        if( mailValue ) websocket.sendMessage({
+          type: this.mode,
+          message: { mail: mailValue }
+        })
       },
       isLoginMode() {
 	      this.setErrorMessage('mail', '');
@@ -53,7 +56,13 @@
 	      let passwordValue = this.checkInputValue('password');
 	      if( !passwordValue ) return;
 
-				websocket.sendData({type: this.mode, mail: mailValue, password: passwordValue});
+				websocket.sendMessage({
+          type: this.mode,
+          message: {
+          	mail: mailValue,
+            password: passwordValue
+          }
+				});
       },
       setErrorMessage(label, message) {
 				this.inputs[label].error = message

@@ -6,7 +6,8 @@ const FetotClient = require('./fetot-client'),
 	fetotModes = require('./modes'),
 	fetotModules = require('./modules'),
 	
-	checkInputMessage = require('./src/check-input-message');
+	checkInputMessage = require('./src/check-input-message'),
+	checkClientID = require('./src/check-client-id');
 
 async function runFetotApplication(WebSocketWorker, mongoWorker) {
 	let fetotEventEmitter = new FetotEventEmitter();
@@ -23,23 +24,26 @@ async function runFetotApplication(WebSocketWorker, mongoWorker) {
 }
 async function parseInputMessage(options) {
 	try {
-		let message = await checkInputMessage(options.message);
+		options.message = await checkInputMessage(options);
 		
-		if( message.type === 'connection' )
+		if( options.message.type === 'connection' )
 			await connectClient(options);
 		else
-			await checkClientType(options.message)
+			await parseClientType(options)
 		
 	} catch( err ) {
 		console.log(err);
 		await options.socketWorker.close('Invalid message');
 	}
 }
-async function connectClient({message, socketWorker}) {
-	let answer = await FetotClient.connect({message, socketWorker});
-	await socketWorker.sendMessage(answer);
+async function connectClient(options) {
+	let response = await FetotClient.connect(options);
+	await options.socketWorker.sendMessage(response);
 }
-async function checkClientType({clientID, type, message}) {
+async function parseClientType({message: {clientID, type, message}, socketWorker}) {
+	let isValidClientID = checkClientID(clientID, socketWorker);
+	if( !isValidClientID ) throw new Error('Invalid client id');
+	
 	let currentClient = FetotClient.clients.get(clientID);
 	
 	switch( type ) {
