@@ -8,6 +8,7 @@ const nodemailer = require('nodemailer'),
 class EmailWorker {
 	constructor(transporter) {
 		this.transporter = transporter;
+		this.message = {};
 	}
 	
 	static async init() {
@@ -15,21 +16,13 @@ class EmailWorker {
 		return new EmailWorker(transporter);
 	}
 	
-	async sendMail(message) {
-		return await this.transporter.sendMail(message);
+	async createMessage(messageConfig) {
+		messageConfig = getMessageConfig(messageConfig);
+		Object.assign(this.message, messageConfig);
+	}
+	async sendMail() {
+		return await this.transporter.sendMail(this.message);
 	}
 }
 
-// let clientEmail = 'zenyutich99@mail.ru';
-
-EmailWorker.init()
-	.then((emailWorker) => {
-		let message = getMessageConfig({clientEmail: 'zenyutich99@mail.ru', type: 'sing-in'});
-		return emailWorker.sendMail(message);
-	})
-	.then((info) => {
-		console.log(info)
-	})
-	.catch((err) => {
-		console.log(err)
-	});
+module.exports = EmailWorker.init();

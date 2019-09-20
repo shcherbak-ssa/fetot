@@ -7,8 +7,8 @@ function getMessageConfig({clientEmail, subject, type}) {
 	return {
 		from: 'shcherbakov.ssa@gmail.com',
 		to: clientEmail,
-		subject: 'Test email',
-		text: 'WTF',
+		subject: subject,
+		text: '',
 		html: getMessageHTML(type)
 	}
 }

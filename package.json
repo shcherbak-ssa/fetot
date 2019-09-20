@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "fetot": "supervisor --watch ./server -- server",
-    "test-email-worker": "node server/fetot/src/email-worker"
+    "fetot": "supervisor --watch ./server -- server"
   },
   "repository": {
     "type": "git",
