@@ -1,11 +1,14 @@
 <template>
-  <div class="content">
-    <div class="form" :class="changeMode" v-if="/(sing-in|login)/.test(mode)">
+  <div class="content" :class="showMessage">
+    <div class="form" :class="changeMode">
       <fetot-input :input="inputs.mail"/>
       <fetot-input :input="inputs.password"/>
-      <fetot-button @button-click="buttonClickHandler" type="text" :value="setButtonValue"/>
+      <!--      <fetot-button @button-click="buttonClickHandler" type="text" :value="setButtonValue"/>-->
+      <fetot-button @button-click="$emit('check-email')" type="text" :value="setButtonValue"/>
     </div>
-    <check-email-message v-else :mail="inputs.mail.value"/>
+    <div class="message">
+      <check-email-message :mail="inputs.mail.value"/>
+    </div>
   </div>
 </template>
 
@@ -30,11 +33,11 @@
     },
 		methods: {
 			buttonClickHandler() {
-				this.mode === 'sing-in' ? this.isSinginMode() : this.isLoginMode()
+				this.mode = 'check-email'
+				// this.mode === 'sing-in' ? this.isSinginMode() : this.isLoginMode()
 			},
 
       isSinginMode() {
-	      this.setErrorMessage('mail', '');
         let mailValue = this.checkInputValue('mail');
 
         if( mailValue ) websocket.sendMessage({
@@ -43,9 +46,6 @@
         })
       },
       isLoginMode() {
-	      this.setErrorMessage('mail', '');
-	      this.setErrorMessage('password', '');
-
 	      let mailValue = this.checkInputValue('mail');
 	      if( !mailValue ) return;
 
@@ -65,6 +65,7 @@
 				this.inputs[label].error = message
       },
       checkInputValue(label) {
+				this.setErrorMessage(label, '');
 	      let {value} = this.inputs[label];
 
 	      let valid = validation(label, value);
@@ -90,6 +91,9 @@
 			},
       changeMode() {
 				return { 'is-login': this.mode === 'login' }
+      },
+      showMessage() {
+				return { 'show-message': this.mode === 'check-email' }
       }
 		},
     created() {
@@ -104,12 +108,14 @@
 
   .content {
     width: 100%;
+    position: relative;
     @include flex-center-column;
 
     .form {
       margin: 30px 0;
       transition: .4s;
       position: relative;
+      z-index: 1;
 
       .fetot-input:nth-child(2) {
         opacity: 0;
@@ -126,6 +132,24 @@
           opacity: 1;
           top: 72px;
         }
+      }
+    }
+    .message {
+      transition: .4s;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      @include full-sizes;
+    }
+    &.show-message {
+      .form {
+        opacity: 0;
+      }
+      .message {
+        opacity: 1;
+        transition: .4s .2s;
+        z-index: 2;
       }
     }
   }

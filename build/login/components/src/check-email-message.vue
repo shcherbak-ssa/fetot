@@ -1,7 +1,7 @@
 <template>
   <div class="message">
     <div class="mail">{{ mail }}</div>
-    <div class="text">Check your e-mail address to continue registration.</div>
+    <div class="text">Check your e-mail address to continue registration</div>
   </div>
 </template>
 
@@ -16,8 +16,10 @@
   @import 'fetot-src-scss';
 
   .message {
-    margin: 10px 0 30px 0;
+    padding: 25px 0 2px;
     font-family: sans-serif;
+    @include box-sizing;
+    @include full-sizes;
     @include flex-center-column;
 
     .mail {

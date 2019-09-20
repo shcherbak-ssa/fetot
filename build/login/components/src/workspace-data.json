@@ -9,14 +9,14 @@
       "link": "Do not have an account"
     },
     "check-email": {
-      "title": "Is correct",
+      "title": "Correct",
       "link": "Change e-mail address"
     }
   },
   "inputs": {
     "mail": {
       "type": "text",
-      "value": "",
+      "value": "shcherbak.ssa@gmail.com",
       "placeholder": "E-mail",
       "icon": "@",
       "error": ""
