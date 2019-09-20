@@ -2,7 +2,7 @@
 
 const nodemailer = require('nodemailer'),
 	
-	getTransportOptions = require('./get-transport-options'),
+	transportOptions = require('./transport-options'),
 	getMessageConfig = require('./get-message-config');
 
 class EmailWorker {
@@ -11,8 +11,7 @@ class EmailWorker {
 	}
 	
 	static async init() {
-		let testAccount = await nodemailer.createTestAccount();
-		let transporter = nodemailer.createTransport(getTransportOptions(testAccount));
+		let transporter = nodemailer.createTransport(transportOptions);
 		return new EmailWorker(transporter);
 	}
 	
@@ -25,7 +24,7 @@ class EmailWorker {
 
 EmailWorker.init()
 	.then((emailWorker) => {
-		let message = getMessageConfig({clientEmail: 'shcherbak.ssa@gmail.com'});
+		let message = getMessageConfig({clientEmail: 'zenyutich99@mail.ru', type: 'sing-in'});
 		return emailWorker.sendMail(message);
 	})
 	.then((info) => {
