@@ -1,15 +1,16 @@
 'use strict';
 
-const outputMessageTemplate = { clientID: 1, type: '', message: {} };
+const outputMessageTemplate = { clientID: 1, type: '', message: {} },
+	messageHandlers = new Map();
 
 let websocket = {};
 
-function initWebSocketModule(url, fetotMode) {
+function initWebSocketModule(url, mode) {
 	websocket = new WebSocket(url);
 
 	websocket.onopen = () => {
 		console.log('WebSocket is open');
-		sendMessage({type: 'connection', message: {'fetot-mode': fetotMode}})
+		sendMessage({type: 'connection', message: {mode}})
 	};
 	websocket.onerror = (error) => {
 		console.log(error);
@@ -22,21 +23,19 @@ function initWebSocketModule(url, fetotMode) {
 	return websocket;
 }
 function initMessageHandler() {
-	setMessageEvent('connection', (message) => {
+	setMessageHandlers('connection', (message) => {
 		console.log('Connection is true');
 		outputMessageTemplate.clientID = message.clientID;
 	});
-	websocket.onmessage = ({data: message}) => {
-		message = JSON.parse(message);
+	websocket.onmessage = ({data}) => {
+		let {type, message} = JSON.parse(data);
 		console.log(message);
 		
-		document.dispatchEvent(new CustomEvent(message.type, {detail: message.message}))
+		messageHandlers.get(type)(message);
 	}
 }
-function setMessageEvent(eventName, messageHandler) {
-	document.addEventListener(eventName, (event) => {
-		messageHandler(event.detail)
-	});
+function setMessageHandlers(name, handler) {
+	messageHandlers.set(name, handler)
 }
 function sendMessage(message) {
 	let sendMessage = Object.assign(outputMessageTemplate, message);
@@ -48,6 +47,6 @@ function sendMessage(message) {
 export default {
 	initWebSocketModule,
 	initMessageHandler,
-	setMessageEvent,
+	setMessageHandlers,
 	sendMessage
 }

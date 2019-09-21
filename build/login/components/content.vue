@@ -3,8 +3,8 @@
     <div class="form" :class="changeMode">
       <fetot-input :input="inputs.mail"/>
       <fetot-input :input="inputs.password"/>
-      <!--      <fetot-button @button-click="buttonClickHandler" type="text" :value="setButtonValue"/>-->
-      <fetot-button @button-click="$emit('check-email')" type="text" :value="setButtonValue"/>
+      <fetot-button @button-click="buttonClickHandler" type="text" :value="setButtonValue"/>
+<!--      <fetot-button @button-click="$emit('check-email')" type="text" :value="setButtonValue"/>-->
     </div>
     <div class="message">
       <check-email-message :mail="inputs.mail.value"/>
@@ -33,16 +33,21 @@
     },
 		methods: {
 			buttonClickHandler() {
-				this.mode = 'check-email'
-				// this.mode === 'sing-in' ? this.isSinginMode() : this.isLoginMode()
+				// this.mode = 'check-email'
+				this.mode === 'sing-in' ? this.isSinginMode() : this.isLoginMode()
 			},
 
       isSinginMode() {
         let mailValue = this.checkInputValue('mail');
 
         if( mailValue ) websocket.sendMessage({
-          type: this.mode,
-          message: { mail: mailValue }
+          type: 'message',
+          message: {
+          	type: 'sing-in/sing-in',
+            data: {
+	            email: mailValue
+            }
+          }
         })
       },
       isLoginMode() {
@@ -53,10 +58,13 @@
 	      if( !passwordValue ) return;
 
 				websocket.sendMessage({
-          type: this.mode,
+          type: 'message',
           message: {
-          	mail: mailValue,
-            password: passwordValue
+	          type: 'login/log-in',
+          	data: {
+		          email: mailValue,
+		          password: passwordValue
+            }
           }
 				});
       },
@@ -76,8 +84,8 @@
 	      return value;
       },
 
-			singinMessageHandler({error, message}) {
-				if( error ) return this.inputs.mail.error = message;
+			singinMessageHandler({status, error}) {
+				if( status === 'error' ) return this.inputs.mail.error = error;
         this.$emit('check-email')
 			},
 			loginMessageHandler(message) {
@@ -97,8 +105,8 @@
       }
 		},
     created() {
-			websocket.setMessageEvent('fetot-sing-in' ,this.singinMessageHandler);
-			websocket.setMessageEvent('fetot-login', this.loginMessageHandler)
+			websocket.setMessageHandlers('sing-in', this.singinMessageHandler);
+			websocket.setMessageHandlers('log-in', this.loginMessageHandler)
     }
 	}
 </script>

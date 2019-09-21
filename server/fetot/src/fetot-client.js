@@ -1,6 +1,7 @@
 'use strict';
 
-const createClientID = require('./src/create-client-id');
+const ModeWorker = require('../../lib/mode-worker'),
+	createClientID = require('./create-client-id');
 
 class FetotClient {
 	constructor(socketWorker) {
@@ -8,18 +9,14 @@ class FetotClient {
 		this.clientID = 0;
 		
 		this.currentMode = {};
-		this.currentModule = {};
-		
-		this.modules = {};
 	}
 	
 	/*** static properties and methods ***/
 	static clients = new Map();
 	
-	static init(mongoWorker, fetotModes, fetotModules) {
+	static async init(mongoWorker, fetotModes) {
 		FetotClient.mongoWorker = mongoWorker;
-		FetotClient.fetotModes = fetotModes;
-		FetotClient.fetotModules = fetotModules;
+		FetotClient.fetotModes = new Map( Object.entries(fetotModes) );
 	}
 	static async connect({message: {message}, socketWorker}) {
 		let clientID = createClientID(),
@@ -28,14 +25,17 @@ class FetotClient {
 		await fetotClient.setClientID(clientID);
 		await socketWorker.setClientID(clientID);
 		
-		if( 'fetot-mode' in message ) {
-			fetotClient.setCurrentMode(message['fetot-mode']);
+		if( 'mode' in message ) {
+			await fetotClient.setCurrentMode(message);
 		} else {
 			throw socketWorker.close('Did not found fetot-mode')
 		}
 		
 		await FetotClient.setNewClient(fetotClient);
 		return {type: 'connection', message: {clientID}};
+	}
+	static async checkID(clientID, {clientID: socketClientID}) {
+		return clientID === socketClientID;
 	}
 	static async setNewClient(fetotClient) {
 		FetotClient.clients.set(fetotClient.clientID, fetotClient);
@@ -46,16 +46,14 @@ class FetotClient {
 		this.clientID = id;
 	}
 	
-	parseMessage(message) {}
-	
-	changeMode(message) {}
-	setCurrentMode(mode) {
-		this.currentMode = FetotClient.fetotModes[mode];
+	async run(message) {
+		let sendMessage = await this.currentMode.run(message);
+		this.socketWorker.sendMessage(sendMessage);
 	}
 	
-	changeModule(message) {}
-	setCurrentModule(fmodule) {
-		this.currentModule = this.currentMode.modules[fmodule];
+	async setCurrentMode({mode}) {
+		let currentModeOptions = FetotClient.fetotModes.get(mode);
+		this.currentMode = await ModeWorker.init(currentModeOptions, FetotClient.mongoWorker);
 	}
 }
 

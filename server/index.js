@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports = require('./fetot-server');
+module.exports = require('./server');

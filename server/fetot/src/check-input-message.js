@@ -10,20 +10,20 @@ async function checkInputMessage({message}) {
 	
 	if( messageMap.size !== 3 ) throw new Error('Invalid count of message keys');
 	
-	await checkMessageKeys(messageMap.keys());
-	await checkMessageType(messageMap.get('type'));
+	await checkKeys(messageMap.entries());
+	await checkType(messageMap.get('type'));
 	
 	return await Object.fromEntries(messageMap.entries());
 }
-function checkMessageKeys(keys) {
-	let validKeys = validInputMassage.get('keys'),
-		keysCount = 0;
+function checkKeys(keys) {
+	let validKeys = validInputMassage.get('keys');
 	
-	for( let key of keys ) if( validKeys.includes(key) ) keysCount += 1;
-	
-	if( keysCount !== 3 ) throw new Error('Invalid key');
+	for( let [key, value] of keys ) {
+		if( key in validKeys && typeof value === validKeys[key]) continue;
+		else throw new Error('Invalid key');
+	}
 }
-function checkMessageType(messageType) {
+function checkType(messageType) {
 	let validTypes = validInputMassage.get('type');
 	if( !validTypes.includes(messageType) ) throw new Error('Invalid message type')
 }

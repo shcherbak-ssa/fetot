@@ -1,9 +1,13 @@
 'use strict';
 
 const validInputMessage = {
-	keys: [ 'clientID', 'type', 'message' ],
+	keys: {
+		clientID: 'number',
+		type: 'string',
+		message: 'object'
+	},
 	type: [ 'connection', 'message' ],
-	message: [ 'event' ]
+	message: [ 'type' ]
 };
 
 module.exports = new Map(Object.entries(validInputMessage));

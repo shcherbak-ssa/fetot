@@ -1,19 +1,17 @@
 'use strict';
 
-const FetotClient = require('./fetot-client'),
-	FetotEventEmitter = require('./fetot-event-emitter'),
+const FetotClient = require('./src/fetot-client'),
+	FetotEventEmitter = require('./src/event-emitter'),
 	
 	fetotModes = require('./modes'),
-	fetotModules = require('./modules'),
 	
-	checkInputMessage = require('./src/check-input-message'),
-	checkClientID = require('./src/check-client-id');
+	checkInputMessage = require('./src/check-input-message');
 
 async function runFetotApplication(WebSocketWorker, mongoWorker) {
 	let fetotEventEmitter = new FetotEventEmitter();
 	
 	await WebSocketWorker.start(fetotEventEmitter);
-	await FetotClient.init(mongoWorker, fetotModes, fetotModules);
+	await FetotClient.init(mongoWorker, fetotModes);
 	
 	fetotEventEmitter.on('connection', async (webSocketWorker) => {
 		await webSocketWorker.start(fetotEventEmitter)
@@ -29,7 +27,7 @@ async function parseInputMessage(options) {
 		if( options.message.type === 'connection' )
 			await connectClient(options);
 		else
-			await parseClientType(options)
+			await parseMessageType(options)
 		
 	} catch( err ) {
 		console.log(err);
@@ -40,21 +38,18 @@ async function connectClient(options) {
 	let response = await FetotClient.connect(options);
 	await options.socketWorker.sendMessage(response);
 }
-async function parseClientType({message: {clientID, type, message}, socketWorker}) {
-	let isValidClientID = checkClientID(clientID, socketWorker);
+async function parseMessageType({message: {clientID, type, message}, socketWorker}) {
+	let isValidClientID = await FetotClient.checkID(clientID, socketWorker);
 	if( !isValidClientID ) throw new Error('Invalid client id');
 	
 	let currentClient = FetotClient.clients.get(clientID);
 	
 	switch( type ) {
 		case 'message':
-			currentClient.parseMessage(message);
+			await currentClient.run(message);
 			break;
 		case 'change-mode':
-			currentClient.changeMode(message);
-			break;
-		case 'change-module':
-			currentClient.changeModule(message);
+			await currentClient.setCurrentMode(message);
 			break;
 	}
 }

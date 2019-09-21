@@ -1,7 +1,13 @@
 'use strict';
 
-const schema = require('./schema');
+const config = require('./config'),
+	singinModule = require('./modules/sing-in');
 
-module.exports = {
-	schema
+const loginMode = {
+	config,
+	modules: {
+		'sing-in': singinModule
+	}
 };
+
+module.exports = loginMode;

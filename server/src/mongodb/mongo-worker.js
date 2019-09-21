@@ -8,14 +8,14 @@ class MongoWorker {
 		this.databases = new Map();
 	}
 	
-	async createDB(dbname) {
-		let db = this.client.db(dbname);
-		this.databases.set(dbname, db);
+	async createDB(name) {
+		let db = this.client.db(name);
+		this.databases.set(name, db);
 		
 		return db;
 	}
-	async createCollection(dbname, collectionName) {
-		let collection = this.databases.get(dbname).collection(collectionName);
+	async createCollection(dbName, collectionName) {
+		let collection = this.databases.get(dbName).collection(collectionName);
 		return new MongoCollection(collection);
 	}
 	
