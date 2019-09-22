@@ -1,9 +1,12 @@
 /* mixins */
-@import 'mixins/variables';
-@import 'mixins/mixin';
-@import 'mixins/flex';
-@import 'mixins/position';
-@import 'mixins/shadows';
+@import './mixins/variables';
+@import './mixins/mixin';
+@import './mixins/flex';
+@import './mixins/position';
+@import './mixins/shadows';
 
 /* components */
-@import 'components/workspace';
+@import './components/workspace';
+
+/* functions */
+@import './functions/functions';

@@ -1,11 +1,17 @@
 <template>
   <div class="workspace">
-    <div class="title">New user</div>
-    <div class="email">{{ email }}</div>
+    <div class="header">
+      <div class="title">New user</div>
+      <div class="email">{{ email }}</div>
+    </div>
+    <div class="form">
+      <user-form/>
+    </div>
   </div>
 </template>
 
 <script>
+  import userForm from './user-form.vue';
   import storage from 'fetot-js-modules/local-storage';
 
 	export default {
@@ -14,6 +20,9 @@
 			return {
 				email: ''
       }
+    },
+    components: {
+			'user-form': userForm
     },
     created() {
 			this.email = storage.getStorageItem('fetot-client-email');
@@ -27,6 +36,10 @@
   .workspace {
     @include workspace-component;
 
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
     .title {
       @include workspace-title-component;
       margin-bottom: 10px;
