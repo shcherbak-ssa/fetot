@@ -16,7 +16,7 @@
   "inputs": {
     "mail": {
       "type": "text",
-      "value": "shcherbak.ssa@gmail.com",
+      "value": "",
       "placeholder": "E-mail",
       "icon": "@",
       "error": ""

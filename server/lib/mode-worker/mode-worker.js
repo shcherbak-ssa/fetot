@@ -3,10 +3,11 @@
 const ModuleWorker = require('../module-worker');
 
 class ModeWorker {
-	constructor({config, modules,}) {
+	constructor({config, modules, fetotClientEventEmitter}) {
 		this.config = config;
 		this.modules = modules;
 		
+		this.fetotClientEventEmitter = fetotClientEventEmitter;
 		this.mongodb = {};
 	}
 	
@@ -24,7 +25,9 @@ class ModeWorker {
 	}
 	async initModules(mongoWorker) {
 		let returnModules = new Map();
+		
 		for( let [name, options] of Object.entries(this.modules) ) {
+			Object.assign(options, {fetotClientEventEmitter: this.fetotClientEventEmitter});
 			returnModules.set(name, ModuleWorker.init(options, mongoWorker));
 		}
 		
@@ -33,10 +36,7 @@ class ModeWorker {
 	
 	async run({type, data}) {
 		let [moduleName, workerName] = type.split('/');
-		// console.log(type);
-		// console.log(message);
-		// console.log(this.modules);
-		return await this.modules.get(moduleName).run(workerName, data);
+		await this.modules.get(moduleName).run(workerName, data);
 	}
 }
 

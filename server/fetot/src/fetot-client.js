@@ -1,6 +1,8 @@
 'use strict';
 
 const ModeWorker = require('../../lib/mode-worker'),
+	
+	EventEmitter = require('./event-emitter'),
 	createClientID = require('./create-client-id');
 
 class FetotClient {
@@ -8,6 +10,7 @@ class FetotClient {
 		this.socketWorker = socketWorker;
 		this.clientID = 0;
 		
+		this.eventEmitter = new EventEmitter();
 		this.currentMode = {};
 	}
 	
@@ -31,28 +34,36 @@ class FetotClient {
 			throw socketWorker.close('Did not found fetot-mode')
 		}
 		
-		await FetotClient.setNewClient(fetotClient);
+		await fetotClient.createClient();
 		return {type: 'connection', message: {clientID}};
 	}
 	static async checkID(clientID, {clientID: socketClientID}) {
 		return clientID === socketClientID;
-	}
-	static async setNewClient(fetotClient) {
-		FetotClient.clients.set(fetotClient.clientID, fetotClient);
 	}
 	
 	/*** work methods ***/
 	setClientID(id) {
 		this.clientID = id;
 	}
+	async createClient() {
+		FetotClient.clients.set(this.clientID, this);
+		
+		this.eventEmitter.on('send-message', async (message) => {
+			await this.socketWorker.sendMessage(message);
+		})
+	}
 	
 	async run(message) {
-		let sendMessage = await this.currentMode.run(message);
-		this.socketWorker.sendMessage(sendMessage);
+		await this.currentMode.run(message);
+	}
+	async emit(event, data) {
+		await this.eventEmitter.emit(event, data)
 	}
 	
 	async setCurrentMode({mode}) {
 		let currentModeOptions = FetotClient.fetotModes.get(mode);
+		Object.assign(currentModeOptions, {fetotClientEventEmitter: this});
+		
 		this.currentMode = await ModeWorker.init(currentModeOptions, FetotClient.mongoWorker);
 	}
 }

@@ -12,6 +12,13 @@ const config = {
 				status: 'success'
 			}
 		},
+		'exist': {
+			type: 'sing-in',
+			message: {
+				status: 'error',
+				error: 'User with current e-mail already exist'
+			}
+		},
 		'invalid-email': {
 			type: 'sing-in',
 			message: {

@@ -3,12 +3,12 @@
 const parseValidationSchema = require('./src/parse-validation-schema');
 
 class ModuleWorker {
-	constructor({config, workers, errors, validationSchema}) {
+	constructor({config, workers, validationSchema, fetotClientEventEmitter}) {
 		this.config = config;
 		this.workers = workers;
-		this.errors = errors;
 		this.validationSchema = validationSchema;
 		
+		this.fetotClientEventEmitter = fetotClientEventEmitter;
 		this.mongoCollection = {};
 	}
 	
@@ -35,12 +35,16 @@ class ModuleWorker {
 	
 	async run(worker, message) {
 		let valid = await this.validation(message);
-		message = (typeof valid === 'string') ? valid : await this.workers.get(worker)(message, this.mongoCollection);
+		if( typeof valid === 'string' ) return await this.sendMessage(valid);
 		
-		return this.returnMessage(message);
+		await this.workers.get(worker)(message, this);
 	}
 	
-	async returnMessage(label, data) {
+	async sendMessage(label, data) {
+		let message = await this.preparingMessage(label, data);
+		await this.fetotClientEventEmitter.emit('send-message', message);
+	}
+	async preparingMessage(label, data) {
 		let {type, message} = this.config.messages[label];
 		if( typeof message === 'function' ) message = message(data);
 		

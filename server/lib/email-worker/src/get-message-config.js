@@ -3,7 +3,7 @@
 const fs = require('fs'),
 	path = require('path');
 
-function getMessageConfig({clientEmail, subject, type}) {
+async function getMessageConfig({clientEmail, subject, type}) {
 	return {
 		from: 'shcherbakov.ssa@gmail.com',
 		to: clientEmail,
@@ -14,7 +14,7 @@ function getMessageConfig({clientEmail, subject, type}) {
 }
 function getMessageHTML(type) {
 	switch( type ) {
-		case 'sing-in': return readFile(path.join(__dirname, 'src/singin-email.html'));
+		case 'sing-in': return readFile(path.join(__dirname, 'html/singin-email.html'));
 	}
 }
 function readFile(filename) {

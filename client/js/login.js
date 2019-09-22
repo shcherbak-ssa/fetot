@@ -237,7 +237,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _nod
 /*! exports provided: content, inputs, default */
 /***/ (function(module) {
 
-eval("module.exports = JSON.parse(\"{\\\"content\\\":{\\\"sing-in\\\":{\\\"title\\\":\\\"Sing in\\\",\\\"link\\\":\\\"Already have an account\\\"},\\\"login\\\":{\\\"title\\\":\\\"Login\\\",\\\"link\\\":\\\"Do not have an account\\\"},\\\"check-email\\\":{\\\"title\\\":\\\"Correct\\\",\\\"link\\\":\\\"Change e-mail address\\\"}},\\\"inputs\\\":{\\\"mail\\\":{\\\"type\\\":\\\"text\\\",\\\"value\\\":\\\"shcherbak.ssa@gmail.com\\\",\\\"placeholder\\\":\\\"E-mail\\\",\\\"icon\\\":\\\"@\\\",\\\"error\\\":\\\"\\\"},\\\"password\\\":{\\\"type\\\":\\\"password\\\",\\\"value\\\":\\\"\\\",\\\"placeholder\\\":\\\"Password\\\",\\\"icon\\\":\\\"#\\\",\\\"error\\\":\\\"\\\"}}}\");\n\n//# sourceURL=webpack:///./login/components/src/workspace-data.json?");
+eval("module.exports = JSON.parse(\"{\\\"content\\\":{\\\"sing-in\\\":{\\\"title\\\":\\\"Sing in\\\",\\\"link\\\":\\\"Already have an account\\\"},\\\"login\\\":{\\\"title\\\":\\\"Login\\\",\\\"link\\\":\\\"Do not have an account\\\"},\\\"check-email\\\":{\\\"title\\\":\\\"Correct\\\",\\\"link\\\":\\\"Change e-mail address\\\"}},\\\"inputs\\\":{\\\"mail\\\":{\\\"type\\\":\\\"text\\\",\\\"value\\\":\\\"\\\",\\\"placeholder\\\":\\\"E-mail\\\",\\\"icon\\\":\\\"@\\\",\\\"error\\\":\\\"\\\"},\\\"password\\\":{\\\"type\\\":\\\"password\\\",\\\"value\\\":\\\"\\\",\\\"placeholder\\\":\\\"Password\\\",\\\"icon\\\":\\\"#\\\",\\\"error\\\":\\\"\\\"}}}\");\n\n//# sourceURL=webpack:///./login/components/src/workspace-data.json?");
 
 /***/ }),
 

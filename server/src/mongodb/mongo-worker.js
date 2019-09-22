@@ -14,7 +14,7 @@ class MongoWorker {
 		
 		return db;
 	}
-	async createCollection(dbName, collectionName) {
+	createCollection(dbName, collectionName) {
 		let collection = this.databases.get(dbName).collection(collectionName);
 		return new MongoCollection(collection);
 	}
