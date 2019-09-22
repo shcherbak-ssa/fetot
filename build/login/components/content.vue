@@ -4,7 +4,6 @@
       <fetot-input :input="inputs.mail"/>
       <fetot-input :input="inputs.password"/>
       <fetot-button @button-click="buttonClickHandler" type="text" :value="setButtonValue"/>
-<!--      <fetot-button @button-click="$emit('check-email')" type="text" :value="setButtonValue"/>-->
     </div>
     <div class="message">
       <check-email-message :mail="inputs.mail.value"/>
@@ -19,7 +18,7 @@
 
   import validation from 'fetot-js-modules/validation';
   import websocket from 'fetot-js-modules/websocket';
-  import {setStorageItem} from 'fetot-js-modules/local-storage';
+  import storage from 'fetot-js-modules/local-storage';
 
 	export default {
 		name: 'login-content',
@@ -88,7 +87,7 @@
 			singinMessageHandler({status, error}) {
 				if( status === 'error' ) return this.inputs.mail.error = error;
 
-				setStorageItem('fetot-client-email', this.inputs.mail.value);
+				storage.setStorageItem('fetot-client-email', this.inputs.mail.value);
 				this.$emit('check-email')
 			},
 			loginMessageHandler(message) {

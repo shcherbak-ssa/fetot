@@ -8,13 +8,13 @@ const path = require('path'),
 	validation = {
 		404: setFilename('view', '404.html'),
 		'\.html$': {
-			valid: new Set(['settings', 'login']),
+			valid: new Set(['user', 'login']),
 			filename(base) {
 				return setFilename('view', ( base === '/' ? 'index.html' : base))
 			}
 		},
 		'\.js$': {
-			valid: new Set(['login', 'app']),
+			valid: new Set(['login', 'user']),
 			filename(base) {
 				return setFilename('js', base)
 			}

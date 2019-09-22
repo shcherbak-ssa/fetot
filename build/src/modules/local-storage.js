@@ -4,7 +4,7 @@ function setStorageItem(key, value) {
 	localStorage.setItem(key, value)
 }
 function getStorageItem(key) {
-	return JSON.parse(localStorage.getItem(key));
+	return localStorage.getItem(key)
 }
 
 export default {

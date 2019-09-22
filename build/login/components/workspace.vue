@@ -11,8 +11,8 @@
 </template>
 
 <script>
+  import {content, inputs} from './src/workspace-data.json';
 	import loginContent from './content.vue';
-	import {content, inputs} from './src/workspace-data.json'
 
 	export default {
 		name: 'workspace',
@@ -60,23 +60,10 @@
   @import 'fetot-src-scss';
 
   .workspace {
-    background: #fff;
-    padding: 36px;
-    width: 510px;
-    transition: .4s;
-    @include box-sizing;
-    @include flex-center-column;
-    @include static-shadow;
-    @include border-radius-6;
-
-    &:hover {
-      @include hover-shadow;
-    }
+    @include workspace-component;
 
     .title {
-      transition: .2s;
-      color: $fetot-dark-blue;
-      font: bold 1.5rem sans-serif;
+      @include workspace-title-component;
     }
     .link {
       transition: .2s;
