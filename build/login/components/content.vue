@@ -18,7 +18,8 @@
   import checkEmailMessage from './src/check-email-message.vue';
 
   import validation from 'fetot-js-modules/validation';
-  import websocket from 'fetot-js-modules/websocket'
+  import websocket from 'fetot-js-modules/websocket';
+  import {setStorageItem} from 'fetot-js-modules/local-storage';
 
 	export default {
 		name: 'login-content',
@@ -86,7 +87,9 @@
 
 			singinMessageHandler({status, error}) {
 				if( status === 'error' ) return this.inputs.mail.error = error;
-        this.$emit('check-email')
+
+				setStorageItem('fetot-client-email', this.inputs.mail.value);
+				this.$emit('check-email')
 			},
 			loginMessageHandler(message) {
 				console.log(message)
