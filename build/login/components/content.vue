@@ -16,9 +16,9 @@
   import fetotButton from 'fetot-components/fetot-button.vue';
   import checkEmailMessage from './src/check-email-message.vue';
 
-  import validation from 'fetot-js-modules/validation';
   import websocket from 'fetot-js-modules/websocket';
-  import storage from 'fetot-js-modules/local-storage';
+  import singinModule from '../modules/sing-in';
+  import loginModule from '../modules/login';
 
 	export default {
 		name: 'login-content',
@@ -33,66 +33,15 @@
     },
 		methods: {
 			buttonClickHandler() {
-				// this.mode = 'check-email'
-				this.mode === 'sing-in' ? this.isSinginMode() : this.isLoginMode()
+				this.mode === 'sing-in'
+          ? singinModule.worker(this.inputs.mail)
+          : loginModule.worker(this.inputs)
 			},
-
-      isSinginMode() {
-        let mailValue = this.checkInputValue('mail');
-
-        if( mailValue ) websocket.sendMessage({
-          type: 'message',
-          message: {
-          	type: 'sing-in/sing-in',
-            data: {
-	            email: mailValue
-            }
-          }
-        })
-      },
-      isLoginMode() {
-	      let mailValue = this.checkInputValue('mail');
-	      if( !mailValue ) return;
-
-	      let passwordValue = this.checkInputValue('password');
-	      if( !passwordValue ) return;
-
-				websocket.sendMessage({
-          type: 'message',
-          message: {
-	          type: 'login/log-in',
-          	data: {
-		          email: mailValue,
-		          password: passwordValue
-            }
-          }
-				});
-      },
-
-      setErrorMessage(label, message) {
-				this.inputs[label].error = message
-      },
-      checkInputValue(label) {
-				this.setErrorMessage(label, '');
-	      let {value} = this.inputs[label];
-
-	      let valid = validation(label, value);
-	      if( !!valid ) {
-		      this.setErrorMessage(label, valid);
-		      return false
-	      }
-	      return value;
-      },
-
-			singinMessageHandler({status, error}) {
-				if( status === 'error' ) return this.inputs.mail.error = error;
-
-				storage.setStorageItem('fetot-client-email', this.inputs.mail.value);
-				this.$emit('check-email')
+			singinMessageHandler() {
+				return singinModule.messageHandler(this.inputs.mail, this);
 			},
-			loginMessageHandler(message) {
-				console.log(message)
-				// this.websocketMessage = data;
+			loginMessageHandler() {
+				return loginModule.messageHandler
 			}
     },
 		computed: {
@@ -107,8 +56,8 @@
       }
 		},
     created() {
-			websocket.setMessageHandlers('sing-in', this.singinMessageHandler);
-			websocket.setMessageHandlers('log-in', this.loginMessageHandler)
+			websocket.setMessageHandlers('sing-in', this.singinMessageHandler());
+			websocket.setMessageHandlers('log-in', this.loginMessageHandler())
     }
 	}
 </script>
