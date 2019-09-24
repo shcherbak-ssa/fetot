@@ -1,16 +1,14 @@
 export default {
   name: 'fetot-input',
 	props: {
-  	input: Object,
-		notIcon: String
+  	input: Object
 	},
 	data() {
   	return {
   		states: {
 			  'is-active': false,
 			  'has-value': false,
-			  'has-error': false,
-			  'not-icon': this.notIcon === 'true'
+			  'has-error': false
 		  }
 		}
 	},

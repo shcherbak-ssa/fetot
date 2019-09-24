@@ -1,10 +1,8 @@
 @mixin workspace-component {
   background: #fff;
   padding: 36px;
-  width: 510px;
   transition: .4s;
   @include box-sizing;
-  @include flex-center-column;
   @include static-shadow;
   @include border-radius-6;
 

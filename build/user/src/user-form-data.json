@@ -7,20 +7,6 @@
       "icon": "$",
       "error": ""
     },
-    "birthday": {
-      "type": "text",
-      "value": "",
-      "placeholder": "Birthday",
-      "icon": ":)",
-      "error": ""
-    },
-    "phone": {
-      "type": "text",
-      "value": "",
-      "placeholder": "Phone number",
-      "icon": "%",
-      "error": ""
-    },
     "password": {
       "type": "password",
       "value": "",

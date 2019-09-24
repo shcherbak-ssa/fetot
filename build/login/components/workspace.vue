@@ -60,6 +60,8 @@
   @import 'fetot-src-scss';
 
   .workspace {
+    width: 510px;
+    @include flex-center-column;
     @include workspace-component;
 
     .title {

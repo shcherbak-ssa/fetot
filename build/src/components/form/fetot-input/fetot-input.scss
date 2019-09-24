@@ -71,6 +71,7 @@
     }
   }
   &.has-value .placeholder {
+    left: 6px;
     opacity: 0;
   }
   &.is-active .icon, &.has-value .icon {
@@ -84,14 +85,6 @@
     .error {
       bottom: -18px;
       opacity: 1;
-    }
-  }
-  &.not-icon {
-    .placeholder {
-      left: 5px;
-    }
-    .icon {
-      display: none;
     }
   }
 }

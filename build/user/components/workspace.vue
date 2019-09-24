@@ -1,31 +1,27 @@
 <template>
   <div class="workspace">
-    <div class="header">
-      <div class="title">New user</div>
-      <div class="email">{{ email }}</div>
-    </div>
-    <div class="form">
-      <user-form/>
-    </div>
+    <workspace-header :email="email"/>
+    <workspace-avatar :fullname="inputs.fullname" :url="url"/>
+    <workspace-form :inputs="inputs"/>
   </div>
 </template>
 
 <script>
-  import userForm from './user-form.vue';
-  import storage from 'fetot-js-modules/local-storage';
+  import workspaceHeader from './workspace-header.vue';
+  import workspaceAvatar from './workspace-avatar.vue';
+  import workspaceForm from './workspace-form.vue';
 
 	export default {
 		name: 'workspace',
-    data() {
-			return {
-				email: ''
-      }
+    props: {
+			inputs: Object,
+      email: String,
+      url: String
     },
     components: {
-			'user-form': userForm
-    },
-    created() {
-			this.email = storage.getStorageItem('fetot-client-email');
+			'workspace-header': workspaceHeader,
+			'workspace-avatar': workspaceAvatar,
+      'workspace-form': workspaceForm
     }
 	}
 </script>
@@ -34,19 +30,8 @@
   @import 'fetot-src-scss';
 
   .workspace {
+    width: 510px;
+    @include flex-center-column;
     @include workspace-component;
-
-    .header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    .title {
-      @include workspace-title-component;
-      margin-bottom: 10px;
-    }
-    .email {
-      color: $fetot-dark-gray;
-      font-size: 18px;
-    }
   }
 </style>
