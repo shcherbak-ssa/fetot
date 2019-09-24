@@ -4,6 +4,9 @@ const validation = {
 	},
 	password(value) {
 		return value.length < 8 ? 'A password cannot be under 8 symbols' : false;
+	},
+	fullname(value) {
+		return  /[^a-z ]/i.test(value) ? 'Full name can only contain the letters' : false;
 	}
 };
 

@@ -34,6 +34,7 @@ class ModuleWorker {
 	}
 	
 	async run(worker, message) {
+		console.log(message);
 		let valid = await this.validation(message);
 		if( typeof valid === 'string' ) return await this.sendMessage(valid);
 		

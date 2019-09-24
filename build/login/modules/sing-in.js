@@ -2,8 +2,7 @@
 
 import websocket from 'fetot-js-modules/websocket';
 import storage from 'fetot-js-modules/local-storage';
-
-import checkInputValue from './src/check-input-value';
+import checkInputValue from 'fetot-js-modules/check-input-value';
 
 function singinModuleWorker(input) {
 	let mailValue = checkInputValue(input, 'mail');

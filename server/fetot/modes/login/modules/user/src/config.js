@@ -6,11 +6,31 @@ const config = {
 		collection: 'clients'
 	},
 	messages: {
-		'invalid-fullname': {
-			type: 'fullname',
+		'invalid-email': {
+			type: 'error',
 			message: {
-				status: 'error',
+				label: 'email',
+				error: 'Invalid e-mail address'
+			}
+		},
+		'invalid-fullname': {
+			type: 'error',
+			message: {
+				label: 'fullname',
 				error: 'Full name can only contain the letters'
+			}
+		},
+		'invalid-password': {
+			type: 'error',
+			message: {
+				label: 'password',
+				error: 'Password cannot be under 8 symbols'
+			}
+		},
+		'success': {
+			type: 'success',
+			message(id) {
+				return { userID: id }
 			}
 		}
 	}

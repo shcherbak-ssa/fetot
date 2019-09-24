@@ -1,6 +1,6 @@
 'use strict';
 
-import validation from 'fetot-js-modules/validation';
+import validation from './validation';
 
 function checkInputValue(input, label) {
 	setErrorMessage(input, '');

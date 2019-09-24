@@ -18,6 +18,8 @@
   import userData from './src/user-form-data.json';
 
   import loadAvatarModule from './modules/load-avatar';
+  import userModule from './modules/user';
+  import websocket from '../src/modules/websocket';
 
 	export default {
 		name: 'user',
@@ -26,8 +28,6 @@
 				inputs: userData.inputs,
 				email: '',
         url: '',
-
-        modalActive: false
       }
     },
     components: {
@@ -37,13 +37,16 @@
     },
     methods: {
 	    buttonClickHandler() {
-	    	console.log('inputs: ', this.inputs)
+	    	userModule.worker(this.inputs)
       },
 	    async loadAvatarHandler(avatar) {
 	    	let url = loadAvatarModule.loadWorker(avatar);
 	    	await loadAvatarModule.changeWorker(url, document.getElementById('user-avatar'));
 
 	    	fetotEventsHandlers.emit('open-modal');
+      },
+      userMessageHandlers() {
+	    	return userModule.messageHandlers(this.inputs);
       }
     },
     created() {
@@ -55,6 +58,7 @@
       };
 
 	    fetotEventsHandlers.add(eventsHandlers);
+	    websocket.setMessageHandlers(this.userMessageHandlers());
     }
 	}
 </script>

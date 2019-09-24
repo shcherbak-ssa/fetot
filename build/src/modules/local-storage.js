@@ -6,8 +6,12 @@ function setStorageItem(key, value) {
 function getStorageItem(key) {
 	return localStorage.getItem(key)
 }
+function removeStorageItem(key) {
+	localStorage.removeItem(key)
+}
 
 export default {
 	setStorageItem,
-	getStorageItem
+	getStorageItem,
+	removeStorageItem
 }

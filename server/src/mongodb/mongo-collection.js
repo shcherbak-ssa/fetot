@@ -8,7 +8,7 @@ class MongoCollection {
 	async insertDocument(object) {
 		return new Promise((success, error) => {
 			return this.collection.insertOne(object, (err, result) => {
-				return err ? error(err) : success( result.ops )
+				return err ? error(err) : success( result.ops[0] )
 			})
 		})
 	}

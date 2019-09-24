@@ -34,8 +34,11 @@ function initMessageHandler() {
 		messageHandlers.get(type)(message);
 	}
 }
-function setMessageHandlers(name, handler) {
-	messageHandlers.set(name, handler)
+function setMessageHandlers(eventName, handler) {
+	if( typeof eventName === 'string' ) return messageHandlers.set(eventName, handler);
+	
+	for( let [event, handler] of Object.entries(eventName) )
+		messageHandlers.set(event, handler)
 }
 function sendMessage(message) {
 	let sendMessage = Object.assign(outputMessageTemplate, message);
