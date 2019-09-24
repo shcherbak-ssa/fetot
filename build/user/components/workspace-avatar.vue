@@ -1,16 +1,20 @@
 <template>
   <div class="workspace-avatar">
     <fetot-avatar size="big" :value="fullname.value" :url="url"/>
-    <label class="link">
-      Load your avatar
-      <input type="file" @change="loadAvatarHandler($event.target.files[0])">
-    </label>
+    <fetot-link fontSize="18px">
+      <label class="label">
+        Load your avatar
+        <input type="file" hidden @change="loadAvatarHandler($event.target.files[0])">
+      </label>
+    </fetot-link>
   </div>
 </template>
 
 <script>
-	import fetotEventsHandlers from 'fetot-js-modules/fetot-events-handlers';
 	import fetotAvatar from 'fetot-components/fetot-avatar.vue';
+	import fetotLink from 'fetot-components/elements/fetot-link.vue';
+
+	import fetotEventsHandlers from 'fetot-js-modules/fetot-events-handlers';
 
 	export default {
 		name: 'workspace-avatar',
@@ -19,7 +23,8 @@
       url: String
     },
     components: {
-			'fetot-avatar': fetotAvatar
+			'fetot-avatar': fetotAvatar,
+      'fetot-link': fetotLink
     },
     methods: {
 	    loadAvatarHandler(avatar) {
@@ -33,26 +38,18 @@
   @import 'fetot-src-scss';
 
   .workspace-avatar {
-    display: flex;
+    display: none;
+    //display: flex;
     margin-bottom: 30px;
     width: 300px;
 
     .fetot-avatar {
       margin-right: 10px;
     }
-    input {
-      display: none;
-    }
-    .link {
-      display: flex;
-      align-items: center;
-      color: $fetot-azure;
+    .label {
+      height: 100%;
       cursor: pointer;
-      font: 18px sans-serif;
-
-      &:hover {
-        text-decoration: underline;
-      }
+      @include flex-align-items-center;
     }
     .txt {
       color: $fetot-dark-gray;

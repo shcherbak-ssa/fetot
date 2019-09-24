@@ -12,8 +12,8 @@
 </template>
 
 <script>
-  import fetotInput from 'fetot-components/fetot-input.vue';
-  import fetotButton from 'fetot-components/fetot-button.vue';
+  import fetotInput from 'fetot-components/form/fetot-input.vue';
+  import fetotButton from 'fetot-components/form/fetot-button.vue';
   import checkEmailMessage from './src/check-email-message.vue';
 
   import websocket from 'fetot-js-modules/websocket';

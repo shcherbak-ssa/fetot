@@ -1,10 +1,20 @@
 'use strict';
 
 function loadAvatarWorker(avatar) {
-	let url = URL.createObjectURL(avatar);
-	console.log(url);
+	return URL.createObjectURL(avatar);
+}
+async function changeAvatarWorker(url, canvas) {
+	let context = canvas.getContext('2d'),
+		avatar = new Image();
+	
+	avatar.src = url;
+	return avatar.onload = () => {
+		context.drawImage(avatar, 0, 0, canvas.width, canvas.height);
+		
+	}
 }
 
 export default {
-	loadWorker: loadAvatarWorker
+	loadWorker: loadAvatarWorker,
+	changeWorker: changeAvatarWorker
 }

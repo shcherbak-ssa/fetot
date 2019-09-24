@@ -20,3 +20,8 @@
   flex-direction: column;
   justify-content: center;
 }
+@mixin flex-center-space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

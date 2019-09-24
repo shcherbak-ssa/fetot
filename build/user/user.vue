@@ -2,19 +2,18 @@
   <fetot-container>
     <div class="user">
       <user-workspace :inputs="inputs" :email="email" :url="url"/>
-      <fetot-modal/>
+<!--      <user-modal/>-->
     </div>
   </fetot-container>
 </template>
 
 <script>
   import fetotContainer from 'fetot-components/fetot-container.vue';
-  import fetotModal from 'fetot-components/fetot-modal.vue';
 
   import storage from 'fetot-js-modules/local-storage';
   import fetotEventsHandlers from 'fetot-js-modules/fetot-events-handlers';
-  //
-  // import avatarModal from './components/avatar-modal.vue';
+
+  // import userModal from './components/user-modal.vue';
   import userWorkspace from './components/workspace.vue';
   import userData from './src/user-form-data.json';
 
@@ -34,14 +33,16 @@
     components: {
 			'fetot-container': fetotContainer,
       'user-workspace': userWorkspace,
-      'fetot-modal': fetotModal
+      // 'user-modal': userModal
     },
     methods: {
 	    buttonClickHandler() {
 	    	console.log('inputs: ', this.inputs)
       },
-	    loadAvatarHandler(avatar) {
-	    	loadAvatarModule.loadWorker(avatar);
+	    async loadAvatarHandler(avatar) {
+	    	let url = loadAvatarModule.loadWorker(avatar);
+	    	await loadAvatarModule.changeWorker(url, document.getElementById('user-avatar'));
+
 	    	fetotEventsHandlers.emit('open-modal');
       }
     },

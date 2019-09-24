@@ -1,7 +1,10 @@
 <template>
   <div class="fetot-modal" :class="states" @click="modalClickHandler">
     <div class="modal">
-      <slot name="modal-header"></slot>
+      <div class="modal-header">
+        <fetot-title><slot name="modal-title"></slot></fetot-title>
+        <fetot-icon-click @icon-click="closeModalHandler">x</fetot-icon-click>
+      </div>
       <slot name="modal-body"></slot>
       <slot name="modal-footer"></slot>
     </div>
@@ -9,6 +12,9 @@
 </template>
 
 <script>
+  import fetotTitle from './elements/fetot-title.vue';
+  import fetotIconClick from './icons/fetot-icon-click.vue';
+
   import fetotEventsHandlers from '../modules/fetot-events-handlers';
 
 	export default {
@@ -22,6 +28,10 @@
 					'is-open': false
         }
       }
+    },
+    components: {
+			'fetot-title': fetotTitle,
+			'fetot-icon-click': fetotIconClick
     },
     methods: {
 			openModalHandler() {
@@ -48,17 +58,25 @@
 
   .fetot-modal {
     background: $fetot-dark-gray-60;
-    cursor: pointer;
     display: none;
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 9999;
     @include full-sizes;
 
     .modal {
-      width: 400px;
+      width: 480px;
       @include position-center;
       @include workspace-component;
+
+      &-header {
+        width: 100%;
+        height: 42px;
+        margin-bottom: 18px;
+        position: relative;
+        @include flex-center-space-between
+      }
     }
 
     &.is-open {

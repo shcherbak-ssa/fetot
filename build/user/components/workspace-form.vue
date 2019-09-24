@@ -8,7 +8,7 @@
 
 <script>
   import fetotInput from 'fetot-components/form/fetot-input.vue';
-  import fetotButton from 'fetot-components/from/fetot-button.vue';
+  import fetotButton from 'fetot-components/form/fetot-button.vue';
 
   import fetotEventsHandlers from 'fetot-js-modules/fetot-events-handlers';
 

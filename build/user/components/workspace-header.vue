@@ -1,15 +1,20 @@
 <template>
   <div class="workspace-header">
-    <div class="title">New user</div>
+    <fetot-title>New user</fetot-title>
     <div class="email">{{ email }}</div>
   </div>
 </template>
 
 <script>
+  import fetotTitle from 'fetot-components/elements/fetot-title.vue';
+
 	export default {
 		name: 'workspace-header',
     props: {
 			email: String
+    },
+    components: {
+			'fetot-title': fetotTitle
     }
 	}
 </script>
@@ -21,8 +26,7 @@
     text-align: center;
     margin-bottom: 30px;
 
-    .title {
-      @include workspace-title-component;
+    .fetot-title {
       margin-bottom: 10px;
     }
     .email {
