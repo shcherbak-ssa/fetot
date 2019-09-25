@@ -6,23 +6,19 @@ const config = {
 		collection: 'clients'
 	},
 	messages: {
-		'check-email': {
-			type: 'sing-in',
-			message: {
-				status: 'success'
-			}
+		'success': {
+			type: 'sing-in/success',
+			message: {}
 		},
 		'exist': {
-			type: 'sing-in',
+			type: 'sing-in/error',
 			message: {
-				status: 'error',
 				error: 'User with current e-mail already exist'
 			}
 		},
 		'invalid-email': {
-			type: 'sing-in',
+			type: 'sing-in/error',
 			message: {
-				status: 'error',
 				error: 'Invalid e-mail address'
 			}
 		}

@@ -2,6 +2,7 @@
 
 import websocket from 'fetot-js-modules/websocket';
 import storage from 'fetot-js-modules/local-storage';
+import eventsHandlers from 'fetot-js-modules/events-handlers';
 import checkInputValue from 'fetot-js-modules/check-input-value';
 
 function singinModuleWorker(input) {
@@ -18,16 +19,21 @@ function singinModuleWorker(input) {
 		}
 	})
 }
-function singinMessageHandler(input, component) {
-	return ({status, error}) => {
-		if( status === 'error' ) return input.error = error;
-		
-		storage.setStorageItem('fetot-client-email', input.value);
-		component.$emit('check-email')
+function singinMessageHandlers(input) {
+	return {
+		'sing-in': {
+			error({error}) {
+				input.error = error;
+			},
+			success() {
+				storage.setStorageItem('fetot-client-email', input.value);
+				eventsHandlers.emit('check-email')
+			}
+		}
 	}
 }
 
 export default {
 	worker: singinModuleWorker,
-	messageHandler: singinMessageHandler
+	messageHandlers: singinMessageHandlers
 };

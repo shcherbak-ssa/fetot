@@ -22,11 +22,11 @@ function loginModuleWorker(inputs) {
 		}
 	});
 }
-function loginMessageHandler(message) {
+function loginMessageHandlers(message) {
 	console.log(message)
 }
 
 export default {
 	worker: loginModuleWorker,
-	messageHandler: loginMessageHandler
+	messageHandlers: loginMessageHandlers
 }

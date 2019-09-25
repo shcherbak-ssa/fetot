@@ -35,7 +35,7 @@ class FetotClient {
 		}
 		
 		await fetotClient.createClient();
-		return {type: 'connection', message: {clientID}};
+		return {type: 'ws/connection', message: {clientID}};
 	}
 	static async checkID(clientID, {clientID: socketClientID}) {
 		return clientID === socketClientID;

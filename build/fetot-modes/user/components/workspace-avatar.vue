@@ -14,7 +14,7 @@
 	import fetotAvatar from 'fetot-components/fetot-avatar.vue';
 	import fetotLink from 'fetot-components/elements/fetot-link.vue';
 
-	import fetotEventsHandlers from 'fetot-js-modules/fetot-events-handlers';
+	import eventsHandlers from 'fetot-js-modules/events-handlers';
 
 	export default {
 		name: 'workspace-avatar',
@@ -28,7 +28,7 @@
     },
     methods: {
 	    loadAvatarHandler(avatar) {
-		    fetotEventsHandlers.emit('load-avatar', avatar);
+		    eventsHandlers.emit('load-avatar', avatar);
 	    }
     }
 	}

@@ -10,7 +10,7 @@
   import fetotInput from 'fetot-components/form/fetot-input.vue';
   import fetotButton from 'fetot-components/form/fetot-button.vue';
 
-  import fetotEventsHandlers from 'fetot-js-modules/fetot-events-handlers';
+  import eventsHandlers from 'fetot-js-modules/events-handlers';
 
 	export default {
 		name: 'workspace-form',
@@ -23,7 +23,7 @@
     },
     methods: {
 	    buttonClickHandler() {
-	    	fetotEventsHandlers.emit('button-click')
+		    eventsHandlers.emit('button-click')
       }
     }
 	}

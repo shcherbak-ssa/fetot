@@ -5,7 +5,7 @@ const path = require('path'),
 
 module.exports = (env) => {
 	let outputFilename = `${env.currentModule}.js`;
-	let entryFilename = `./${env.currentModule}/index.js`;
+	let entryFilename = `./fetot-modes/${env.currentModule}/index.js`;
 	
 	return {
 		mode: 'development',

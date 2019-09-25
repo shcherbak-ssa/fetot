@@ -14,7 +14,7 @@ function userWorker(inputs) {
 	websocket.sendMessage({
 		type: 'message',
 		message: {
-			type: 'user/user-data',
+			type: 'user/create',
 			data: {
 				email: storage.getStorageItem('fetot-client-email'),
 				fullname: fullnameValue,
@@ -25,18 +25,20 @@ function userWorker(inputs) {
 }
 function userMessageHandlers(inputs) {
 	return {
-		error({label, error}) {
-			if( label === 'email' ) return;
-			inputs[label].error = error;
-		},
-		success({userID}) {
-			let email = storage.getStorageItem('fetot-client-email'),
-				password = inputs.password.value;
-			
-			storage.removeStorageItem('fetot-client-email');
-			storage.setStorageItem(userID, { email, password });
-			
-			console.log(storage.getStorageItem(userID));
+		'user': {
+			error({label, error}) {
+				if( label === 'email' ) return;
+				inputs[label].error = error;
+			},
+			success({userID}) {
+				let email = storage.getStorageItem('fetot-client-email'),
+					password = inputs.password.value;
+				
+				storage.removeStorageItem('fetot-client-email');
+				storage.setStorageItem(userID, { email, password });
+				
+				console.log(storage.getStorageItem(userID));
+			}
 		}
 	}
 }

@@ -6,8 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-login": "webpack --env.currentModule=login",
-    "build-user": "webpack --env.currentModule=user",
-    "cli": "node cli"
+    "build-user": "webpack --env.currentModule=user"
   },
   "author": "Friends.IT",
   "license": "ISC",

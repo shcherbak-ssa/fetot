@@ -14,7 +14,7 @@
     }
   },
   "inputs": {
-    "mail": {
+    "email": {
       "type": "text",
       "value": "",
       "placeholder": "E-mail",

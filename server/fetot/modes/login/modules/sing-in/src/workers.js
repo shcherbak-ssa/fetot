@@ -10,9 +10,9 @@ async function singinWorker({email}, currentModule) {
 		let exist = await currentModule.mongoCollection.findDocument({email});
 		if( exist.length !== 0 ) return await currentModule.sendMessage('exist');
 		
-		await currentModule.sendMessage('check-email');
+		await currentModule.sendMessage('success');
 		
-		let message = {clientEmail: email, subject: 'Config e-mail', type: 'sing-in'};
+		let message = {clientEmail: email, subject: 'Confirm e-mail', type: 'sing-in'};
 		await emailWorker.createMessage(message);
 		
 		let info = await emailWorker.sendMail();

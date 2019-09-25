@@ -1,5 +1,5 @@
 <template>
-  <div class="fetot-link" :style="{ 'font-size': this.fontSize }">
+  <div class="fetot-link" :style="{ 'font-size': this.fontSize }" @click="$emit('link-click')">
     <slot></slot>
   </div>
 </template>
