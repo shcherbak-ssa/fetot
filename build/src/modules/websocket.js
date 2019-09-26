@@ -18,9 +18,9 @@ function init(mode) {
 	});
 	websocket.onmessage = ({data}) => {
 		let {type, message} = JSON.parse(data),
-			[moduleName, handlerName] = type.slice('/');
+			[moduleName, handlerName] = type.split('/');
 		
-		console.log(message);
+		console.log(type, message);
 		messageHandlers[moduleName].get(handlerName)(message);
 	};
 	websocket.onopen = () => {

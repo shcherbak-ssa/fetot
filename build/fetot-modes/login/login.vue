@@ -1,10 +1,8 @@
 <template>
   <fetot-container>
     <div class="login">
-      <login-workspace
-              :mode="mode" :title="currentTitle"
-              :link="currentLink" :inputs="inputs"
-      />
+      <login-workspace :mode="mode" :title="setCurrentTitle"
+              :link="setCurrentLink" :inputs="inputs"/>
     </div>
   </fetot-container>
 </template>
@@ -22,11 +20,9 @@
 
 	export default {
 		name: 'fetot-login',
-    date() {
+    data() {
 			return {
 				mode: 'sing-in',
-        currentTitle: '',
-        currentLink: '',
 				content: loginData.content,
         inputs: loginData.inputs
       }
@@ -38,8 +34,6 @@
     methods: {
 			changeModeHandler() {
 				this.mode = changeCurrentMode();
-				this.currentTitle = this.content[this.mode].title;
-				this.currentLink = this.content[this.mode].link;
 
 				function changeCurrentMode() {
 					switch( this.mode ) {
@@ -56,6 +50,14 @@
       },
 	    singInWorkerHandler() {
 				singInModule.worker(this.inputs.email)
+      }
+    },
+    computed: {
+	    setCurrentTitle() {
+	    	return this.content[this.mode].title;
+	    },
+      setCurrentLink() {
+	    	return this.content[this.mode].link;
       }
     },
     created() {

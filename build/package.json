@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-login": "webpack --env.currentModule=login",
-    "build-user": "webpack --env.currentModule=user"
+    "watch-login": "webpack --env.mode=login --watch --mode=development",
+    "dev-login": "webpack --env.mode=login --mode=development",
+    "watch-user": "webpack --env.mode=user --watch --mode=development",
+    "dev-user": "webpack --env.mode=user --mode=development"
   },
   "author": "Friends.IT",
   "license": "ISC",

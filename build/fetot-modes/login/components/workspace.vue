@@ -1,7 +1,9 @@
 <template>
   <div class="workspace">
     <transition name="change-mode" mode="out-in">
-      <fetot-title :key="mode">{{ title }}</fetot-title>
+      <div :key="mode">
+        <fetot-title>{{ title }}</fetot-title>
+      </div>
     </transition>
     <div class="content" :class="showMessage">
       <workspace-form :inputs="inputs" :mode="mode"/>
@@ -10,7 +12,9 @@
       </div>
     </div>
     <transition name="change-mode" mode="out-in">
-      <fetot-link fontSize="14px" :key="mode" @link-click="linkClickHandler">{{ link }}</fetot-link>
+      <div :key="mode">
+        <fetot-link fontSize="14px" @link-click="linkClickHandler">{{ link }}</fetot-link>
+      </div>
     </transition>
   </div>
 </template>
@@ -56,6 +60,10 @@
     width: 510px;
     @include flex-center-column;
     @include workspace-component;
+  }
+  .content {
+    width: 100%;
+    position: relative;
   }
   .message {
     transition: .4s;

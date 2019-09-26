@@ -4,17 +4,15 @@ const path = require('path'),
 	VueLoader = require('vue-loader/lib/plugin');
 
 module.exports = (env) => {
-	let outputFilename = `${env.currentModule}.js`;
-	let entryFilename = `./fetot-modes/${env.currentModule}/index.js`;
+	let outputFilename = `${env.mode}.js`;
+	let entryFilename = `./fetot-modes/${env.mode}/index.js`;
 	
 	return {
-		mode: 'development',
 		entry: entryFilename,
 		output: {
 			path: path.resolve(__dirname, '../client/js/'),
 			filename: outputFilename,
 		},
-		watch: true,
 		module: {
 			rules: [
 				{
