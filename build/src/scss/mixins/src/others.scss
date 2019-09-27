@@ -1,0 +1,22 @@
+@mixin full-sizes {
+  width: 100%;
+  height: 100%;
+}
+@mixin box-sizing {
+  box-sizing: border-box;
+}
+@mixin border-radius-6 {
+  border-radius: 6px;
+}
+@mixin border-radius-3 {
+  border-radius: 3px;
+}
+@mixin psevdo-element {
+  content: '';
+  display: block;
+  position: absolute;
+}
+@mixin form-element {
+  background: transparent;
+  display: block;
+}

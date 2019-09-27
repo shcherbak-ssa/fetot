@@ -2,7 +2,11 @@
   <div class="workspace-form" :class="changeMode">
     <fetot-input :input="inputs.email"/>
     <fetot-input :input="inputs.password"/>
-    <fetot-button @button-click="buttonClickHandler" type="text" :value="setButtonValue"/>
+    <fetot-button @button-click="buttonClickHandler">
+      <transition :name="buttonAnimation" mode="out-in">
+        <span class="txt" :key="mode">{{ mode === 'sing-in' ? 'Continue' : 'Enter' }}</span>
+      </transition>
+    </fetot-button>
   </div>
 </template>
 
@@ -14,7 +18,7 @@
 
 	export default {
 		name: 'workspace-form',
-		props: {
+    props: {
 			mode: String,
       inputs: Object
 		},
@@ -28,11 +32,11 @@
 			}
     },
 		computed: {
-			setButtonValue() {
-				return this.mode === 'sing-in' ? 'Continue' : 'Enter'
-			},
       changeMode() {
 				return { 'is-login': this.mode === 'login' }
+      },
+			buttonAnimation() {
+      	return this.mode === 'sing-in' ? 'rotate-to-bottom' : 'rotate-to-top'
       }
 		}
 	}
@@ -49,13 +53,17 @@
     z-index: 1;
     @include flex-center-column;
 
+    .txt {
+      font: 18px sans-serif;
+      transition: .2s;
+    }
+
     .fetot-input:nth-child(2) {
       opacity: 0;
       position: absolute;
       top: 0;
       left: 0;
     }
-
     &.is-login {
       .fetot-input:nth-child(1) {
         margin-bottom: 102px;
@@ -66,4 +74,5 @@
       }
     }
   }
+  @include rotate-to-bottom;
 </style>

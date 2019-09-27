@@ -1,4 +1,2 @@
-@mixin sizes($w, $h) {
-  width: $w;
-  height: $h;
-}
+
+@import './src/sizes.scss';

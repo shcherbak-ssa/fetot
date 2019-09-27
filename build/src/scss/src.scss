@@ -1,12 +1,13 @@
+/* variables */
+@import './variables.scss';
+
 /* mixins */
-@import './mixins/variables';
-@import './mixins/mixin';
-@import './mixins/flex';
-@import './mixins/position';
-@import './mixins/shadows';
+@import './mixins';
 
 /* components */
-@import './components/workspace';
+@import './components/workspace'; // @todo: need to change
 
 /* functions */
-@import './functions/functions';
+@import './functions';
+
+@import './animation';

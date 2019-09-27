@@ -10,6 +10,12 @@ const FetotClient = require('./src/fetot-client'),
 async function runFetotApplication(WebSocketWorker, mongoWorker) {
 	let fetotEventEmitter = new FetotEventEmitter();
 	
+	/* need to remove [BEGIN]*/
+	// let db = await mongoWorker.createDB('clients');
+	// let isDrop = await db.collection('clients').drop();
+	// console.log(isDrop);
+	/* need to remove [END] */
+	
 	await WebSocketWorker.start(fetotEventEmitter);
 	await FetotClient.init(mongoWorker, fetotModes);
 	

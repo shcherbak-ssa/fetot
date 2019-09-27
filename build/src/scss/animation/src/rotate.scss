@@ -1,0 +1,12 @@
+@mixin rotate-to-bottom {
+  .rotate-to-bottom {
+    &-leave-active {
+      transition: opacity .2s;
+    }
+    &-leave-to {
+      opacity: 0;
+      transform-origin: top center;
+      transform: rotateX(-90deg);
+    }
+  }
+}
