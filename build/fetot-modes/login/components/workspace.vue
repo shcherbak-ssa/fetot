@@ -1,9 +1,7 @@
 <template>
   <div class="workspace">
     <transition name="change-mode" mode="out-in">
-      <div :key="mode">
-        <fetot-title>{{ title }}</fetot-title>
-      </div>
+        <fetot-title><span :key="mode">{{ title }}</span></fetot-title>
     </transition>
     <div class="content" :class="showMessage">
       <workspace-form :inputs="inputs" :mode="mode"/>
@@ -45,11 +43,13 @@
 		methods: {
 			linkClickHandler() {
 				eventsHandlers.emit('change-mode');
-      },
-			showMessage() {
-				return { 'show-message': this.mode === 'check-email' }
-			}
+      }
 		},
+    computed: {
+	    showMessage() {
+		    return { 'show-message': this.mode === 'check-email' }
+	    }
+    }
 	}
 </script>
 
@@ -62,7 +62,6 @@
     @include workspace-component;
   }
   .content {
-    width: 100%;
     position: relative;
   }
   .message {

@@ -18,6 +18,7 @@
 
   .fetot-link {
     color: $fetot-azure;
+    cursor: pointer;
     font-weight: lighter;
     font-family: sans-serif;
     transition: .2s;

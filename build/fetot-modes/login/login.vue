@@ -1,7 +1,8 @@
 <template>
   <fetot-container>
     <div class="login">
-      <login-workspace :mode="mode" :title="setCurrentTitle"
+      <login-workspace
+              :mode="mode" :title="setCurrentTitle"
               :link="setCurrentLink" :inputs="inputs"/>
     </div>
   </fetot-container>
@@ -33,10 +34,10 @@
 		},
     methods: {
 			changeModeHandler() {
-				this.mode = changeCurrentMode();
+				this.mode = changeCurrentMode(this.mode);
 
-				function changeCurrentMode() {
-					switch( this.mode ) {
+				function changeCurrentMode(mode) {
+					switch( mode ) {
 						case 'sing-in':
 							return 'login';
 						case 'login':
