@@ -16,7 +16,7 @@ const schema = {
 	password: {
 		type: String,
 		validation(value) {
-			return value.length < 8 || 'invalid-password'
+			return value.length >= 8 || 'invalid-password'
 		}
 	}
 };

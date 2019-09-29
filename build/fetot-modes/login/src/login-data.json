@@ -16,14 +16,14 @@
   "inputs": {
     "email": {
       "type": "text",
-      "value": "",
+      "value": "shcherbak.ssa@gmail.com",
       "placeholder": "E-mail",
       "icon": "@",
       "error": ""
     },
     "password": {
       "type": "password",
-      "value": "",
+      "value": "12345678",
       "placeholder": "Password",
       "icon": "#",
       "error": ""

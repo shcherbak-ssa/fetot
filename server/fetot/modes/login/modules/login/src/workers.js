@@ -2,11 +2,11 @@
 
 async function loginWorker({email, password}, currentModule) {
 	try {
-		let currentClient = currentModule.mongoCollection.findDocument({email});
-		if( !currentClient ) return currentModule.sendMessage('error');
+		let currentClient = await currentModule.mongoCollection.findDocument({email});
+		if( !currentClient ) return await currentModule.sendMessage('error');
 		
 		let messageLabel = password === currentClient.password ? 'success' : 'error';
-		currentModule.sendMessage(messageLabel);
+		await currentModule.sendMessage(messageLabel);
 	} catch( err ) {
 		throw err;
 	}

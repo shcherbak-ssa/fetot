@@ -18,6 +18,7 @@
 	import websocket from 'fetot-js-modules/websocket';
 
 	import singInModule from './modules/sing-in';
+	import loginModule from './modules/login';
 
 	export default {
 		name: 'fetot-login',
@@ -51,7 +52,10 @@
       },
 	    singInWorkerHandler() {
 				singInModule.worker(this.inputs.email)
-      }
+      },
+	    loginWorkerHandler() {
+		    loginModule.worker(this.inputs)
+	    }
     },
     computed: {
 	    setCurrentTitle() {
@@ -65,10 +69,13 @@
 	    eventsHandlers.add({
         'change-mode': this.changeModeHandler,
         'check-email': this.checkEmailHandler,
-        'sing-in-worker': this.singInWorkerHandler
+        'sing-in-worker': this.singInWorkerHandler,
+        'login-worker': this.loginWorkerHandler
       });
+
 			websocket.setMessageHandlers(
-				singInModule.messageHandlers(this.inputs.email)
+				singInModule.messageHandlers(this.inputs.email),
+        loginModule.messageHandlers(this.inputs)
       )
     }
 	}

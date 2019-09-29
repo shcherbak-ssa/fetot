@@ -28,7 +28,8 @@
     },
 		methods: {
 			buttonClickHandler() {
-				this.mode === 'sing-in' ? eventsHandlers.emit('sing-in-worker') : eventsHandlers.emit('login-worker');
+				let event = this.mode === 'sing-in' ? 'sing-in-worker' : 'login-worker';
+				eventsHandlers.emit(event);
 			}
     },
 		computed: {

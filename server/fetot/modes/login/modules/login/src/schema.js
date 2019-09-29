@@ -10,7 +10,7 @@ const schema = {
 	password: {
 		type: String,
 		validation(value) {
-			return value.length > 8 || 'invalid-email'
+			return value.length >= 8 || 'invalid-email'
 		}
 	}
 };

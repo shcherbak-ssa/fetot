@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports = require('./sing-in');
+module.exports = require('./login');

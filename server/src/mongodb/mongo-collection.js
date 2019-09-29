@@ -14,8 +14,8 @@ class MongoCollection {
 	}
 	async findDocument(filter) {
 		return new Promise((success, error) => {
-			return this.collection.find(filter).toArray((err, document) => {
-				return err ? error(err) : success( document );
+			return this.collection.find(filter).toArray((err, documents) => {
+				return err ? error(err) : success( documents[0] );
 			})
 		})
 	}

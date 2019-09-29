@@ -2,10 +2,11 @@
 
 import websocket from 'fetot-js-modules/websocket';
 import storage from 'fetot-js-modules/local-storage';
+
 import checkInputValue from 'fetot-js-modules/check-input-value';
 
 function loginModuleWorker(inputs) {
-	let mailValue = checkInputValue(inputs.mail, 'mail');
+	let mailValue = checkInputValue(inputs.email, 'mail');
 	if( !mailValue ) return;
 	
 	let passwordValue = checkInputValue(inputs.password, 'password');
@@ -14,7 +15,7 @@ function loginModuleWorker(inputs) {
 	websocket.sendMessage({
 		type: 'message',
 		message: {
-			type: 'login/log-in',
+			type: 'login/login',
 			data: {
 				email: mailValue,
 				password: passwordValue
@@ -22,8 +23,21 @@ function loginModuleWorker(inputs) {
 		}
 	});
 }
-function loginMessageHandlers(message) {
-	console.log(message)
+function loginMessageHandlers(inputs) {
+	return {
+		'login': {
+			success() {
+				alert('Login success')
+			},
+			error({error}) {
+				setErrorMessage(inputs.email, error);
+				setErrorMessage(inputs.password, error);
+			}
+		}
+	}
+}
+function setErrorMessage(input, message) {
+	input.error = message;
 }
 
 export default {
