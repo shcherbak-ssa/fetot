@@ -11,10 +11,6 @@ class WebSocketWorker {
 	static webSocket = {};
 	static sockets = new Map();
 	
-	static async init(websocket) {
-		WebSocketWorker.webSocket = websocket;
-		return WebSocketWorker;
-	}
 	static async start(fetotEventEmitter) {
 		WebSocketWorker.webSocket.on('connection', (socket) => {
 			const webSocketWorker = new WebSocketWorker(socket);
