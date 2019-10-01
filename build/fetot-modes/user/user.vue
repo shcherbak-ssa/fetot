@@ -11,14 +11,13 @@
 	// import userModal from './components/user-modal.vue';
   import fetotContainer from 'fetot-components/fetot-container.vue';
 
-  import websocket from 'fetot-js-modules/websocket';
   import storage from 'fetot-js-modules/local-storage';
   import eventsHandlers from 'fetot-js-modules/events-handlers';
 
   import userWorkspace from './components/workspace.vue';
   import userData from './src/user-data.json';
 
-  import loadAvatarModule from './modules/load-avatar';
+  // import loadAvatarModule from './modules/load-avatar';
   import userModule from './modules/user';
 
 	export default {
@@ -36,26 +35,23 @@
       // 'user-modal': userModal
     },
     methods: {
-	    buttonClickHandler() {
-	    	userModule.worker(this.inputs)
+	    async buttonClickHandler() {
+	    	await userModule.worker(this.inputs)
       },
-	    async loadAvatarHandler(avatar) {
-	    	let url = loadAvatarModule.loadWorker(avatar);
-	    	await loadAvatarModule.changeWorker(url, document.getElementById('user-avatar'));
-
-		    eventsHandlers.emit('open-modal');
-      }
+	    // async loadAvatarHandler(avatar) {
+	    // 	let url = loadAvatarModule.loadWorker(avatar);
+	    // 	await loadAvatarModule.changeWorker(url, document.getElementById('user-avatar'));
+      //
+		  //   eventsHandlers.emit('open-modal');
+      // }
     },
     created() {
 	    this.email = storage.getStorageItem('fetot-client-email');
 
 	    eventsHandlers.add({
 		    'button-click': this.buttonClickHandler,
-		    'load-avatar': this.loadAvatarHandler
+		    // 'load-avatar': this.loadAvatarHandler
 	    });
-	    websocket.setMessageHandlers(
-	    	userModule.messageHandlers(this.inputs)
-      );
     }
 	}
 </script>

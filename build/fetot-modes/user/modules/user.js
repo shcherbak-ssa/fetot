@@ -1,49 +1,51 @@
 'use strict';
 
-import websocket from 'fetot-js-modules/websocket';
 import storage from 'fetot-js-modules/local-storage';
+import fetchRequest from 'fetot-js-modules/fetch-request';
 import checkInputValue from 'fetot-js-modules/check-input-value';
 
-function userWorker(inputs) {
+const message = {
+	url: 'create/user/message',
+	body: {},
+	type: 'json'
+};
+
+async function userWorker(inputs) {
+	let formData = new FormData();
+	
 	let fullnameValue = checkInputValue(inputs.fullname, 'fullname');
 	if( !fullnameValue ) return;
 	
 	let passwordValue = checkInputValue(inputs.password, 'password');
 	if( !passwordValue ) return;
 	
-	websocket.sendMessage({
-		type: 'message',
-		message: {
-			type: 'user/create',
-			data: {
-				email: storage.getStorageItem('fetot-client-email'),
-				fullname: fullnameValue,
-				password: passwordValue
-			}
-		}
-	})
+	formData.set('email', storage.getStorageItem('fetot-client-email'));
+	formData.set('fullname', fullnameValue);
+	formData.set('password', passwordValue);
+	let response = await fetchRequest.post( Object.assign(message, {body: formData}) );
+	
+	await userResponseWorker(inputs, response);
 }
-function userMessageHandlers(inputs) {
-	return {
-		'user': {
-			error({label, error}) {
-				if( label === 'email' ) return;
-				inputs[label].error = error;
-			},
-			success({userID}) {
-				let email = storage.getStorageItem('fetot-client-email'),
-					password = inputs.password.value;
-				
-				storage.removeStorageItem('fetot-client-email');
-				storage.setStorageItem(userID, { email, password });
-				
-				console.log(storage.getStorageItem(userID));
-			}
-		}
+async function userResponseWorker(inputs, {type, message}) {
+	switch( type ) {
+		case 'error':
+			let {label, error} = message;
+			
+			if( label === 'email' ) return;
+			inputs[label].error = error;
+			break;
+		case 'success':
+			let email = storage.getStorageItem('fetot-client-email'),
+				password = inputs.password.value,
+				{userID} = message;
+			
+			storage.removeStorageItem('fetot-client-email');
+			storage.setStorageItem(userID, { email, password });
+			
+			console.log(storage.getStorageItem(userID));
 	}
 }
 
 export default {
-	worker: userWorker,
-	messageHandlers: userMessageHandlers
+	worker: userWorker
 }

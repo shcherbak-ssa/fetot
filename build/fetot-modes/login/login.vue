@@ -2,20 +2,18 @@
   <fetot-container>
     <div class="login">
       <login-workspace
-              :mode="mode" :title="setCurrentTitle"
-              :link="setCurrentLink" :inputs="inputs"/>
+              :mode="mode" :inputs="inputs"
+              :title="setCurrentTitle" :link="setCurrentLink"/>
     </div>
   </fetot-container>
 </template>
 
 <script>
 	import fetotContainer from 'fetot-components/fetot-container.vue';
+	import eventsHandlers from 'fetot-js-modules/events-handlers';
 
 	import loginWorkspace from './components/workspace.vue';
 	import loginData from './src/login-data.json';
-
-	import eventsHandlers from 'fetot-js-modules/events-handlers';
-	import websocket from 'fetot-js-modules/websocket';
 
 	import singInModule from './modules/sing-in';
 	import loginModule from './modules/login';
@@ -50,11 +48,11 @@
       checkEmailHandler() {
 	      this.mode = 'check-email'
       },
-	    singInWorkerHandler() {
-				singInModule.worker(this.inputs.email)
+	    async singInWorkerHandler() {
+				await singInModule.worker(this.inputs.email)
       },
-	    loginWorkerHandler() {
-		    loginModule.worker(this.inputs)
+	    async loginWorkerHandler() {
+		    await loginModule.worker(this.inputs)
 	    }
     },
     computed: {
@@ -71,12 +69,7 @@
         'check-email': this.checkEmailHandler,
         'sing-in-worker': this.singInWorkerHandler,
         'login-worker': this.loginWorkerHandler
-      });
-
-			websocket.setMessageHandlers(
-				singInModule.messageHandlers(this.inputs.email),
-        loginModule.messageHandlers(this.inputs)
-      )
+      })
     }
 	}
 </script>
