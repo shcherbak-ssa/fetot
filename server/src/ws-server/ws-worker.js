@@ -1,6 +1,6 @@
 'use strict';
 
-class WebSocketWorker {
+class WSWorker {
 	constructor(socket) {
 		this.socket = socket;
 		this.clientID = '';
@@ -12,8 +12,8 @@ class WebSocketWorker {
 	static sockets = new Map();
 	
 	static async start(fetotEventEmitter) {
-		WebSocketWorker.webSocket.on('connection', (socket) => {
-			const webSocketWorker = new WebSocketWorker(socket);
+		WSWorker.webSocket.on('connection', (socket) => {
+			const webSocketWorker = new WSWorker(socket);
 			fetotEventEmitter.emit('connection', webSocketWorker)
 		})
 	}
@@ -33,7 +33,7 @@ class WebSocketWorker {
 		this.clientID = id;
 	}
 	async sendMessage(message) {
-		let sendMessage = Object.assign(WebSocketWorker.outputMessageTemplate, message);
+		let sendMessage = Object.assign(WSWorker.outputMessageTemplate, message);
 		sendMessage = JSON.stringify(sendMessage);
 		
 		this.socket.send(sendMessage);
@@ -43,8 +43,8 @@ class WebSocketWorker {
 		this.removeSocket();
 	}
 	removeSocket() {
-		WebSocketWorker.sockets.delete(this.clientID);
+		WSWorker.sockets.delete(this.clientID);
 	}
 }
 
-module.exports = WebSocketWorker;
+module.exports = WSWorker;

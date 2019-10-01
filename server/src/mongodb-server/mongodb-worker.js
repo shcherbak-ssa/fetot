@@ -1,16 +1,18 @@
 'use strict';
 
-class MongoWorker {
+class MongodbWorker {
 	constructor(collection) {
 		this.collection = collection;
 	}
 	
+	/*** static properties and methods ***/
 	static mongoClient = {};
-	
 	static createCollection({db, collection}) {
-		let mongoCollection = MongoWorker.mongoClient.db(db).collection(collection);
-		return new MongoWorker(mongoCollection);
+		let mongoCollection = MongodbWorker.mongoClient.db(db).collection(collection);
+		return new MongodbWorker(mongoCollection);
 	}
+	
+	/*** work methods ***/
 	async insertDocument(object) {
 		return new Promise((success, error) => {
 			return this.collection.insertOne(object, (err, result) => {
@@ -39,4 +41,4 @@ class MongoWorker {
 	}
 }
 
-module.exports = MongoWorker;
+module.exports = MongodbWorker;

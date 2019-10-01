@@ -6,18 +6,17 @@ const {MongoClient} = require('mongodb'),
 	mongoUrl = 'mongodb://localhost:27017',
 	mongoOptions = { useNewUrlParser: true, useUnifiedTopology: true },
 	
-	MongoWorker = require('./mongo-worker');
+	MongoWorker = require('./mongodb-worker');
 
-const runMongodbClient = async () => {
+async function runMongodbServer() {
 	try {
 		let mongoClient = new MongoClient(mongoUrl, mongoOptions); // await runMongodProcess();
-		return mongoClientConnect(mongoClient);
+		return await mongoClientConnect(mongoClient);
 	} catch( err ) {
 		return Promise.reject(err);
 	}
-};
-
-function mongoClientConnect(mongoClient) {
+}
+async function mongoClientConnect(mongoClient) {
 	return new Promise((success, error) => {
 		return mongoClient.connect((err, client) => {
 			if( err ) return error(err);
@@ -28,4 +27,4 @@ function mongoClientConnect(mongoClient) {
 	})
 }
 
-module.exports = runMongodbClient;
+module.exports = runMongodbServer;

@@ -1,11 +1,11 @@
 'use strict';
 
 const WebSocket = require('ws'),
-	WebSocketWorker = require('./web-socket-worker');
+	WSWorker = require('./ws-worker');
 
 async function webSocketServer(httpServer) {
-	WebSocketWorker.webSocket = new WebSocket.Server({ server: httpServer });
-	return WebSocketWorker;
+	WSWorker.webSocket = new WebSocket.Server({ server: httpServer });
+	return WSWorker;
 }
 
 module.exports = webSocketServer;
