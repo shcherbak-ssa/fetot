@@ -1,5 +1,7 @@
 'use strict';
 
+const fetotEventEmitter = require('../fetot-event-emitter');
+
 class WSWorker {
 	constructor(socket) {
 		this.socket = socket;
@@ -11,15 +13,15 @@ class WSWorker {
 	static webSocket = {};
 	static sockets = new Map();
 	
-	static async start(fetotEventEmitter) {
+	static async run() {
 		WSWorker.webSocket.on('connection', (socket) => {
 			const webSocketWorker = new WSWorker(socket);
-			fetotEventEmitter.emit('connection', webSocketWorker)
+			fetotEventEmitter.emit('ws-connection', webSocketWorker)
 		})
 	}
 	
 	/*** work methods ***/
-	async start(fetotEventEmitter) {
+	async start() {
 		this.socket.on('message', (message) => {
 			fetotEventEmitter.emit('message', message, this);
 		});
