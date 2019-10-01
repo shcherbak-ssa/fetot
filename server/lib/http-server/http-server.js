@@ -2,7 +2,7 @@
 
 const http = require('http'),
 	server = http.createServer(),
-
+	
 	HttpWorker = require('./http-worker');
 
 async function createHttpServer(port, hostname) {
