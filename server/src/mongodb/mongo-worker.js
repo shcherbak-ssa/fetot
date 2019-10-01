@@ -1,26 +1,41 @@
 'use strict';
 
-const MongoCollection = require('./mongo-collection');
-
 class MongoWorker {
-	constructor(client) {
-		this.client = client;
-		this.databases = new Map();
+	constructor(collection) {
+		this.collection = collection;
 	}
 	
-	async createDB(name) {
-		let db = this.client.db(name);
-		this.databases.set(name, db);
+	static mongoClient = {};
+	
+	static createCollection({db, collection}) {
+		let mongoCollection = MongoWorker.mongoClient.db(db).collection(collection);
+		return new MongoWorker(mongoCollection);
+	}
+	async insertDocument(object) {
+		return new Promise((success, error) => {
+			return this.collection.insertOne(object, (err, result) => {
+				return err ? error(err) : success( result.ops[0] )
+			})
+		})
+	}
+	async findDocument(filter) {
+		return new Promise((success, error) => {
+			return this.collection.find(filter).toArray((err, documents) => {
+				return err ? error(err) : success( documents[0] )
+			})
+		})
+	}
+	async updateDocument() {
+		return new Promise((success, error) => {
 		
-		return db;
+		})
 	}
-	createCollection(dbName, collectionName) {
-		let collection = this.databases.get(dbName).collection(collectionName);
-		return new MongoCollection(collection);
-	}
-	
-	closeMongo() {
-		this.client.close();
+	async deleteDocument(docID) {
+		return new Promise((success, error) => {
+			return this.collection.deleteOne(docID, (err, result) => {
+				return err ? error(err) : success(result);
+			})
+		})
 	}
 }
 

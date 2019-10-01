@@ -10,9 +10,7 @@ const {MongoClient} = require('mongodb'),
 
 const runMongodbClient = async () => {
 	try {
-		let mongoClient = new MongoClient(mongoUrl, mongoOptions);
-		
-		// await runMongodProcess();
+		let mongoClient = new MongoClient(mongoUrl, mongoOptions); // await runMongodProcess();
 		return mongoClientConnect(mongoClient);
 	} catch( err ) {
 		return Promise.reject(err);
@@ -22,7 +20,10 @@ const runMongodbClient = async () => {
 function mongoClientConnect(mongoClient) {
 	return new Promise((success, error) => {
 		return mongoClient.connect((err, client) => {
-			return err ? error(err) : success(new MongoWorker(client))
+			if( err ) return error(err);
+			
+			MongoWorker.mongoClient = client;
+			return success( MongoWorker )
 		})
 	})
 }
