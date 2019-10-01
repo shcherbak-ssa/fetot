@@ -8,9 +8,7 @@ const path = require('path'),
 			type: 'file',
 			response: {
 				filename: path.join(clientDirname, 'view', '404.html'),
-				headers: {
-				
-				}
+				statusCode: 404
 			}
 		}
 		// 'get-file':

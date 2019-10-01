@@ -40,13 +40,14 @@ class HttpWorker {
 		}
 	}
 	async parseGETRequest() {
-		try {
-			let {type, response} = await requestParse.get(this.request);
-			await this.sendResponse(type, response);
-		} catch( err ) {
-			if( typeof err === 'string' ) return await this.sendResponse('error', err);
-			console.log( err );
-		}
+		this.response.end('hello world');
+		// try {
+		// 	let {type, response} = await requestParse.get(this.request);
+		// 	await this.sendResponse(type, response);
+		// } catch( err ) {
+		// 	if( typeof err === 'string' ) return await this.sendResponse('error', err);
+		// 	console.log( err );
+		// }
 	}
 	async parsePOSTRequest() {
 	
