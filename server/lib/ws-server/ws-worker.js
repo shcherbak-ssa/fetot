@@ -15,15 +15,15 @@ class WSWorker {
 	
 	static async run() {
 		WSWorker.webSocket.on('connection', (socket) => {
-			const webSocketWorker = new WSWorker(socket);
-			fetotEventEmitter.emit('ws-connection', webSocketWorker)
+			const wsWorker = new WSWorker(socket);
+			fetotEventEmitter.emit('ws-connection', wsWorker)
 		})
 	}
 	
 	/*** work methods ***/
 	async start() {
 		this.socket.on('message', (message) => {
-			fetotEventEmitter.emit('message', message, this);
+			fetotEventEmitter.emit('ws-message', message, this);
 		});
 		this.socket.on('close', (event) => {
 			console.log(event);

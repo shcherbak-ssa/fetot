@@ -8,7 +8,7 @@ const {MongoClient} = require('mongodb'),
 	
 	MongoWorker = require('./mongodb-worker');
 
-async function runMongodbServer() {
+async function createMongodbServer() {
 	try {
 		let mongoClient = new MongoClient(mongoUrl, mongoOptions); // await runMongodProcess();
 		return await mongoClientConnect(mongoClient);
@@ -27,4 +27,4 @@ async function mongoClientConnect(mongoClient) {
 	})
 }
 
-module.exports = runMongodbServer;
+module.exports = createMongodbServer;

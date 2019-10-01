@@ -5,9 +5,11 @@ const http = require('http'),
 
 	HttpWorker = require('./http-worker');
 
-async function runHttpServer(port, hostname) {
-	HttpWorker.httpServer = server;
-	return server.listen(port, hostname, () => HttpWorker)
+async function createHttpServer(port, hostname) {
+	server.listen(port, hostname, () => console.log('http server run'));
+	
+	HttpWorker.server = server;
+	return HttpWorker
 }
 
-module.exports = runHttpServer;
+module.exports = createHttpServer;

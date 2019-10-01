@@ -9,9 +9,9 @@ class HttpWorker {
 	}
 	
 	/*** static properties and methods ***/
-	static httpServer = {};
+	static server = {};
 	static async run() {
-		HttpWorker.httpServer.on('request', (request, response) => {
+		HttpWorker.server.on('request', (request, response) => {
 			let httpWorker = new HttpWorker(request, response);
 			fetotEventEmitter.emit('http-request', httpWorker);
 		})
@@ -19,7 +19,8 @@ class HttpWorker {
 	
 	/*** work methods ***/
 	async start() {
-		console.log('request')
+		console.log('request');
+		this.sendResponse();
 	}
 	sendResponse(type, response) {
 		this.response.end('Hello, world');

@@ -19,10 +19,10 @@ async function runFetotApplication(WebSocketWorker, mongoWorker) {
 	await WebSocketWorker.start(fetotEventEmitter);
 	await FetotClient.init(mongoWorker, fetotModes);
 	
-	fetotEventEmitter.on('connection', async (webSocketWorker) => {
+	fetotEventEmitter.on('ws-connection', async (webSocketWorker) => {
 		await webSocketWorker.start(fetotEventEmitter)
 	});
-	fetotEventEmitter.on('message', async (message, socketWorker) => {
+	fetotEventEmitter.on('ws-message', async (message, socketWorker) => {
 		await parseInputMessage({message, socketWorker});
 	});
 }

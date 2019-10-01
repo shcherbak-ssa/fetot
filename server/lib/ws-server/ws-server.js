@@ -3,9 +3,9 @@
 const WebSocket = require('ws'),
 	WSWorker = require('./ws-worker');
 
-async function runWebSocketServer(httpServer) {
+async function createWebSocketServer(httpServer) {
 	WSWorker.webSocket = new WebSocket.Server({server: httpServer});
 	return WSWorker;
 }
 
-module.exports = runWebSocketServer;
+module.exports = createWebSocketServer;
