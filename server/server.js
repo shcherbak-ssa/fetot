@@ -27,8 +27,8 @@ async function runFetotServer() {
 		await HttpServer.run();
 		await WSWorker.run();
 		
-		fetotEventEmitter.on('http-request', async (httpWorker) => {
-			await httpWorker.start()
+		fetotEventEmitter.on('http-post-request', async (httpWorker) => {
+			await httpWorker.parseRequest()
 		});
 		fetotEventEmitter.on('ws-connection', async (wsWorker) => {
 			await wsWorker.start(fetotEventEmitter)

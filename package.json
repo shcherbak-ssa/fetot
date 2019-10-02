@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "fetot": "supervisor --watch ./server -- server"
+    "fetot": "supervisor --watch ./server -- server",
+    "mongod": "mongod.bat"
   },
   "repository": {
     "type": "git",
