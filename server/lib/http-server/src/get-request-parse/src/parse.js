@@ -1,14 +1,16 @@
 'use strict';
 
+const {rootResponseConfig, fileResponseConfig} = require('./response-config');
+
 async function parseRootRequest(cookie) {
-	// if( !cookie ) return ;
+	if( !cookie ) return ;
 }
 async function parseFileRequest(url, cookie) {
 
 }
 
 async function error404() {
-	return Promise.reject('error404');
+	return Promise.reject('404');
 }
 async function parseCookie(cookie) {
 	console.log(cookie);

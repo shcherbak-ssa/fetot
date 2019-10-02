@@ -20,15 +20,15 @@ async function runFetotServer() {
 		host = 'localhost';
 	
 	try {
-		const HttpServer = await createHttpServer(port, host),
-			WSWorker = await createWSServer(HttpServer.server),
+		const httpServer = await createHttpServer(port, host),
+			WSWorker = await createWSServer(httpServer.server),
 			mongodbWorker = await createMongodbClient();
 		
-		await HttpServer.run();
+		await httpServer.run();
 		await WSWorker.run();
 		
-		fetotEventEmitter.on('http-post-request', async (httpWorker) => {
-			await httpWorker.parseRequest()
+		fetotEventEmitter.on('http-post-request', async (PostRequestWorker) => {
+		
 		});
 		fetotEventEmitter.on('ws-connection', async (wsWorker) => {
 			await wsWorker.start(fetotEventEmitter)
