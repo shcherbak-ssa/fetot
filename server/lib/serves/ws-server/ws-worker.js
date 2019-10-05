@@ -1,6 +1,6 @@
 'use strict';
 
-const fetotEventEmitter = require('../fetot-event-emitter');
+const fetotEventEmitter = require('../../fetot-event-emitter');
 
 class WSWorker {
 	constructor(socket) {

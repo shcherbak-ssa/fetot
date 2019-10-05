@@ -4,8 +4,8 @@ const path = require('path'),
 	clientDirname = path.join(process.cwd(), 'client');
 
 let
-	rootResponseConfig = {
-		async common(filename) {
+	rootResponse = {
+		async root(filename) {
 			return {
 				filename: path.join(clientDirname, 'view', `${filename}.html`),
 				statusCode: 200,
@@ -13,30 +13,16 @@ let
 					'Content-Type': 'text/html'
 				}
 			}
-		},
-		async login(currentModule) {
-			return {
-				headers: {
-					'Set-Cookie': cookieConfig[currentModule]
-				}
-			}
-		},
-		async app() {
-			return {}
 		}
 	},
 	rootProxyHandler = {
 		get(target, prop) {
-			return async (currentModule) => {
-				if( prop !== 'common' && prop in target ) {
-					let filename = '';
-					let common = target.common();
-				}
-				return false;
+			return async () => {
+				return await target.root(prop);
 			}
 		}
 	},
-	fileResponseConfig = {
+	fileResponse = {
 		js: {
 			valid: [ 'login', 'user', 'app' ],
 			async options(filename) {
@@ -59,7 +45,7 @@ let
 		}
 	};
 
-rootResponseConfig = new Proxy(rootResponseConfig, rootProxyHandler);
-fileResponseConfig = new Proxy(fileResponseConfig, fileProxyHandler);
+rootResponse = new Proxy(rootResponse, rootProxyHandler);
+fileResponse = new Proxy(fileResponse, fileProxyHandler);
 
-module.exports = { rootResponseConfig, fileResponseConfig };
+module.exports = { rootResponse, fileResponse };

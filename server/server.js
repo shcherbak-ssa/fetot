@@ -1,10 +1,7 @@
 'use strict';
 
 const fetotEventEmitter = require('./lib/fetot-event-emitter'),
-	
-	createHttpServer = require('./lib/http-server'),
-	createWSServer = require('./lib/ws-server'),
-	createMongodbClient = require('./lib/mongodb-server');
+	{createHttpServer, createMongodbClient, createWSServer} = require('./lib/serves');
 
 runFetotServer()
 	.then(() => {
@@ -20,14 +17,14 @@ async function runFetotServer() {
 		host = 'localhost';
 	
 	try {
-		const httpServer = await createHttpServer(port, host),
-			WSWorker = await createWSServer(httpServer.server),
+		const httpWorker = await createHttpServer(port, host),
+			WSWorker = await createWSServer(httpWorker.server),
 			mongodbWorker = await createMongodbClient();
 		
-		await httpServer.run();
+		await httpWorker.run();
 		await WSWorker.run();
 		
-		fetotEventEmitter.on('http-post-request', async (PostRequestWorker) => {
+		fetotEventEmitter.on('http-post-request', async (postRequestWorker) => {
 		
 		});
 		fetotEventEmitter.on('ws-connection', async (wsWorker) => {

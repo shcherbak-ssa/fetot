@@ -22,7 +22,7 @@ async function getRequestParse(request, response) {
 
 async function parse(request) {
 	let {url} = request;
-	if( /[^a-z0-9./]/i.test(url) ) return Promise.reject('error404');
+	if( /[^a-z0-9./]/i.test(url) ) return Promise.reject('404');
 	
 	let {cookie} = request.headers;
 	return (url === '/') ? parseRootRequest(cookie) : parseFileRequest(url);
