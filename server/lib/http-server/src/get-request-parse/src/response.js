@@ -24,7 +24,7 @@ let
 	},
 	fileResponse = {
 		js: {
-			valid: [ 'login', 'user', 'app' ],
+			valid: [ 'login', 'app' ],
 			async options(filename) {
 				return {
 					filename: path.join(clientDirname, 'js', `${filename}.js`),

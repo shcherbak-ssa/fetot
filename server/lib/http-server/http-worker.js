@@ -1,6 +1,6 @@
 'use strict';
 
-const fetotEventEmitter = require('../../fetot-event-emitter'),
+const fetotEventEmitter = require('../fetot-event-emitter'),
 	getRequestParse = require('./src/get-request-parse'),
 	PostRequestWorker = require('./src/post-request-worker');
 

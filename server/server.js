@@ -1,7 +1,10 @@
 'use strict';
 
 const fetotEventEmitter = require('./lib/fetot-event-emitter'),
-	{createHttpServer, createMongodbClient, createWSServer} = require('./lib/serves');
+	
+	createHttpServer = require('./lib/http-server'),
+	createMongodbClient = require('./lib/mongodb-server'),
+	createWSServer = require('./lib/ws-server');
 
 runFetotServer()
 	.then(() => {

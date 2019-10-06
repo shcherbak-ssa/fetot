@@ -3,12 +3,6 @@
 const fs = require('fs'),
 	path = require('path');
 
-/**
- *
- * @param options
- * @param response
- * @returns {Promise<void>}
- */
 async function sendFile({filename, statusCode, headers}, response) {
 	let readStream = new fs.ReadStream(filename);
 	response.writeHead(statusCode, headers);
