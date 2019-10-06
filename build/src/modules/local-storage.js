@@ -1,3 +1,4 @@
+'use strict';
 
 function setStorageItem(key, value) {
 	if( typeof value === 'object' ) value = JSON.stringify(value);
@@ -9,9 +10,13 @@ function getStorageItem(key) {
 function removeStorageItem(key) {
 	localStorage.removeItem(key)
 }
+function hasStorageItem(key) {
+	return !!getStorageItem(key);
+}
 
 export default {
 	setStorageItem,
 	getStorageItem,
-	removeStorageItem
+	removeStorageItem,
+	hasStorageItem
 }

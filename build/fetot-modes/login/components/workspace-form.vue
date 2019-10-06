@@ -3,9 +3,7 @@
     <fetot-input :input="inputs.email"/>
     <fetot-input :input="inputs.password"/>
     <fetot-button @button-click="buttonClickHandler">
-      <transition :name="buttonAnimation" mode="out-in">
-        <span class="txt" :key="mode">{{ mode === 'sing-in' ? 'Continue' : 'Enter' }}</span>
-      </transition>
+      {{ mode === 'sing-in' ? 'Continue' : 'Enter' }}
     </fetot-button>
   </div>
 </template>

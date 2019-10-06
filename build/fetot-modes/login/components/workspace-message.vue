@@ -1,14 +1,32 @@
 <template>
   <div class="workspace-message">
-    <div class="email">{{ email }}</div>
-    <div class="txt">Check your e-mail address to continue registration</div>
+    <div class="txt">
+      Please, check your e-mail address
+      <a class="email" href="https://mail.google.com" target="_blank">{{ email }}</a>
+      to continue registration
+    </div>
+    <fetot-input :input="input" @input-input="inputInputHandler"/>
   </div>
 </template>
 
 <script>
+	import fetotInput from 'fetot-components/form/fetot-input.vue';
+	import eventsHandlers from 'fetot-js-modules/events-handlers';
+
 	export default {
 		name: 'workspace-message',
-    props: { email: String }
+    props: {
+			email: String,
+      input: Object
+		},
+    components: {
+			'fetot-input': fetotInput
+    },
+    methods: {
+			inputInputHandler() {
+				eventsHandlers.emit('confirm-email-worker')
+      }
+    }
 	}
 </script>
 
@@ -16,6 +34,8 @@
   @import 'fetot-src-scss';
 
   .workspace-message {
+    text-align: center;
+    font-size: 18px;
     padding: 25px 0 2px;
     font-family: sans-serif;
     @include box-sizing;
@@ -23,14 +43,15 @@
     @include flex-center-column;
 
     .email {
-      color: $fetot-dark-gray;
-      font-size: 18px;
-      margin-bottom: 30px;
+      color: $fetot-azure;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
     .txt {
       color: $fetot-blue;
-      font-size: 24px;
-      text-align: center;
+      margin-bottom: 20px;
     }
   }
 </style>

@@ -9,7 +9,7 @@
       "link": "Do not have an account"
     },
     "check-email": {
-      "title": "Correct",
+      "title": "Confirm e-mail",
       "link": "Change e-mail address"
     }
   },
@@ -26,6 +26,13 @@
       "value": "12345678",
       "placeholder": "Password",
       "icon": "#",
+      "error": ""
+    },
+    "confirm-email": {
+      "type": "text",
+      "value": "",
+      "placeholder": "Confirm code",
+      "icon": "?",
       "error": ""
     }
   }

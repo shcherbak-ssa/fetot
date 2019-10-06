@@ -11,18 +11,20 @@
 <script>
 	import fetotContainer from 'fetot-components/fetot-container.vue';
 	import eventsHandlers from 'fetot-js-modules/events-handlers';
+	import storage from 'fetot-js-modules/local-storage';
 
 	import loginWorkspace from './components/workspace.vue';
 	import loginData from './src/login-data.json';
 
 	import singInModule from './modules/sing-in';
 	import loginModule from './modules/login';
+	import confirmEmailModule from './modules/confirm-email';
 
 	export default {
 		name: 'fetot-login',
     data() {
 			return {
-				mode: 'sing-in',
+				mode: '',
 				content: loginData.content,
         inputs: loginData.inputs
       }
@@ -53,7 +55,10 @@
       },
 	    async loginWorkerHandler() {
 		    await loginModule.worker(this.inputs)
-	    }
+	    },
+      async confirmEmailWorkerHandler() {
+				await confirmEmailModule.worker(this.inputs['confirm-email'])
+      }
     },
     computed: {
 	    setCurrentTitle() {
@@ -63,12 +68,16 @@
 	    	return this.content[this.mode].link;
       }
     },
+    beforeCreate() {
+			this.mode = storage.hasStorageItem('client-exist') ? 'login' : 'sing-in'
+    },
     created() {
 	    eventsHandlers.add({
         'change-mode': this.changeModeHandler,
         'check-email': this.checkEmailHandler,
         'sing-in-worker': this.singInWorkerHandler,
-        'login-worker': this.loginWorkerHandler
+        'login-worker': this.loginWorkerHandler,
+        'confirm-email-worker': this.confirmEmailWorkerHandler
       })
     }
 	}

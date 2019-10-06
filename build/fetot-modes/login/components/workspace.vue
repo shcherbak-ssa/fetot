@@ -1,21 +1,13 @@
 <template>
   <div class="workspace">
-    <!--<transition name="change-mode" mode="out-in">-->
-      <!--<fetot-title><span :key="mode">{{ title }}</span></fetot-title>-->
-    <!--</transition>-->
     <fetot-title>{{ title }}</fetot-title>
     <div class="content" :class="showMessage">
       <workspace-form :inputs="inputs" :mode="mode"/>
       <div class="message">
-        <workspace-message :email="inputs.email.value"/>
+        <workspace-message :email="inputs.email.value" :input="inputs['confirm-email']"/>
       </div>
     </div>
     <fetot-link fontSize="14px" @link-click="linkClickHandler">{{ link }}</fetot-link>
-    <!--<transition name="change-mode" mode="out-in">-->
-      <!--<div :key="mode">-->
-        <!--<fetot-link fontSize="14px" @link-click="linkClickHandler">{{ link }}</fetot-link>-->
-      <!--</div>-->
-    <!--</transition>-->
   </div>
 </template>
 
