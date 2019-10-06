@@ -14,15 +14,11 @@ class ModeWorker {
 	static async init(options, mongoWorker) {
 		let modeWorker = new ModeWorker(options);
 		
-		await modeWorker.initMongodb(mongoWorker);
 		await modeWorker.initModules(mongoWorker);
 		
 		return modeWorker;
 	}
 	
-	async initMongodb(mongoWorker) {
-		this.mongodb = mongoWorker.createDB(this.config.db);
-	}
 	async initModules(mongoWorker) {
 		let returnModules = new Map();
 		

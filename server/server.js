@@ -1,14 +1,14 @@
 'use strict';
 
-const fetotEventEmitter = require('./lib/fetot-event-emitter'),
+const fetotEventEmitter = require('./src/fetot-event-emitter'),
 	
-	createHttpServer = require('./lib/http-server'),
-	createMongodbClient = require('./lib/mongodb-server'),
-	createWSServer = require('./lib/ws-server');
+	createHttpServer = require('./src/http-server'),
+	createMongodbClient = require('./src/mongodb-server'),
+	createWebSocketServer = require('./src/web-socket-server');
 
 runFetotServer()
 	.then(() => {
-		console.log('Server run')
+		console.log('Full server run')
 	})
 	.catch((err) => {
 		console.log(err);
@@ -16,27 +16,27 @@ runFetotServer()
 	});
 
 async function runFetotServer() {
-	const port = 8080,
-		host = 'localhost';
+	let port = 8080, host = 'localhost';
 	
 	try {
-		const httpWorker = await createHttpServer(port, host),
-			WSWorker = await createWSServer(httpWorker.server),
-			mongodbWorker = await createMongodbClient();
+		let httpServer = await createHttpServer(port, host);
 		
-		await httpWorker.run();
-		await WSWorker.run();
+		await createWebSocketServer(httpServer);
+		await createMongodbClient();
 		
-		fetotEventEmitter.on('http-post-request', async (postRequestWorker) => {
+		fetotEventEmitter
+			.on('mongodb-connection', (mongoClient) => {
+
+			})
+			.on('http-get-request', async (request, response) => {
+				response.end('http-get-request');
+			})
+			.on('http-post-request', async (request, response) => {
 		
-		});
-		fetotEventEmitter.on('ws-connection', async (wsWorker) => {
-			await wsWorker.start(fetotEventEmitter)
-		});
-		fetotEventEmitter.on('ws-message', async (message, wsWorker) => {
-			console.log('ws-message')
-			// await parseInputMessage({message, socketWorker});
-		});
+			})
+			.on('ws-message', async (message, socket) => {
+			
+			});
 		
 		return Promise.resolve();
 	} catch( err ) {
