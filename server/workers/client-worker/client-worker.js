@@ -1,6 +1,9 @@
 'use strict';
 
 class ClientWorker {
+	constructor() {}
+	
+	static mongodbWorker = {};
 	
 }
 

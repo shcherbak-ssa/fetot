@@ -1,12 +1,14 @@
 'use strict';
 
 const fetotEventEmitter = require('./src/fetot-event-emitter'),
-	
 	createHttpServer = require('./src/http-server'),
 	createMongodbClient = require('./src/mongodb-server'),
-	createWebSocketServer = require('./src/web-socket-server');
+	createWebSocketServer = require('./src/web-socket-server'),
 
-runFetotServer()
+	MongodbWorker = require('./workers/mongodb-worker'),
+	ClientWorker = require('./workers/client-worker');
+
+runFetotServer(8080, 'localhost')
 	.then(() => {
 		console.log('Full server run')
 	})
@@ -15,9 +17,7 @@ runFetotServer()
 		process.exit(0);
 	});
 
-async function runFetotServer() {
-	let port = 8080, host = 'localhost';
-	
+async function runFetotServer(port, host) {
 	try {
 		let httpServer = await createHttpServer(port, host);
 		
@@ -26,7 +26,8 @@ async function runFetotServer() {
 		
 		fetotEventEmitter
 			.on('mongodb-connection', (mongoClient) => {
-
+				MongodbWorker.mongoClient = mongoClient;
+				ClientWorker.mongodbWorker = MongodbWorker;
 			})
 			.on('http-get-request', async (request, response) => {
 				response.end('http-get-request');
