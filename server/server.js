@@ -1,12 +1,12 @@
 'use strict';
 
-const fetotEventEmitter = require('./src/fetot-event-emitter'),
-	createHttpServer = require('./src/http-server'),
+const createHttpServer = require('./src/http-server'),
 	createMongodbClient = require('./src/mongodb-server'),
 	createWebSocketServer = require('./src/web-socket-server'),
-
-	MongodbWorker = require('./workers/mongodb-worker'),
-	ClientWorker = require('./workers/client-worker');
+	
+	{ setConnectionEventsHandlers,
+		setMessageEventsHandlers,
+		setClientEventsHandlers } = require('./src/set-events-handlers');
 
 runFetotServer(8080, 'localhost')
 	.then(() => {
@@ -20,24 +20,12 @@ runFetotServer(8080, 'localhost')
 async function runFetotServer(port, host) {
 	try {
 		let httpServer = await createHttpServer(port, host);
-		
 		await createWebSocketServer(httpServer);
 		await createMongodbClient();
 		
-		fetotEventEmitter
-			.on('mongodb-connection', (mongoClient) => {
-				MongodbWorker.mongoClient = mongoClient;
-				ClientWorker.mongodbWorker = MongodbWorker;
-			})
-			.on('http-get-request', async (request, response) => {
-				response.end('http-get-request');
-			})
-			.on('http-post-request', async (request, response) => {
-		
-			})
-			.on('ws-message', async (message, socket) => {
-			
-			});
+		await setConnectionEventsHandlers();
+		await setMessageEventsHandlers();
+		await setClientEventsHandlers();
 		
 		return Promise.resolve();
 	} catch( err ) {

@@ -1,7 +1,7 @@
 'use strict';
 
 const WebSocket = require('ws'),
-	fetotEventEmitter = require('./fetot-event-emitter');
+	{messageEventEmitter} = require('./server-events-emitters');
 
 async function createWebSocketServer(httpServer) {
 	let webSocketServer = new WebSocket.Server({server: httpServer});
@@ -11,7 +11,7 @@ async function createWebSocketServer(httpServer) {
 	webSocketServer.on('connection', (socket) => {
 		socket
 			.on('message', (message) => {
-				fetotEventEmitter.emit('ws-message', message, socket)
+				messageEventEmitter.emit('message-ws-request', message, socket)
 			})
 			.on('close', (event) => {
 				console.log(event);
