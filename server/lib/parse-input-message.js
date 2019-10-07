@@ -3,6 +3,13 @@
 /*** export [begin] ***/
 
 async function parseInputMessage(options) {
+	let message = await parse(options);
+	return JSON.parse(message)
+}
+
+/*** export [end] ***/
+
+async function parse(options) {
 	switch( options.type ) {
 		case 'post-message':
 			return await parsePostMessage(options);
@@ -10,9 +17,6 @@ async function parseInputMessage(options) {
 			return await parseWebSocketMessage(options);
 	}
 }
-
-/*** export [end] ***/
-
 async function parsePostMessage({request}) {
 	return new Promise((success, error) => {
 		let message = '';
@@ -21,12 +25,12 @@ async function parsePostMessage({request}) {
 				message += data.toString();
 			})
 			.on('end', () => {
-				success( JSON.parse(message) );
+				success( message );
 			})
 	})
 }
 async function parseWebSocketMessage({message}) {
-	return JSON.parse(message);
+	return message;
 }
 
 module.exports = parseInputMessage;

@@ -1,6 +1,6 @@
 'use strict';
 
-const getClientFilename = require('../../lib/get-client-filename'),
+const getClientFilename = require('../../../lib/get-client-filename'),
 	responseConfig = {
 		async root(filename) {
 			return {
