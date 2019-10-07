@@ -3,8 +3,7 @@
 class ClientWorker {
 	constructor() {}
 	
-	static mongodbWorker = {};
-	
+	static MongodbWorker = {};
 }
 
 module.exports = ClientWorker;

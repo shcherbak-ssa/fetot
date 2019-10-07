@@ -1,8 +1,8 @@
 'use strict';
 
 const createHttpServer = require('./src/http-server'),
-	createMongodbClient = require('./src/mongodb-server'),
 	createWebSocketServer = require('./src/web-socket-server'),
+	createMongodbClient = require('./src/mongodb-server'),
 	
 	{ setConnectionEventsHandlers,
 		setMessageEventsHandlers,

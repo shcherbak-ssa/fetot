@@ -5,7 +5,6 @@ const outputMessageTemplate = {type: '', message: {}};
 class WebSocketWorker {
 	constructor(socket) {
 		this.socket = socket;
-		this.clientID = '';
 	}
 	
 	async sendMessage(message) {

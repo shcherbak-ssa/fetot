@@ -1,6 +1,6 @@
 'use strict';
 
-const {sendFile, sendError404} = require('../../lib/send-file'),
+const {sendFile, sendError404} = require('../../../lib/send-file'),
 	responseConfig = require('./response-config');
 
 /*** exports [begin] ***/

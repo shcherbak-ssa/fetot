@@ -3,7 +3,11 @@
 const httpRootRequestHandler = require('./events-handlers/http-root-request-handler'),
 	httpFileRequestHandler = require('./events-handlers/http-file-request-handler'),
 	
+	mongodbConnectionHandler = require('./events-handlers/mongodb-connection-handler'),
+	
 	{connectionEventEmitter, messageEventEmitter, clientEventEmitter} = require('./server-events-emitters');
+
+/*** exports [begin] ***/
 
 async function setConnectionEventsHandlers() {
 	connectionEventEmitter
@@ -12,9 +16,7 @@ async function setConnectionEventsHandlers() {
 		.on('http-connection', (request, response) => {
 		
 		})
-		.on('mongodb-connection', (mongoClient) => {
-		
-		})
+		.on('mongodb-connection', mongodbConnectionHandler)
 }
 async function setMessageEventsHandlers() {
 	messageEventEmitter
@@ -28,6 +30,8 @@ async function setMessageEventsHandlers() {
 async function setClientEventsHandlers() {
 
 }
+
+/*** exports [end] ***/
 
 module.exports = {
 	setConnectionEventsHandlers,

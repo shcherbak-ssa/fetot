@@ -3,8 +3,10 @@
 const http = require('http'),
 	server = http.createServer(),
 	
-	{sendError404} = require('./lib/send-file'),
+	{sendError404} = require('../lib/send-file'),
 	{connectionEventEmitter, messageEventEmitter} = require('./server-events-emitters');
+
+/*** exports [begin] ***/
 
 async function createHttpServer(port, hostname) {
 	server
@@ -17,6 +19,8 @@ async function createHttpServer(port, hostname) {
 	
 	return server;
 }
+
+/*** exports [end] ***/
 
 async function requestParse(request, response) {
 	switch( request.method ) {
