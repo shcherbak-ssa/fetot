@@ -1,12 +1,11 @@
 'use strict';
 
-const createHttpServer = require('./src/http-server'),
-	createWebSocketServer = require('./src/web-socket-server'),
-	createMongodbClient = require('./src/mongodb-server'),
+const createHttpServer = require('./src/servers/http-server'),
+	createWebSocketServer = require('./src/servers/web-socket-server'),
+	createMongodbClient = require('./src/servers/mongodb-server'),
 	
-	{ setConnectionEventsHandlers,
-		setMessageEventsHandlers,
-		setClientEventsHandlers } = require('./src/set-events-handlers');
+	{setConnectionEventsHandlers, setMessageEventsHandlers,
+		setClientEventsHandlers} = require('./src/set-events-handlers');
 
 runFetotServer(8080, 'localhost')
 	.then(() => {

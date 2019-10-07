@@ -4,7 +4,7 @@ const {MongoClient} = require('mongodb'),
 	mongodbUrl = 'mongodb://localhost:27017',
 	mongodbOptions = {useNewUrlParser: true, useUnifiedTopology: true},
 	
-	{connectionEventEmitter} = require('./server-events-emitters');
+	{connectionEventEmitter} = require('../server-events-emitters');
 
 /*** exports [begin] ***/
 

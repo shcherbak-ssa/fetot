@@ -1,12 +1,12 @@
 'use strict';
 
 const WebSocket = require('ws'),
-	{messageEventEmitter} = require('./server-events-emitters');
+	{messageEventEmitter} = require('../server-events-emitters');
+
+/*** exports [begin] ***/
 
 async function createWebSocketServer(httpServer) {
 	let webSocketServer = new WebSocket.Server({server: httpServer});
-	
-	console.log('Web socket server run');
 	
 	webSocketServer.on('connection', (socket) => {
 		socket
@@ -19,5 +19,7 @@ async function createWebSocketServer(httpServer) {
 			});
 	})
 }
+
+/*** exports [end] ***/
 
 module.exports = createWebSocketServer;

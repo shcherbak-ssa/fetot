@@ -3,8 +3,8 @@
 const http = require('http'),
 	server = http.createServer(),
 	
-	{sendError404} = require('../lib/send-file'),
-	{connectionEventEmitter, messageEventEmitter} = require('./server-events-emitters');
+	{sendError404} = require('../../lib/send-file'),
+	{connectionEventEmitter, messageEventEmitter} = require('../server-events-emitters');
 
 /*** exports [begin] ***/
 

@@ -2,7 +2,7 @@
 
 /*** export [begin] ***/
 
-async function parseMessageWorker(options) {
+async function parseInputMessage(options) {
 	switch( options.type ) {
 		case 'post-message':
 			return await parsePostMessage(options);
@@ -29,4 +29,4 @@ async function parseWebSocketMessage({message}) {
 	return JSON.parse(message);
 }
 
-module.exports = parseMessageWorker;
+module.exports = parseInputMessage;
