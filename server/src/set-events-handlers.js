@@ -1,27 +1,24 @@
 'use strict';
 
-const rootHttpRequestHandler = require('./events-handlers/root-http-request-handler'),
+const httpRootRequestHandler = require('./events-handlers/http-root-request-handler'),
+	httpFileRequestHandler = require('./events-handlers/http-file-request-handler'),
 	
-	{ connectionEventEmitter,
-		messageEventEmitter,
-		clientEventEmitter } = require('./server-events-emitters');
+	{connectionEventEmitter, messageEventEmitter, clientEventEmitter} = require('./server-events-emitters');
 
 async function setConnectionEventsHandlers() {
 	connectionEventEmitter
-		.on('root-http-request', rootHttpRequestHandler)
-		.on('file-http-request', (url, response) => {
+		.on('http-root-request', httpRootRequestHandler)
+		.on('http-file-request', httpFileRequestHandler)
+		.on('http-connection', (request, response) => {
 		
 		})
-		.on('connection-http-request', (request, response) => {
-		
-		})
-		.on('connection-mongodb', (mongoClient) => {
+		.on('mongodb-connection', (mongoClient) => {
 		
 		})
 }
 async function setMessageEventsHandlers() {
 	messageEventEmitter
-		.on('message-http-request', () => {
+		.on('http-message', () => {
 		
 		})
 		.on('message-ws-request', (message, socket) => {

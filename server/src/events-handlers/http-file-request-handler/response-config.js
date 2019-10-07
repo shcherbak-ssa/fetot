@@ -1,7 +1,6 @@
 'use strict';
 
 const getClientFilename = require('../../lib/get-client-filename'),
-	
 	responseConfig = {
 		js: {
 			valid: [ 'login', 'app' ],

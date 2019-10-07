@@ -5,7 +5,7 @@ const {sendFile, sendError404} = require('../../lib/send-file'),
 
 /*** exports [begin] ***/
 
-async function rootHttpRequestHandler(headers, response) {
+async function httpRootRequestHandler(headers, response) {
 	let responseOptions = await parseRequest(headers);
 	if( !responseOptions ) return await sendError404(response);
 	
@@ -29,4 +29,4 @@ async function parseCookie(cookie) {
 	return JSON.parse(value);
 }
 
-module.exports = rootHttpRequestHandler;
+module.exports = httpRootRequestHandler;

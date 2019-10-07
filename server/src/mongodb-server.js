@@ -6,15 +6,17 @@ const {MongoClient} = require('mongodb'),
 	
 	{connectionEventEmitter} = require('./server-events-emitters');
 
+/*** exports [begin] ***/
+
 async function createMongodbServer() {
 	let mongoClient = new MongoClient(mongodbUrl, mongodbOptions);
 	
 	return mongoClient.connect((err, client) => {
 		if( err ) return Promise.reject(err);
-		
-		console.log('Mongodb server run');
-		connectionEventEmitter.emit('connection-mongodb', client);
+		connectionEventEmitter.emit('mongodb-connection', client);
 	})
 }
+
+/*** exports [end] ***/
 
 module.exports = createMongodbServer;
