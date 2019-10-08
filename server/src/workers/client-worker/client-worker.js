@@ -1,7 +1,9 @@
 'use strict';
 
 class ClientWorker {
-	constructor() {}
+	constructor({mongodbWorker}) {
+		this.mongodbWorker = mongodbWorker;
+	}
 	
 	static MongodbWorker = {};
 	static activeClients = new Map();

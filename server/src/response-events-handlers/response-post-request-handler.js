@@ -2,9 +2,11 @@
 
 /*** exports [begin] ***/
 
-async function responsePostRequestHandler(options, response) {
-	response.writeHead(options.statusCode, options.headers);
-	response.write(JSON.stringify(options.message));
+async function responsePostRequestHandler({statusCode, headers, message}, response) {
+	response
+		.writeHead(statusCode, headers)
+		.write(JSON.stringify(message))
+		.end();
 }
 
 /*** exports [end] ***/
