@@ -5,7 +5,7 @@ const createHttpServer = require('./src/servers/http-server'),
 	createMongodbClient = require('./src/servers/mongodb-server'),
 	
 	{setConnectionEventsHandlers, setMessageEventsHandlers,
-		setClientEventsHandlers} = require('./src/set-events-handlers');
+		setClientEventsHandlers, setResponseEventsHandlers} = require('./src/set-events-handlers');
 
 runFetotServer(8080, 'localhost')
 	.then(() => {
@@ -20,11 +20,12 @@ async function runFetotServer(port, host) {
 	try {
 		let httpServer = await createHttpServer(port, host);
 		await createWebSocketServer(httpServer);
-		await createMongodbClient();
+		// await createMongodbClient();
 		
 		await setConnectionEventsHandlers();
 		await setMessageEventsHandlers();
 		await setClientEventsHandlers();
+		await setResponseEventsHandlers();
 		
 		return Promise.resolve();
 	} catch( err ) {

@@ -7,6 +7,8 @@ const httpRootRequestHandler = require('./connection-events-handlers/http-root-r
 	
 	responseError404Handler = require('./response-events-handlers/response-error404-handler'),
 	responseFileHandler = require('./response-events-handlers/response-file-handler'),
+	responsePostRequestHandler = require('./response-events-handlers/response-post-request-handler'),
+	responseWebSocketHandler = require('./response-events-handlers/response-web-socket-handler'),
 	
 	{connectionEventEmitter, messageEventEmitter,
 		clientEventEmitter, responseEventEmitter } = require('./server-events-emitters');
@@ -17,14 +19,13 @@ async function setConnectionEventsHandlers() {
 	connectionEventEmitter
 		.on('http-root-request', httpRootRequestHandler)
 		.on('http-file-request', httpFileRequestHandler)
-		
 		.on('http-connection', httpConnectionHandler)
 		.on('mongodb-connection', mongodbConnectionHandler)
 }
 async function setMessageEventsHandlers() {
 	messageEventEmitter
 		.on('http-message', (request, response) => {})
-		.on('message-ws-request', (message, socket) => {})
+		.on('web-socket-message', (message, socket) => {})
 }
 async function setClientEventsHandlers() {
 
@@ -33,8 +34,8 @@ async function setResponseEventsHandlers() {
 	responseEventEmitter
 		.on('response-error-404', responseError404Handler)
 		.on('response-file', responseFileHandler)
-	
-		.on('response-post-request', (message, response) => {})
+		.on('response-post-request', responsePostRequestHandler)
+		.on('response-web-socket', responseWebSocketHandler)
 }
 
 /*** exports [end] ***/
@@ -42,5 +43,6 @@ async function setResponseEventsHandlers() {
 module.exports = {
 	setConnectionEventsHandlers,
 	setMessageEventsHandlers,
-	setClientEventsHandlers
+	setClientEventsHandlers,
+	setResponseEventsHandlers
 };

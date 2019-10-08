@@ -11,11 +11,10 @@ async function createWebSocketServer(httpServer) {
 	webSocketServer.on('connection', (socket) => {
 		socket
 			.on('message', (message) => {
-				messageEventEmitter.emit('message-ws-request', message, socket)
+				messageEventEmitter.emit('web-socket-message', message, socket)
 			})
 			.on('close', (event) => {
 				console.log(event);
-				// socket.close(1000, 'event.reason')
 			});
 	})
 }
