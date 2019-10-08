@@ -14,7 +14,7 @@
   @import 'fetot-src-scss';
 
   .fetot-container {
-    background: $fetot-light-gray;
+    background: #fff;
     position: relative;
     @include full-sizes;
   }

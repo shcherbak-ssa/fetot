@@ -50,6 +50,6 @@ function sendMessage(message) {
 
 export default {
 	init,
-	setMessageHandlers,
-	sendMessage
+	sendMessage,
+	setMessageHandlers
 }

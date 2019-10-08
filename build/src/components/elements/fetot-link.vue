@@ -1,5 +1,5 @@
 <template>
-  <div class="fetot-link" :style="{ 'font-size': this.fontSize }" @click="$emit('link-click')">
+  <div class="fetot-link" @click="$emit('link-click')">
     <slot></slot>
   </div>
 </template>
@@ -7,9 +7,6 @@
 <script>
 	export default {
 		name: 'fetot-link',
-    props: {
-			fontSize: String
-    }
 	}
 </script>
 

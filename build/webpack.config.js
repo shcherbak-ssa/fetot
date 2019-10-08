@@ -4,8 +4,8 @@ const path = require('path'),
 	VueLoader = require('vue-loader/lib/plugin');
 
 module.exports = (env) => {
-	let outputFilename = `${env.mode}.js`;
-	let entryFilename = `./fetot-modes/${env.mode}/index.js`;
+	let outputFilename = `${env.mode}.js`,
+		entryFilename = `./${env.mode}/index.js`;
 	
 	return {
 		entry: entryFilename,
