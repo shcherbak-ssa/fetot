@@ -4,9 +4,9 @@ const validMessageType = ['message', 'change-mode', 'change-module'],
 	validMessage = {
 		type: String,
 		client: Number, // need to think
-		message: Object
+		content: Object
 	},
-	validMessageObject = {
+	validMessageContent = {
 		type: String,
 		data: Object
 	};
@@ -14,10 +14,10 @@ const validMessageType = ['message', 'change-mode', 'change-module'],
 /*** exports [begin] ***/
 
 async function messageValidation(message) {
-	message = new Map(Object.entries(message));
+	let messageMap = new Map(Object.entries(message)),
+		valid = await validation(generatorMessageValidation(messageMap));
 	
-	let valid = await validation(generatorMessageValidation(message));
-	return valid ? Object.fromEntries(message) : false;
+	return valid ? message : false;
 }
 
 /*** exports [end] ***/
@@ -25,7 +25,7 @@ async function messageValidation(message) {
 async function validation(generator) {
 	let {value, done} = generator.next();
 	
-	if( done ) return true;
+	if( done ) return value;
 	return value ? validation(generator) : false;
 }
 async function* generatorMessageValidation(message) {
@@ -33,19 +33,23 @@ async function* generatorMessageValidation(message) {
 	
 	yield await checkObject(message, validMessage);
 	
-	let messageObject = new Map(Object.entries(message.get('message')));
-	yield await checkObject(messageObject, validMessageObject);
+	let messageContent = new Map(Object.entries(message.get('content')));
+	yield await checkObject(messageContent, validMessageContent);
 	
-	yield await checkValidTypeValue(message.get('type'));
+	return await checkValidTypeValue(message.get('type'));
 }
 async function checkObject(messageObject, validObject) {
-	for( let [key, value] of messageObject.entries() ) {
-		if( validObject.has(key) ) {
+	try {
+		messageObject.entries().map(async ([key, value]) => {
+			if( !validObject.has(key) ) throw 0;
+			
 			let valid = await checkValueType(value, validObject.get(key));
-			if( !valid ) return false;
-		} else return false;
+			if( !valid ) throw 0;
+		});
+		return true;
+	} catch( e ) {
+		return false;
 	}
-	return true;
 }
 async function checkValueType(messageValue, validValue) {
 	return typeof messageValue === typeof validValue()
