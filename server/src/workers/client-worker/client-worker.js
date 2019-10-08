@@ -5,7 +5,13 @@ class ClientWorker {
 	
 	static MongodbWorker = {};
 	static activeClients = new Map();
-	static clientConnection() {
+	static async clientConnection(message, response) {
+		let [currentMode, currentModule] = message.content.type.split('/'),
+			client = Date.now();
+		
+		console.log(currentMode, currentModule, client);
+	}
+	static async createClient() {
 	
 	}
 }

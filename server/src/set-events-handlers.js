@@ -1,12 +1,15 @@
 'use strict';
 
-const httpRootRequestHandler = require('./events-handlers/http-root-request-handler'),
-	httpFileRequestHandler = require('./events-handlers/http-file-request-handler'),
+const httpRootRequestHandler = require('./connection-events-handlers/http-root-request-handler'),
+	httpFileRequestHandler = require('./connection-events-handlers/http-file-request-handler'),
+	httpConnectionHandler = require('./connection-events-handlers/http-connection-handler'),
+	mongodbConnectionHandler = require('./connection-events-handlers/mongodb-connection-handler'),
 	
-	httpConnectionHandler = require('./events-handlers/http-connection-handler'),
-	mongodbConnectionHandler = require('./events-handlers/mongodb-connection-handler'),
+	responseError404Handler = require('./response-events-handlers/response-error404-handler'),
+	responseFileHandler = require('./response-events-handlers/response-file-handler'),
 	
-	{connectionEventEmitter, messageEventEmitter, clientEventEmitter} = require('./server-events-emitters');
+	{connectionEventEmitter, messageEventEmitter,
+		clientEventEmitter, responseEventEmitter } = require('./server-events-emitters');
 
 /*** exports [begin] ***/
 
@@ -25,6 +28,13 @@ async function setMessageEventsHandlers() {
 }
 async function setClientEventsHandlers() {
 
+}
+async function setResponseEventsHandlers() {
+	responseEventEmitter
+		.on('response-error-404', responseError404Handler)
+		.on('response-file', responseFileHandler)
+	
+		.on('response-post-request', (message, response) => {})
 }
 
 /*** exports [end] ***/

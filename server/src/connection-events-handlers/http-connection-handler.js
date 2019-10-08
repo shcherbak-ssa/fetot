@@ -1,15 +1,17 @@
 'use strict';
 
 const parseInputMessage = require('../../lib/parse-input-message'),
-	messageValidation = require('../../lib/message-validation');
+	messageValidation = require('../../lib/message-validation'),
+	ClientWorker = require('../workers/client-worker');
 
 /*** exports [begin] ***/
 
 async function httpConnectionHandler(request, response) {
 	let message = await parseInputMessage({type: 'post-message', request});
-	
 	message = await messageValidation(message);
-	if( !message ) response.end('Message error');
+	
+	if( !message ) return response.end('Message error');
+	await ClientWorker.clientConnection(message, response);
 }
 
 /*** exports [end] ***/

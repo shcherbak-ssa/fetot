@@ -1,15 +1,13 @@
 'use strict';
 
-const {sendFile, sendError404} = require('../../../lib/send-file'),
-	responseConfig = require('./response-config');
+const responseConfig = require('./response-config'),
+	{responseEventEmitter} = require('../../server-events-emitters');
 
 /*** exports [begin] ***/
 
 async function httpRootRequestHandler(headers, response) {
 	let responseOptions = await parseRequest(headers);
-	if( !responseOptions ) return await sendError404(response);
-	
-	await sendFile(responseOptions, response);
+	responseEventEmitter.emit('response-file', responseOptions, response);
 }
 
 /*** exports [end] ***/

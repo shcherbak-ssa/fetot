@@ -3,8 +3,8 @@
 const http = require('http'),
 	server = http.createServer(),
 	
-	{sendError404} = require('../../lib/send-file'),
-	{connectionEventEmitter, messageEventEmitter} = require('../server-events-emitters');
+	{connectionEventEmitter, messageEventEmitter,
+		responseEventEmitter} = require('../server-events-emitters');
 
 /*** exports [begin] ***/
 
@@ -39,7 +39,7 @@ async function getRequestParse({url, headers}, response) {
 		case /\/[a-z]+\.(js|css)/i.test(url):
 			return connectionEventEmitter.emit('http-file-request', url, response);
 		default:
-			await sendError404(response);
+			responseEventEmitter.emit('response-error-404', response);
 	}
 }
 async function postRequestParse(request, response) {

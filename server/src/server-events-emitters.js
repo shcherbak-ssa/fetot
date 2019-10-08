@@ -5,7 +5,7 @@ const Events = require('events');
 class ServerEventEmitter extends Events {}
 
 let eventsEmitters = Object.fromEntries(
-	['connection', 'message', 'client'].map((item) => {
+	['connection', 'message', 'client', 'response'].map((item) => {
 		return [item, new ServerEventEmitter()]
 	})
 );
@@ -13,5 +13,6 @@ let eventsEmitters = Object.fromEntries(
 module.exports = {
 	connectionEventEmitter: eventsEmitters.connection,
 	messageEventEmitter: eventsEmitters.message,
-	clientEventEmitter: eventsEmitters.client
+	clientEventEmitter: eventsEmitters.client,
+	responseEventEmitter: eventsEmitters.response
 };

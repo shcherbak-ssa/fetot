@@ -1,7 +1,7 @@
 'use strict';
 
-const {sendFile, sendError404} = require('../../../lib/send-file'),
-	responseConfig = require('./response-config');
+const responseConfig = require('./response-config'),
+	{responseEventEmitter} = require('../../server-events-emitters');
 
 /*** exports [begin] ***/
 
@@ -9,9 +9,7 @@ async function httpFileRequestHandler(url, response) {
 	let [filename, type] = url.slice(1).split('.'),
 		responseOptions = await responseConfig[type](filename);
 	
-	return !responseOptions
-		? await sendError404(response)
-		: await sendFile(responseOptions, response);
+	responseEventEmitter.emit('response-file', responseOptions, response);
 }
 
 /*** exports [end] ***/
