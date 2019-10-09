@@ -4,7 +4,7 @@ const eventsMap = new Map();
 
 /*** exports [begin] ***/
 
-async function addEventHandler(moduleName, eventsHandlers) {
+async function addEventEmitter(emitter) {
 	let handleEvent = {
 		handleEvent(event) {
 			eventsHandlers.get(event.detail.worker)(...event.detail);
