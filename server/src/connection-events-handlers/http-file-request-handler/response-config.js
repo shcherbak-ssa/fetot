@@ -13,6 +13,18 @@ const getClientFilename = require('../../../lib/get-client-filename'),
 					}
 				}
 			}
+		},
+		ico: {
+			valid: [ 'favicon' ],
+			async options(filename) {
+				return {
+					filename: getClientFilename('ico', filename),
+					statusCode: 200,
+					headers: {
+						'Content-Type': 'image/x-icon'
+					}
+				}
+			}
 		}
 	};
 
