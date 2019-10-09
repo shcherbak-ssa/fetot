@@ -12,3 +12,14 @@
   left: 50%;
   transform: translateX(-50%);
 }
+
+@mixin position-top-center {
+  position: absolute;
+  top: 0;
+  @include position-gor-center;
+}
+@mixin position-bottom-center {
+  position: absolute;
+  bottom: 0;
+  @include position-gor-center;
+}

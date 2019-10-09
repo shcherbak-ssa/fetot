@@ -36,6 +36,5 @@
 
   .login {
     @include full-sizes;
-    @include flex-center;
   }
 </style>

@@ -1,14 +1,16 @@
 <template>
   <div class="workspace">
-    <fetot-title>
-      {{ title }}
-    </fetot-title>
-    <keep-alive>
-      <component :is="changeWorkspaceContent"></component>
-    </keep-alive>
-    <fetot-link>
-      <span class="link">{{ setCurrentLink }}</span>
-    </fetot-link>
+    <div class="workspace-item">
+      <fetot-title>
+        {{ setCurrentTitle }}
+      </fetot-title>
+      <div class="content">
+        content
+      </div>
+      <fetot-link>
+        <span class="link">{{ setCurrentLink }}</span>
+      </fetot-link>
+    </div>
   </div>
 </template>
 
@@ -49,28 +51,22 @@
   @import 'fetot-src-scss';
 
   .workspace {
-    background: #fff;
     padding: 36px;
+    position: relative;
     transition: .6s;
-    width: 510px;
+    @include full-sizes;
     @include box-sizing;
-    @include border-radius-6;
     @include flex-center-column;
 
-    &:hover {
-      @include hover-shadow;
+    .fetot-title {
+      @include position-top-center;
     }
-
-    @media screen and (max-width: 768px) {
-      padding: 24px;
-      width: 80%;
-      @include hover-shadow;
+    .content {
+      @include position-center;
     }
-    @media screen and (max-width: 420px) {
-      padding: 12px;
-      width: 90%;
+    .fetot-link {
+      @include position-bottom-center;
     }
-
     .link {
       font-size: 14px;
     }
