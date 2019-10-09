@@ -46,7 +46,9 @@ module.exports = (env) => {
 				'fetot-main-scss': path.join(__dirname, 'src/scss/main.scss'),
 				'fetot-src-scss': path.join(__dirname, 'src/scss/src.scss'),
 				'fetot-components': path.join(__dirname, 'src/components'),
-				'fetot-js-modules': path.join(__dirname, 'src/modules')
+				'fetot-js-modules': path.join(__dirname, 'src/modules'),
+				'fetot-workers': path.join(__dirname, 'src/module/workers'),
+				'fetot-network-modules': path.join(__dirname, 'src', 'modules', 'network')
 			}
 		},
 		plugins: [

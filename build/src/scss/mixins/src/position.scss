@@ -5,10 +5,12 @@
   transform: translate(-50%, -50%);
 }
 @mixin position-vert-center {
+  position: absolute;
   top: 50%;
   transform: translateY(-50%);
 }
 @mixin position-gor-center {
+  position: absolute;
   left: 50%;
   transform: translateX(-50%);
 }

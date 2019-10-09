@@ -15,7 +15,8 @@
 
   .fetot-title {
     color: $fetot-dark-blue;
-    font: bold 1.5rem sans-serif;
+    font-family: sans-serif;
+    font-weight: bold;
     transition: .2s;
   }
 </style>
