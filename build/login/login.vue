@@ -1,24 +1,27 @@
 <template>
   <fetot-container>
     <div class="login">
-      <login-workspace :inputs="inputs" :content="content" :mode="mode"/>
+      Hello
+<!--      <login-workspace :inputs="store.get('inputs')"/>-->
     </div>
   </fetot-container>
 </template>
 
 <script>
   import fetotContainer from 'fetot-components/fetot-container.vue';
-  import loginWorkspace from './components/workspace.vue';
+  // import loginWorkspace from './src/components/workspace.vue';
 
 	export default {
 		name: 'login',
     props: {
-			currentModule: String,
-      store: Object
+      store: Map
     },
     components: {
 			'fetot-container': fetotContainer,
-      'login-workspace': loginWorkspace
+      // 'login-workspace': loginWorkspace
+    },
+    created() {
+			console.log(this.store)
     }
 	}
 </script>

@@ -16,7 +16,7 @@ async function getRequest({url, type}) {
 async function postRequest({url = '/', headers = {}, message}) {
 	let response = await fetch(url, {
 		method: 'POST',
-		headers: Object.assign({}, headers),
+		headers: headers,
 		body: outputMessage.get(message)
 	});
 	

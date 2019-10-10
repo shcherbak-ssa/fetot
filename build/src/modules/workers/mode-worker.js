@@ -1,5 +1,10 @@
 'use strict';
 
+/*** imports [begin] ***/
+
+import Events from '../events';
+const modeEvents = new Events('mode-event');
+
 class ModeWorker {
 	constructor({modules}) {
 		this.modules = modules;

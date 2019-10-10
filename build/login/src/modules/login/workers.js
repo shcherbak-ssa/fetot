@@ -47,6 +47,6 @@ async function parseServerResponse({type, message}) {
 
 /*** src [end] ***/
 
-export default new Map( Object.entries({
+export default {
 	'submit-data': submitDataWorker
-}) );
+}

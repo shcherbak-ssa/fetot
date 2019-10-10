@@ -2,6 +2,8 @@
 
 /*** exports [begin] ***/
 
+const emitters = new Map();
+
 class Events {
 	constructor(emitter) {
 		this.emitter = emitter;
@@ -12,6 +14,17 @@ class Events {
 				this.handlers.get(event.type)(...event.detail);
 			}
 		};
+	}
+	
+	// static emitters = new Map();
+	static createEmitter(name) {
+		let events = new Events(name);
+		// Events.emitters.set(name, events);
+		emitters.set(name, events);
+		return events;
+	}
+	static getEmitter(name) {
+		return emitters.get(name)
 	}
 	
 	on(event, handler) {
