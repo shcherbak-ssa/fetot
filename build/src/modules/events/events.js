@@ -1,52 +1,45 @@
 'use strict';
 
-/*** imports [begin] ***/
-
-import eventsEmitter from './events-emitter';
-
-/*** imports [end] ***/
 /*** exports [begin] ***/
 
 class Events {
 	constructor(emitter) {
 		this.emitter = emitter;
 		this.handlers = new Map();
-	}
-	
-	static createEmitter(emitter) {
-		let events = new Events(emitter);
 		
+		this.handleObject = {
+			handleEvent(event) {
+				this.handlers.get(event.type)(...event.detail);
+			}
+		};
 	}
 	
 	on(event, handler) {
-		switch( typeof event ) {
-			case 'string':
-				this.handlers.set(event, handler);
-				break;
-			case 'object':
-				Object.entries(event).map(([event, handler]) => {
-					this.handlers.set(event, handler)
-				})
-		}
+		event = this._getEventName(event);
+		
+		this.handlers.set(event, handler);
+		document.addEventListener(event, this.handleObject);
+		
 		return this;
 	}
 	remove(event) {
-		switch( typeof event ) {
-			case 'string':
-				this.handlers.delete(event);
-				break;
-			case 'object':
-				Object.keys(event).map((event) => {
-					this.handlers.delete(event)
-				})
-		}
+		event = this._getEventName(event);
+		
+		this.handlers.delete(event);
+		document.removeEventListener(event, this.handleObject);
+		
 		return this;
 	}
 	emit(event, ...args) {
+		event = this._getEventName(event);
+		document.dispatchEvent(new CustomEvent(event, {detail: args}))
+	}
 	
+	_getEventName(event) {
+		return `${this.emitter}-${event}`;
 	}
 }
 
 /*** exports [end] ***/
 
-export default {};
+export default Events;
