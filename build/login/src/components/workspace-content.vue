@@ -1,5 +1,5 @@
 <template>
-  <div class="workspace-item-content">
+  <div class="workspace-content">
 
   </div>
 </template>
@@ -9,7 +9,7 @@
 	import fetotButton from 'fetot-components/form/fetot-button.vue';
 
 	export default {
-		name: 'workspace-item-content',
+		name: 'workspace-content',
     props: {
 			content: Object
     },
@@ -23,7 +23,7 @@
 <style lang="scss" scoped>
   @import 'fetot-src-scss';
 
-  .workspace-item-content {
+  .workspace-content {
     background: #fff;
     padding: 36px;
     transition: .4s;

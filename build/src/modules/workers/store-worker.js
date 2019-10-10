@@ -2,16 +2,17 @@
 
 /*** exports [begin] ***/
 
+const globalStore = new Map();
+
 async function initStore(store) {
-	store = Object.entries(store).map(([key, value]) => {
-		if( typeof value === 'object' ) {
-			value = Object.entries(value);
-			return [key, new Map(value)]
-		}
+	Object.entries(store).map(([key, value]) => {
+		if( typeof value === 'object' )
+			value = new Map( Object.entries(value) );
+		
+		globalStore.set(key, value)
 	});
 	
-	console.log('init store');
-	return new Map(store);
+	return globalStore;
 }
 
 /*** exports [begin] ***/

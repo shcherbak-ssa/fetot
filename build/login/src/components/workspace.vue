@@ -1,26 +1,34 @@
 <template>
   <div class="workspace">
-
+    <fetot-title>
+      <div class="title">{{ options.moduleData.title }}</div>
+    </fetot-title>
+<!--    <workspace-item-content :content="moduleData.content"/>-->
+    <fetot-link @link-click="linkClickHandler">
+      <span class="link">{{ options.moduleData.link }}</span>
+    </fetot-link>
   </div>
 </template>
 
 <script>
-  import workspaceItem from './workspace-item.vue';
+	import fetotTitle from 'fetot-components/elements/fetot-title.vue';
+	import fetotLink from 'fetot-components/elements/fetot-link.vue';
 
 	export default {
 		name: 'workspace',
     props: {
-			mode: String,
-			inputs: Object,
-      content: Object
-    },
-    components: {
-			'workspace-item': workspaceItem
-    },
-    computed: {
-			hello() {
+			options: Object
+		},
+		components: {
+			'fetot-title': fetotTitle,
+			'fetot-link': fetotLink
+		},
+    methods: {
+			linkClickHandler() {
+				this.options.appEvents.emit('workspace-link-click')
       }
-    }
+    },
+    created() {}
 	}
 </script>
 
@@ -28,7 +36,21 @@
   @import 'fetot-src-scss';
 
   .workspace {
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 64px;
+    transition: .6s;
+    justify-content: space-between;
     @include full-sizes;
+    @include box-sizing;
+    @include flex-center-column;
+
+    .title {
+      font-size: 36px;
+    }
+    .link {
+      font-size: 18px;
+    }
   }
 </style>

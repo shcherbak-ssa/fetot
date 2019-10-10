@@ -12,11 +12,11 @@ import fetotLogin from './login.vue';
 /*** init [begin] ***/
 
 initApplication()
-	.then((store) => {
+	.then((options) => {
 		new Vue({
 			el: '#login',
-			data: { store },
-			template: '<fetot-login :store="store"/>',
+			data: { options },
+			template: '<fetot-login :options="options"/>',
 			components: { 'fetot-login': fetotLogin }
 		})
 	});

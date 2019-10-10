@@ -9,9 +9,10 @@ class Events {
 		this.emitter = emitter;
 		this.handlers = new Map();
 		
+		let handlers = this.handlers;
 		this.handleObject = {
 			handleEvent(event) {
-				this.handlers.get(event.type)(...event.detail);
+				handlers.get(event.type)(...event.detail);
 			}
 		};
 	}
