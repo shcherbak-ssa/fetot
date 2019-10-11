@@ -6,9 +6,7 @@ import Events from 'fetot-js-modules/events';
 import storeWorker from 'fetot-worker-modules/store-worker';
 
 import loginMode from './login-mode';
-
 import inputsStore from './store/inputs.json';
-import modulesStore from './store/modules.json';
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
@@ -16,17 +14,14 @@ import modulesStore from './store/modules.json';
 const appEvents = Events.createEmitter('app'),
 	loginModeEvents = Events.createEmitter('login-mode');
 
-const loginStore = {
-	inputs: inputsStore,
-	modules: modulesStore
-};
-
 async function initApplication() {
-	let appEvents = await initAppEvents(),
-		store = await storeWorker.init(loginStore),
-		currentModule = await loginMode.init();
+	await storeWorker.appendGlobalStore('inputs', inputsStore);
 	
-	return { appEvents, store, currentModule }
+	let modeStore = await loginMode.init();
+	await loginMode.initEvents(loginModeEvents);
+	
+	await initAppEvents();
+	return { events: appEvents, store: modeStore }
 }
 
 /*** exports [end] ***/
@@ -35,11 +30,12 @@ async function initApplication() {
 async function initAppEvents() {
 	appEvents
 		.on('workspace-button-click', () => {
-			console.log('workspace-button-click')
+			console.log('workspace-button-click');
+			loginModeEvents.emit('run-current-module-worker');
 		})
 		.on('workspace-link-click', () => {
 			console.log('workspace-link-click');
-			loginModeEvents.emit('change-module');
+			loginModeEvents.emit('change-module', 'link');
 		});
 }
 

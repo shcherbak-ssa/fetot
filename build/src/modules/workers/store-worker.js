@@ -4,19 +4,30 @@
 
 const globalStore = new Map();
 
-async function initStore(store) {
+async function appendGlobalStore(name, store) {
+	globalStore.set(name, new Map( Object.entries(store) ));
+}
+async function getGlobalStore(name) {
+	return globalStore.get(name);
+}
+
+async function createLocalStore(store) {
+	const retStore = new Map();
+	
 	Object.entries(store).map(([key, value]) => {
 		if( typeof value === 'object' )
 			value = new Map( Object.entries(value) );
 		
-		globalStore.set(key, value)
+		retStore.set(key, value)
 	});
 	
-	return globalStore;
+	return retStore;
 }
 
 /*** exports [begin] ***/
 
 export default {
-	init: initStore
+	appendGlobalStore,
+	getGlobalStore,
+	createLocalStore
 };

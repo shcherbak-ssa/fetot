@@ -2,6 +2,7 @@
 
 /*** imports [begin] ***/
 
+import storeWorker from 'fetot-worker-modules/store-worker';
 import fetchRequest from 'fetot-network-modules/fetch-request';
 
 /*** imports [end] ***/
@@ -15,11 +16,12 @@ const outputMessage = {
 
 /*** exports [begin] ***/
 
-async function submitDataWorker(inputs) {
-	let formData = new FormData();
+async function loginModuleWorker() {
+	let inputs = storeWorker.getGlobalStore('inputs'),
+		formData = new FormData();
 	
-	let email = inputs.email.value,
-		password = inputs.password.value;
+	let email = inputs.get('email').value,
+		password = inputs.get('password').value;
 	
 	formData.set('email', email);
 	formData.set('password', password);
@@ -47,6 +49,4 @@ async function parseServerResponse({type, message}) {
 
 /*** src [end] ***/
 
-export default {
-	'submit-data': submitDataWorker
-}
+export default loginModuleWorker;

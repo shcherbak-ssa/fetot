@@ -2,18 +2,20 @@
 
 /*** imports [begin] ***/
 
-import workers from './workers';
+import store from './store';
+import worker from './worker';
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
-async function initLoginModule() {
-
+async function init() {
+	console.log('init login module');
 }
 
 /*** exports [end] ***/
 
 export default {
-	init: initLoginModule,
-	workers
+	init,
+	store,
+	worker
 }

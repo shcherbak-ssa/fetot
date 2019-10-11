@@ -26,20 +26,14 @@
     },
     methods: {
 			setWorkspaceOptions(label) {
-				let {appEvents, store} = this.options;
-				return {appEvents, moduleData: store.get('modules').get(label)}
-      },
-			changeCurrentModuleHandler(currentModule) {
-				this.options.currentModule = currentModule;
+				let {events, store} = this.options;
+				return {events, data: store.get('modules').get(label)}
       }
     },
     computed: {
 	    setCurrentModule() {
-	    	return { [`is-${this.options.currentModule}-module-active`]: true }
+	    	return { [`is-${this.options.store.get('current-module')}-module-active`]: true }
       }
-    },
-    created() {
-			this.options.appEvents.on('change-module', this.changeCurrentModuleHandler)
     }
 	}
 </script>

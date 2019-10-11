@@ -1,11 +1,11 @@
 <template>
   <div class="workspace">
     <fetot-title>
-      <div class="title">{{ options.moduleData.title }}</div>
+      <div class="title">{{ options.data.get('title') }}</div>
     </fetot-title>
 <!--    <workspace-item-content :content="moduleData.content"/>-->
     <fetot-link @link-click="linkClickHandler">
-      <span class="link">{{ options.moduleData.link }}</span>
+      <span class="link">{{ options.data.get('link') }}</span>
     </fetot-link>
   </div>
 </template>
@@ -25,10 +25,9 @@
 		},
     methods: {
 			linkClickHandler() {
-				this.options.appEvents.emit('workspace-link-click')
+				this.options.events.emit('workspace-link-click')
       }
-    },
-    created() {}
+    }
 	}
 </script>
 
