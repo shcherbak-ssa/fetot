@@ -1,33 +1,31 @@
 'use strict';
 
-/*** exports [begin] ***/
-
 const globalStore = new Map();
 
-async function appendGlobalStore(name, store) {
-	globalStore.set(name, new Map( Object.entries(store) ));
+/*** exports [begin] ***/
+
+function appendGlobalStore(name, store) {
+	globalStore.set(name, createLocalStore(store));
 }
-async function getGlobalStore(name) {
+function getGlobalStore(name) {
 	return globalStore.get(name);
 }
 
-async function createLocalStore(store) {
-	const retStore = new Map();
-	
-	Object.entries(store).map(([key, value]) => {
-		if( typeof value === 'object' )
-			value = new Map( Object.entries(value) );
-		
-		retStore.set(key, value)
-	});
-	
-	return retStore;
+function createLocalStore(store) {
+	return new Proxy(store, {
+		get(target, prop, receiver) {
+			switch( prop ) {
+				case 'get': return (key) => {
+					return Reflect.get(target, key, receiver)
+				};
+				case 'set': return (key, value) => {
+					return Reflect.set(target, key, value, receiver)
+				};
+			}
+		}
+	})
 }
 
 /*** exports [begin] ***/
 
-export default {
-	appendGlobalStore,
-	getGlobalStore,
-	createLocalStore
-};
+export default { appendGlobalStore, getGlobalStore, createLocalStore };

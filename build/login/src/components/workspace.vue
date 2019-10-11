@@ -3,7 +3,7 @@
     <fetot-title>
       <div class="title">{{ options.data.get('title') }}</div>
     </fetot-title>
-<!--    <workspace-item-content :content="moduleData.content"/>-->
+    <workspace-content />
     <fetot-link @link-click="linkClickHandler">
       <span class="link">{{ options.data.get('link') }}</span>
     </fetot-link>
@@ -14,6 +14,8 @@
 	import fetotTitle from 'fetot-components/elements/fetot-title.vue';
 	import fetotLink from 'fetot-components/elements/fetot-link.vue';
 
+	import workspaceContent from './workspace-content.vue';
+
 	export default {
 		name: 'workspace',
     props: {
@@ -21,7 +23,8 @@
 		},
 		components: {
 			'fetot-title': fetotTitle,
-			'fetot-link': fetotLink
+			'fetot-link': fetotLink,
+      'workspace-content': workspaceContent
 		},
     methods: {
 			linkClickHandler() {

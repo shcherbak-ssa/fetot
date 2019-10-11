@@ -19,12 +19,21 @@ const modules = {
 	'confirm-email': confirmEmailModule,
 	'create-account': createAccount
 };
-const modeStore = storeWorker.createLocalStore({
-	'modules': {
-		'login': loginModule.store
-	},
-	'current-module': ''
+let modeStore = {
+	'current-module': '',
+	modules: {
+		'login': loginModule.store,
+		'sing-in': singInModule.store
+	}
+};
+console.log('wtf', {
+	'current-module': '',
+	modules: {
+		'login': loginModule.store,
+		'sing-in': singInModule.store
+	}
 });
+modeStore = storeWorker.createLocalStore(modeStore);
 
 let currentModule = {};
 
@@ -32,10 +41,8 @@ let currentModule = {};
 /*** exports [begin] ***/
 
 async function initLoginMode() {
-	// let currentModuleName = locStorage.hasStorageItem('client-exist') ? 'login' : 'sing-in';
-	let currentModuleName = 'login';
-	await initNewModule(currentModuleName);
-	
+	await initNewModule(locStorage.hasStorageItem('client-exist') ? 'login' : 'sing-in');
+	console.log('init', modeStore);
 	return modeStore;
 }
 async function initLoginModeEvents(loginModeEvents) {
@@ -45,7 +52,7 @@ async function initLoginModeEvents(loginModeEvents) {
 			await initNewModule(currentModuleName);
 		})
 		.on('run-current-module-worker', async () => {
-			currentModule.worker();
+			await currentModule.worker();
 		})
 }
 
@@ -56,7 +63,7 @@ async function initNewModule(name) {
 	modeStore.set('current-module', name);
 	
 	currentModule = modules[name];
-	currentModule.init();
+	await currentModule.init();
 }
 async function changeCurrentModule(label) {
 	if( label === 'link' ) switch( modeStore.get('current-module') ) {

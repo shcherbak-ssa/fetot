@@ -17,6 +17,11 @@
 
 	export default {
 		name: 'login',
+    data() {
+			return {
+				currentModule: ''
+      }
+    },
     props: {
 			options: Object
     },
@@ -26,8 +31,11 @@
     },
     methods: {
 			setWorkspaceOptions(label) {
-				let {events, store} = this.options;
-				return {events, data: store.get('modules').get(label)}
+				console.log(this.options);
+				return {
+					events: this.options.events,
+          data: this.options.store.get('modules')[label]
+				}
       }
     },
     computed: {
@@ -46,6 +54,7 @@
     @include full-sizes;
   }
   .sing-in-section, .login-section {
+    opacity: 0;
     transition: .7s;
     position: absolute;
     top: 0;
@@ -56,11 +65,17 @@
     overflow: hidden;
 
     &.is-sing-in-module-active {
+      .sing-in-section {
+        opacity: 1;
+      }
       .login-section {
         top: 100%;
       }
     }
     &.is-login-module-active {
+      .login-section {
+        opacity: 1;
+      }
       .sing-in-section {
         top: -100%;
       }

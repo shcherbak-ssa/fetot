@@ -9,7 +9,7 @@ import worker from './worker';
 /*** exports [begin] ***/
 
 async function init() {
-	console.log('init login module');
+	console.log('init sing-in module');
 }
 
 /*** exports [end] ***/

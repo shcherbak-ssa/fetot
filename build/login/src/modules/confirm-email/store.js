@@ -7,7 +7,7 @@ import storeWorker from 'fetot-worker-modules/store-worker';
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
-const store = storeWorker.init({
+const store = storeWorker.createLocalStore({
 	title: 'Confirm email',
 	link: 'Change email address',
 	content: {

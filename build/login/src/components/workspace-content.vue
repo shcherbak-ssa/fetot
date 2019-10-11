@@ -11,7 +11,7 @@
 	export default {
 		name: 'workspace-content',
     props: {
-			content: Object
+			content: Map
     },
     components: {
 	    'fetot-input': fetotInput,
