@@ -4,7 +4,7 @@
       <p class="txt" v-if="options.data.text">
         {{ options.data.text }}
       </p>
-      <fetot-input v-for="(input, index) in options.data.inputs" :key="index" :input="getInputData(input)"/>
+      <fetot-input v-for="(input, index) in options.data.inputs" :key="index" :input="inputs[input]"/>
       <fetot-button v-if="options.data.button" @fetot-button-click="buttonClickHandler">
         {{ options.data.button }}
       </fetot-button>
@@ -20,6 +20,11 @@
 
 	export default {
 		name: 'workspace-content',
+    data() {
+			return {
+				inputs: storeWorker.getGlobalStore('inputs')
+      }
+    },
     props: {
 			options: Object
     },
@@ -32,7 +37,7 @@
 				this.options.events.emit('fetot-button-click')
       },
       getInputData(label) {
-				return storeWorker.getGlobalStore('inputs').get(label)
+				return storeWorker.getGlobalStore('inputs')[label]
       }
     }
 	}
@@ -48,7 +53,6 @@
     width: 510px;
     @include box-sizing;
     @include border-radius-6;
-    @include static-shadow;
     @include flex-center;
 
     &:hover {

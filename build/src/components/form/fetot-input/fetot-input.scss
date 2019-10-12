@@ -47,6 +47,7 @@
   }
   &::after {
     background: $fetot-dark-gray;
+    border-radius: 0 0 2px 2px;
     width: 100%;
     height: 2px;
     bottom: 0;
@@ -54,9 +55,8 @@
     transition: .4s;
     @include psevdo-element;
   }
-  &.is-active::after, &:hover::after {
+  &.is-active, &:hover {
     background: #fff;
-    height: 100%;
     @include hover-shadow;
     @include border-radius-3;
   }

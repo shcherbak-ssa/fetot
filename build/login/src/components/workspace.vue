@@ -47,7 +47,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    padding: 64px;
+    padding: 52px;
     transition: .6s;
     justify-content: space-between;
     @include full-sizes;
@@ -55,10 +55,10 @@
     @include flex-center-column;
 
     .title {
-      font-size: 36px;
+      font-size: 32px;
     }
     .link {
-      font-size: 18px;
+      font-size: 16px;
     }
   }
 </style>

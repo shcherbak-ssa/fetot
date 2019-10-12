@@ -1,10 +1,10 @@
 <template>
   <fetot-container>
     <div class="login" :class="setCurrentModule">
-      <div class="sing-in-section">
+      <div class="section sing-in">
         <login-workspace :options="setWorkspaceOptions('sing-in')"/>
       </div>
-      <div class="login-section">
+      <div class="section log-in">
         <login-workspace :options="setWorkspaceOptions('login')"/>
       </div>
     </div>
@@ -48,34 +48,32 @@
 <style lang="scss" scoped>
   @import 'fetot-src-scss';
 
-  .login, .sing-in-section, .login-section {
+  .login, .section {
+    overflow: hidden;
     position: relative;
     @include full-sizes;
   }
-  .sing-in-section, .login-section {
+  .section {
     opacity: 0;
-    transition: .7s;
+    transition: .6s;
     position: absolute;
     top: 0;
     left: 0;
-    @include flex-center;
   }
   .login {
-    overflow: hidden;
-
     &.is-sing-in-module-active {
-      .sing-in-section {
+      .sing-in {
         opacity: 1;
       }
-      .login-section {
+      .log-in {
         top: 100%;
       }
     }
     &.is-login-module-active {
-      .login-section {
+      .log-in {
         opacity: 1;
       }
-      .sing-in-section {
+      .sing-in {
         top: -100%;
       }
     }
