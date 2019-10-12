@@ -6,7 +6,7 @@ const outputMessageTemplate = {
 	type: 'message',
 	client: 0,
 	content: {
-		type: 0,
+		type: '',
 		data: {}
 	}
 };
@@ -15,7 +15,7 @@ const outputHeadersTemplate = {
 };
 
 function getOutputMessage(message) {
-	return Object.assign(outputMessageTemplate, message)
+	return JSON.stringify( Object.assign(outputMessageTemplate, message) )
 }
 function getOutputHeaders(headers) {
 	return Object.assign(outputHeadersTemplate, headers);

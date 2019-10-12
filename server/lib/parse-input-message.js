@@ -19,14 +19,13 @@ async function parse(options) {
 }
 async function parsePostMessage({request}) {
 	return new Promise((success, error) => {
-		let message = [];
+		let message = '';
 		request
 			.on('data', (data) => {
-				message.push(...data.toJSON().data);
+				message += data.toString();
 			})
 			.on('end', () => {
-				console.log(message.toString());
-				success( message.toString() );
+				success( message );
 			})
 	})
 }

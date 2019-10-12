@@ -48,6 +48,7 @@ async function checkObject(messageObject, validObject) {
 		});
 		return true;
 	} catch( e ) {
+		console.log(e);
 		return false;
 	}
 }

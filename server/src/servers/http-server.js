@@ -14,7 +14,7 @@ async function createHttpServer(port, hostname) {
 			await requestParse(request, response);
 		})
 		.listen(port, hostname, () => {
-			console.log('\n')
+			console.log('')
 		});
 	
 	return server;

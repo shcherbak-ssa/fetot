@@ -14,11 +14,6 @@ async function getRequest({url, type}) {
 	else console.log(new Error('fetch get request error'))
 }
 async function postRequest({url = '/', headers = {}, message}) {
-	console.log({
-		method: 'POST',
-		headers: outputMessage.getHeaders(headers),
-		body: outputMessage.getMessage(message)
-	});
 	let response = await fetch(url, {
 		method: 'POST',
 		headers: outputMessage.getHeaders(headers),
@@ -34,13 +29,14 @@ async function connection({currentMode, currentModule}) {
 		message: {
 			type: 'connection',
 			content: {
+				type: '',
 				data: { currentMode, currentModule }
 			}
 		}
 	});
 	
-	outputMessage.template.client = response.message.client;
 	console.log(response);
+	outputMessage.template.client = response.message.client;
 }
 
 /*** exports [end] ***/
