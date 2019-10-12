@@ -11,7 +11,10 @@ async function httpConnectionHandler(request, response) {
 	message = await messageValidation(message);
 	
 	if( !message ) return response.end('Message error');
-	await ClientWorker.clientConnection(message, response);
+	console.log(message);
+	
+	response.end(JSON.stringify({message: {client: 1}}));
+	// await ClientWorker.clientConnection(message, response);
 }
 
 /*** exports [end] ***/

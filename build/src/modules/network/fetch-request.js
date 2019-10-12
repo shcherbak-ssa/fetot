@@ -14,10 +14,15 @@ async function getRequest({url, type}) {
 	else console.log(new Error('fetch get request error'))
 }
 async function postRequest({url = '/', headers = {}, message}) {
+	console.log({
+		method: 'POST',
+		headers: outputMessage.getHeaders(headers),
+		body: outputMessage.getMessage(message)
+	});
 	let response = await fetch(url, {
 		method: 'POST',
-		headers: headers,
-		body: outputMessage.get(message)
+		headers: outputMessage.getHeaders(headers),
+		body: outputMessage.getMessage(message)
 	});
 	
 	if( response.ok ) return await response.json();
@@ -26,15 +31,16 @@ async function postRequest({url = '/', headers = {}, message}) {
 async function connection({currentMode, currentModule}) {
 	let response = await postRequest({
 		url: 'connection',
-		message: outputMessage.get({
+		message: {
 			type: 'connection',
 			content: {
 				data: { currentMode, currentModule }
 			}
-		})
+		}
 	});
 	
 	outputMessage.template.client = response.message.client;
+	console.log(response);
 }
 
 /*** exports [end] ***/

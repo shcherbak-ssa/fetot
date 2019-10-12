@@ -6,18 +6,26 @@ const outputMessageTemplate = {
 	type: 'message',
 	client: 0,
 	content: {
-		type: '',
+		type: 0,
 		data: {}
 	}
+};
+const outputHeadersTemplate = {
+	'Content-Type': 'application/json'
 };
 
 function getOutputMessage(message) {
 	return Object.assign(outputMessageTemplate, message)
 }
+function getOutputHeaders(headers) {
+	return Object.assign(outputHeadersTemplate, headers);
+}
 
 /*** exports [begin] ***/
 
 export default {
+	headers: outputHeadersTemplate,
 	template: outputMessageTemplate,
-	get: getOutputMessage
+	getMessage: getOutputMessage,
+	getHeaders: getOutputHeaders
 };

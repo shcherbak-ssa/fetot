@@ -14,7 +14,7 @@ async function createHttpServer(port, hostname) {
 			await requestParse(request, response);
 		})
 		.listen(port, hostname, () => {
-			console.log('http server run')
+			console.log('\n')
 		});
 	
 	return server;
@@ -46,7 +46,7 @@ async function postRequestParse(request, response) {
 	switch( request.url ) {
 		case '/':
 			return messageEventEmitter.emit('http-message', request, response);
-		case 'connection':
+		case '/connection':
 			return connectionEventEmitter.emit('http-connection', request, response);
 		default:
 			response.end('Oops :)')

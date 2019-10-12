@@ -14,8 +14,23 @@ import fetotLogin from './login.vue';
 /*** init [begin] ***/
 
 initApplication()
-	.then(createVueModel)
-	.then(fetchRequest.connection);
+	.then((options) => {
+		new Vue({
+			el: '#login',
+			data: { options },
+			template: '<fetot-login :options="options"/>',
+			components: { 'fetot-login': fetotLogin }
+		});
+		
+		return {
+			currentMode: 'login',
+			currentModule: options.store.get('current-module')
+		}
+	})
+	.then((options) => fetchRequest.connection(options))
+	.catch((err) => {
+		console.log(new Error(err))
+	});
 
 /*** init [end] ***/
 /*** src [begin] ***/
@@ -27,6 +42,7 @@ async function createVueModel(options) {
 		template: '<fetot-login :options="options"/>',
 		components: { 'fetot-login': fetotLogin }
 	});
+	
 	return {
 		currentMode: 'login',
 		currentModule: options.store.get('current-module')
