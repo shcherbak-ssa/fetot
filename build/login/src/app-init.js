@@ -29,12 +29,11 @@ async function initApplication() {
 
 async function initAppEvents() {
 	appEvents
-		.on('workspace-button-click', () => {
-			console.log('workspace-button-click');
-			loginModeEvents.emit('run-current-module-worker');
+		.on('fetot-button-click', () => {
+			loginModeEvents.emit('change-module', 'button');
+			// loginModeEvents.emit('run-current-module-worker');
 		})
-		.on('workspace-link-click', () => {
-			console.log('workspace-link-click');
+		.on('fetot-link-click', () => {
 			loginModeEvents.emit('change-module', 'link');
 		});
 }

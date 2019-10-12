@@ -6,27 +6,30 @@ import storeWorker from 'fetot-worker-modules/store-worker';
 import fetchRequest from 'fetot-network-modules/fetch-request';
 
 /*** imports [end] ***/
+/*** init [begin] ***/
 
 const outputMessage = {
 	content: {
-		type: 'check-client',
+		type: 'check-code',
 		data: {}
 	}
 };
 
+/*** init [end] ***/
 /*** exports [begin] ***/
 
-async function loginModuleWorker() {
-	let inputs = storeWorker.getGlobalStore('inputs'),
-		formData = new FormData();
+async function confirmEmailModuleWorker() {
+	let input = storeWorker.getGlobalStore('inputs').get('confirm-email'),
+		{value} = input;
 	
-	let email = inputs.get('email').value,
-		password = inputs.get('password').value;
+	if( value.length < 6 ) return;
 	
-	formData.set('email', email);
-	formData.set('password', password);
+	if( /[^\d]/.test(value) ) {
+		input.error = 'Confirmation code can contain only the numbers';
+		return;
+	}
 	
-	outputMessage.content.data = formData;
+	outputMessage.content.data = {'confirm-code': value};
 	let response = await fetchRequest.post({
 		message: outputMessage
 	});
@@ -49,4 +52,4 @@ async function parseServerResponse({type, message}) {
 
 /*** src [end] ***/
 
-export default loginModuleWorker;
+export default confirmEmailModuleWorker;

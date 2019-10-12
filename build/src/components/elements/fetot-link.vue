@@ -1,5 +1,5 @@
 <template>
-  <div class="fetot-link" @click="$emit('link-click')">
+  <div class="fetot-link" @click="$emit('fetot-link-click')">
     <slot></slot>
   </div>
 </template>

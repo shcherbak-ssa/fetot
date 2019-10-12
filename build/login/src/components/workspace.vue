@@ -3,8 +3,8 @@
     <fetot-title>
       <div class="title">{{ options.data.get('title') }}</div>
     </fetot-title>
-    <workspace-content />
-    <fetot-link @link-click="linkClickHandler">
+    <workspace-content :options="setContentOptions()"/>
+    <fetot-link @fetot-link-click="linkClickHandler">
       <span class="link">{{ options.data.get('link') }}</span>
     </fetot-link>
   </div>
@@ -28,7 +28,13 @@
 		},
     methods: {
 			linkClickHandler() {
-				this.options.events.emit('workspace-link-click')
+				this.options.events.emit('fetot-link-click')
+      },
+      setContentOptions() {
+				return {
+					events: this.options.events,
+          data: this.options.data.get('content')
+        }
       }
     }
 	}

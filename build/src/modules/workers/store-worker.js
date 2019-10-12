@@ -12,16 +12,12 @@ function getGlobalStore(name) {
 }
 
 function createLocalStore(store) {
-	return new Proxy(store, {
-		get(target, prop, receiver) {
-			switch( prop ) {
-				case 'get': return (key) => {
-					return Reflect.get(target, key, receiver)
-				};
-				case 'set': return (key, value) => {
-					return Reflect.set(target, key, value, receiver)
-				};
-			}
+	return Object.assign(store, {
+		get(key) {
+			return this[key]
+		},
+		set(key, value) {
+			this[key] = value
 		}
 	})
 }

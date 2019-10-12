@@ -31,7 +31,6 @@
     },
     methods: {
 			setWorkspaceOptions(label) {
-				console.log(this.options);
 				return {
 					events: this.options.events,
           data: this.options.store.get('modules')[label]
@@ -40,7 +39,7 @@
     },
     computed: {
 	    setCurrentModule() {
-	    	return { [`is-${this.options.store.get('current-module')}-module-active`]: true }
+	    	return { [`is-${this.options.store['current-module']}-module-active`]: true }
       }
     }
 	}

@@ -6,33 +6,19 @@ import storeWorker from 'fetot-worker-modules/store-worker';
 import fetchRequest from 'fetot-network-modules/fetch-request';
 
 /*** imports [end] ***/
+/*** init [begin] ***/
 
 const outputMessage = {
 	content: {
-		type: 'check-client',
+		type: 'create-account',
 		data: {}
 	}
 };
 
+/*** init [end] ***/
 /*** exports [begin] ***/
 
-async function loginModuleWorker() {
-	let inputs = storeWorker.getGlobalStore('inputs'),
-		formData = new FormData();
-	
-	let email = inputs.get('email').value,
-		password = inputs.get('password').value;
-	
-	formData.set('email', email);
-	formData.set('password', password);
-	
-	outputMessage.content.data = formData;
-	let response = await fetchRequest.post({
-		message: outputMessage
-	});
-	
-	await parseServerResponse(response);
-}
+async function createAccountModuleWorker() {}
 
 /*** exports [end] ***/
 /*** src [begin] ***/
@@ -49,4 +35,4 @@ async function parseServerResponse({type, message}) {
 
 /*** src [end] ***/
 
-export default loginModuleWorker;
+export default createAccountModuleWorker;
