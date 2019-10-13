@@ -2,7 +2,7 @@
 
 /*** export [begin] ***/
 
-async function parseInputMessage(options) {
+async function parseMessage(options) {
 	let message = await parse(options);
 	return JSON.parse(message)
 }
@@ -36,4 +36,4 @@ async function parseWebSocketMessage({message}) {
 
 /*** src [end] ***/
 
-module.exports = parseInputMessage;
+module.exports = parseMessage;

@@ -10,10 +10,9 @@ const responseConfig = require('./response-config');
 async function responsePostRequestHandler({label, message, response}) {
 	let {statusCode, headers} = await responseConfig[label]();
 	
-	response
-		.writeHead(statusCode, headers)
-		.write(JSON.stringify(message))
-		.end();
+	response.writeHead(statusCode, headers);
+	response.write(JSON.stringify(message));
+	response.end();
 }
 
 /*** exports [end] ***/

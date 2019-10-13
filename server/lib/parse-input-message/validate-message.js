@@ -16,7 +16,7 @@ const validMessageType = ['connection', 'message', 'change-mode', 'change-module
 /*** init [end] ***/
 /*** exports [begin] ***/
 
-async function messageValidation(message) {
+async function validateMessage(message) {
 	let messageMap = Object.entries(message),
 		valid = await validation(generatorMessageValidation(messageMap));
 	
@@ -65,4 +65,4 @@ function checkValidTypeValue(messageType) {
 
 /*** src [end] ***/
 
-module.exports = messageValidation;
+module.exports = validateMessage;

@@ -2,7 +2,7 @@
 
 /*** imports [begin] ***/
 
-const {messageEventEmitter} = require('../server-events-emitters');
+const {responseEventEmitter} = require('../server-events-emitters');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
@@ -20,7 +20,7 @@ class ClientWorker {
 			client = Date.now();
 		
 		console.log(currentMode, currentModule, client);
-		messageEventEmitter.emit('response-post-request', {label: 'success', message: {message: {client}}, response});
+		responseEventEmitter.emit('response-post-request', {label: 'success', message: {message: {client}}, response});
 	}
 	static async createClient() {
 	

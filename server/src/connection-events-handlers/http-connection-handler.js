@@ -3,7 +3,6 @@
 /*** imports [begin] ***/
 
 const parseInputMessage = require('../../lib/parse-input-message'),
-	messageValidation = require('../../lib/message-validation'),
 	ClientWorker = require('../workers/client-worker');
 
 /*** imports [end] ***/
@@ -11,9 +10,8 @@ const parseInputMessage = require('../../lib/parse-input-message'),
 
 async function httpConnectionHandler(request, response) {
 	let message = await parseInputMessage({type: 'post-message', request});
-	message = await messageValidation(message);
-	
 	if( !message ) return response.end('Message error');
+	
 	await ClientWorker.clientConnection(message, response);
 }
 

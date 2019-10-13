@@ -7,6 +7,9 @@ const httpRootRequestHandler = require('./connection-events-handlers/http-root-r
 	httpConnectionHandler = require('./connection-events-handlers/http-connection-handler'),
 	mongodbConnectionHandler = require('./connection-events-handlers/mongodb-connection-handler'),
 	
+	httpMessageHandler = require('./message-events-handlers/http-message-handler'),
+	webSocketMessageHandler = require('./message-events-handlers/web-socket-message-handler'),
+	
 	responseError404Handler = require('./response-events-handlers/response-error404-handler'),
 	responseFileHandler = require('./response-events-handlers/response-file-handler'),
 	responsePostRequestHandler = require('./response-events-handlers/response-post-request-handler'),
@@ -27,8 +30,8 @@ async function setConnectionEventsHandlers() {
 }
 async function setMessageEventsHandlers() {
 	messageEventEmitter
-		.on('http-message', (request, response) => {})
-		.on('web-socket-message', (message, socket) => {})
+		.on('http-message', httpMessageHandler)
+		.on('web-socket-message', webSocketMessageHandler)
 }
 async function setClientEventsHandlers() {
 
