@@ -1,8 +1,11 @@
 'use strict';
 
+/*** imports [begin] ***/
+
 const WebSocket = require('ws'),
 	{messageEventEmitter} = require('../server-events-emitters');
 
+/*** imports [end] ***/
 /*** exports [begin] ***/
 
 async function createWebSocketServer(httpServer) {

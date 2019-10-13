@@ -1,8 +1,11 @@
 'use strict';
 
+/*** imports [begin] ***/
+
 const responseConfig = require('./response-config'),
 	{responseEventEmitter} = require('../../server-events-emitters');
 
+/*** imports [end] ***/
 /*** exports [begin] ***/
 
 async function httpRootRequestHandler(headers, response) {
@@ -11,6 +14,7 @@ async function httpRootRequestHandler(headers, response) {
 }
 
 /*** exports [end] ***/
+/*** src [begin] ***/
 
 async function parseRequest({cookie}) {
 	if( !cookie ) return await responseConfig.login();
@@ -26,5 +30,7 @@ async function parseCookie(cookie) {
 	
 	return JSON.parse(value);
 }
+
+/*** src [end] ***/
 
 module.exports = httpRootRequestHandler;

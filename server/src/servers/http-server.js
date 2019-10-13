@@ -1,11 +1,14 @@
 'use strict';
 
+/*** imports [begin] ***/
+
 const http = require('http'),
 	server = http.createServer(),
 	
 	{connectionEventEmitter, messageEventEmitter,
 		responseEventEmitter} = require('../server-events-emitters');
 
+/*** imports [end] ***/
 /*** exports [begin] ***/
 
 async function createHttpServer(port, hostname) {
@@ -14,13 +17,14 @@ async function createHttpServer(port, hostname) {
 			await requestParse(request, response);
 		})
 		.listen(port, hostname, () => {
-			console.log('')
+			console.log('-----------------------')
 		});
 	
 	return server;
 }
 
 /*** exports [end] ***/
+/*** src [begin] ***/
 
 async function requestParse(request, response) {
 	switch( request.method ) {
@@ -52,5 +56,7 @@ async function postRequestParse(request, response) {
 			response.end('Oops :)')
 	}
 }
+
+/*** src [end] ***/
 
 module.exports = createHttpServer;

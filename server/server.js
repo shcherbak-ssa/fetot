@@ -1,11 +1,16 @@
 'use strict';
 
+/*** imports [begin] ***/
+
 const createHttpServer = require('./src/servers/http-server'),
 	createWebSocketServer = require('./src/servers/web-socket-server'),
 	createMongodbClient = require('./src/servers/mongodb-server'),
 	
 	{setConnectionEventsHandlers, setMessageEventsHandlers,
 		setClientEventsHandlers, setResponseEventsHandlers} = require('./src/set-events-handlers');
+
+/*** imports [end] ***/
+/*** init [begin] ***/
 
 runFetotServer(8080, 'localhost')
 	.then(() => {
@@ -15,6 +20,9 @@ runFetotServer(8080, 'localhost')
 		console.log(err);
 		process.exit(0);
 	});
+
+/*** init [end] ***/
+/*** src [begin] ***/
 
 async function runFetotServer(port, host) {
 	try {
@@ -32,3 +40,5 @@ async function runFetotServer(port, host) {
 		return Promise.reject(err);
 	}
 }
+
+/*** src [end] ***/

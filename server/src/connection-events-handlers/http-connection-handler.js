@@ -1,9 +1,12 @@
 'use strict';
 
+/*** imports [begin] ***/
+
 const parseInputMessage = require('../../lib/parse-input-message'),
 	messageValidation = require('../../lib/message-validation'),
 	ClientWorker = require('../workers/client-worker');
 
+/*** imports [end] ***/
 /*** exports [begin] ***/
 
 async function httpConnectionHandler(request, response) {

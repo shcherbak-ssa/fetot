@@ -1,7 +1,12 @@
 'use strict';
 
+/*** imports [begin] ***/
+
 const fs = require('fs'),
 	getClientFilename = require('./get-client-filename');
+
+/*** imports [end] ***/
+/*** exports [begin] ***/
 
 async function sendFile({filename, statusCode, headers}, response) {
 	let readStream = new fs.ReadStream(filename);
@@ -28,5 +33,7 @@ async function sendError404(response) {
 		}
 	}, response);
 }
+
+/*** exports [end] ***/
 
 module.exports = { sendFile, sendError404 };

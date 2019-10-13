@@ -1,7 +1,15 @@
 'use strict';
 
+/*** imports [begin] ***/
+
+const {messageEventEmitter} = require('../server-events-emitters');
+
+/*** imports [end] ***/
+/*** exports [begin] ***/
+
 class ClientWorker {
-	constructor({mongodbWorker}) {
+	constructor({client, mongodbWorker}) {
+		this.id = client;
 		this.mongodbWorker = mongodbWorker;
 	}
 	
@@ -12,11 +20,13 @@ class ClientWorker {
 			client = Date.now();
 		
 		console.log(currentMode, currentModule, client);
-		response.end(JSON.stringify({message: {client}}));
+		messageEventEmitter.emit('response-post-request', {label: 'success', message: {message: {client}}, response});
 	}
 	static async createClient() {
 	
 	}
 }
+
+/*** exports [end] ***/
 
 module.exports = ClientWorker;

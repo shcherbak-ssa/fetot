@@ -1,32 +1,40 @@
 'use strict';
 
-const getClientFilename = require('../../../lib/get-client-filename'),
-	responseConfig = {
-		js: {
-			valid: [ 'login', 'app' ],
-			async options(filename) {
-				return {
-					filename: getClientFilename('js', filename),
-					statusCode: 200,
-					headers: {
-						'Content-Type': 'text/javascript'
-					}
-				}
-			}
-		},
-		ico: {
-			valid: [ 'favicon' ],
-			async options(filename) {
-				return {
-					filename: getClientFilename('ico', filename),
-					statusCode: 200,
-					headers: {
-						'Content-Type': 'image/x-icon'
-					}
+/*** imports [begin] ***/
+
+const getClientFilename = require('../../../lib/get-client-filename');
+
+/*** imports [end] ***/
+/*** exports [begin] ***/
+
+const responseConfig = {
+	js: {
+		valid: [ 'login', 'app' ],
+		async options(filename) {
+			return {
+				filename: getClientFilename('js', filename),
+				statusCode: 200,
+				headers: {
+					'Content-Type': 'text/javascript'
 				}
 			}
 		}
-	};
+	},
+	ico: {
+		valid: [ 'favicon' ],
+		async options(filename) {
+			return {
+				filename: getClientFilename('ico', filename),
+				statusCode: 200,
+				headers: {
+					'Content-Type': 'image/x-icon'
+				}
+			}
+		}
+	}
+};
+
+/*** exports [end] ***/
 
 module.exports = new Proxy(responseConfig, {
 	get(target, prop) {

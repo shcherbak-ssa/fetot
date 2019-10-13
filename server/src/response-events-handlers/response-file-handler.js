@@ -1,7 +1,10 @@
 'use strict';
 
+/*** imports [begin] ***/
+
 const {sendFile, sendError404} = require('../../lib/send-file');
 
+/*** imports [end] ***/
 /*** exports [begin] ***/
 
 async function responseFileHandler(options, response) {

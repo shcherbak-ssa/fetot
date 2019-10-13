@@ -1,18 +1,28 @@
 'use strict';
 
-const path = require('path'), {join} = path,
-	
-	clientDirname = join(process.cwd(), 'client'),
-	clientAssetsDirname = join(clientDirname, 'assets'),
+/*** imports [begin] ***/
 
+const path = require('path'), {join} = path;
+
+/*** imports [end] ***/
+/*** init [begin] ***/
+
+const clientDirname = join(process.cwd(), 'client'),
+	clientAssetsDirname = join(clientDirname, 'assets'),
+	
 	clientDirnameMap = new Map(Object.entries({
 		'html': join(clientDirname, 'view'),
 		'js': join(clientDirname, 'js'),
 		'ico': clientAssetsDirname
 	}));
 
+/*** init [end] ***/
+/*** exports [begin] ***/
+
 function getClientFilename(type, filename) {
 	return join(clientDirnameMap.get(type), `${filename}.${type}`)
 }
+
+/*** exports [end] ***/
 
 module.exports = getClientFilename;

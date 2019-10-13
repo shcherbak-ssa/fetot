@@ -8,6 +8,7 @@ async function parseInputMessage(options) {
 }
 
 /*** export [end] ***/
+/*** src [begin] ***/
 
 async function parse(options) {
 	switch( options.type ) {
@@ -32,5 +33,7 @@ async function parsePostMessage({request}) {
 async function parseWebSocketMessage({message}) {
 	return message;
 }
+
+/*** src [end] ***/
 
 module.exports = parseInputMessage;

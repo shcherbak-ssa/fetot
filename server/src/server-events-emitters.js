@@ -1,14 +1,24 @@
 'use strict';
 
+/*** imports [begin] ***/
+
 const Events = require('events');
 
+/*** imports [end] ***/
+/*** init [begin] ***/
+
 class ServerEventEmitter extends Events {}
+
+/*** init [end] ***/
+/*** exports [begin] ***/
 
 let eventsEmitters = Object.fromEntries(
 	['connection', 'message', 'client', 'response'].map((item) => {
 		return [item, new ServerEventEmitter()]
 	})
 );
+
+/*** exports [end] ***/
 
 module.exports = {
 	connectionEventEmitter: eventsEmitters.connection,

@@ -1,11 +1,17 @@
 'use strict';
 
+/*** imports [begin] ***/
+
 const {MongoClient} = require('mongodb'),
-	mongodbUrl = 'mongodb://localhost:27017',
-	mongodbOptions = {useNewUrlParser: true, useUnifiedTopology: true},
-	
 	{connectionEventEmitter} = require('../server-events-emitters');
 
+/*** imports [end] ***/
+/*** init [begin] ***/
+
+const	mongodbUrl = 'mongodb://localhost:27017',
+	mongodbOptions = {useNewUrlParser: true, useUnifiedTopology: true};
+
+/*** init [end] ***/
 /*** exports [begin] ***/
 
 async function createMongodbServer() {
