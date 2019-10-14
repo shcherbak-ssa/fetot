@@ -8,23 +8,26 @@ const {responseEventEmitter} = require('../server-events-emitters');
 /*** exports [begin] ***/
 
 class ClientWorker {
-	constructor({client, mongodbWorker}) {
-		this.id = client;
-		this.mongodbWorker = mongodbWorker;
+	constructor({clientID, clientIP}) {
+		this.id = clientID;
+		this.ip = clientIP;
+		
+		this.currentMode = {};
 	}
 	
 	static MongodbWorker = {};
 	static activeClients = new Map();
-	static async clientConnection(message, response) {
-		let {currentMode, currentModule} = message.content.data,
-			client = Date.now();
-		
-		console.log(currentMode, currentModule, client);
-		responseEventEmitter.emit('response-post-request', {label: 'success', message: {message: {client}}, response});
-	}
-	static async createClient() {
+	
+	static async createClient(options) {
 	
 	}
+	static async controlClient(clientID, clientIP) {
+		let clientWorker = ClientWorker.activeClients.get(clientID);
+		return clientWorker.ip === clientIP ? clientWorker : false;
+	}
+	
+	async changeCurrentMode() {}
+	async changeCurrentModule() {}
 }
 
 /*** exports [end] ***/

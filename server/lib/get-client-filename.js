@@ -2,7 +2,7 @@
 
 /*** imports [begin] ***/
 
-const path = require('path'), {join} = path;
+const {join} = require('path');
 
 /*** imports [end] ***/
 /*** init [begin] ***/

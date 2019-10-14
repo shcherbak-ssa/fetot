@@ -5,7 +5,7 @@
 const validMessageType = ['connection', 'message', 'change-mode', 'change-module'],
 	validMessage = {
 		type: String,
-		client: Number, // need to think
+		client: String,
 		content: Object
 	},
 	validMessageContent = {
