@@ -52,7 +52,9 @@ async function checkObject(message, validMessage) {
 		if( key in validMessage ) {
 			let valid = checkValueType(value, validMessage[key]);
 			if( !valid ) return Promise.reject(new Error('invalid value type'));
-		} else return Promise.reject(new Error('invalid key'));
+		} else {
+			return Promise.reject(new Error('invalid key'));
+		}
 	}))
 }
 

@@ -2,7 +2,8 @@
 
 /*** imports [begin] ***/
 
-const {responseEventEmitter} = require('../server-events-emitters');
+const ModeWorker = require('./mode-worker'),
+	{responseEventEmitter} = require('../server-events-emitters');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
@@ -15,7 +16,6 @@ class ClientWorker {
 		this.currentMode = {};
 	}
 	
-	static MongodbWorker = {};
 	static activeClients = new Map();
 	
 	static async createClient(options) {
