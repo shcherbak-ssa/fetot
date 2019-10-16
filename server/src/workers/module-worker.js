@@ -15,24 +15,27 @@ class ModuleWorker {
 		this.workers = workers;
 		
 		this.options = {
-			response: this.config.response,
+			responseModule: {},
+			responseConfig: this.config.response,
 			events: responseEventEmitter,
 			message: {},
 			mongodb: {},
-			store: new Map()
+			store: {}
 		};
 	}
 	
-	async init() {
+	async init(modeStore) {
 		this.options.mongodb = await MongodbWorker.createCollection(this.config.mongodb);
+		this.options.store = modeStore
 	}
-	async run(message) {
+	async run(options) {
 		try {
-			let {type, data} = message;
+			let {type, data} = options.message;
 			await this.validate(data);
 			
-			this.options.message = message;
-			this.workers.get(type)(this.options);
+			this.options.message = data;
+			this.options.responseModule = options.response || options.socket;
+			await this.workers.get(type)(this.options);
 		} catch( err ) {
 			console.log(err)
 		}
@@ -58,9 +61,6 @@ class ModuleWorker {
 				return Promise.reject(error);
 			}
 		}))
-	}
-	async remove() {
-	
 	}
 }
 

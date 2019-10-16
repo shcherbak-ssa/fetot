@@ -1,5 +1,7 @@
 'use strict';
 
+/*** exports [begin] ***/
+
 class MongodbWorker {
 	constructor(collection) {
 		this.collection = collection;
@@ -40,5 +42,7 @@ class MongodbWorker {
 		})
 	}
 }
+
+/*** exports [end] ***/
 
 module.exports = MongodbWorker;

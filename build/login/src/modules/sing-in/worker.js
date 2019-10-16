@@ -6,14 +6,16 @@ import storeWorker from 'fetot-worker-modules/store-worker';
 import fetchRequest from 'fetot-network-modules/fetch-request';
 
 /*** imports [end] ***/
+/*** init [begin] ***/
 
 const outputMessage = {
 	content: {
-		type: 'check-exist',
+		type: 'check-email',
 		data: {}
 	}
 };
 
+/*** init [end] ***/
 /*** exports [begin] ***/
 
 async function singInModuleWorker() {

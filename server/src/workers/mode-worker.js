@@ -2,7 +2,8 @@
 
 /*** imports [begin] ***/
 
-const fetotModes = require('../../fetot-modes');
+const fetotModes = require('../../fetot-modes'),
+	ModuleWorker = require('./module-worker');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
@@ -11,6 +12,7 @@ class ModeWorker {
 	constructor({modules}) {
 		this.modules = modules;
 		this.currentModule = {};
+		this.store = {}
 	}
 	
 	static async initMode(modeName, currentModuleName) {
@@ -24,7 +26,10 @@ class ModeWorker {
 		this.currentModule.run(options)
 	}
 	async changeCurrentModule(moduleName) {
-		this.currentModule = this.modules.get(moduleName).init();
+		if( !(moduleName in this.store) ) this.store[moduleName] = new Map();
+		
+		this.currentModule = new ModuleWorker(this.modules.get(moduleName));
+		await this.currentModule.init(this.store);
 	}
 }
 
