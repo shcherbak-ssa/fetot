@@ -29,7 +29,7 @@ class ModuleWorker {
 	async run(message) {
 		try {
 			let {type, data} = message;
-			message = await this.validate(data);
+			await this.validate(data);
 			
 			this.options.message = message;
 			this.workers.get(type)(this.options);
@@ -44,16 +44,23 @@ class ModuleWorker {
 		return Promise.all(messageMap.map(([key, value]) => {
 			if( key in this.schema ) {
 				let schema = this.schema[key];
-				if( typeof value !== typeof schema.type() ) return Promise.reject();
+				if( typeof value !== typeof schema.type() ) {
+					let error = new Error('invalid type value');
+					return Promise.reject(error);
+				}
 				
-				let valid = schema.validate(value);
-				if( !valid ) return Promise.reject();
-				
-				return message
+				if( !schema.validate(value) ) {
+					let error = new Error('invalid value');
+					return Promise.reject(error);
+				}
 			} else {
-				return Promise.reject();
+				let error = new Error('invalid key');
+				return Promise.reject(error);
 			}
 		}))
+	}
+	async remove() {
+	
 	}
 }
 

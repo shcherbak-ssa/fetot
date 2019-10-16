@@ -2,7 +2,7 @@
 
 /*** imports [begin] ***/
 
-const createClientID = require('../../lib/create-client-id'),
+const {createClientID} = require('../../lib/create-id'),
 	ClientWorker = require('../workers/client-worker');
 
 /*** imports [end] ***/
