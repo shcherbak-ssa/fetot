@@ -4,7 +4,7 @@
 
 const outputMessageTemplate = {
 	type: 'message',
-	client: 0,
+	client: '',
 	content: {
 		type: '',
 		data: {}

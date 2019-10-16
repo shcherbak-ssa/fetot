@@ -17,8 +17,7 @@ async function httpConnectionHandler(request, response) {
 	let clientIP = await getClientIpAddress(request);
 	if( !clientIP ) return response.end('message error');
 	
-	let options = {message, clientIP, response};
-	clientEventEmitter.emit('client-connection', options)
+	clientEventEmitter.emit('client-connection', {message, clientIP, response})
 }
 
 /*** exports [end] ***/
