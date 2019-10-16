@@ -12,13 +12,15 @@ const parseInputMessage = require('../../lib/parse-input-message'),
 
 async function httpMessageHandler(request, response) {
 	let message = await parseInputMessage({type: 'post-message', request});
-	if( !message ) return response.end('Message error');
+	if( !message ) {
+		console.log(new Error('invalid input message'));
+		return response.end('Message error');
+	}
 	
 	let clientIP = await getClientIpAddress(request);
 	if( !clientIP ) return response.end('message error');
 	
-	let options = {message, clientIP, response};
-	clientEventEmitter.emit('client-check-type', options);
+	clientEventEmitter.emit('client-check-type', {message, clientIP, responseModule: 'http', response});
 }
 
 /*** imports [end] ***/

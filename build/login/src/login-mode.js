@@ -2,6 +2,7 @@
 
 /*** imports [begin] ***/
 
+import fetchRequest from 'fetot-network-modules/fetch-request';
 import locStorage from 'fetot-js-modules/local-storage';
 import storeWorker from 'fetot-worker-modules/store-worker';
 
@@ -39,8 +40,18 @@ async function initLoginMode() {
 async function initLoginModeEvents(loginModeEvents) {
 	loginModeEvents
 		.on('change-module', async (label) => {
-			let currentModuleName = await changeCurrentModule(label);
-			await initNewModule(currentModuleName);
+			let currentModuleName = await changeCurrentModule(label),
+				response = await fetchRequest.post({
+					message: {
+						type: 'change-module',
+						content: {
+							type: currentModuleName,
+							data: {}
+						}
+					}
+				});
+			
+			if( response.type === 'success' )	await initNewModule(currentModuleName);
 		})
 		.on('run-current-module-worker', async () => {
 			await currentModule.worker();
@@ -52,7 +63,6 @@ async function initLoginModeEvents(loginModeEvents) {
 
 async function initNewModule(name) {
 	modeStore.set('current-module', name);
-	
 	currentModule = modules[name];
 	await currentModule.init();
 }
@@ -65,9 +75,15 @@ async function changeCurrentModule(label) {
 		case 'confirm-email':
 		case 'create-account':
 			return 'sing-in';
-	} else switch( currentModule ) {
+	}
+	if( label === 'button' ) switch( currentModule ) {
 		case 'sing-in':
 			return 'confirm-email';
+		case 'confirm-email':
+			return 'create-account';
+		case 'login':
+		case 'create-account':
+			return ''
 	}
 }
 

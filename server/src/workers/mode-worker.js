@@ -22,7 +22,7 @@ class ModeWorker {
 		return modeWorker;
 	}
 	
-	async runCurrentModuleWorker(options) {
+	async runCurrentModule(options) {
 		this.currentModule.run(options)
 	}
 	async changeCurrentModule(moduleName) {

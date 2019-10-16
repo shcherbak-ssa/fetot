@@ -24,8 +24,16 @@ class ClientWorker {
 	}
 	
 	/*** work methods ***/
-	async changeCurrentMode() {}
-	async changeCurrentModule() {}
+	async runCurrentModule(options) {
+		await this.currentMode.runCurrentModule(options);
+	}
+	async changeCurrentMode() {
+	
+	}
+	async changeCurrentModule(moduleName) {
+		await this.currentMode.changeCurrentModule(moduleName);
+		console.log('current module: ', moduleName);
+	}
 }
 
 /*** exports [end] ***/

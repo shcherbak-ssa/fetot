@@ -35,6 +35,7 @@ class ModuleWorker {
 			
 			this.options.message = data;
 			this.options.responseModule = options.response || options.socket;
+			
 			await this.workers.get(type)(this.options);
 		} catch( err ) {
 			console.log(err)

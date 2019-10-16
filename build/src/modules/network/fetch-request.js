@@ -29,8 +29,8 @@ async function connection({currentMode, currentModule}) {
 		message: {
 			type: 'connection',
 			content: {
-				type: '',
-				data: { currentMode, currentModule }
+				type: `${currentMode}/${currentModule}`,
+				data: {}
 			}
 		}
 	});

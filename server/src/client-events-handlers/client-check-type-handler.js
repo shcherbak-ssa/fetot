@@ -18,7 +18,7 @@ async function clientCheckTypeHandler(options) {
 	options.message = content;
 	delete options.clientIP;
 	
-	clientEventEmitter.emit(`client-type-${type}`, options)
+	clientEventEmitter.emit(`client-${type}`, options)
 }
 
 /*** exports [end] ***/

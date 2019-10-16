@@ -30,7 +30,7 @@ async function initApplication() {
 async function initAppEvents() {
 	appEvents
 		.on('fetot-button-click', () => {
-			loginModeEvents.emit('change-module', 'button');
+			loginModeEvents.emit('run-current-module-worker', 'button');
 			// loginModeEvents.emit('run-current-module-worker');
 		})
 		.on('fetot-link-click', () => {

@@ -12,7 +12,7 @@ const ClientWorker = require('../workers/client-worker'),
 /*** exports [begin] ***/
 
 async function clientConnectionHandler({message, clientIP, response}) {
-	let {currentMode, currentModule} = message.content.data,
+	let [currentMode, currentModule] = message.content.type.split('/'),
 		clientID = await createClientID(),
 		clientWorker = new ClientWorker({clientID, clientIP});
 	
