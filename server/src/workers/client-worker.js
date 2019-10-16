@@ -16,22 +16,14 @@ class ClientWorker {
 		this.currentMode = {};
 	}
 	
+	/*** static properties and methods ***/
 	static activeClients = new Map();
-	
-	static async createClient({currentMode, currentModule, clientIP, clientID, response}) {
-		let clientWorker = new ClientWorker({clientID, clientIP});
-		clientWorker.currentMode = await ModeWorker.initMode(currentMode, currentModule);
-		
-		ClientWorker.activeClients.set(clientID, clientWorker);
-		
-		let message = { message: { client: clientID } };
-		responseEventEmitter.emit('response-post-request', {label: 'success', response, message})
-	}
 	static async controlClient(clientID, clientIP) {
 		let clientWorker = ClientWorker.activeClients.get(clientID);
 		return clientWorker.ip === clientIP ? clientWorker : false;
 	}
 	
+	/*** work methods ***/
 	async changeCurrentMode() {}
 	async changeCurrentModule() {}
 }

@@ -35,7 +35,6 @@ async function connection({currentMode, currentModule}) {
 		}
 	});
 	
-	console.log(response);
 	outputMessage.template.client = response.message.client;
 }
 
