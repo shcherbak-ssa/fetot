@@ -4,6 +4,12 @@
       <div class="section sing-in">
         <login-workspace :options="setWorkspaceOptions('sing-in')"/>
       </div>
+      <div class="section confirm-email">
+        <login-workspace :options="setWorkspaceOptions('confirm-email')"/>
+      </div>
+      <div class="section create-account">
+        <login-workspace :options="setWorkspaceOptions('create-account')"/>
+      </div>
       <div class="section log-in">
         <login-workspace :options="setWorkspaceOptions('login')"/>
       </div>
@@ -39,7 +45,7 @@
     },
     computed: {
 	    setCurrentModule() {
-	    	return { [`is-${this.options.store['current-module']}-module-active`]: true }
+	    	return { [`is-${this.options.store['current-module']}`]: true }
       }
     }
 	}
@@ -55,27 +61,35 @@
   }
   .section {
     opacity: 0;
-    transition: .6s;
+    transition: .4s;
     position: absolute;
     top: 0;
-    left: 0;
+
+    &.sing-in {
+
+    }
+    &.login {
+
+    }
+    &.confirm-email {
+
+    }
+    &.create-account {
+
+    }
   }
   .login {
-    &.is-sing-in-module-active {
-      .sing-in {
-        opacity: 1;
-      }
-      .log-in {
-        top: 100%;
-      }
+    &.is-sing-in {
+
     }
-    &.is-login-module-active {
-      .log-in {
-        opacity: 1;
-      }
-      .sing-in {
-        top: -100%;
-      }
+    &.is-login {
+
+    }
+    &.is-confirm-email {
+
+    }
+    &.is-create-account {
+
     }
   }
 </style>

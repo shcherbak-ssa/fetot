@@ -1,5 +1,5 @@
 <template>
-  <div class="workspace">
+  <div class="workspace" :class="changeActive">
     <fetot-title>
       <div class="title">{{ options.data.get('title') }}</div>
     </fetot-title>
@@ -19,6 +19,7 @@
 	export default {
 		name: 'workspace',
     props: {
+			active: Boolean,
 			options: Object
 		},
 		components: {
@@ -36,6 +37,11 @@
           data: this.options.data.get('content')
         }
       }
+    },
+    computed: {
+			changeActive() {
+				return { 'is-active': this.active }
+      }
     }
 	}
 </script>
@@ -49,8 +55,7 @@
     left: 0;
     padding: 52px;
     transition: .6s;
-    justify-content: space-between;
-    @include full-sizes;
+    justify-content: center;
     @include box-sizing;
     @include flex-center-column;
 
@@ -59,6 +64,16 @@
     }
     .link {
       font-size: 16px;
+    }
+
+    .fetot-title, .fetot-link {
+      transition: .4s;
+      @include position-center;
+    }
+    &.is-active {
+      .fetot-title, .fetot-link {
+        position: static;
+      }
     }
   }
 </style>

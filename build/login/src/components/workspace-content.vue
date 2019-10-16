@@ -49,11 +49,14 @@
   .workspace-content {
     background: #fff;
     padding: 36px;
+    margin: 50px 0;
     transition: .4s;
     width: 510px;
+    z-index: 1;
     @include box-sizing;
     @include border-radius-6;
     @include flex-center;
+    @include static-shadow;
 
     &:hover {
       @include hover-shadow;
