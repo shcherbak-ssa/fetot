@@ -16,8 +16,7 @@ class ModuleWorker {
 		
 		this.options = {
 			response: {},
-			responseModule: {},
-			responseConfig: this.config.response,
+			config: this.config,
 			events: responseEventEmitter,
 			message: {},
 			mongodb: {},
@@ -35,7 +34,6 @@ class ModuleWorker {
 			await this.validate(data);
 			
 			this.options.message = data;
-			this.options.responseModule = options.responseModule;
 			this.options.response = options.response || options.socket;
 			
 			await this.workers[type](this.options);

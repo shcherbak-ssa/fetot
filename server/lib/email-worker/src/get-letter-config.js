@@ -10,7 +10,11 @@ const fs = require('fs'),
 /*** imports [end] ***/
 /*** init [begin] ***/
 
-const Handlebars = initHandlebars();
+const Handlebars = initHandlebars(),
+	confirmEmailText = {
+		text: 'Hey there! Someone gave us an email to sign in. If it wasn\'t you just delete the email. Otherwise, copy the code below :)',
+		padding: 30
+	};
 
 /*** init [end] ***/
 /*** exports [begin] ***/
@@ -30,7 +34,9 @@ async function getLetterConfig({clientEmail, subject, type, data}) {
 
 function getLetterHTML(type, data) {
 	switch( type ) {
-		case 'confirm-email': return readFile(path.join(__dirname, 'html/confirm-email.html'), data);
+		case 'confirm-email':
+			data = Object.assign({}, data, confirmEmailText);
+			return readFile(path.join(__dirname, 'html/confirm-email.html'), data);
 	}
 }
 function readFile(filename, data) {

@@ -14,6 +14,18 @@ const singInModuleConfig = {
 			message: {
 				error: 'Client with current email already exist'
 			}
+		},
+		'success': {
+			type: 'success',
+			message: {}
+		}
+	},
+	emailLetterConfig(email, code) {
+		return {
+			clientEmail: email,
+			subject: 'Confirm email',
+			type: 'confirm-email',
+			data: { code }
 		}
 	}
 };
