@@ -17,7 +17,9 @@ const singInModuleConfig = {
 		},
 		'success': {
 			type: 'success',
-			message: {}
+			message: {
+				success: true
+			}
 		}
 	},
 	emailLetterConfig(email, code) {
