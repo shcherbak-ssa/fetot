@@ -15,6 +15,7 @@ class ModuleWorker {
 		this.workers = workers;
 		
 		this.options = {
+			response: {},
 			responseModule: {},
 			responseConfig: this.config.response,
 			events: responseEventEmitter,
@@ -34,9 +35,10 @@ class ModuleWorker {
 			await this.validate(data);
 			
 			this.options.message = data;
-			this.options.responseModule = options.response || options.socket;
+			this.options.responseModule = options.responseModule;
+			this.options.response = options.response || options.socket;
 			
-			await this.workers.get(type)(this.options);
+			await this.workers[type](this.options);
 		} catch( err ) {
 			console.log(err)
 		}

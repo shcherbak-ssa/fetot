@@ -15,10 +15,10 @@ const outputHeadersTemplate = {
 };
 
 function getOutputMessage(message) {
-	return JSON.stringify( Object.assign(outputMessageTemplate, message) )
+	return JSON.stringify( Object.assign({}, outputMessageTemplate, message) )
 }
 function getOutputHeaders(headers) {
-	return Object.assign(outputHeadersTemplate, headers);
+	return Object.assign({}, outputHeadersTemplate, headers);
 }
 
 /*** exports [begin] ***/

@@ -46,7 +46,7 @@ async function initLoginModeEvents(loginModeEvents) {
 			let currentModuleName = await changeCurrentModule(label);
 			await initNewModule(currentModuleName);
 		})
-		.on('run-current-module-worker', async () => {
+		.on('run-current-module-worker', async (label) => {
 			await currentModule.worker();
 		})
 }

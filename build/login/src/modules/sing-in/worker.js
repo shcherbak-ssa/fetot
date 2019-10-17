@@ -20,29 +20,33 @@ const outputMessage = {
 
 async function singInModuleWorker() {
 	let inputs = storeWorker.getGlobalStore('inputs'),
-		formData = new FormData();
+		outputData = new Map();
 	
 	let email = inputs.get('email').value;
-	formData.set('email', email);
+	outputData.set('email', email);
 	
-	outputMessage.content.data = formData;
+	outputMessage.content.data = Object.fromEntries(outputData.entries());
 	let response = await fetchRequest.post({
 		message: outputMessage
 	});
 	
-	await parseServerResponse(response);
+	await parseServerResponse(inputs, response);
 }
 
 /*** exports [end] ***/
 /*** src [begin] ***/
 
-async function parseServerResponse({type, message}) {
+async function parseServerResponse(inputs, {type, message}) {
 	switch( type ) {
 		case 'error':
-			console.log(message);
+			console.log('error', message);
+			let email = inputs.get('email');
+			
+			email.error = '';
+			email.error = message.error;
 			break;
 		case 'success':
-			alert('Login success')
+			console.log('success', message);
 	}
 }
 

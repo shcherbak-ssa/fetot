@@ -6,7 +6,7 @@ const validationSchema = {
 	email: {
 		type: String,
 		validate(value) {
-			return /[^\s@]+@(gmail|mail)\.(com|ru)]/.test(value)
+			return /[^@\s]+@(gmail|mail)\.(com|ru)/.test(value)
 		}
 	},
 	password: {

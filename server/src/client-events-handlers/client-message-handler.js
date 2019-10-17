@@ -1,11 +1,10 @@
 'use strict';
 
-/*** imports [begin] ***/
-
-/*** imports [end] ***/
 /*** exports [begin] ***/
 
-async function clientMessageHandler(options) {}
+async function clientMessageHandler(options) {
+	await options.clientWorker.runCurrentModule(options);
+}
 
 /*** exports [end] ***/
 

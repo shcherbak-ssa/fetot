@@ -15,6 +15,7 @@ const {connectionEventEmitter, messageEventEmitter,
 	
 	clientConnectionHandler = require('./client-events-handlers/client-connection-handler'),
 	clientCheckTypeHandler = require('./client-events-handlers/client-check-type-handler'),
+	clientMessageHandler = require('./client-events-handlers/client-message-handler'),
 	clientChangeModuleHandler = require('./client-events-handlers/client-change-module-handler'),
 	
 	responseError404Handler = require('./response-events-handlers/response-error404-handler'),
@@ -41,7 +42,7 @@ async function setClientEventsHandlers() {
 	clientEventEmitter
 		.on('client-connection', clientConnectionHandler)
 		.on('client-check-type', clientCheckTypeHandler)
-		.on('client-message', () => {})
+		.on('client-message', clientMessageHandler)
 		.on('client-change-mode', () => {})
 		.on('client-change-module', clientChangeModuleHandler)
 }
