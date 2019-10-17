@@ -4,17 +4,19 @@
 
 const Handlebars = require('handlebars'),
 	
+	headerHelper = require('./header'),
 	lineSpaceHelper = require('./line-space'),
 	titleHelper = require('./title'),
-	headerHelper = require('./header');
+	textHelper = require('./text');
 
 /*** imports [end] ***/
 /*** init [begin] ***/
 
 const helpers = [
+	headerHelper,
 	lineSpaceHelper,
 	titleHelper,
-	headerHelper
+	textHelper
 ];
 
 /*** init [end] ***/

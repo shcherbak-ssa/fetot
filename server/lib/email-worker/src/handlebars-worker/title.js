@@ -14,11 +14,9 @@ function titleHelper(Handlebars) {
 function getTitleString(title) {
 	return (
 		'<tr>' +
-			'<td> </td>' +
 			'<td style="text-align: center;font-size: 24px;font-weight: 500;color: #393E46;"> ' +
 				title +
 			'</td>' +
-			'<td> </td>' +
 		'</tr>'
 	)
 }
