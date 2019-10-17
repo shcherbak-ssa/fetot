@@ -32,7 +32,6 @@ class ClientWorker {
 	}
 	async changeCurrentModule(moduleName) {
 		await this.currentMode.changeCurrentModule(moduleName);
-		console.log('current module: ', moduleName);
 	}
 }
 
