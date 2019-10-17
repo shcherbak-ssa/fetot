@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "fetot": "supervisor --watch ./server -- server",
-    "mongod": "mongod.bat"
+    "mongod": "mongod.bat",
+    "email-test": "node email-test.js"
   },
   "repository": {
     "type": "git",
@@ -15,6 +16,7 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/shcherbak_ssa/fetot#readme",
   "dependencies": {
+    "handlebars": "^4.4.3",
     "mongodb": "^3.3.2",
     "nanoid": "^2.1.3",
     "nodemailer": "^6.3.0",

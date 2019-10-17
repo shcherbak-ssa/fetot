@@ -1,9 +1,13 @@
 'use strict';
 
-const nodemailer = require('nodemailer'),
-	
+/*** imports [begin] ***/
+
+const nodeMailer = require('nodemailer'),
 	transportOptions = require('./src/transport-options'),
 	getMessageConfig = require('./src/get-message-config');
+
+/*** imports [end] ***/
+/*** exports [begin] ***/
 
 class EmailWorker {
 	constructor(transporter) {
@@ -12,17 +16,18 @@ class EmailWorker {
 	}
 	
 	static init() {
-		let transporter = nodemailer.createTransport(transportOptions);
+		let transporter = nodeMailer.createTransport(transportOptions);
 		return new EmailWorker(transporter);
 	}
 	
 	async createMessage(messageConfig) {
-		messageConfig = await getMessageConfig(messageConfig);
-		this.message = messageConfig;
+		this.message = await getMessageConfig(messageConfig);
 	}
 	async sendMail() {
 		return await this.transporter.sendMail(this.message);
 	}
 }
 
-module.exports = EmailWorker.init();
+/*** exports [end] ***/
+
+module.exports = EmailWorker;

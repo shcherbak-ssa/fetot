@@ -13,7 +13,8 @@ const clientDirname = join(process.cwd(), 'client'),
 	clientDirnameMap = new Map(Object.entries({
 		'html': join(clientDirname, 'view'),
 		'js': join(clientDirname, 'js'),
-		'ico': clientAssetsDirname
+		'ico': clientAssetsDirname,
+		'png': join(clientAssetsDirname, 'images')
 	}));
 
 /*** init [end] ***/

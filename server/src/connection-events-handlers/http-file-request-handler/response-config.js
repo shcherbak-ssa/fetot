@@ -31,6 +31,18 @@ const responseConfig = {
 				}
 			}
 		}
+	},
+	png: {
+		valid: [ 'email-logo' ],
+		async options(filename) {
+			return {
+				filename: getClientFilename('png', filename),
+				statusCode: 200,
+				headers: {
+					'Content-Type': 'image/png'
+				}
+			}
+		}
 	}
 };
 

@@ -28,7 +28,7 @@ async function runFetotServer(port, host) {
 	try {
 		let httpServer = await createHttpServer(port, host);
 		await createWebSocketServer(httpServer);
-		await createMongodbClient();
+		// await createMongodbClient();
 		
 		await setConnectionEventsHandlers();
 		await setMessageEventsHandlers();
