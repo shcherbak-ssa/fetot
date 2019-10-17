@@ -1,18 +1,9 @@
 <template>
   <fetot-container>
-    <div class="login" :class="setCurrentModule">
-      <div class="section sing-in">
-        <login-workspace :options="setWorkspaceOptions('sing-in')"/>
-      </div>
-      <div class="section confirm-email">
-        <login-workspace :options="setWorkspaceOptions('confirm-email')"/>
-      </div>
-      <div class="section create-account">
-        <login-workspace :options="setWorkspaceOptions('create-account')"/>
-      </div>
-      <div class="section log-in">
-        <login-workspace :options="setWorkspaceOptions('login')"/>
-      </div>
+    <div class="login">
+      <transition name="change-module" mode="out-in">
+        <login-workspace :key="options.store['current-module']" :options="setWorkspaceOptions"/>
+      </transition>
     </div>
   </fetot-container>
 </template>
@@ -35,61 +26,42 @@
 			'fetot-container': fetotContainer,
       'login-workspace': loginWorkspace
     },
-    methods: {
-			setWorkspaceOptions(label) {
-				return {
-					events: this.options.events,
-          data: this.options.store.get('modules')[label]
-				}
-      }
-    },
     computed: {
-	    setCurrentModule() {
-	    	return { [`is-${this.options.store['current-module']}`]: true }
-      }
+	    setWorkspaceOptions() {
+		    return {
+			    events: this.options.events,
+			    data: this.options.store.get('modules')[this.options.store['current-module']]
+		    }
+	    }
     }
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   @import 'fetot-src-scss';
 
-  .login, .section {
-    overflow: hidden;
+  .login {
     position: relative;
     @include full-sizes;
   }
-  .section {
-    opacity: 0;
-    transition: .4s;
-    position: absolute;
-    top: 0;
 
-    &.sing-in {
+  .change-module {
+    &-enter, &-leave-to {
+      opacity: 0;
 
+      .fetot-title {
+        transform: translateY(300%);
+      }
+      .fetot-link {
+        transform: translateY(-400%);
+      }
     }
-    &.login {
+    &-enter-to, &-leave {
+      opacity: 1;
 
-    }
-    &.confirm-email {
-
-    }
-    &.create-account {
-
-    }
-  }
-  .login {
-    &.is-sing-in {
-
-    }
-    &.is-login {
-
-    }
-    &.is-confirm-email {
-
-    }
-    &.is-create-account {
-
+      .fetot-title, .fetot-link {
+        transform: translateY(0);
+      }
     }
   }
 </style>

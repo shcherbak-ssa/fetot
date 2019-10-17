@@ -11,7 +11,7 @@ const store = storeWorker.createLocalStore({
 	title: 'Confirm email',
 	link: 'Change email address',
 	content: {
-		text: 'Please check your email % and enter the received code',
+		text: 'Please, check your email and enter the received code',
 		inputs: [ 'confirm-email' ]
 	}
 });

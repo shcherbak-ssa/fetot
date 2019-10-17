@@ -15,11 +15,8 @@ class ModeWorker {
 		this.store = {}
 	}
 	
-	static async initMode(modeName, currentModuleName) {
-		let modeWorker = new ModeWorker(fetotModes.get(modeName));
-		await modeWorker.changeCurrentModule(currentModuleName);
-		
-		return modeWorker;
+	static async initMode(modeName) {
+		return new ModeWorker(fetotModes.get(modeName));
 	}
 	
 	async runCurrentModule(options) {

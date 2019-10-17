@@ -12,11 +12,11 @@ const ClientWorker = require('../workers/client-worker'),
 /*** exports [begin] ***/
 
 async function clientConnectionHandler({message, clientIP, response}) {
-	let [currentMode, currentModule] = message.content.type.split('/'),
+	let currentMode = message.content.type,
 		clientID = await createClientID(),
 		clientWorker = new ClientWorker({clientID, clientIP});
 	
-	clientWorker.currentMode = await ModeWorker.initMode(currentMode, currentModule);
+	clientWorker.currentMode = await ModeWorker.initMode(currentMode);
 	ClientWorker.activeClients.set(clientID, clientWorker);
 	
 	responseEventEmitter.emit('response-post-request', {

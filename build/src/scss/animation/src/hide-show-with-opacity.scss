@@ -1,0 +1,22 @@
+
+[class*="opacity-hide"] {
+  opacity: 0;
+}
+.opacity-hide-to-left {
+  left: -100%;
+}
+.opacity-hide-to-top {
+  top: -100%;
+}
+.opacity-hide-to-right {
+  left: 100%;
+}
+.opacity-hide-to-bottom {
+  top: 100%;
+}
+
+.opacity-show {
+  opacity: 1;
+  left: 0;
+  top: 0;
+}

@@ -23,25 +23,38 @@ async function postRequest({url = '/', headers = {}, message}) {
 	if( response.ok ) return await response.json();
 	else console.log(new Error('fetch post request error'))
 }
-async function connection({currentMode, currentModule}) {
+
+async function connection({currentMode, data = {}}) {
 	let response = await postRequest({
 		url: 'connection',
 		message: {
 			type: 'connection',
 			content: {
-				type: `${currentMode}/${currentModule}`,
-				data: {}
+				type: currentMode,
+				data: data
 			}
 		}
 	});
 	
 	outputMessage.template.client = response.message.client;
 }
+async function changeModule(moduleName, data = {}) {
+	return await postRequest({
+		message: {
+			type: 'change-module',
+			content: {
+				type: moduleName,
+				data: data
+			}
+		}
+	})
+}
 
 /*** exports [end] ***/
 
 export default {
-	connection,
 	get: getRequest,
-	post: postRequest
+	post: postRequest,
+	connection,
+	changeModule
 }

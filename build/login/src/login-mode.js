@@ -2,14 +2,13 @@
 
 /*** imports [begin] ***/
 
-import fetchRequest from 'fetot-network-modules/fetch-request';
 import locStorage from 'fetot-js-modules/local-storage';
 import storeWorker from 'fetot-worker-modules/store-worker';
 
 import loginModule from './modules/login';
 import singInModule from './modules/sing-in';
 import confirmEmailModule from './modules/confirm-email';
-import createAccount from './modules/create-account';
+import createAccountModule from './modules/create-account';
 
 /*** imports [end] ***/
 /*** init [begin] ***/
@@ -18,13 +17,15 @@ const modules = {
 	'login': loginModule,
 	'sing-in': singInModule,
 	'confirm-email': confirmEmailModule,
-	'create-account': createAccount
+	'create-account': createAccountModule
 };
 const modeStore = storeWorker.createLocalStore({
 	'current-module': '',
 	modules: {
 		'login': loginModule.store,
-		'sing-in': singInModule.store
+		'sing-in': singInModule.store,
+		'confirm-email': confirmEmailModule.store,
+		'create-account': createAccountModule.store
 	}
 });
 
@@ -34,24 +35,16 @@ let currentModule = {};
 /*** exports [begin] ***/
 
 async function initLoginMode() {
-	await initNewModule(locStorage.hasStorageItem('client-exist') ? 'login' : 'sing-in');
+	let currentModuleName = locStorage.hasStorageItem('client-exist') ? 'login' : 'sing-in';
+	await initNewModule(currentModuleName);
+	
 	return modeStore;
 }
 async function initLoginModeEvents(loginModeEvents) {
 	loginModeEvents
 		.on('change-module', async (label) => {
-			let currentModuleName = await changeCurrentModule(label),
-				response = await fetchRequest.post({
-					message: {
-						type: 'change-module',
-						content: {
-							type: currentModuleName,
-							data: {}
-						}
-					}
-				});
-			
-			if( response.type === 'success' )	await initNewModule(currentModuleName);
+			let currentModuleName = await changeCurrentModule(label);
+			await initNewModule(currentModuleName);
 		})
 		.on('run-current-module-worker', async () => {
 			await currentModule.worker();

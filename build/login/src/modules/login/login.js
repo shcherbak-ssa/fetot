@@ -2,6 +2,8 @@
 
 /*** imports [begin] ***/
 
+import fetchRequest from 'fetot-network-modules/fetch-request';
+
 import store from './store';
 import worker from './worker';
 
@@ -10,6 +12,9 @@ import worker from './worker';
 
 async function init() {
 	console.log('init login module');
+	
+	let response = await fetchRequest.changeModule('login');
+	console.log(response);
 }
 
 /*** exports [end] ***/

@@ -70,6 +70,7 @@
       color: $fetot-dark-gray;
       font-size: 18px;
       text-align: center;
+      margin-bottom: 30px;
     }
   }
 </style>
