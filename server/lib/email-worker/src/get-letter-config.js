@@ -1,0 +1,45 @@
+'use strict';
+
+/*** imports [begin] ***/
+
+const fs = require('fs'),
+	path = require('path'),
+	
+	initHandlebars = require('./handlebars-worker');
+
+/*** imports [end] ***/
+/*** init [begin] ***/
+
+const Handlebars = initHandlebars();
+
+/*** init [end] ***/
+/*** exports [begin] ***/
+
+async function getLetterConfig({clientEmail, subject, type}) {
+	return {
+		from: 'shcherbakov.ssa@gmail.com',
+		to: clientEmail,
+		subject: subject,
+		text: '',
+		html: getLetterHTML(type)
+	}
+}
+
+/*** exports [end] ***/
+/*** src [begin] ***/
+
+function getLetterHTML(type) {
+	switch( type ) {
+		case 'confirm-email': return readFile(path.join(__dirname, 'html/confirm-email.html'))
+	}
+}
+function readFile(filename) {
+	let filedata = fs.readFileSync(filename, {encoding: 'utf-8'}),
+		template = Handlebars.compile(filedata);
+	
+	return template();
+}
+
+/*** src [end] ***/
+
+module.exports = getLetterConfig;

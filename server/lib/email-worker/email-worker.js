@@ -4,30 +4,21 @@
 
 const nodeMailer = require('nodemailer'),
 	transportOptions = require('./src/transport-options'),
-	getMessageConfig = require('./src/get-message-config');
+	getLetterConfig = require('./src/get-letter-config');
 
 /*** imports [end] ***/
+/*** init [begin] ***/
+
+const transporter = nodeMailer.createTransport(transportOptions);
+
+/*** init [end] ***/
 /*** exports [begin] ***/
 
-class EmailWorker {
-	constructor(transporter) {
-		this.transporter = transporter;
-		this.message = {};
-	}
-	
-	static init() {
-		let transporter = nodeMailer.createTransport(transportOptions);
-		return new EmailWorker(transporter);
-	}
-	
-	async createMessage(messageConfig) {
-		this.message = await getMessageConfig(messageConfig);
-	}
-	async sendMail() {
-		return await this.transporter.sendMail(this.message);
-	}
+async function sendMailLetter(config) {
+	let letter = await getLetterConfig(config);
+	return await transporter.sendMail(letter);
 }
 
 /*** exports [end] ***/
 
-module.exports = EmailWorker;
+module.exports = sendMailLetter;

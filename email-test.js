@@ -1,24 +1,17 @@
 'use strict';
 
-const EmailWorker = require('./server/lib/email-worker');
+const sendMailLetter = require('./server/lib/email-worker');
 
-let data = {
+let config = {
 	clientEmail: 'shcherbak.ssa@gmail.com',
-	subject: 'test',
-	type: 'test'
+	subject: 'Confirm email',
+	type: 'confirm-email'
 };
 
-emailTest(data)
+sendMailLetter(config)
 	.then((info) => {
 		console.log(info)
 	})
 	.catch((err) => {
 		console.log(err);
 	});
-
-async function emailTest(data) {
-	let emailWorker = EmailWorker.init();
-	
-	await emailWorker.createMessage(data);
-	return await emailWorker.sendMail();
-}
