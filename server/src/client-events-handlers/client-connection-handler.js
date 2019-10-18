@@ -5,7 +5,7 @@
 const ClientWorker = require('../workers/client-worker'),
 	ModeWorker = require('../workers/mode-worker'),
 	
-	{createClientID} = require('../../lib/create-id'),
+	{generateClientId} = require('../../lib/generate-client-id'),
 	{responseEventEmitter} = require('../server-events-emitters');
 
 /*** imports [end] ***/
@@ -13,7 +13,7 @@ const ClientWorker = require('../workers/client-worker'),
 
 async function clientConnectionHandler({message, clientIP, response}) {
 	let currentMode = message.content.type,
-		clientID = await createClientID(),
+		clientID = await generateClientId(),
 		clientWorker = new ClientWorker({clientID, clientIP});
 	
 	clientWorker.currentMode = await ModeWorker.initMode(currentMode);

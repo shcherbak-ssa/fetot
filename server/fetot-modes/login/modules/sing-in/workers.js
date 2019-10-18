@@ -3,7 +3,7 @@
 /*** imports [begin] ***/
 
 const sendMailLetter = require('../../../../lib/email-worker'),
-	{createIDWithLength} = require('../../../../lib/create-id');
+	{generateClientId} = require('../../../../lib/generate-client-id');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
@@ -12,7 +12,7 @@ async function checkEmailWorker({message, mongodb, events, config, store, respon
 	let emailExist = await mongodb.findDocument({email: message.email});
 	if( emailExist ) return events.emit('response-post-request', config.response['client-exist'](response));
 	
-	let confirmEmailCode = await createIDWithLength(6);
+	let confirmEmailCode = await generateClientId('1234567890', 6);
 	store['sing-in'].set('confirm-email-code', confirmEmailCode);
 	
 	events.emit('response-post-request', config.response['success'](response));
