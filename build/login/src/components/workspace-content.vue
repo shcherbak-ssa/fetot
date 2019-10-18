@@ -4,7 +4,11 @@
       <p class="txt" v-if="options.data.text">
         {{ options.data.text }}
       </p>
-      <fetot-input v-for="(input, index) in options.data.inputs" :key="index" :input="inputs[input]"/>
+      <fetot-input
+              v-for="(input, index) in options.data.inputs"
+              :key="index" :input="inputs[input]"
+              @fetot-input-input="inputInputHandler"
+      />
       <fetot-button v-if="options.data.button" @fetot-button-click="buttonClickHandler">
         {{ options.data.button }}
       </fetot-button>
@@ -36,8 +40,8 @@
 			buttonClickHandler() {
 				this.options.events.emit('fetot-button-click')
       },
-      getInputData(label) {
-				return storeWorker.getGlobalStore('inputs')[label]
+      inputInputHandler() {
+				this.options.events.emit('fetot-input-input')
       }
     }
 	}

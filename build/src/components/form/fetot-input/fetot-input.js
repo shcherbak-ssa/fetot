@@ -22,7 +22,7 @@ export default {
 		},
 		setValue({target}) {
   		this.input.value = target.value;
-  		this.$emit('input-input');
+  		if( this.input.event ) this.$emit('fetot-input-input');
 		},
 		setStates(isActive, hasValue, hasError) {
 			this.states['is-active'] = !!isActive;

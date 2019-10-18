@@ -32,12 +32,15 @@ async function initApplication() {
 
 async function initAppEvents() {
 	appEventsEmitter
-		.on('fetot-button-click', () => {
-			loginModeEventsEmitter.emit('run-current-module-worker');
-		})
-		.on('fetot-link-click', () => {
-			loginModeEventsEmitter.emit('change-module', 'link');
-		});
+		.on('fetot-button-click', runCurrentModuleWorkerHandler)
+		.on('fetot-input-input', runCurrentModuleWorkerHandler)
+		.on('fetot-link-click', changeModeHandler)
+}
+function runCurrentModuleWorkerHandler() {
+	loginModeEventsEmitter.emit('run-current-module-worker');
+}
+function changeModeHandler() {
+	loginModeEventsEmitter.emit('change-module', 'link');
 }
 
 /*** src [end] ***/

@@ -18,7 +18,8 @@
     "value": "",
     "placeholder": "Confirmation code",
     "icon": "?",
-    "error": ""
+    "error": "",
+    "event": true
   },
   "fullname": {
     "type": "text",

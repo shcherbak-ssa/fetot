@@ -23,7 +23,7 @@ async function confirmEmailModuleWorker() {
 	const input = storeWorker.getGlobalStore('inputs').get('confirm-email'),
 		loginModeEventsEmitter = EventsEmitter.getEmitter('login-mode');
 		
-	let	{value} = input;
+	let	{value} = input; console.log('confirmation-code', value);
 	if( value.length < 6 ) return;
 	
 	if( /[^\w]/i.test(value) ) {
