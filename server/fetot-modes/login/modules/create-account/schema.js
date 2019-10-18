@@ -8,7 +8,6 @@ const validationSchema = require('../../../../lib/validation-schema');
 /*** exports [begin] ***/
 
 const schema = {
-	email: validationSchema.email,
 	password: validationSchema.password,
 	fullname: {
 		type: String,
@@ -23,7 +22,7 @@ const schema = {
 			}
 		}
 	},
-	__length: 3
+	__length: 2
 };
 
 /*** exports [end] ***/

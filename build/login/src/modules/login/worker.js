@@ -19,6 +19,7 @@ async function loginModuleWorker() {
 	let password = inputs.get('password').value;
 	outputDataWorker.set('password', password);
 	
+	console.log(outputDataWorker.getData());
 	let response = await fetchRequest.post({
 		message: outputDataWorker.getData()
 	});
@@ -32,8 +33,8 @@ async function loginModuleWorker() {
 async function parseServerResponse(inputs, {type, message}) {
 	switch( type ) {
 		case 'error':
-			console.log(message);
-			inputs.get(message.input).error = message.error;
+			if( 'input' in message ) inputs.get(message.input).error = message.error;
+			else console.log(message);
 			break;
 		case 'success':
 			alert('Login success')

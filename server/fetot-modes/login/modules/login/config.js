@@ -8,7 +8,26 @@ const singInModuleConfig = {
 		db: 'clients',
 		collection: 'clients'
 	},
-	response: {}
+	response: {
+		'many-enter-count': {
+			type: 'error',
+			message: {
+				error: ''
+			}
+		},
+		'not-exist': {
+			type: 'error',
+			message: {
+				error: 'Invalid email or password'
+			}
+		},
+		'success': {
+			type: 'success',
+			message: {
+				success: true
+			}
+		}
+	}
 };
 
 singInModuleConfig.response = new Proxy(singInModuleConfig.response, {

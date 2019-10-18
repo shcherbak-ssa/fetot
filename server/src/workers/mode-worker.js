@@ -12,7 +12,7 @@ class ModeWorker {
 	constructor({modules}) {
 		this.modules = modules;
 		this.currentModule = {};
-		this.store = {}
+		this.store = new Map();
 	}
 	
 	static async initMode(modeName) {
@@ -23,8 +23,6 @@ class ModeWorker {
 		this.currentModule.run(options)
 	}
 	async changeCurrentModule(moduleName) {
-		if( !(moduleName in this.store) ) this.store[moduleName] = new Map();
-		
 		this.currentModule = new ModuleWorker(this.modules.get(moduleName));
 		await this.currentModule.init(this.store);
 	}

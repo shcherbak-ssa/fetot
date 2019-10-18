@@ -13,9 +13,10 @@ async function checkEmailWorker({message, mongodb, events, config, store, respon
 	if( emailExist ) return events.emit('response-post-request', config.response['client-exist'](response));
 	
 	let confirmEmailCode = await generateClientId('1234567890', 6);
-	store['sing-in'].set('confirm-email-code', confirmEmailCode);
+	store.set('confirm-email-code', confirmEmailCode)
+	     .set('current-client-email', message.email);
 	
-	events.emit('response-post-request', config.response['success'](response));
+	events.emit('response-post-request', config.response.success(response));
 	await sendMailLetter(config.emailLetterConfig(message.email, confirmEmailCode));
 }
 
