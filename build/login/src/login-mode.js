@@ -48,7 +48,6 @@ async function initLoginModeEvents(loginModeEventsEmitter) {
 		})
 		.on('run-current-module-worker', async () => {
 			await currentModule.worker();
-			loginModeEventsEmitter.emit('change-module', 'button');
 		})
 }
 
@@ -57,6 +56,7 @@ async function initLoginModeEvents(loginModeEventsEmitter) {
 
 async function initNewModule(name) {
 	modeStore.set('current-module', name);
+	
 	currentModule = modules[name];
 	await currentModule.init();
 }
@@ -70,7 +70,7 @@ async function changeCurrentModule(label) {
 		case 'create-account':
 			return 'sing-in';
 	}
-	if( label === 'button' ) switch( currentModule ) {
+	switch( currentModule ) {
 		case 'sing-in':
 			return 'confirm-email';
 		case 'confirm-email':

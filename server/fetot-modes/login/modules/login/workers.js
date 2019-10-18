@@ -5,7 +5,7 @@
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
-async function checkClientWorker({message, mongodb, events, responseConfig, store, responseModule}) {
+async function checkClientWorker(options) {
 
 }
 

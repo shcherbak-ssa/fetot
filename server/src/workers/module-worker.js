@@ -25,7 +25,9 @@ class ModuleWorker {
 	}
 	
 	async init(modeStore) {
-		this.options.mongodb = await MongodbWorker.createCollection(this.config.mongodb);
+		if( 'mongodb' in this.config )
+			this.options.mongodb = await MongodbWorker.createCollection(this.config.mongodb);
+		
 		this.options.store = modeStore
 	}
 	async run(options) {

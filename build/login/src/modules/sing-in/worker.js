@@ -2,9 +2,9 @@
 
 /*** imports [begin] ***/
 
+import EventsEmitter from 'fetot-js-modules/events-emitter';
 import storeWorker from 'fetot-worker-modules/store-worker';
 import fetchRequest from 'fetot-network-modules/fetch-request';
-import {setInputError} from 'fetot-js-modules/input-src';
 
 /*** imports [end] ***/
 /*** init [begin] ***/
@@ -20,7 +20,8 @@ const outputMessage = {
 /*** exports [begin] ***/
 
 async function singInModuleWorker() {
-	let inputs = storeWorker.getGlobalStore('inputs'),
+	let loginModeEventsEmitter = EventsEmitter.getEmitter('login-mode'),
+		inputs = storeWorker.getGlobalStore('inputs'),
 		outputData = new Map();
 	
 	let email = inputs.get('email').value;
@@ -31,20 +32,21 @@ async function singInModuleWorker() {
 		message: outputMessage
 	});
 	
-	await parseServerResponse(inputs, response);
+	await parseServerResponse(inputs, response, loginModeEventsEmitter);
 }
 
 /*** exports [end] ***/
 /*** src [begin] ***/
 
-async function parseServerResponse(inputs, {type, message}) {
+async function parseServerResponse(inputs, {type, message}, loginModeEventsEmitter) {
 	switch( type ) {
 		case 'error':
 			console.log('error', message);
-			setInputError(inputs.get('email'), message.error);
+			inputs.get('email').error = message.error;
 			break;
 		case 'success':
 			console.log('success', message);
+			loginModeEventsEmitter.emit('change-module');
 	}
 }
 

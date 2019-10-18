@@ -3,7 +3,8 @@
 /*** imports [begin] ***/
 
 const singInModule = require('./modules/sing-in'),
-	loginModule = require('./modules/login');
+	loginModule = require('./modules/login'),
+	confirmEmailModule = require('./modules/confirm-email');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
@@ -11,7 +12,8 @@ const singInModule = require('./modules/sing-in'),
 const loginMode = {
 	modules: new Map(Object.entries({
 		'sing-in': singInModule,
-		'login': loginModule
+		'login': loginModule,
+		'confirm-email': confirmEmailModule
 	}))
 };
 

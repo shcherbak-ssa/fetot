@@ -2,6 +2,7 @@
 
 /*** imports [begin] ***/
 
+import EventsEmitter from 'fetot-js-modules/events-emitter';
 import storeWorker from 'fetot-worker-modules/store-worker';
 import fetchRequest from 'fetot-network-modules/fetch-request';
 
@@ -10,7 +11,7 @@ import fetchRequest from 'fetot-network-modules/fetch-request';
 
 const outputMessage = {
 	content: {
-		type: 'check-code',
+		type: 'confirm-email',
 		data: {}
 	}
 };
@@ -19,34 +20,37 @@ const outputMessage = {
 /*** exports [begin] ***/
 
 async function confirmEmailModuleWorker() {
-	let input = storeWorker.getGlobalStore('inputs').get('confirm-email'),
-		{value} = input;
-	
+	const input = storeWorker.getGlobalStore('inputs').get('confirm-email'),
+		loginModeEventsEmitter = EventsEmitter.getEmitter('login-mode');
+		
+	let	{value} = input;
 	if( value.length < 6 ) return;
 	
-	if( /[^\d]/.test(value) ) {
-		input.error = 'Confirmation code can contain only the numbers';
+	if( /[^\w]/i.test(value) ) {
+		input.error = 'Invalid confirmation code';
 		return;
 	}
 	
-	outputMessage.content.data = {'confirm-code': value};
+	outputMessage.content.data = {code: value};
 	let response = await fetchRequest.post({
 		message: outputMessage
 	});
 	
-	await parseServerResponse(response);
+	await parseServerResponse(input, response, loginModeEventsEmitter);
 }
 
 /*** exports [end] ***/
 /*** src [begin] ***/
 
-async function parseServerResponse({type, message}) {
+async function parseServerResponse(input, {type, message}, loginModeEventsEmitter) {
 	switch( type ) {
 		case 'error':
-			console.log(message);
+			console.log('error', message);
+			input.error = message.error;
 			break;
 		case 'success':
-			alert('Login success')
+			console.log('success', message);
+			loginModeEventsEmitter.emit('change-module');
 	}
 }
 

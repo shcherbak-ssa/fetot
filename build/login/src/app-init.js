@@ -18,7 +18,7 @@ const appEventsEmitter = EventsEmitter.createEmitter('app'),
 /*** exports [begin] ***/
 
 async function initApplication() {
-	await storeWorker.appendGlobalStore('inputs', inputsStore);
+	storeWorker.appendGlobalStore('inputs', inputsStore);
 	
 	let modeStore = await loginMode.init();
 	await loginMode.initEvents(loginModeEventsEmitter);
