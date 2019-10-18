@@ -4,6 +4,7 @@
 
 import storeWorker from 'fetot-worker-modules/store-worker';
 import fetchRequest from 'fetot-network-modules/fetch-request';
+import {setInputError} from 'fetot-js-modules/input-src';
 
 /*** imports [end] ***/
 /*** init [begin] ***/
@@ -40,10 +41,7 @@ async function parseServerResponse(inputs, {type, message}) {
 	switch( type ) {
 		case 'error':
 			console.log('error', message);
-			let email = inputs.get('email');
-			
-			email.error = '';
-			email.error = message.error;
+			setInputError(inputs.get('email'), message.error);
 			break;
 		case 'success':
 			console.log('success', message);

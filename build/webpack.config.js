@@ -34,20 +34,16 @@ module.exports = (env) => {
 						'css-loader',
 						'sass-loader'
 					]
-				},
-				// {
-				// 	test: /\.(png|ttf|svg|woff|woff2|eot)$/,
-				// 	exclude: /src/
-				// }
+				}
 			]
 		},
 		resolve: {
 			alias: {
-				'fetot-main-scss': path.join(__dirname, 'src/scss/main.scss'),
-				'fetot-src-scss': path.join(__dirname, 'src/scss/src.scss'),
-				'fetot-components': path.join(__dirname, 'src/components'),
-				'fetot-js-modules': path.join(__dirname, 'src/modules'),
-				'fetot-worker-modules': path.join(__dirname, 'src/modules/workers'),
+				'fetot-main-scss': path.join(__dirname, 'src', 'scss', 'main.scss'),
+				'fetot-src-scss': path.join(__dirname, 'src', 'scss', 'src.scss'),
+				'fetot-components': path.join(__dirname, 'src', 'components'),
+				'fetot-js-modules': path.join(__dirname, 'src', 'modules'),
+				'fetot-worker-modules': path.join(__dirname, 'src', 'modules', 'workers'),
 				'fetot-network-modules': path.join(__dirname, 'src', 'modules', 'network')
 			}
 		},

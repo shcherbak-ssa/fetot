@@ -2,9 +2,7 @@
 
 /*** exports [begin] ***/
 
-const emitters = new Map();
-
-class Events {
+class EventsEmitter {
 	constructor(emitter) {
 		this.emitter = emitter;
 		this.handlers = new Map();
@@ -17,19 +15,21 @@ class Events {
 		};
 	}
 	
-	// static emitters = new Map();
+	/*** static properties and methods ***/
+	static Emitters = new Map();
 	static createEmitter(name) {
-		let events = new Events(name);
-		// Events.emitters.set(name, events);
-		emitters.set(name, events);
-		return events;
+		let emitter = new EventsEmitter(name);
+		EventsEmitter.Emitters.set(name, emitter);
+		
+		return emitter;
 	}
 	static getEmitter(name) {
-		return emitters.get(name)
+		return EventsEmitter.Emitters.get(name)
 	}
 	
+	/*** work methods ***/
 	on(event, handler) {
-		event = this._getEventName(event);
+		event = this.__getEventName(event);
 		
 		this.handlers.set(event, handler);
 		document.addEventListener(event, this.handleObject);
@@ -37,7 +37,7 @@ class Events {
 		return this;
 	}
 	remove(event) {
-		event = this._getEventName(event);
+		event = this.__getEventName(event);
 		
 		this.handlers.delete(event);
 		document.removeEventListener(event, this.handleObject);
@@ -45,15 +45,16 @@ class Events {
 		return this;
 	}
 	emit(event, ...args) {
-		event = this._getEventName(event);
+		event = this.__getEventName(event);
 		document.dispatchEvent(new CustomEvent(event, {detail: args}))
 	}
 	
-	_getEventName(event) {
+	/*** privet methods ***/
+	__getEventName(event) {
 		return `${this.emitter}-${event}`;
 	}
 }
 
 /*** exports [end] ***/
 
-export default Events;
+export default EventsEmitter;

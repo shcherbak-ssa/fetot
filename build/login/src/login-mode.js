@@ -40,14 +40,15 @@ async function initLoginMode() {
 	
 	return modeStore;
 }
-async function initLoginModeEvents(loginModeEvents) {
-	loginModeEvents
+async function initLoginModeEvents(loginModeEventsEmitter) {
+	loginModeEventsEmitter
 		.on('change-module', async (label) => {
 			let currentModuleName = await changeCurrentModule(label);
 			await initNewModule(currentModuleName);
 		})
-		.on('run-current-module-worker', async (label) => {
+		.on('run-current-module-worker', async () => {
 			await currentModule.worker();
+			loginModeEventsEmitter.emit('change-module', 'button');
 		})
 }
 

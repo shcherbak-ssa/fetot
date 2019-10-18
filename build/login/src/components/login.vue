@@ -10,7 +10,7 @@
 
 <script>
   import fetotContainer from 'fetot-components/fetot-container.vue';
-  import loginWorkspace from './src/components/workspace.vue';
+  import loginWorkspace from './workspace.vue';
 
 	export default {
 		name: 'login',
