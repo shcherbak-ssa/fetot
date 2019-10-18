@@ -2,15 +2,12 @@
 
 /*** exports [begin] ***/
 
-async function confirmEmailWorker({message, events, config, store, response}) {
-	let confirmEmailCode = store['sing-in'].get('confirm-email-code'),
-		responseLabel = message.code === confirmEmailCode ? 'success' : 'invalid-code';
-	
-	events.emit('response-post-request', config.response[responseLabel](response));
+async function createAccountWorker({message, mongodb, events, config, store, response}) {
+
 }
 
 /*** exports [end] ***/
 
 module.exports = {
-	'confirm-email': confirmEmailWorker
+	'create-account': createAccountWorker
 };

@@ -2,45 +2,38 @@
 
 /*** imports [begin] ***/
 
+import OutputDataWorker from 'fetot-worker-modules/output-data-worker';
 import storeWorker from 'fetot-worker-modules/store-worker';
 import fetchRequest from 'fetot-network-modules/fetch-request';
 
 /*** imports [end] ***/
-
-const outputMessage = {
-	content: {
-		type: 'check-client',
-		data: {}
-	}
-};
-
 /*** exports [begin] ***/
 
 async function loginModuleWorker() {
-	let inputs = storeWorker.getGlobalStore('inputs'),
-		formData = new FormData();
+	const inputs = storeWorker.getGlobalStore('inputs'),
+		outputDataWorker = new OutputDataWorker('check-client');
 	
-	let email = inputs.get('email').value,
-		password = inputs.get('password').value;
+	let email = inputs.get('email').value;
+	outputDataWorker.set('email', email);
 	
-	formData.set('email', email);
-	formData.set('password', password);
+	let password = inputs.get('password').value;
+	outputDataWorker.set('password', password);
 	
-	outputMessage.content.data = formData;
 	let response = await fetchRequest.post({
-		message: outputMessage
+		message: outputDataWorker.getData()
 	});
 	
-	await parseServerResponse(response);
+	await parseServerResponse(inputs, response);
 }
 
 /*** exports [end] ***/
 /*** src [begin] ***/
 
-async function parseServerResponse({type, message}) {
+async function parseServerResponse(inputs, {type, message}) {
 	switch( type ) {
 		case 'error':
 			console.log(message);
+			inputs.get(message.input).error = message.error;
 			break;
 		case 'success':
 			alert('Login success')
