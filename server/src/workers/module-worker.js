@@ -39,8 +39,9 @@ class ModuleWorker {
 			this.options.response = options.response || options.socket;
 			
 			await this.workers[type](this.options);
-		} catch( err ) {
-			console.log(err)
+		} catch( message ) {
+			let responseOptions = {label: 'success', message, response: options.response};
+			responseEventEmitter.emit('response-post-request', responseOptions)
 		}
 	}
 	async validate(message) {
@@ -50,15 +51,8 @@ class ModuleWorker {
 		return Promise.all(messageMap.map(([key, value]) => {
 			if( key in this.schema ) {
 				let schema = this.schema[key];
-				if( typeof value !== typeof schema.type() ) {
-					let error = new Error('invalid type value');
-					return Promise.reject(error);
-				}
-				
-				if( !schema.validate(value) ) {
-					let error = new Error('invalid value');
-					return Promise.reject(error);
-				}
+				if( typeof value !== typeof schema.type() || !schema.validate(value) )
+					return Promise.reject(schema.error);
 			} else {
 				let error = new Error('invalid key');
 				return Promise.reject(error);

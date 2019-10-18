@@ -3,14 +3,12 @@
 /*** exports [begin] ***/
 
 const singInModuleConfig = {
-	name: 'confirm-email',
+	name: 'create-account',
+	mongodb: {
+		db: 'clients',
+		collection: 'clients'
+	},
 	response: {
-		'invalid-code': {
-			type: 'error',
-			message: {
-				error: 'Invalid confirmation code'
-			}
-		},
 		'success': {
 			type: 'success',
 			message: {}
