@@ -14,14 +14,19 @@ const clientDirname = join(process.cwd(), 'client'),
 		'html': join(clientDirname, 'view'),
 		'js': join(clientDirname, 'js'),
 		'ico': clientAssetsDirname,
-		'png': join(clientAssetsDirname, 'images')
+		'png': join(clientAssetsDirname, 'images'),
+		'f-ttf': join(clientAssetsDirname, 'fonts'),
+		'i-ttf': join(clientAssetsDirname, 'icons')
 	}));
 
 /*** init [end] ***/
 /*** exports [begin] ***/
 
-function getClientFilename(type, filename) {
-	return join(clientDirnameMap.get(type), `${filename}.${type}`)
+function getClientFilename(type, filename, isFont) {
+	if( isFont === undefined ) return join(clientDirnameMap.get(type), `${filename}.${type}`);
+	
+	let key = isFont ? `f-${type}` : `i-${type}`;
+	return join(clientDirnameMap.get(key), `${filename}.${type}`)
 }
 
 /*** exports [end] ***/

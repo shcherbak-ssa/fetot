@@ -1,7 +1,8 @@
 'use strict';
 
 const path = require('path'),
-	VueLoader = require('vue-loader/lib/plugin');
+	VueLoader = require('vue-loader/lib/plugin'),
+	StringReplacePlugin = require("string-replace-webpack-plugin");
 
 module.exports = (env) => {
 	let outputFilename = `${env.mode}.js`,
@@ -13,6 +14,7 @@ module.exports = (env) => {
 			path: path.resolve(__dirname, '../client/js/'),
 			filename: outputFilename,
 		},
+		devtool: 'inline-source-map',
 		module: {
 			rules: [
 				{
@@ -31,9 +33,31 @@ module.exports = (env) => {
 					test: /\.scss$/,
 					use: [
 						'vue-style-loader',
-						'css-loader',
+						{
+							loader: 'replace-string-loader',
+							options: {
+								search: /url\('\.\.\/\.\.\/assets\/(\w+)\.(ttf|woff2)'\)/ig,
+								replace: function (match, filename, ext) {
+									return `url('${filename}.${ext}')`
+								},
+								file: false
+							}
+						},
+						{
+							loader: 'css-loader',
+							options: {
+								url: false
+							}
+						},
 						'sass-loader'
 					]
+				},
+				{
+					test: /\.ttf$/,
+					loader: 'file-loader',
+					options: {
+						name: '../assets/[name].[ext]'
+					}
 				}
 			]
 		},
@@ -48,7 +72,8 @@ module.exports = (env) => {
 			}
 		},
 		plugins: [
-			new VueLoader()
+			new VueLoader(),
+			new StringReplacePlugin()
 		]
 	}
 };

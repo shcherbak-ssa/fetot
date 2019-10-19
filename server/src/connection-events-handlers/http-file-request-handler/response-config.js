@@ -43,6 +43,18 @@ const responseConfig = {
 				}
 			}
 		}
+	},
+	ttf: {
+		valid: [ 'fRobotoRegular', 'fRobotoBold', 'fRobotoLight' ],
+		async options(filename) {
+			return {
+				filename: getClientFilename('ttf', filename, filename[0] === 'f'),
+				statusCode: 200,
+				headers: {
+					'Content-Type': 'application/x-font-ttf'
+				}
+			}
+		}
 	}
 };
 
