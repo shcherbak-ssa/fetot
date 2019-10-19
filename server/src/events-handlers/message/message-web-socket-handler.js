@@ -2,15 +2,15 @@
 
 /*** imports [begin] ***/
 
-const parseInputMessage = require('../../lib/parse-input-message');
+const parseInputMessage = require('../../../lib/parse-input-message');
 
 /*** imports [end] ***/
 /*** imports [end] ***/
 
-async function webSocketMessageHandler(message, socket) {
+async function messageWebSocketHandler(message, socket) {
 	message = await parseInputMessage({type: 'ws-message', message});
 }
 
 /*** imports [end] ***/
 
-module.exports = webSocketMessageHandler;
+module.exports = messageWebSocketHandler;

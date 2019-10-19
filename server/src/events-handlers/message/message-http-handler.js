@@ -2,15 +2,15 @@
 
 /*** imports [begin] ***/
 
-const parseInputMessage = require('../../lib/parse-input-message'),
-	getClientIpAddress = require('../../lib/get-client-ip-address'),
+const parseInputMessage = require('../../../lib/parse-input-message'),
+	getClientIpAddress = require('../../../lib/get-client-ip-address'),
 	
-	{clientEventEmitter} = require('../server-events-emitters');
+	{clientEventEmitter} = require('../../server-events-emitters');
 
 /*** imports [end] ***/
 /*** imports [end] ***/
 
-async function httpMessageHandler(request, response) {
+async function messageHttpHandler(request, response) {
 	let message = await parseInputMessage({type: 'post-message', request});
 	if( !message ) {
 		console.log(new Error('invalid input message'));
@@ -25,4 +25,4 @@ async function httpMessageHandler(request, response) {
 
 /*** imports [end] ***/
 
-module.exports = httpMessageHandler;
+module.exports = messageHttpHandler;

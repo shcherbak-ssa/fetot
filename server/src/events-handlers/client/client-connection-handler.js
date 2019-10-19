@@ -2,11 +2,11 @@
 
 /*** imports [begin] ***/
 
-const ClientWorker = require('../workers/client-worker'),
-	ModeWorker = require('../workers/mode-worker'),
+const ClientWorker = require('../../workers/client-worker'),
+	ModeWorker = require('../../workers/mode-worker'),
 	
-	{generateClientId} = require('../../lib/generate-client-id'),
-	{responseEventEmitter} = require('../server-events-emitters');
+	{generateClientId} = require('../../../lib/generate-client-id'),
+	{responseEventEmitter} = require('../../server-events-emitters');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/

@@ -8,16 +8,16 @@ const {requestEventEmitter, connectionEventEmitter, messageEventEmitter,
 	requestRootHttpHandler = require('./events-handlers/request/request-root-http-handler'),
 	requestFileHttpHandler = require('./events-handlers/request/request-file-http-handler'),
 	
-	httpConnectionHandler = require('./connection-events-handlers/http-connection-handler'),
-	mongodbConnectionHandler = require('./connection-events-handlers/mongodb-connection-handler'),
+	connectionHttpHandler = require('./events-handlers/connection/connection-http-handler'),
+	connectionMongodbHandler = require('./events-handlers/connection/connection-mongodb-handler'),
 	
-	httpMessageHandler = require('./message-events-handlers/http-message-handler'),
-	webSocketMessageHandler = require('./message-events-handlers/web-socket-message-handler'),
+	messageHttpHandler = require('./events-handlers/message/message-http-handler'),
+	messageWebSocketHandler = require('./events-handlers/message/message-web-socket-handler'),
 	
-	clientConnectionHandler = require('./client-events-handlers/client-connection-handler'),
-	clientCheckTypeHandler = require('./client-events-handlers/client-check-type-handler'),
-	clientMessageHandler = require('./client-events-handlers/client-message-handler'),
-	clientChangeModuleHandler = require('./client-events-handlers/client-change-module-handler'),
+	clientConnectionHandler = require('./events-handlers/client/client-connection-handler'),
+	clientCheckTypeHandler = require('./events-handlers/client/client-check-type-handler'),
+	clientMessageHandler = require('./events-handlers/client/client-message-handler'),
+	clientChangeModuleHandler = require('./events-handlers/client/client-change-module-handler'),
 	
 	responseError404Handler = require('./events-handlers/response/response-error404-handler'),
 	responseFileHandler = require('./events-handlers/response/response-file-handler'),
@@ -34,13 +34,13 @@ async function setRequestEventsHandlers() {
 }
 async function setConnectionEventsHandlers() {
 	connectionEventEmitter
-		.on('http-connection', httpConnectionHandler)
-		.on('mongodb-connection', mongodbConnectionHandler)
+		.on('connection-http', connectionHttpHandler)
+		.on('connection-mongodb', connectionMongodbHandler)
 }
 async function setMessageEventsHandlers() {
 	messageEventEmitter
-		.on('http-message', httpMessageHandler)
-		.on('web-socket-message', webSocketMessageHandler)
+		.on('message-http', messageHttpHandler)
+		.on('message-web-socket', messageWebSocketHandler)
 }
 async function setClientEventsHandlers() {
 	clientEventEmitter

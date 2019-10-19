@@ -2,8 +2,8 @@
 
 /*** imports [begin] ***/
 
-const {clientEventEmitter} = require('../server-events-emitters'),
-	ClientWorker = require('../workers/client-worker');
+const {clientEventEmitter} = require('../../server-events-emitters'),
+	ClientWorker = require('../../workers/client-worker');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/

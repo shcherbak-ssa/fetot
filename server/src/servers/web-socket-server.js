@@ -14,7 +14,7 @@ async function createWebSocketServer(httpServer) {
 	webSocketServer.on('connection', (socket) => {
 		socket
 			.on('message', (message) => {
-				messageEventEmitter.emit('web-socket-message', message, socket)
+				messageEventEmitter.emit('message-web-socket', message, socket)
 			})
 			.on('close', (event) => {
 				console.log(event);

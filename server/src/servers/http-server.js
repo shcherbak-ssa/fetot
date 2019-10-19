@@ -49,9 +49,9 @@ async function getRequestParse({url, headers}, response) {
 async function postRequestParse(request, response) {
 	switch( request.url ) {
 		case '/':
-			return messageEventEmitter.emit('http-message', request, response);
+			return messageEventEmitter.emit('message-http', request, response);
 		case '/connection':
-			return connectionEventEmitter.emit('http-connection', request, response);
+			return connectionEventEmitter.emit('connection-http', request, response);
 		default:
 			response.end('Oops :)')
 	}

@@ -2,7 +2,7 @@
 
 /*** imports [begin] ***/
 
-const {responseEventEmitter} = require('../server-events-emitters');
+const {responseEventEmitter} = require('../../server-events-emitters');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/

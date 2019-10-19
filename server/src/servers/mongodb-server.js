@@ -19,7 +19,7 @@ async function createMongodbServer() {
 	
 	return mongoClient.connect((err, client) => {
 		if( err ) return Promise.reject(err);
-		connectionEventEmitter.emit('mongodb-connection', client);
+		connectionEventEmitter.emit('connection-mongodb', client);
 	})
 }
 
