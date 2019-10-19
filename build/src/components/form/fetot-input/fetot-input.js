@@ -16,7 +16,7 @@ export default {
   	isActive() {
 		  this.setStates(1, 0, 0);
 		  this.input.error = '';
-	  },
+		},
 		isBlur({target}) {
   		this.setStates(0, !!target.value,0)
 		},
@@ -38,5 +38,6 @@ export default {
 	},
 	mounted() {
   	this.setStates(0, !!this.input.value, 0);
+		this.input.error = '';
 	}
 }
