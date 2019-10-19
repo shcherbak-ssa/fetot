@@ -34,16 +34,6 @@ module.exports = (env) => {
 					use: [
 						'vue-style-loader',
 						{
-							loader: 'replace-string-loader',
-							options: {
-								search: /url\('\.\.\/\.\.\/assets\/(\w+)\.(ttf|woff2)'\)/ig,
-								replace: function (match, filename, ext) {
-									return `url('${filename}.${ext}')`
-								},
-								file: false
-							}
-						},
-						{
 							loader: 'css-loader',
 							options: {
 								url: false
@@ -53,10 +43,10 @@ module.exports = (env) => {
 					]
 				},
 				{
-					test: /\.ttf$/,
+					test: /\.(ttf|eot|woff|woff2|svg)$/,
 					loader: 'file-loader',
 					options: {
-						name: '../assets/[name].[ext]'
+						name: '../assets/build/[name].[ext]'
 					}
 				}
 			]

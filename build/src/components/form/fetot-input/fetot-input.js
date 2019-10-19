@@ -1,3 +1,5 @@
+import fetotIcon from '../../icons/fetot-icon.vue';
+
 export default {
   name: 'fetot-input',
 	props: {
@@ -11,6 +13,9 @@ export default {
 			  'has-error': false
 		  }
 		}
+	},
+	components: {
+  	'fetot-icon': fetotIcon
 	},
 	methods: {
   	isActive() {

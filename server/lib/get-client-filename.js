@@ -16,7 +16,11 @@ const clientDirname = join(process.cwd(), 'client'),
 		'ico': clientAssetsDirname,
 		'png': join(clientAssetsDirname, 'images'),
 		'f-ttf': join(clientAssetsDirname, 'fonts'),
-		'i-ttf': join(clientAssetsDirname, 'icons')
+		'i-ttf': join(clientAssetsDirname, 'icons'),
+		'i-svg': join(clientAssetsDirname, 'icons'),
+		'i-eot': join(clientAssetsDirname, 'icons'),
+		'i-woff': join(clientAssetsDirname, 'icons'),
+		'i-woff2': join(clientAssetsDirname, 'icons')
 	}));
 
 /*** init [end] ***/

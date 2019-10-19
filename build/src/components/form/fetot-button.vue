@@ -17,6 +17,7 @@
     background: $fetot-blue;
     color: $fetot-light-gray;
     cursor: pointer;
+    font: 18px 'roboto-medium', sans-serif;
     width: 300px;
     height: 42px;
     transition: .4s;

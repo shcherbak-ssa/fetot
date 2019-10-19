@@ -16,8 +16,7 @@
   .fetot-link {
     color: $fetot-azure;
     cursor: pointer;
-    font-weight: lighter;
-    font-family: sans-serif;
+    font: 14px 'roboto-light', sans-serif;
     transition: .2s;
 
     &:hover {

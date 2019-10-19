@@ -1,5 +1,6 @@
 @import 'src.scss';
 @import 'assets/fonts.scss';
+@import 'assets/icons.scss';
 
 * {
   margin: 0;
@@ -16,4 +17,8 @@ body {
   width: 100vw;
   height: 100vh;
   position: relative;
+}
+
+[data-icon] {
+  font-family: 'icons-font';
 }

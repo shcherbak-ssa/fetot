@@ -40,7 +40,7 @@ async function getRequestParse({url, headers}, response) {
 	switch( true ) {
 		case url === '/':
 			return requestEventEmitter.emit('request-root-http', headers, response);
-		case /\/[-a-z0-9]+\.(js|css|ico|png)/i.test(url):
+		case /\/[-\w]+\.\w{1,5}/i.test(url):
 			return requestEventEmitter.emit('request-file-http', url, response);
 		default:
 			responseEventEmitter.emit('response-error-404', response);

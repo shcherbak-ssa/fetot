@@ -1,6 +1,6 @@
 <template>
   <fetot-icon>
-    <div class="fetot-icon-click" @click="$emit('icon-click')">
+    <div class="fetot-icon-click" @click="$emit('fetot-icon-click')">
       <slot></slot>
     </div>
   </fetot-icon>
