@@ -2,11 +2,12 @@
 
 /*** imports [begin] ***/
 
-const {connectionEventEmitter, messageEventEmitter,
+const {requestEventEmitter, connectionEventEmitter, messageEventEmitter,
 	clientEventEmitter, responseEventEmitter} = require('./server-events-emitters'),
 	
-	httpRootRequestHandler = require('./connection-events-handlers/http-root-request-handler'),
-	httpFileRequestHandler = require('./connection-events-handlers/http-file-request-handler'),
+	requestRootHttpHandler = require('./events-handlers/request/request-root-http-handler'),
+	requestFileHttpHandler = require('./events-handlers/request/request-file-http-handler'),
+	
 	httpConnectionHandler = require('./connection-events-handlers/http-connection-handler'),
 	mongodbConnectionHandler = require('./connection-events-handlers/mongodb-connection-handler'),
 	
@@ -18,18 +19,21 @@ const {connectionEventEmitter, messageEventEmitter,
 	clientMessageHandler = require('./client-events-handlers/client-message-handler'),
 	clientChangeModuleHandler = require('./client-events-handlers/client-change-module-handler'),
 	
-	responseError404Handler = require('./response-events-handlers/response-error404-handler'),
-	responseFileHandler = require('./response-events-handlers/response-file-handler'),
-	responsePostRequestHandler = require('./response-events-handlers/response-post-request-handler'),
-	responseWebSocketHandler = require('./response-events-handlers/response-web-socket-handler');
+	responseError404Handler = require('./events-handlers/response/response-error404-handler'),
+	responseFileHandler = require('./events-handlers/response/response-file-handler'),
+	responsePostRequestHandler = require('./events-handlers/response/response-post-request-handler'),
+	responseWebSocketHandler = require('./events-handlers/response/response-web-socket-handler');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
+async function setRequestEventsHandlers() {
+	requestEventEmitter
+		.on('request-root-http', requestRootHttpHandler)
+		.on('request-file-http', requestFileHttpHandler)
+}
 async function setConnectionEventsHandlers() {
 	connectionEventEmitter
-		.on('http-root-request', httpRootRequestHandler)
-		.on('http-file-request', httpFileRequestHandler)
 		.on('http-connection', httpConnectionHandler)
 		.on('mongodb-connection', mongodbConnectionHandler)
 }
@@ -57,6 +61,7 @@ async function setResponseEventsHandlers() {
 /*** exports [end] ***/
 
 module.exports = {
+	setRequestEventsHandlers,
 	setConnectionEventsHandlers,
 	setMessageEventsHandlers,
 	setClientEventsHandlers,

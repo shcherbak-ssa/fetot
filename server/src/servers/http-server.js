@@ -6,7 +6,7 @@ const http = require('http'),
 	server = http.createServer(),
 	
 	{connectionEventEmitter, messageEventEmitter,
-		responseEventEmitter} = require('../server-events-emitters');
+	requestEventEmitter, responseEventEmitter} = require('../server-events-emitters');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
@@ -39,9 +39,9 @@ async function requestParse(request, response) {
 async function getRequestParse({url, headers}, response) {
 	switch( true ) {
 		case url === '/':
-			return connectionEventEmitter.emit('http-root-request', headers, response);
+			return requestEventEmitter.emit('request-root-http', headers, response);
 		case /\/[-a-z0-9]+\.(js|css|ico|png)/i.test(url):
-			return connectionEventEmitter.emit('http-file-request', url, response);
+			return requestEventEmitter.emit('request-file-http', url, response);
 		default:
 			responseEventEmitter.emit('response-error-404', response);
 	}

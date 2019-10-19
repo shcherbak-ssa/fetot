@@ -2,7 +2,7 @@
 
 /*** imports [begin] ***/
 
-const getClientFilename = require('../../../lib/get-client-filename');
+const getClientFilename = require('../../../../lib/get-client-filename');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/

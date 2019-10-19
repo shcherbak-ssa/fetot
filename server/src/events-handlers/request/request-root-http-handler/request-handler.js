@@ -3,12 +3,12 @@
 /*** imports [begin] ***/
 
 const responseConfig = require('./response-config'),
-	{responseEventEmitter} = require('../../server-events-emitters');
+	{responseEventEmitter} = require('../../../server-events-emitters');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
-async function httpRootRequestHandler(headers, response) {
+async function requestRootHttpHandler(headers, response) {
 	let responseOptions = await parseRequest(headers);
 	responseEventEmitter.emit('response-file', responseOptions, response);
 }
@@ -33,4 +33,4 @@ async function parseCookie(cookie) {
 
 /*** src [end] ***/
 
-module.exports = httpRootRequestHandler;
+module.exports = requestRootHttpHandler;

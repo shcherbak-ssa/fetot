@@ -2,7 +2,7 @@
 
 /*** imports [begin] ***/
 
-const {sendError404} = require('../../lib/send-file');
+const {sendError404} = require('../../../lib/send-file');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/

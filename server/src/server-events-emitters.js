@@ -13,7 +13,7 @@ class ServerEventEmitter extends Events {}
 /*** exports [begin] ***/
 
 let eventsEmitters = Object.fromEntries(
-	['connection', 'message', 'client', 'response'].map((item) => {
+	['request', 'connection', 'message', 'client', 'response'].map((item) => {
 		return [item, new ServerEventEmitter()]
 	})
 );
@@ -21,6 +21,7 @@ let eventsEmitters = Object.fromEntries(
 /*** exports [end] ***/
 
 module.exports = {
+	requestEventEmitter: eventsEmitters.request,
 	connectionEventEmitter: eventsEmitters.connection,
 	messageEventEmitter: eventsEmitters.message,
 	clientEventEmitter: eventsEmitters.client,
