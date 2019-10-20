@@ -5,6 +5,7 @@
 import OutputDataWorker from 'fetot-worker-modules/output-data-worker';
 import storeWorker from 'fetot-worker-modules/store-worker';
 import fetchRequest from 'fetot-network-modules/fetch-request';
+import EventsEmitter from 'fetot-js-modules/events-emitter';
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
@@ -37,7 +38,8 @@ async function parseServerResponse(inputs, {type, message}) {
 			else console.log(message);
 			break;
 		case 'success':
-			alert('Login success')
+			console.log('Login success', message);
+			EventsEmitter.getEmitter('login-mode').emit('save-client', message.id);
 	}
 }
 

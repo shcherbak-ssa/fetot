@@ -8,13 +8,11 @@ const getClientFilename = require('../../../../lib/get-client-filename');
 /*** exports [begin] ***/
 
 const responseConfig = {
-	async root(filename) {
-		return {
-			filename: getClientFilename('html', filename),
-			statusCode: 200,
-			headers: {
-				'Content-Type': 'text/html'
-			}
+	root: {
+		filename: '',
+		statusCode: 200,
+		headers: {
+			'Content-Type': 'text/html'
 		}
 	}
 };
@@ -24,7 +22,10 @@ const responseConfig = {
 module.exports = new Proxy(responseConfig, {
 	get(target, prop) {
 		return async () => {
-			return await target.root(prop);
+			let root = target.root;
+			root.filename = getClientFilename('html', prop);
+			
+			return root;
 		}
 	}
 });

@@ -49,6 +49,14 @@ async function initLoginModeEvents(loginModeEventsEmitter) {
 		.on('run-current-module-worker', async () => {
 			await currentModule.worker();
 		})
+		.on('save-client', (clientID) => {
+			locStorage.setStorageItem('client-id', clientID);
+			locStorage.setStorageItem('client-exist', true);
+			
+			document.cookie = '$fetot={"client":true};path=/;max-age=60';
+			console.log('local-storage', localStorage);
+			console.log('cookie', document.cookie);
+		})
 }
 
 /*** exports [begin] ***/
