@@ -7,7 +7,7 @@ const validationSchema = {
 		checkEmpty: true,
 		type: String,
 		validate(value) {
-			return /^[^@\s]+@(gmail|mail)\.(com|ru)/i.test(value)
+			return /^[^@\s]+@(gmail|mail)\.(com|ru)$/i.test(value)
 		},
 		error: {
 			input: 'email',

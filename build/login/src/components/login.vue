@@ -1,7 +1,7 @@
 <template>
   <fetot-container>
     <div class="login">
-      <transition name="change-module" mode="out-in">
+      <transition name="change-module" mode="out-in" appear>
         <login-workspace :key="options.store['current-module']" :options="setWorkspaceOptions"/>
       </transition>
     </div>
