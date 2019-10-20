@@ -54,8 +54,7 @@ async function initLoginModeEvents(loginModeEventsEmitter) {
 			locStorage.setStorageItem('client-exist', true);
 			
 			document.cookie = '$fetot={"client":true};path=/;max-age=60';
-			console.log('local-storage', localStorage);
-			console.log('cookie', document.cookie);
+			window.location.reload();
 		})
 }
 
