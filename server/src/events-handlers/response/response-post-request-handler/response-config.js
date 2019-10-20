@@ -3,18 +3,10 @@
 /*** exports [begin] ***/
 
 const responseConfig = {
-	async success() {
-		return {
-			statusCode: 200,
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		}
-	},
-	async error() {
-		return {
-			statusCode: 404,
-			headers: {}
+	common: {
+		statusCode: 200,
+		headers: {
+			'Content-Type': 'application/json'
 		}
 	}
 };
@@ -24,7 +16,8 @@ const responseConfig = {
 module.exports = new Proxy(responseConfig, {
 	get(target, prop) {
 		return async () => {
-			return await target[prop]()
+			if( prop === 'common' ) return target.common;
+			return Object.assign({}, target.common, target[prop]);
 		}
 	}
 });

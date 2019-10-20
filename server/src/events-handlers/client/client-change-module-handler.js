@@ -13,7 +13,6 @@ async function clientChangeModuleHandler(options) {
 	
 	switch( options.responseModule ) {
 		case 'http': return responseEventEmitter.emit('response-post-request', {
-				label: 'success',
 				response: options.response,
 				message: { type: 'success' }
 			});

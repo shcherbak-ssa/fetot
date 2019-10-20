@@ -16,18 +16,6 @@ const singInModuleConfig = {
 	}
 };
 
-singInModuleConfig.response = new Proxy(singInModuleConfig.response, {
-	get(target, prop) {
-		return (responseModule) => {
-			return {
-				label: 'success',
-				message: target[prop],
-				response: responseModule
-			}
-		}
-	}
-});
-
 /*** exports [end] ***/
 
 module.exports = singInModuleConfig;

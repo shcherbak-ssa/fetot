@@ -20,10 +20,11 @@ async function clientConnectionHandler({message, clientIP, response}) {
 	ClientWorker.activeClients.set(clientID, clientWorker);
 	
 	responseEventEmitter.emit('response-post-request', {
-		label: 'success',
 		response,
 		message: {
-			message: {client: clientID}
+			message: {
+				client: clientID
+			}
 		}
 	})
 }

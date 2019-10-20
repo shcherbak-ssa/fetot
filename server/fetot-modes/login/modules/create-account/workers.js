@@ -6,8 +6,8 @@ async function createAccountWorker({message, mongodb, events, config, store, res
 	let email = store.get('current-client-email'),
 		{fullname, password} = message;
 	
-	let info = await mongodb.insertDocument({email, password, fullname});
-	events.emit('response-post-request', config.response.success(response));
+	let document = await mongodb.insertDocument({email, password, fullname});
+	events.emit('response-post-request', config.response.success(response, {id: document._id}));
 	
 	console.log('new client:\n', info);
 }

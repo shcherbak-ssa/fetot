@@ -12,10 +12,10 @@ async function checkClientWorker({message, mongodb, events, config, store, respo
 	if( enterCount === 7 ) return events.emit('response-post-request', config.response['many-enter-count'](response));
 	store.set('enter-count', enterCount + 1);
 	
-	let exist = await mongodb.findDocument(message);
-	if( !exist ) return events.emit('response-post-request', config.response['not-exist'](response));
+	let document = await mongodb.findDocument(message);
+	if( !document ) return events.emit('response-post-request', config.response['not-exist'](response));
 	
-	events.emit('response-post-request', config.response.success(response));
+	events.emit('response-post-request', config.response.success(response, {id: document._id}));
 }
 
 /*** exports [end] ***/

@@ -4,6 +4,7 @@
 
 const MongodbWorker = require('../mongodb-worker'),
 	validateWorker = require('./validate-worker'),
+	configWorker = require('./config-worker'),
 	
 	{responseEventEmitter} = require('../../server-events-emitters');
 
@@ -12,7 +13,7 @@ const MongodbWorker = require('../mongodb-worker'),
 
 class ModuleWorker {
 	constructor({config, schema, workers}) {
-		this.config = config;
+		this.config = configWorker(config);
 		this.schema = schema;
 		this.workers = workers;
 		
@@ -42,14 +43,10 @@ class ModuleWorker {
 			
 			await this.workers[type](this.options);
 		} catch( errorMessage ) {
-			responseEventEmitter.emit(
-				'response-post-request',
-				{
-					label: 'success',
-					response: options.response,
-					message: {type: 'error', message: errorMessage}
-				}
-			)
+			responseEventEmitter.emit('response-post-request', {
+				response: options.response,
+				message: {type: 'error', message: errorMessage}
+			})
 		}
 	}
 	async validate(message) {
