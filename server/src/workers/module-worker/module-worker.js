@@ -2,8 +2,10 @@
 
 /*** imports [begin] ***/
 
-const MongodbWorker = require('./mongodb-worker'),
-	{responseEventEmitter} = require('../server-events-emitters');
+const MongodbWorker = require('../mongodb-worker'),
+	validateWorker = require('./validate-worker'),
+	
+	{responseEventEmitter} = require('../../server-events-emitters');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
@@ -39,25 +41,19 @@ class ModuleWorker {
 			this.options.response = options.response || options.socket;
 			
 			await this.workers[type](this.options);
-		} catch( message ) {
-			let responseOptions = {label: 'success', message, response: options.response};
-			responseEventEmitter.emit('response-post-request', responseOptions)
+		} catch( errorMessage ) {
+			responseEventEmitter.emit(
+				'response-post-request',
+				{
+					label: 'success',
+					response: options.response,
+					message: {type: 'error', message: errorMessage}
+				}
+			)
 		}
 	}
 	async validate(message) {
-		let messageMap = Object.entries(message);
-		if( messageMap.length !== this.schema.__length ) return Promise.reject();
-		
-		return Promise.all(messageMap.map(([key, value]) => {
-			if( key in this.schema ) {
-				let schema = this.schema[key];
-				if( typeof value !== typeof schema.type() || !schema.validate(value) )
-					return Promise.reject(schema.error);
-			} else {
-				let error = new Error('invalid key');
-				return Promise.reject(error);
-			}
-		}))
+		return await validateWorker(this.schema, message)
 	}
 }
 
