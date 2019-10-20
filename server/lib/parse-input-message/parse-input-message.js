@@ -2,15 +2,13 @@
 
 /*** imports [begin] ***/
 
-const parseMessage = require('./parse-message'),
-	validateMessage = require('./validate-message');
+const parseMessage = require('./parse-message');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
 async function parseInputMessage(options) {
-	let message = await parseMessage(options);
-	return await validateMessage(message);
+	return await parseMessage(options);
 }
 
 /*** exports [end] ***/

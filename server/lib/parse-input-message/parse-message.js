@@ -3,8 +3,13 @@
 /*** export [begin] ***/
 
 async function parseMessage(options) {
-	let message = await parse(options);
-	return JSON.parse(message)
+	try {
+		let message = await parse(options);
+		return JSON.parse(message)
+	} catch( err ) {
+		console.log(err);
+		return false;
+	}
 }
 
 /*** export [end] ***/
@@ -27,6 +32,9 @@ async function parsePostMessage({request}) {
 			})
 			.on('end', () => {
 				success( message );
+			})
+			.on('error', () => {
+				error()
 			})
 	})
 }
