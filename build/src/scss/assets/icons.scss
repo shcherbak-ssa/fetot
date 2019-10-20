@@ -1,10 +1,21 @@
 @font-face {
   font-family: 'icons-font';
-  src: url('icons.eot') format('embedded-opentype'),
-  url('icons.woff2') format('woff2'),
-  url('icons.woff') format('woff'),
-  url('icons.ttf') format('truetype'),
-  url('icons.svg') format('svg');
+  src: url('/icons.eot');
+  src: url('/icons.eot') format('embedded-opentype'),
+  url('/icons.woff2') format('woff2'),
+  url('/icons.woff') format('woff'),
+  url('/icons.ttf') format('truetype'),
+  url('/icons.svg') format('svg');
   font-weight: normal;
   font-style: normal;
 }
+
+[class^="ficon-"]:before, [class*=" ficon-"]:before {
+  font: 24px 'icons-font';
+  @include flex-center;
+}
+
+.ficon-user:before { content: '\e800'; } /* '' */
+.ficon-password:before { content: '\e801'; } /* '' */
+.ficon-code:before { content: '\e802'; } /* '' */
+.ficon-email:before { content: '\f0e0'; } /* '' */

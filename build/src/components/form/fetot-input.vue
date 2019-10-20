@@ -3,9 +3,13 @@
     <input class="input"
            :type="input.type" :value="input.value"
            @blur="isBlur" @input="setValue">
-    <div class="placeholder">{{ input.placeholder }}</div>
-    <fetot-icon>{{ input.icon }}</fetot-icon>
-    <div class="error">{{ toggleError }}</div>
+    <div class="placeholder">
+      {{ input.placeholder }}
+    </div>
+    <div class="icon" :class="setIconName"></div>
+    <div class="error">
+      {{ toggleError }}
+    </div>
   </div>
 </template>
 

@@ -1,23 +1,23 @@
 {
   "email": {
     "type": "text",
-    "value": "shcherbak.ssa@gmail.com",
+    "value": "",
     "placeholder": "E-mail",
-    "icon": "&#F0E0;",
+    "icon": "email",
     "error": ""
   },
   "password": {
     "type": "password",
     "value": "",
     "placeholder": "Password",
-    "icon": "&#xE801;",
+    "icon": "password",
     "error": ""
   },
   "confirm-email": {
     "type": "text",
     "value": "",
     "placeholder": "Confirmation code",
-    "icon": "&#xE802;",
+    "icon": "code",
     "error": "",
     "event": true
   },
@@ -25,7 +25,7 @@
     "type": "text",
     "value": "",
     "placeholder": "Full name",
-    "icon": "&#xE800;",
+    "icon": "user",
     "error": ""
   }
 }

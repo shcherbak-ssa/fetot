@@ -64,9 +64,9 @@ const responseConfig = {
 		options(filename) {
 			return {
 				filename: getClientFilename('woff', filename, filename[0] === 'f'),
-				// headers: {
-				// 	'Content-Type': 'application/font-woff'
-				// }
+				headers: {
+					'Content-Type': 'application/font-woff'
+				}
 			}
 		}
 	},
@@ -75,9 +75,9 @@ const responseConfig = {
 		options(filename) {
 			return {
 				filename: getClientFilename('woff2', filename, filename[0] === 'f'),
-				// headers: {
-				// 	'Content-Type': 'application/font-woff2'
-				// }
+				headers: {
+					'Content-Type': 'application/font-woff2'
+				}
 			}
 		}
 	},
@@ -97,9 +97,9 @@ const responseConfig = {
 		options(filename) {
 			return {
 				filename: getClientFilename('eot', filename, filename[0] === 'f'),
-				// headers: {
-				// 	'Content-Type': 'application/vnd.ms-fontobject'
-				// }
+				headers: {
+					'Content-Type': 'application/vnd.ms-fontobject'
+				}
 			}
 		}
 	}

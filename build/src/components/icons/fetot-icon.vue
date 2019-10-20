@@ -1,20 +1,21 @@
 <template>
-  <div class="fetot-icon">
-    <slot></slot>
-  </div>
+  <div class="fetot-icon" :class="setIconName"></div>
 </template>
 
 <script>
 	export default {
-		name: 'fetot-icon'
+		name: 'fetot-icon',
+    props: {
+			icon: String
+    },
+    computed: {
+
+    }
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   @import 'fetot-src-scss';
 
-  .fetot-icon {
-    font-size: 24px;
-    font-family: 'icons-font';
-  }
+
 </style>
