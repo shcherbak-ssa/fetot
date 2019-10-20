@@ -47,7 +47,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    padding: 52px;
+    padding: 48px;
     transition: .4s;
     justify-content: center;
     @include full-sizes;
@@ -62,6 +62,12 @@
     }
     .fetot-title, .fetot-link {
       transition: .4s;
+    }
+
+    @media screen and (max-width: 480px) {
+      .title {
+        font-size: 28px;
+      }
     }
   }
 </style>

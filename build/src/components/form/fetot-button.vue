@@ -18,7 +18,7 @@
     color: $fetot-light-gray;
     cursor: pointer;
     font: 18px 'roboto-medium', sans-serif;
-    width: 300px;
+    width: 100%;
     height: 42px;
     transition: .4s;
     user-select: none;

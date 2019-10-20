@@ -52,8 +52,8 @@
 
   .workspace-content {
     background: #fff;
-    padding: 36px;
-    margin: 50px 0;
+    padding: 42px;
+    margin: 35px 0;
     transition: .4s;
     width: 510px;
     z-index: 1;
@@ -67,7 +67,7 @@
     }
 
     .content {
-      width: 300px;
+      width: 320px;
       @include flex-center-column;
     }
     .txt {
@@ -75,6 +75,15 @@
       font-size: 18px;
       text-align: center;
       margin-bottom: 30px;
+    }
+
+    @media screen and (max-width: 580px) {
+      width: 100%;
+      padding: 0;
+
+      &, &:hover {
+        box-shadow: none;
+      }
     }
   }
 </style>
