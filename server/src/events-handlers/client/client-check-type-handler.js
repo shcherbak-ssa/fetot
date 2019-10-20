@@ -8,7 +8,7 @@ const {clientEventEmitter} = require('../../server-events-emitters'),
 /*** imports [end] ***/
 /*** init [begin] ***/
 
-const validMessageType = ['connection', 'message', 'change-mode', 'change-module'];
+const validMessageType = ['connection', 'exit', 'message', 'change-mode', 'change-module'];
 
 /*** init [end] ***/
 /*** exports [begin] ***/

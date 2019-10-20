@@ -22,6 +22,10 @@ class ClientWorker {
 		let clientWorker = ClientWorker.activeClients.get(clientID);
 		return clientWorker.ip === clientIP ? clientWorker : false;
 	}
+	static async removeClient(clientID) {
+		ClientWorker.activeClients.delete(clientID);
+		console.log('exit one', ClientWorker.activeClients.size);
+	}
 	
 	/*** work methods ***/
 	async runCurrentModule(options) {

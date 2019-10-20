@@ -15,6 +15,7 @@ const {requestEventEmitter, connectionEventEmitter, messageEventEmitter,
 	messageWebSocketHandler = require('./events-handlers/message/message-web-socket-handler'),
 	
 	clientConnectionHandler = require('./events-handlers/client/client-connection-handler'),
+	clientExitHandler = require('./events-handlers/client/client-exit-handler'),
 	clientCheckTypeHandler = require('./events-handlers/client/client-check-type-handler'),
 	clientMessageHandler = require('./events-handlers/client/client-message-handler'),
 	clientChangeModuleHandler = require('./events-handlers/client/client-change-module-handler'),
@@ -45,6 +46,7 @@ async function setMessageEventsHandlers() {
 async function setClientEventsHandlers() {
 	clientEventEmitter
 		.on('client-connection', clientConnectionHandler)
+		.on('client-exit', clientExitHandler)
 		.on('client-check-type', clientCheckTypeHandler)
 		.on('client-message', clientMessageHandler)
 		.on('client-change-mode', () => {})

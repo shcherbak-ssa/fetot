@@ -5,6 +5,17 @@
 import outputMessage from './output-message';
 
 /*** imports [end] ***/
+/*** init [begin] ***/
+
+window.addEventListener('unload', () => {
+	fetch('/', {
+		method: 'POST',
+		body: outputMessage.getMessage({type: 'exit'}),
+		keepalive: true
+	})
+});
+
+/*** init [end] ***/
 /*** exports [begin] ***/
 
 async function getRequest({url, type}) {
