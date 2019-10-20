@@ -3,10 +3,11 @@
 /*** exports [begin] ***/
 
 function configWorker(config) {
-	config.response = new Proxy(config.response, {
+	let cloneConfig = Object.assign({}, config);
+	cloneConfig.response = new Proxy(cloneConfig.response, {
 		get(target, prop) {
 			return (responseModule, message = false) => {
-				let currentMessage = target[prop];
+				let currentMessage = Object.assign({}, target[prop]);
 				if( message ) Object.assign(currentMessage.message, message);
 				
 				return {
@@ -17,7 +18,7 @@ function configWorker(config) {
 		}
 	});
 	
-	return config;
+	return cloneConfig;
 }
 
 /*** exports [end] ***/

@@ -12,7 +12,7 @@ const singInModuleConfig = {
 		'many-enter-count': {
 			type: 'error',
 			message: {
-				error: ''
+				error: 'many-enter-count'
 			}
 		},
 		'not-exist': {

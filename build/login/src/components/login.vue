@@ -30,7 +30,7 @@
 	    setWorkspaceOptions() {
 		    return {
 			    events: this.options.events,
-			    data: this.options.store.get('modules')[this.options.store['current-module']]
+			    data: this.options.store.modules[this.options.store['current-module']]
 		    }
 	    }
     }

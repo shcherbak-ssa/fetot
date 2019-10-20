@@ -1,9 +1,7 @@
 <template>
   <div class="workspace-content">
     <div class="content">
-      <p class="txt" v-if="options.data.text">
-        {{ options.data.text }}
-      </p>
+      <p class="txt" v-if="options.data.text" v-html="options.data.text"></p>
       <fetot-input
               v-for="(input, index) in options.data.inputs"
               :key="index" :input="inputs[input]"

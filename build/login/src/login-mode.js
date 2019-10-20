@@ -82,9 +82,6 @@ async function changeCurrentModule(label) {
 			return 'confirm-email';
 		case 'confirm-email':
 			return 'create-account';
-		case 'login':
-		case 'create-account':
-			return ''
 	}
 }
 

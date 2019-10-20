@@ -1,7 +1,10 @@
 'use strict';
 
+/*** init [begin] ***/
+
 const globalStore = new Map();
 
+/*** init [end] ***/
 /*** exports [begin] ***/
 
 function appendGlobalStore(name, store) {
@@ -24,4 +27,8 @@ function createLocalStore(store) {
 
 /*** exports [begin] ***/
 
-export default { appendGlobalStore, getGlobalStore, createLocalStore };
+export default {
+	appendGlobalStore,
+	getGlobalStore,
+	createLocalStore
+}

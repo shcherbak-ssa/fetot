@@ -34,8 +34,13 @@ async function loginModuleWorker() {
 async function parseServerResponse(inputs, {type, message}) {
 	switch( type ) {
 		case 'error':
-			if( 'input' in message ) inputs.get(message.input).error = message.error;
-			else console.log(message);
+			console.log(message);
+			if( 'input' in message )
+				inputs.get(message.input).error = message.error;
+			else {
+				let text = `<span style="color:#FF2105;">${message.error}</span>`;
+				storeWorker.getGlobalStore('login-module').content.text = text;
+			}
 			break;
 		case 'success':
 			console.log('Login success', message);

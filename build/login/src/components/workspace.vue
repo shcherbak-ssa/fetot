@@ -33,7 +33,7 @@
       setContentOptions() {
 				return {
 					events: this.options.events,
-          data: this.options.data.get('content')
+          data: this.options.data.content
         }
       }
     }
