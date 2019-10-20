@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "watch-login": "webpack --env.mode=login --watch --mode=development",
-    "dev-login": "webpack --env.mode=login --mode=development"
+    "dev-login": "webpack --env.mode=login --mode=development",
+    "watch-app": "webpack --env.mode=app --watch --mode=development",
+    "dev-app": "webpack --env.mode=app --mode=development"
   },
   "author": "Friends.IT",
   "license": "ISC",
