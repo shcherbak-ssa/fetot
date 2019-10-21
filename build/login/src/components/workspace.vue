@@ -1,11 +1,11 @@
 <template>
   <div class="workspace">
     <fetot-title>
-      <div class="title">{{ options.data.get('title') }}</div>
+      <div class="title">{{ options.store.get('title') }}</div>
     </fetot-title>
     <workspace-content :options="setContentOptions()"/>
     <fetot-link @fetot-link-click="linkClickHandler">
-      <span class="link">{{ options.data.get('link') }}</span>
+      <span class="link">{{ options.store.get('link') }}</span>
     </fetot-link>
   </div>
 </template>
@@ -33,7 +33,7 @@
       setContentOptions() {
 				return {
 					events: this.options.events,
-          data: this.options.data.content
+					store: this.options.store.content
         }
       }
     }

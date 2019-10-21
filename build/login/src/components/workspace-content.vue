@@ -1,14 +1,14 @@
 <template>
   <div class="workspace-content">
     <div class="content">
-      <p class="txt" v-if="options.data.text" v-html="options.data.text"></p>
+      <p class="txt" v-if="options.store.text" v-html="options.store.text"></p>
       <fetot-input
-              v-for="(input, index) in options.data.inputs"
+              v-for="(input, index) in options.store.inputs"
               :key="index" :input="inputs[input]"
               @fetot-input-input="inputInputHandler"
       />
-      <fetot-button v-if="options.data.button" @fetot-button-click="buttonClickHandler">
-        {{ options.data.button }}
+      <fetot-button v-if="options.store.button" @fetot-button-click="buttonClickHandler">
+        {{ options.store.button }}
       </fetot-button>
     </div>
   </div>

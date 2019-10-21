@@ -2,7 +2,7 @@
   <fetot-container>
     <div class="login">
       <transition name="change-module" mode="out-in" appear>
-        <login-workspace :key="options.store['current-module']" :options="setWorkspaceOptions"/>
+        <login-workspace :key="options.store['current-module-name']" :options="setWorkspaceOptions"/>
       </transition>
     </div>
   </fetot-container>
@@ -14,11 +14,6 @@
 
 	export default {
 		name: 'login',
-    data() {
-			return {
-				currentModule: ''
-      }
-    },
     props: {
 			options: Object
     },
@@ -30,7 +25,7 @@
 	    setWorkspaceOptions() {
 		    return {
 			    events: this.options.events,
-			    data: this.options.store.modules[this.options.store['current-module']]
+			    store: this.options.store['current-module-store']
 		    }
 	    }
     }
