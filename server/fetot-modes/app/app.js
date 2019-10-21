@@ -15,11 +15,11 @@ const mongodbConfig = {
 const testSettings = {
 	modules: {
 		'notes': {
-			icon: '',
+			icon: '&#xE820;',
 			name: 'Notes'
 		},
 		'lists': {
-			icon: '',
+			icon: '&#xE81F;',
 			name: 'Lists'
 		}
 	}
