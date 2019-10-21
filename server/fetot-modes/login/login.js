@@ -2,7 +2,9 @@
 
 /*** imports [begin] ***/
 
-const singInModule = require('./modules/sing-in'),
+const object2mapWorker = require('../../lib/object2map-worker'),
+	
+	singInModule = require('./modules/sing-in'),
 	loginModule = require('./modules/login'),
 	confirmEmailModule = require('./modules/confirm-email'),
 	createAccountModule = require('./modules/create-account');
@@ -11,12 +13,12 @@ const singInModule = require('./modules/sing-in'),
 /*** exports [begin] ***/
 
 const loginMode = {
-	modules: new Map(Object.entries({
+	modules: object2mapWorker({
 		'sing-in': singInModule,
 		'login': loginModule,
 		'confirm-email': confirmEmailModule,
 		'create-account': createAccountModule
-	}))
+	})
 };
 
 /*** exports [end] ***/

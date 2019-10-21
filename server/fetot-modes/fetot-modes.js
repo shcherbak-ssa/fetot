@@ -2,14 +2,18 @@
 
 /*** imports [begin] ***/
 
-const loginMode = require('./login');
+const object2mapWorker = require('../lib/object2map-worker'),
+	
+	loginMode = require('./login'),
+	appMode = require('./app');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
-const fetotModes = new Map(Object.entries({
-	'login': loginMode
-}));
+const fetotModes = object2mapWorker({
+	'login': loginMode,
+	'app': appMode
+});
 
 /*** exports [end] ***/
 

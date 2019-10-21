@@ -1,5 +1,7 @@
 'use strict';
 
+/*** exports [begin] ***/
+
 function setStorageItem(key, value) {
 	if( typeof value === 'object' ) value = JSON.stringify(value);
 	localStorage.setItem(key, value)
@@ -13,6 +15,8 @@ function removeStorageItem(key) {
 function hasStorageItem(key) {
 	return !!getStorageItem(key);
 }
+
+/*** exports [end] ***/
 
 export default {
 	setStorageItem,

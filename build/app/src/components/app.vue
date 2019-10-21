@@ -6,6 +6,7 @@
 
 <script>
 	import fetotContainer from 'fetot-components/fetot-container.vue';
+	import appHeader from './app-header.vue';
 
 	export default {
 		name: 'fetot-app',
