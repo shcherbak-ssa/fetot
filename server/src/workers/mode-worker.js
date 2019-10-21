@@ -9,14 +9,19 @@ const fetotModes = require('../../fetot-modes'),
 /*** exports [begin] ***/
 
 class ModeWorker {
-	constructor({modules}) {
+	constructor({modules, settings}) {
 		this.modules = modules;
+		this.settings = settings;
+		
 		this.currentModule = {};
 		this.store = new Map();
 	}
 	
-	static async initMode(modeName) {
-		return new ModeWorker(fetotModes.get(modeName));
+	static async initMode(mode, data) {
+		let currentMode = fetotModes.get(mode);
+		if( currentMode.init ) currentMode.settings = await currentMode.init(data);
+		
+		return new ModeWorker(currentMode);
 	}
 	
 	async runCurrentModule(options) {

@@ -38,7 +38,7 @@ async function parseServerResponse(inputs, {type, message}) {
 			break;
 		case 'success':
 			console.log('Created success', message);
-			EventsEmitter.getEmitter('login-mode').emit('save-client', message.id);
+			EventsEmitter.getEmitter('login-mode').emit('save-client');
 	}
 }
 

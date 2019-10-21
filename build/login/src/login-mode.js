@@ -44,10 +44,10 @@ async function initLoginModeEvents(loginModeEventsEmitter) {
 		.on('run-current-module-worker', async () => {
 			await currentModule.worker();
 		})
-		.on('save-client', (clientID) => {
+		.on('save-client', () => {
 			let {email, password} = storeWorker.getGlobalStore('inputs');
 			
-			locStorage.setStorageItem('client', {id: clientID, email: email.value, password: password.value});
+			locStorage.setStorageItem('client', {email: email.value, password: password.value});
 			locStorage.setStorageItem('client-exist', true);
 			
 			document.cookie = '$fetot={"client":true};path=/;max-age=3600';

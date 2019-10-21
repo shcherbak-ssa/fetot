@@ -15,7 +15,7 @@ async function checkClientWorker({message, mongodb, events, config, store, respo
 	let document = await mongodb.findDocument(message);
 	if( !document ) return events.emit('response-post-request', config.response['not-exist'](response));
 	
-	events.emit('response-post-request', config.response.success(response, {id: document._id}));
+	events.emit('response-post-request', config.response.success(response));
 }
 
 /*** exports [end] ***/

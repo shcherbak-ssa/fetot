@@ -1,6 +1,8 @@
 <template>
   <fetot-container>
-    <div class="fetot-app"></div>
+    <div class="fetot-app">
+      <app-header/>
+    </div>
   </fetot-container>
 </template>
 
@@ -11,7 +13,8 @@
 	export default {
 		name: 'fetot-app',
     components: {
-			'fetot-container': fetotContainer
+			'fetot-container': fetotContainer,
+      'app-header': appHeader
     }
 	}
 </script>

@@ -36,7 +36,7 @@ async function postRequest({url = '/', headers = {}, message}) {
 }
 
 async function connection({currentMode, data = {}}) {
-	let response = await postRequest({
+	let {message} = await postRequest({
 		url: 'connection',
 		message: {
 			type: 'connection',
@@ -47,7 +47,8 @@ async function connection({currentMode, data = {}}) {
 		}
 	});
 	
-	outputMessage.template.client = response.message.client;
+	outputMessage.template.client = message.client;
+	return message.settings
 }
 async function changeModule(moduleName, data = {}) {
 	return await postRequest({

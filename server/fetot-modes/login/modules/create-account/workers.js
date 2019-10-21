@@ -4,9 +4,10 @@
 
 async function createAccountWorker({message, mongodb, events, config, store, response}) {
 	let email = store.get('current-client-email'), {fullname, password} = message,
-		document = await mongodb.insertDocument({email, password, fullname});
+		document = await mongodb.insertDocument({email, password, settings: {fullname}});
 	
-	events.emit('response-post-request', config.response.success(response, {id: document._id}));
+	console.log('new client', document);
+	events.emit('response-post-request', config.response.success(response));
 }
 
 /*** exports [end] ***/
