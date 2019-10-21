@@ -12,17 +12,17 @@ const mongodbConfig = {
 	db: 'clients',
 	collection: 'clients'
 };
-const testSettings = {
-	modules: {
-		'notes': {
+const testConfig = {
+	modules: [
+		{
 			icon: '&#xE820;',
 			name: 'Notes'
 		},
-		'lists': {
+		{
 			icon: '&#xE81F;',
 			name: 'Lists'
 		}
-	}
+	]
 };
 
 /*** init [end] ***/
@@ -31,7 +31,7 @@ const testSettings = {
 const appMode = {
 	init: initAppMode.bind(this),
 	modules: object2mapWorker({}),
-	settings: {}
+	config: {}
 };
 
 /*** exports [end] ***/
@@ -41,10 +41,10 @@ async function initAppMode({email, password}) {
 	let mongoWorker = await MongoWorker.createCollection(mongodbConfig),
 		document = await mongoWorker.findDocument({email, password});
 	
-	return document ? needToRemove(document.settings) : false;
+	return document ? needToRemove(document.config, email) : false;
 }
-function needToRemove(settings) {
-	return Object.assign({}, settings, testSettings)
+function needToRemove(config, email) {
+	return Object.assign({email}, config, testConfig)
 }
 
 /*** src [end] ***/

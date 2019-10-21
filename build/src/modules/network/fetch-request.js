@@ -48,7 +48,7 @@ async function connection({currentMode, data = {}}) {
 	});
 	
 	outputMessage.template.client = message.client;
-	return message.settings
+	return message.config
 }
 async function changeModule(moduleName, data = {}) {
 	return await postRequest({

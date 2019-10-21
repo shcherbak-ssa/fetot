@@ -23,8 +23,8 @@ async function clientConnectionHandler({message, clientIP, response}) {
 		response,
 		message: {
 			message: {
-				client: clientID,
-				settings: clientWorker.currentMode.settings || {}
+				client: clientWorker.id,
+				config: clientWorker.currentMode.config || {}
 			}
 		}
 	})

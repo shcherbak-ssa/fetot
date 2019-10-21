@@ -5,14 +5,14 @@
 const object2mapWorker = require('../lib/object2map-worker'),
 	
 	loginMode = require('./login'),
-	appMode = require('./app');
+	personalMode = require('./personal');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
 const fetotModes = object2mapWorker({
 	'login': loginMode,
-	'app': appMode
+	'personal': personalMode
 });
 
 /*** exports [end] ***/

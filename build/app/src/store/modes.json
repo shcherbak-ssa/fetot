@@ -1,0 +1,17 @@
+[
+  {
+    "icon": "&#xE800;",
+    "name": "Personal",
+    "active": true
+  },
+  {
+    "icon": "&#xE821;",
+    "name": "Team",
+    "active": false
+  },
+  {
+    "icon": "&#xE822;",
+    "name": "Work",
+    "active": false
+  }
+]
