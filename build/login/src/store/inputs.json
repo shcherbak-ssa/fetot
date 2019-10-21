@@ -3,21 +3,21 @@
     "type": "text",
     "value": "",
     "placeholder": "E-mail",
-    "icon": "email",
+    "icon": "&#xf0e0;",
     "error": ""
   },
   "password": {
     "type": "password",
     "value": "",
     "placeholder": "Password",
-    "icon": "password",
+    "icon": "&#xe801;",
     "error": ""
   },
   "confirm-email": {
     "type": "text",
     "value": "",
     "placeholder": "Confirmation code",
-    "icon": "code",
+    "icon": "&#xe802;",
     "error": "",
     "event": true
   },
@@ -25,7 +25,7 @@
     "type": "text",
     "value": "",
     "placeholder": "Full name",
-    "icon": "user",
+    "icon": "&#xe800;",
     "error": ""
   }
 }

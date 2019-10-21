@@ -1,5 +1,5 @@
 <template>
-  <div class="fetot-icon" :class="setIconName"></div>
+  <div class="fetot-icon" v-html="icon"></div>
 </template>
 
 <script>
@@ -7,9 +7,6 @@
 		name: 'fetot-icon',
     props: {
 			icon: String
-    },
-    computed: {
-
     }
 	}
 </script>
@@ -17,5 +14,8 @@
 <style lang="scss">
   @import 'fetot-src-scss';
 
-
+  .fetot-icon {
+    font: 24px 'icons-font';
+    @include flex-center;
+  }
 </style>

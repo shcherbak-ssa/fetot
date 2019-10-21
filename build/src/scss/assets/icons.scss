@@ -9,13 +9,3 @@
   font-weight: normal;
   font-style: normal;
 }
-
-[class^="ficon-"]:before, [class*=" ficon-"]:before {
-  font: 24px 'icons-font';
-  @include flex-center;
-}
-
-.ficon-user:before { content: '\e800'; } /* '' */
-.ficon-password:before { content: '\e801'; } /* '' */
-.ficon-code:before { content: '\e802'; } /* '' */
-.ficon-email:before { content: '\f0e0'; } /* '' */

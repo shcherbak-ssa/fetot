@@ -12,6 +12,18 @@ const mongodbConfig = {
 	db: 'clients',
 	collection: 'clients'
 };
+const testSettings = {
+	modules: {
+		'notes': {
+			icon: '',
+			name: 'Notes'
+		},
+		'lists': {
+			icon: '',
+			name: 'Lists'
+		}
+	}
+};
 
 /*** init [end] ***/
 /*** exports [begin] ***/
@@ -29,7 +41,10 @@ async function initAppMode({email, password}) {
 	let mongoWorker = await MongoWorker.createCollection(mongodbConfig),
 		document = await mongoWorker.findDocument({email, password});
 	
-	return document ? document.settings : false;
+	return document ? needToRemove(document.settings) : false;
+}
+function needToRemove(settings) {
+	return Object.assign({}, settings, testSettings)
 }
 
 /*** src [end] ***/

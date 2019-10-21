@@ -6,7 +6,7 @@
     <div class="placeholder">
       {{ input.placeholder }}
     </div>
-    <div class="icon" :class="setIconName"></div>
+    <fetot-icon :icon="input.icon"/>
     <div class="error">
       {{ toggleError }}
     </div>

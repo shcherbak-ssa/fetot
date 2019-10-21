@@ -21,13 +21,13 @@
     color: $fetot-dark-gray-60;
     left: 40px;
   }
-  .icon {
+  .fetot-icon {
     color: $fetot-dark-gray-80;
     left: 10px;
     width: 24px;
     height: 24px;
   }
-  .placeholder, .icon {
+  .placeholder, .fetot-icon {
     z-index: 1;
     transition: .2s;
     @include position-vert-center;
@@ -74,12 +74,12 @@
     left: 6px;
     opacity: 0;
   }
-  &.is-active .icon, &.has-value .icon {
+  &.is-active .fetot-icon, &.has-value .fetot-icon {
     color: $fetot-dark-blue;
     left: -30px;
   }
   &.has-error {
-    .placeholder, .icon {
+    .placeholder, .fetot-icon {
       color: $fetot-red;
     }
     .error {
