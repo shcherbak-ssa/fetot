@@ -19,7 +19,6 @@ async function clientConnectionHandler({message, clientIP, response}) {
 	clientWorker.currentMode = await ModeWorker.initMode(currentMode, messageData);
 	ClientWorker.activeClients.set(clientID, clientWorker);
 	
-	console.log('clientWorker.currentMode.settings', clientWorker.currentMode.settings);
 	responseEventEmitter.emit('response-post-request', {
 		response,
 		message: {

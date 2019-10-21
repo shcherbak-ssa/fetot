@@ -17,7 +17,7 @@ async function requestRootHttpHandler(headers, response) {
 /*** src [begin] ***/
 
 async function parseRequest({cookie}) {
-	if( !cookie || /max-age/.test(cookie) ) return await responseConfig.login();
+	if( !cookie ) return await responseConfig.login();
 	
 	cookie = await parseCookie(cookie);
 	if( !cookie || !cookie.client ) return false;
@@ -25,7 +25,7 @@ async function parseRequest({cookie}) {
 	return await responseConfig.app();
 }
 async function parseCookie(cookie) {
-	let [key, value] = cookie.split(';')[0].split('=');
+	let [key, value] = cookie.split('=');
 	return key === '$fetot' && value !== '' ? JSON.parse(value) : false;
 }
 
