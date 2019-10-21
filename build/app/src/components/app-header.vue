@@ -1,5 +1,5 @@
 <template>
-  <div class="app-header">
+  <div class="app-header" @click="clickHandler">
     app-header
   </div>
 </template>
@@ -9,6 +9,11 @@
 		name: 'app-header',
     props: {
 			options: Object
+    },
+    methods: {
+	    clickHandler() {
+		    this.options.events.fetot.emit('fetot-open-home-page', true)
+      }
     }
 	}
 </script>

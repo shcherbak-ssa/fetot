@@ -18,8 +18,16 @@
 <style lang="scss" scoped>
   @import 'fetot-src-scss';
 
-  .fetot-menu-icon {
+  .fetot-menu-icon .fetot-icon {
+    background: #fff;
+    border-radius: 50%;
     color: $fetot-dark-gray;
     transition: .4s;
+    @include sizes(32px, 32px);
+
+    &:hover {
+      cursor: pointer;
+      @include static-shadow;
+    }
   }
 </style>

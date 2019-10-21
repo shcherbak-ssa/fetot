@@ -27,6 +27,10 @@
   @import 'fetot-src-scss';
 
   .home-page-content {
+    @include flex-column;
 
+    .home-page-module {
+      margin-bottom: 40px;
+    }
   }
 </style>

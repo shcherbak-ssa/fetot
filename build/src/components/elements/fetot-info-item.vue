@@ -1,7 +1,7 @@
 <template>
   <div class="fetot-info-item">
-    <fetot-icon :icon="icon"></fetot-icon>
-    <div class="count">{{ count }}</div>
+    <fetot-icon :icon="info.icon"></fetot-icon>
+    <div class="count">{{ info.count }}</div>
   </div>
 </template>
 
@@ -11,8 +11,7 @@
 	export default {
 		name: 'fetot-info-item',
     props: {
-			icon: String,
-      count: Number
+			info: Object
     },
     components: {
 			'fetot-icon': fetotIcon
@@ -26,7 +25,13 @@
   .fetot-info-item {
     color: $fetot-dark-gray;
     transition: .4s;
-    font-size: 24px;
+    display: flex;
+    font-size: 18px;
     margin-right: 10px;
+
+    .fetot-icon {
+      margin-right: 5px;
+      font-size: 18px;
+    }
   }
 </style>

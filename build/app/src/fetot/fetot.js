@@ -32,7 +32,7 @@ async function initFetot() {
 	let response = await fetchRequest.connection({currentMode: 'personal', data: client});
 	storeWorker.appendGlobalStore('client', response);
 	
-	await events.setFetotEventsHandlers();
+	await events.setFetotEventsHandlers(outputOptions);
 	
 	return outputOptions;
 }

@@ -21,6 +21,10 @@
   .fetot-grip-icon {
     color: $fetot-dark-gray-40;
     transition: .4s;
+
+    .fetot-icon {
+      font-size: 18px;
+    }
     
     &:hover {
       color: $fetot-dark-gray-80;

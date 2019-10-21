@@ -1,10 +1,8 @@
 <template>
   <fetot-container>
-    <div class="fetot-app">
-      <transition :name="setHomePageTransition" mode="out-in">
-        <home-page v-if="options.store['home-page-open']" :options="options"></home-page>
-        <app-header v-else :options="options"></app-header>
-      </transition>
+    <div class="fetot-app" :class="isHomePageOpen">
+      <home-page :options="options"></home-page>
+      <app-header :options="options"></app-header>
     </div>
   </fetot-container>
 </template>
@@ -25,8 +23,8 @@
       'home-page': homePage
     },
     computed: {
-	    setHomePageTransition() {
-	    	return this.options.store['home-page-open'] ? 'to-home-page' : 'to-app-header';
+			isHomePageOpen() {
+				return {'is-home-page-open': this.options.store['home-page-open']};
       }
     }
 	}
@@ -37,24 +35,23 @@
 
   .fetot-app {
     position: relative;
+    overflow: hidden;
     @include full-sizes;
-  }
 
-  .to-home-page-leave-to {
-    opacity: 0;
-    height: 100%;
-    border-radius: 0;
-    box-shadow: none;
-  }
-  .to-app-header-leave-to {
-    opacity: 0;
-    height: 120px;
-    border-radius: 0 0 10px 10px;
-    @include static-shadow;
-  }
-  .to-home-page, .to-app-header {
-    &-enter-to {
-      opacity: 1;
+    .home-page {
+      opacity: 0;
+      top: -100%;
+    }
+
+    &.is-home-page-open {
+      .app-header {
+        opacity: 0;
+        top: 100%;
+      }
+      .home-page {
+        top: 0;
+        opacity: 1;
+      }
     }
   }
 </style>

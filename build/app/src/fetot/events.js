@@ -14,9 +14,12 @@ import selectModuleHandler from './events-handlers/fetot/select-module-handler';
 
 const fetotEventEmitter = EventsEmitter.createEmitter('fetot');
 
-async function setFetotEventsHandlers() {
+async function setFetotEventsHandlers(options) {
 	fetotEventEmitter
 		.on('fetot-select-module', selectModuleHandler)
+		.on('fetot-open-home-page', (label) => {
+			options.store['home-page-open'] = label;
+		})
 }
 
 /*** exports [end] ***/

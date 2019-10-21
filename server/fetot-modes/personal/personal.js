@@ -15,12 +15,34 @@ const mongodbConfig = {
 const testConfig = {
 	modules: [
 		{
-			icon: '&#xE820;',
-			name: 'Notes'
+			name: 'Notes',
+			info: [
+				{
+					icon: '&#xE820;',
+					count: 0,
+					title: 'Notes count'
+				},
+				{
+					icon: '&#xF292;',
+					count: 1,
+					title: 'Categories count'
+				}
+			]
 		},
 		{
-			icon: '&#xE81F;',
-			name: 'Lists'
+			name: 'Lists',
+			info: [
+				{
+					icon: '&#xE81F;',
+					count: 0,
+					title: 'Lists count'
+				},
+				{
+					icon: '&#xF292;',
+					count: 1,
+					title: 'Categories count'
+				}
+			]
 		}
 	]
 };
