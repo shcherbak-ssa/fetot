@@ -1,0 +1,66 @@
+{
+  "js": {
+    "valid": [ "login", "app" ],
+    "options": {
+      "headers": {
+        "Content-Type": "text/javascript"
+      }
+    }
+  },
+  "ico": {
+    "valid": [ "favicon" ],
+    "options": {
+      "headers": {
+        "Content-Type": "image/x-icon"
+      }
+    }
+  },
+  "png": {
+    "valid": [ "email-logo" ],
+    "options": {
+      "headers": {
+        "Content-Type": "image/png"
+      }
+    }
+  },
+  "ttf": {
+    "valid": [ "fRobotoRegular", "fRobotoBold", "fRobotoLight", "fRobotoMedium", "icons" ],
+    "options": {
+      "headers": {
+        "Content-Type": "application/x-font-ttf"
+      }
+    }
+  },
+  "woff": {
+    "valid": [ "icons" ],
+    "options": {
+      "headers": {
+        "Content-Type": "application/font-woff"
+      }
+    }
+  },
+  "woff2": {
+    "valid": [ "icons" ],
+    "options": {
+      "headers": {
+        "Content-Type": "application/font-woff2"
+      }
+    }
+  },
+  "svg": {
+    "valid": [ "icons" ],
+    "options": {
+      "headers": {
+        "Content-Type": "image/svg+xml"
+      }
+    }
+  },
+  "eot": {
+    "valid": [ "icons" ],
+    "options": {
+      "headers": {
+        "Content-Type": "application/vnd.ms-fontobject"
+      }
+    }
+  }
+}
