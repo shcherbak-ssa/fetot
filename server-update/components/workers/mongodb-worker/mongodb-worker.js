@@ -1,5 +1,13 @@
 'use strict';
 
+/*** imports [begin] ***/
+
+const insertDocuments = require('./components/insert-documents'),
+	findDocuments = require('./components/find-documents'),
+	deleteDocuments = require('./components/delete-documents'),
+	updateDocuments = require('./components/update-documents');
+
+/*** imports [end] ***/
 /*** exports [begin] ***/
 
 class MongodbWorker {
@@ -7,41 +15,20 @@ class MongodbWorker {
 		this.collection = collection;
 	}
 	
-	/*** static properties and methods ***/
 	static mongoClient = {};
 	static createCollection({db, collection}) {
 		let mongoCollection = MongodbWorker.mongoClient.db(db).collection(collection);
 		return new MongodbWorker(mongoCollection);
 	}
-	
-	/*** work methods ***/
-	async insertDocument(object) {
-		return new Promise((success, error) => {
-			return this.collection.insertOne(object, (err, result) => {
-				return err ? error(err) : success( result.ops[0] )
-			})
-		})
-	}
-	async findDocument(filter) {
-		return new Promise((success, error) => {
-			return this.collection.find(filter).toArray((err, documents) => {
-				return err ? error(err) : success( documents[0] )
-			})
-		})
-	}
-	async updateDocument() {
-		return new Promise((success, error) => {
-		
-		})
-	}
-	async deleteDocument(docID) {
-		return new Promise((success, error) => {
-			return this.collection.deleteOne(docID, (err, result) => {
-				return err ? error(err) : success(result);
-			})
-		})
-	}
 }
+
+Object.assign(
+	MongodbWorker.prototype,
+	insertDocuments,
+	findDocuments,
+	deleteDocuments,
+	updateDocuments
+);
 
 /*** exports [end] ***/
 
