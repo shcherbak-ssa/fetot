@@ -7,11 +7,11 @@ const sendResponse = require('../send-response');
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
-async function preparingOptions(ip, message, response) {
+async function preparingOptions(ip, message, socket) {
 	return {
 		ip, message,
 		response: async (outputMessage) => {
-			await sendResponse({message: outputMessage}, response);
+			await sendResponse(outputMessage, socket);
 		}
 	}
 }

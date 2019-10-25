@@ -5,7 +5,7 @@
 const http = require('http'),
 	server = http.createServer(),
 
-	requestHandler = require('./request-handler');
+	requestHandler = require('./src/request-handler');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/

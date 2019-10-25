@@ -3,7 +3,7 @@
 /*** imports [begin] ***/
 
 const sendFile = require('./send-file'),
-	getClientFilename = require('../../lib/get-client-filename');
+	getClientFilename = require('../../src/get-client-filename');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/

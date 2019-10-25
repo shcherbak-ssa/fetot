@@ -4,7 +4,7 @@
 
 const {MongoClient} = require('mongodb'),
 	mongodbOptions = require('./mongodb-options'),
-	serverEvents = require('../../server-events');
+	{serverEvents} = require('../../server-events');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
@@ -14,7 +14,7 @@ async function initMongodbServer() {
 	
 	return mongoClient.connect((err, client) => {
 		if( err ) return Promise.reject(err);
-		serverEvents.emit('connection-mongodb', client);
+		serverEvents.emit('mongodb-connection', client);
 	})
 }
 

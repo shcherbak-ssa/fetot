@@ -2,8 +2,8 @@
 
 /*** imports [begin] ***/
 
-const parseGetRequest = require('./components/get-request'),
-	parsePostRequest = require('./components/post-request');
+const parseGetRequest = require('../components/get-request'),
+	parsePostRequest = require('../components/post-request');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
