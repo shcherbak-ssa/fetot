@@ -2,7 +2,7 @@
 
 /*** imports [begin] ***/
 
-const getClientFilename = require('../../../src/get-client-filename');
+const getPublicFilename = require('../../../src/get-public-filename');
 
 /*** imports [end] ***/
 /*** init [begin] ***/
@@ -16,7 +16,7 @@ const headers = {
 
 const rootResponseConfig = new Proxy({}, {
 	get(target, prop) {
-		let filename = getClientFilename(`${prop}.html`);
+		let filename = getPublicFilename(`${prop}.html`);
 		return Object.assign({}, {filename, headers});
 	}
 });

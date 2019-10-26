@@ -3,7 +3,7 @@
 /*** imports [begin] ***/
 
 const responseConfig = require('./response-config.json'),
-	getClientFilename = require('../../../src/get-client-filename');
+	getPublicFilename = require('../../../src/get-public-filename');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
@@ -14,7 +14,7 @@ const fileResponseConfig = new Proxy(responseConfig, {
 		return async (name, filename) => {
 			if( !valid.includes(name) ) return false;
 			
-			filename = getClientFilename(filename);
+			filename = getPublicFilename(filename);
 			return Object.assign({}, options, {filename});
 		}
 	}

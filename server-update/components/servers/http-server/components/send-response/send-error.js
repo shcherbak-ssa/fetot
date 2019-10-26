@@ -3,14 +3,14 @@
 /*** imports [begin] ***/
 
 const sendFile = require('./send-file'),
-	getClientFilename = require('../../src/get-client-filename');
+	getPublicFilename = require('../../src/get-public-filename');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
 async function sendError404(response) {
 	await sendFile({
-		filename: getClientFilename('404.html'),
+		filename: getPublicFilename('404.html'),
 		statusCode: 404,
 		headers: {
 			'Content-Type': 'text/html'
