@@ -2,7 +2,7 @@
 
 /*** imports [begin] ***/
 
-const getPublicFilename = require('../../../src/get-public-filename');
+const getPublicFilename = require('../../get-public-filename');
 
 /*** imports [end] ***/
 /*** init [begin] ***/

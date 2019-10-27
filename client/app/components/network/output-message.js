@@ -3,7 +3,7 @@
 /*** exports [begin] ***/
 
 const outputMessageTemplate = {
-	type: 'message',
+	type: 'block',
 	client: '',
 	content: {
 		type: '',

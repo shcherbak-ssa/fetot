@@ -3,7 +3,7 @@
 /*** imports [begin] ***/
 
 const responseConfig = require('./response-config.json'),
-	getPublicFilename = require('../../../src/get-public-filename');
+	getPublicFilename = require('../../get-public-filename');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
