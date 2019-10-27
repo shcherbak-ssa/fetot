@@ -3,7 +3,7 @@
 /*** exports [begin] ***/
 
 const outputMessageTemplate = {
-	type: 'block',
+	type: '', // 'connection', 'exit', 'client', 'mode', 'module'
 	client: '',
 	content: {
 		type: '',
@@ -21,7 +21,7 @@ function getOutputHeaders(headers) {
 	return Object.assign({}, outputHeadersTemplate, headers);
 }
 
-/*** exports [begin] ***/
+/*** exports [end] ***/
 
 export default {
 	headers: outputHeadersTemplate,

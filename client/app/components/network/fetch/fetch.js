@@ -2,8 +2,8 @@
 
 /*** imports [begin] ***/
 
-import parseResponse from './parse-response';
 import sendRequest from './send-request';
+import parseResponse from './parse-response';
 
 /*** imports [end] ***/
 /*** exports [begin] ***/

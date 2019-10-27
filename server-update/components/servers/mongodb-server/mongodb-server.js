@@ -14,7 +14,7 @@ async function initMongodbServer() {
 	
 	return mongoClient.connect((err, client) => {
 		if( err ) return Promise.reject(err);
-		serverEvents.emit('mongodb-connection', client);
+		serverEvents.emit('connection-mongodb', client);
 	})
 }
 

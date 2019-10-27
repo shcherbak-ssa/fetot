@@ -17,6 +17,9 @@ async function sendResponse(options, response) {
 		case 'message' in options:
 			await sendMessage(options.message, response);
 			break;
+		case 'event-source' in options:
+			await sendSSE(response);
+			break;
 		default:
 			await sendFile(options, response);
 	}

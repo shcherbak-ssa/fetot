@@ -4,8 +4,9 @@
 
 const Events = require('events'),
 	
-	connectionHandler = require('./events-handlers/connection-handler'),
-	mongodbConnectionHandler = require('./events-handlers/mongodb-connection-handler');
+	connectionHandler = require('./events-handlers/connections/connection-handler'),
+	connectionMongodbHandler = require('./events-handlers/connections/connection-mongodb-handler'),
+	connectionEventSourceHandler = require('./events-handlers/connections/connection-event-source-handler');
 
 /*** imports [end] ***/
 /*** init [begin] ***/
@@ -17,8 +18,10 @@ const serverEvents = new ServerEvents();
 /*** exports [begin] ***/
 
 async function initServerEvents() {
+	/* connection events */
 	serverEvents
-		.on('mongodb-connection', mongodbConnectionHandler)
+		.on('connection-event-source', connectionEventSourceHandler)
+		.on('connection-mongodb', connectionMongodbHandler)
 		.on('connection', connectionHandler)
 }
 

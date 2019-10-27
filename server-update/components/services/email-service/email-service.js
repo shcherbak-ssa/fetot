@@ -14,11 +14,11 @@ const transporter = nodeMailer.createTransport(transportOptions);
 /*** init [end] ***/
 /*** exports [begin] ***/
 
-async function sendMailLetter(config) {
+async function sendEmailLetter(config) {
 	let letter = await getLetterConfig(config);
 	return await transporter.sendMail(letter);
 }
 
 /*** exports [end] ***/
 
-module.exports = sendMailLetter;
+module.exports = sendEmailLetter;
