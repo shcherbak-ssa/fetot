@@ -10,7 +10,7 @@ const asyncNanoid = require('nanoid/async'),
 
 async function generateClientID(alphabet, length) {
 	switch( true ) {
-		case !alphabet:
+		case alphabet === undefined:
 			return await createClientID();
 		case typeof alphabet === 'number':
 			return await createClientIDWithLength(alphabet);

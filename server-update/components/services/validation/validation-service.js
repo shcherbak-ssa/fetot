@@ -8,17 +8,10 @@ const ValidateSchema = require('validate');
 /*** exports [begin] ***/
 
 async function validation(schema, object) {
-	schema = await createSchema(schema);
+	schema = new ValidateSchema(schema);
 	return schema.validate(object);
 }
 
 /*** exports [end] ***/
-/*** src [begin] ***/
-
-async function createSchema(schema) {
-	return new ValidateSchema(schema);
-}
-
-/*** src [end] ***/
 
 module.exports = validation;
