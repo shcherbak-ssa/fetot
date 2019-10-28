@@ -3,7 +3,7 @@
 /*** exports [begin] ***/
 
 async function connectionMongodbHandler(mongoClient) {
-	let MongodbWorker = require('../../../workers/mongodb-worker');
+	let MongodbWorker = require('../../../workers/mongodb');
 	MongodbWorker.mongoClient = mongoClient;
 }
 
