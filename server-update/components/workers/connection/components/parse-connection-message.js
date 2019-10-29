@@ -2,14 +2,24 @@
 
 /*** imports [begin] ***/
 
-/*** imports [end] ***/
-/*** init [begin] ***/
+const generateClientID = require('../src/generate-client-id'),
+	clientWorker = require('../../client');
 
-/*** init [end] ***/
+/*** imports [end] ***/
 /*** exports [begin] ***/
 
 async function parseConnectionMessage(options) {
-	switch( options.message.content.type ) {
+	let {ip, message: {content: {type, data}}} = options,
+		message = await parse(type,{ip, message: data});
+	
+	await options.response({message});
+}
+
+/*** exports [end] ***/
+/*** src [begin] ***/
+
+async function parse(type, options) {
+	switch( type ) {
 		case 'login':
 			return await isLoginPageConnection(options);
 		case 'app':
@@ -17,21 +27,13 @@ async function parseConnectionMessage(options) {
 	}
 }
 
-/*** exports [end] ***/
-/*** src [begin] ***/
+/* login page connection */
+async function isLoginPageConnection(options) {}
 
-async function isLoginPageConnection(options) {
-
-}
-async function isAppPageConnection(options) {
-
-}
-async function isFirstClientConnection() {
-
-}
-async function isNotFirstClientConnection() {
-
-}
+/* app page connection */
+async function isAppPageConnection(options) {}
+async function isFirstClientConnection(options) {}
+async function isNotFirstClientConnection(client, options) {}
 
 /*** src [end] ***/
 

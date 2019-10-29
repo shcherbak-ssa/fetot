@@ -8,9 +8,13 @@
 /*** init [end] ***/
 /*** exports [begin] ***/
 
+async function parseCloseMessage(options) {
+
+}
+
 /*** exports [end] ***/
 /*** src [begin] ***/
 
 /*** src [end] ***/
 
-module.exports = {};
+module.exports = parseCloseMessage;

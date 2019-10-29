@@ -8,15 +8,17 @@
 /*** init [end] ***/
 /*** exports [begin] ***/
 
-const connectionStore = {
-	create(name) {
-		this[name] = new Map();
+class Connection {
+	constructor() {
+		this.mode = {}
 	}
-};
+	
+	static async create(options) {}
+}
 
 /*** exports [end] ***/
 /*** src [begin] ***/
 
 /*** src [end] ***/
 
-module.exports = connectionStore;
+module.exports = Connection;

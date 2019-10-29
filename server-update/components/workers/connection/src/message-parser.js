@@ -2,7 +2,9 @@
 
 /*** imports [begin] ***/
 
-const parseConnectionMessage = require('../components/parse-connection-message');
+const parseConnectionMessage = require('../components/parse-connection-message'),
+	parseCloseMessage = require('../components/parse-close-message'),
+	parseOthersMessage = require('../components/parse-others-message');
 
 /*** imports [end] ***/
 /*** init [begin] ***/
@@ -15,6 +17,9 @@ async function messageParser(options) {
 		case 'connection':
 			return await parseConnectionMessage(options);
 		case 'close':
+			return await parseCloseMessage(options);
+		case 'others': // need to fix
+			return await parseOthersMessage(options);
 		default:
 			options.response({error: 'Invalid message type'});
 	}

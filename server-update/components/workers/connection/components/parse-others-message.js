@@ -8,15 +8,8 @@
 /*** init [end] ***/
 /*** exports [begin] ***/
 
-class Connection {
-	clients = [];
-	
-	appendClient() {
-	
-	}
-	deleteClient() {
-	
-	}
+async function parseOthersMessage(options) {
+
 }
 
 /*** exports [end] ***/
@@ -24,4 +17,4 @@ class Connection {
 
 /*** src [end] ***/
 
-module.exports = Connection;
+module.exports = parseOthersMessage;
