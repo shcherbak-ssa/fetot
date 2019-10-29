@@ -2,7 +2,8 @@
 
 /*** imports [begin] ***/
 
-const generateID = require('../../../../lib/generate-id');
+const parseClientID = require('./parse-client-id'),
+	generateID = require('../../../../lib/generate-id');
 
 /*** imports [end] ***/
 /*** init [begin] ***/
@@ -20,7 +21,7 @@ async function generateClientIDForAppPage() {
 	return generateClientID('', appPageCollection);
 }
 async function removeIDFromCollection(id) {
-	let [, collectionSymbol] = id.split('/');
+	let [, collectionSymbol] = await parseClientID(id);
 	collectionSymbol === 'l' ? loginPageCollection.delete(id) : appPageCollection.delete(id);
 }
 

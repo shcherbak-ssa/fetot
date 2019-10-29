@@ -29,6 +29,7 @@ client.createConnection = createClientConnection;
 
 client.getAppLinkID = getAppClientLinkID;
 client.setAppLinkID = setAppClientLinkID;
+client.removeAppLinkID = removeAppClientLinkID;
 
 client.remove = removeClient;
 client.removeConnection = removeClientConnection;
@@ -54,6 +55,11 @@ async function getAppClientLinkID(clientOptions) {
 }
 async function setAppClientLinkID(clientOptions, id) {
 	clientsCollections.appLinksID.set(clientOptions, id);
+}
+async function removeAppClientLinkID(id) {
+	for( let [key, val] of clientsCollections.appLinksID.entries() ) {
+		if( val === id ) return clientsCollections.appLinksID.delete(key);
+	}
 }
 
 // remove functions
