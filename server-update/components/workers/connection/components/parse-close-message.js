@@ -10,6 +10,8 @@ const {removeIDFromCollection} = require('../src/generate-client-id'),
 /*** exports [begin] ***/
 
 async function parseCloseMessage(options) {
+	options.response(null);
+	
 	await parse(options);
 	await removeIDFromCollection(options.id);
 }

@@ -10,15 +10,14 @@ const sendFile = require('./send-file'),
 /*** exports [begin] ***/
 
 async function sendResponse(options, response) {
+	if( options === null ) return response.end();
+	
 	switch( true ) {
 		case 'error' in options:
 			await sendError[options.error](response);
 			break;
 		case 'message' in options:
 			await sendMessage(options.message, response);
-			break;
-		case 'event-source' in options:
-			await sendSSE(response);
 			break;
 		default:
 			await sendFile(options, response);
