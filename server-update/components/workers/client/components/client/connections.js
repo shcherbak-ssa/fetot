@@ -17,7 +17,8 @@ connections.remove = removeConnection;
 /*** src [begin] ***/
 
 async function appendConnection(connection) {
-	connections.map.set(connections.count++, connection);
+	connections.map.set(connections.count, connection);
+	return connections.count += 1;
 }
 async function removeConnection(connectionNumber) {
 	connections.map.delete(connectionNumber);

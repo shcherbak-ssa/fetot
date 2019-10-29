@@ -10,7 +10,7 @@ const Client = require('./components/client'),
 
 const clientsCollections = {
 	app: new Map(),
-	appLinks: new Map(),
+	appLinksID: new Map(),
 	login: new Map(),
 	get(key) {
 		return this[key];
@@ -27,8 +27,8 @@ async function client(label, id) {
 client.create = createClient;
 client.appendConnection = appendClientConnection;
 
-client.getAppLink = getAppClientLink;
-client.setAppLink = setAppClientLink;
+client.getAppLinkID = getAppClientLinkID;
+client.setAppLinkID = setAppClientLinkID;
 
 client.remove = removeClient;
 client.run = runClient;
@@ -42,15 +42,15 @@ async function createClient(page, id, options) {
 }
 async function appendClientConnection(client, options) {
 	let connection = await Connection.create(options);
-	await client.connections.append(connection);
+	return await client.connections.append(connection);
 }
 
-/* client link functions */
-async function getAppClientLink(clientOptions) {
-	return clientsCollections.appLinks.get('links').get(clientOptions)
+// client link-id functions
+async function getAppClientLinkID(clientOptions) {
+	return clientsCollections.appLinksID.get(clientOptions)
 }
-async function setAppClientLink(clientOptions, id) {
-	clientsCollections.appLinks.set(clientOptions, id);
+async function setAppClientLinkID(clientOptions, id) {
+	clientsCollections.appLinksID.set(clientOptions, id);
 }
 
 async function removeClient(client, connectionNumber) {}
@@ -58,6 +58,4 @@ async function runClient(client, message) {}
 
 /*** src [end] ***/
 
-module.exports = {
-	client
-};
+module.exports = { client };

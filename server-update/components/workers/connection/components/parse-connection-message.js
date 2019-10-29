@@ -28,12 +28,34 @@ async function parse(type, options) {
 }
 
 /* login page connection */
-async function isLoginPageConnection(options) {}
+async function isLoginPageConnection(options) {
+	let id = await generateClientID.forLoginPage();
+	
+	await clientWorker.client.create('login', id, options);
+	return { id };
+}
 
 /* app page connection */
-async function isAppPageConnection(options) {}
-async function isFirstClientConnection(options) {}
-async function isNotFirstClientConnection(client, options) {}
+async function isAppPageConnection(options) {
+	let id = await clientWorker.client.getAppLinkID(options.client);
+	return id
+		? await isNotFirstClientConnection(id, options.connection)
+		: await isFirstClientConnection(options);
+}
+async function isFirstClientConnection(options) {
+	let id = await generateClientID.forAppPage();
+	
+	await clientWorker.client.setAppLinkID(options.client, id);
+	await clientWorker.client.create('app', id, options);
+	
+	return { id }
+}
+async function isNotFirstClientConnection(id, options) {
+	let client = clientWorker.client('app', id),
+		connectionLabel = await clientWorker.client.appendConnection(client, options);
+	
+	return { id: `${id}/${connectionLabel}` }
+}
 
 /*** src [end] ***/
 

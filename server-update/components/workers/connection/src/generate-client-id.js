@@ -14,21 +14,23 @@ const appPageCollection = new Set(),
 /*** exports [begin] ***/
 
 async function generateClientIDForLoginPage() {
-	let id = await generateID() + 'l';
-	return controlIDInCollection(loginPageCollection, id) ? await generateClientIDForLoginPage() : id;
+	return generateClientID('/l', loginPageCollection);
 }
-async function generateClientIDForAppPage(connectionsCount) {
-	let id = await generateID() + connectionsCount + 'a';
-	return controlIDInCollection(appPageCollection, id) ? await generateClientIDForAppPage() : id;
+async function generateClientIDForAppPage() {
+	return generateClientID('', appPageCollection);
 }
 async function removeIDFromCollection(id) {
-	let collectionLabel = id.charAt(id.length - 1);
-	collectionLabel === 'l' ? loginPageCollection.delete(id) : appPageCollection.delete(id);
+	let [, collectionSymbol] = id.split('/');
+	collectionSymbol === 'l' ? loginPageCollection.delete(id) : appPageCollection.delete(id);
 }
 
 /*** exports [end] ***/
 /*** src [begin] ***/
 
+async function generateClientID(label, collection) {
+	let id = await generateID() + label;
+	return controlIDInCollection(collection, id) ? await generateClientID(label, collection) : id;
+}
 async function controlIDInCollection(collection, id) {
 	if( collection.has(id) ) return true;
 	
