@@ -2,26 +2,26 @@
 
 /*** exports [begin] ***/
 
-async function connections(connectionNumber) {
-	return connections.map.get(connectionNumber);
+async function connections(connectionLabel) {
+	return connections.map.get(connectionLabel);
 }
 
-connections.count = 0;
+connections.label = 0;
 connections.map = new Map();
 connections.size = () => connections.map.size;
 
-connections.append = appendConnection;
+connections.create = createConnection;
 connections.remove = removeConnection;
 
 /*** exports [end] ***/
 /*** src [begin] ***/
 
-async function appendConnection(connection) {
-	connections.map.set(connections.count, connection);
-	return connections.count += 1;
+async function createConnection(connection) {
+	connections.map.set(connections.label, connection);
+	return connections.label += 1;
 }
-async function removeConnection(connectionNumber) {
-	connections.map.delete(connectionNumber);
+async function removeConnection(connectionLabel) {
+	connections.map.delete(connectionLabel);
 }
 
 /*** src [end] ***/

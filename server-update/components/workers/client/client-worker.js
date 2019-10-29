@@ -25,22 +25,25 @@ async function client(label, id) {
 }
 
 client.create = createClient;
-client.appendConnection = appendClientConnection;
+client.createConnection = createClientConnection;
 
 client.getAppLinkID = getAppClientLinkID;
 client.setAppLinkID = setAppClientLinkID;
 
 client.remove = removeClient;
+client.removeConnection = removeClientConnection;
+
 client.run = runClient;
 
 /*** exports [end] ***/
 /*** src [begin] ***/
 
+// create functions
 async function createClient(page, id, options) {
 	let client = await Client.create(options);
 	clientsCollections.get(page).set(id, client);
 }
-async function appendClientConnection(client, options) {
+async function createClientConnection(client, options) {
 	let connection = await Connection.create(options);
 	return await client.connections.append(connection);
 }
@@ -53,7 +56,14 @@ async function setAppClientLinkID(clientOptions, id) {
 	clientsCollections.appLinksID.set(clientOptions, id);
 }
 
-async function removeClient(client, connectionNumber) {}
+// remove functions
+async function removeClient(page, id) {
+	clientsCollections.get(page).delete(id);
+}
+async function removeClientConnection(client, connectionsLabel) {
+	await client.connections.remove(connectionsLabel);
+}
+
 async function runClient(client, message) {}
 
 /*** src [end] ***/

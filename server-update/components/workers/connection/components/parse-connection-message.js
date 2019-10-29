@@ -52,7 +52,7 @@ async function isFirstClientConnection(options) {
 }
 async function isNotFirstClientConnection(id, options) {
 	let client = clientWorker.client('app', id),
-		connectionLabel = await clientWorker.client.appendConnection(client, options);
+		connectionLabel = await clientWorker.client.createConnection(client, options);
 	
 	return { id: `${id}/${connectionLabel}` }
 }
