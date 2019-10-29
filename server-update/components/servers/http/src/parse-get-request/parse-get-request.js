@@ -3,8 +3,8 @@
 /*** imports [begin] ***/
 
 const sendResponse = require('../send-response'),
-	parseRootRequest = require('./parse-root-request'),
-	parseFileRequest = require('./parse-file-request'),
+	isRootRequest = require('./is-root-request'),
+	isFileRequest = require('./is-file-request'),
 
 	{serverEvents} = require('../../../../server-events');
 
@@ -25,9 +25,9 @@ async function parseGetRequest(request, response) {
 async function parse({url, headers}) {
 	switch( true ) {
 		case url === '/':
-			return await parseRootRequest(headers);
+			return await isRootRequest(headers);
 		case /\/[-\w]+\.\w{1,5}/i.test(url):
-			return await parseFileRequest(url.slice(1));
+			return await isFileRequest(url.slice(1));
 		case /\/event-source\.\w{21}/i.test(url):
 			return {'event-source': true, url};
 		default:

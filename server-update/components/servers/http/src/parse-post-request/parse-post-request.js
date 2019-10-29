@@ -3,7 +3,7 @@
 /*** imports [begin] ***/
 
 const parseInputMessage = require('./parse-input-message'),
-	preparingOptions = require('./preparing-options'),
+	sendResponse = require('../send-response'),
 	
 	{serverEvents} = require('../../../../server-events'),
 	getClientIPAddress = require('../../../../../lib/get-client-ip-address');
@@ -22,5 +22,17 @@ async function parsePostRequest(request, response) {
 }
 
 /*** exports [end] ***/
+/*** src [begin] ***/
+
+async function preparingOptions(ip, message, response) {
+	return {
+		ip, message,
+		response: async (outputMessage) => {
+			await sendResponse({message: outputMessage}, response);
+		}
+	}
+}
+
+/*** src [end] ***/
 
 module.exports = parsePostRequest;
