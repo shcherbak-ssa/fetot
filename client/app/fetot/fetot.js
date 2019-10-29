@@ -7,14 +7,14 @@ import '../UI/scss/main.scss';
 import fttContainer from '../UI/vue/ftt-container.vue';
 
 import connection from './src/connection';
-import exitHandler from './src/exit-handler';
+import closeHandler from './src/close-handler';
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
 async function initFetot(connectionData, mainComponent) {
 	await connection(connectionData);
-	window.addEventListener('unload', exitHandler);
+	window.addEventListener('unload', closeHandler);
 	
 	return new Vue({
 		el: '#ftt',

@@ -7,10 +7,10 @@ import $fetch from '../../components/network/fetch'
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
-async function exitHandler() {
+function closeHandler() {
 	return $fetch.request({
 		message: {
-			type: 'exit'
+			type: 'close'
 		},
 		options: {
 			keepalive: true
@@ -20,4 +20,4 @@ async function exitHandler() {
 
 /*** exports [end] ***/
 
-export default exitHandler;
+export default closeHandler;

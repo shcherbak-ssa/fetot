@@ -6,25 +6,16 @@ import $fetch from '../../components/network/fetch'
 import outputMessage from '../../components/network/output-message'
 
 /*** imports [end] ***/
-/*** init [begin] ***/
-
-/*** init [end] ***/
 /*** exports [begin] ***/
 
-async function connection(data) {
+async function connection(content) {
 	let response = await $fetch.request({
-		message: {
-			type: 'connection',
-			content: { data }
-		}
+		message: { type: 'connection', content }
 	});
 	
 	outputMessage.template.id = response.id;
 }
 
 /*** exports [end] ***/
-/*** src [begin] ***/
-
-/*** src [end] ***/
 
 export default connection;
