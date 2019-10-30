@@ -19,6 +19,11 @@ class Client {
 	}
 	
 	static async create(clientOptions) {
+		if( '$module' in clientOptions ) {
+			console.log(clientOptions);
+			return new Client({});
+		}
+		
 		let mongodbWorker = await MongodbWorker.createCollection({db: 'clients', collection: 'clients'});
 		let {config} = await mongodbWorker.findOneDocument(clientOptions);
 		

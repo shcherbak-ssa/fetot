@@ -1,17 +1,18 @@
 'use strict';
 
-const path = require('path'),
-	VueLoader = require('vue-loader/lib/plugin'),
-	StringReplacePlugin = require("string-replace-webpack-plugin");
+const path = require('path');
+const VueLoader = require('vue-loader/lib/plugin');
+
+const appDirname = path.join(__dirname, 'app');
 
 module.exports = (env) => {
-	let outputFilename = `${env.mode}.js`,
-		entryFilename = `./${env.mode}/index.js`;
+	let outputFilename = `${env.page}.js`,
+		entryFilename = `./build/${env.page}-page/index.js`;
 	
 	return {
 		entry: entryFilename,
 		output: {
-			path: path.resolve(__dirname, '../client/js/'),
+			path: path.resolve(__dirname, '../public/js/'),
 			filename: outputFilename,
 		},
 		devtool: 'inline-source-map',
@@ -53,17 +54,16 @@ module.exports = (env) => {
 		},
 		resolve: {
 			alias: {
-				'fetot-main-scss': path.join(__dirname, 'src', 'scss', 'main.scss'),
-				'fetot-src-scss': path.join(__dirname, 'src', 'scss', 'src.scss'),
-				'fetot-components': path.join(__dirname, 'src', 'components'),
-				'fetot-js-modules': path.join(__dirname, 'src', 'modules'),
-				'fetot-worker-modules': path.join(__dirname, 'src', 'modules', 'workers'),
-				'fetot-network-modules': path.join(__dirname, 'src', 'modules', 'network')
+				'fetot': path.join(appDirname, 'fetot'),
+				'fetot-scss': path.join(appDirname, 'UI', 'scss', 'src.scss'),
+				'fetot-vue': path.join(appDirname, 'UI', 'vue'),
+				'fetot-network-components': path.join(appDirname, 'components', 'network'),
+				'fetot-workers-components': path.join(appDirname, 'components', 'workers'),
+				'fetot-services-components': path.join(appDirname, 'components', 'services'),
 			}
 		},
 		plugins: [
-			new VueLoader(),
-			new StringReplacePlugin()
+			new VueLoader()
 		]
 	}
 };

@@ -12,8 +12,8 @@ import closeHandler from './src/close-handler';
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
-async function initFetot(connectionData, mainComponent) {
-	await connection(connectionData);
+async function initFetot(connectionOptions, mainComponent) {
+	await connection(connectionOptions);
 	window.addEventListener('unload', closeHandler);
 	
 	return new Vue({
@@ -28,9 +28,13 @@ async function initFetot(connectionData, mainComponent) {
 		}
 	})
 }
+async function preparingConnectionOptions({type, mode, $module}) {
+	return { type, connection: { mode, $module } }
+}
 
 /*** exports [end] ***/
 
 export default {
-	init: initFetot
+	init: initFetot,
+	preparingConnectionOptions
 };

@@ -4,7 +4,7 @@
 
 const outputMessageTemplate = {
 	id: '',
-	type: '', // 'connection', 'exit', 'client', 'mode', 'module'
+	type: '', // 'connection', 'close', 'message'
 	content: {
 		type: '',
 		data: {}

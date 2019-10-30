@@ -33,9 +33,9 @@ async function parse(type, message) {
 }
 
 /* login page connection */
-async function isLoginPageConnection({client}) {
+async function isLoginPageConnection({connection}) {
 	let id = await generateClientID.forLoginPage();
-	let success = await clientWorker.client.create('login', id, client);
+	let success = await clientWorker.client.create('login', id, connection);
 	
 	return success ? id : null;
 }
