@@ -32,14 +32,14 @@ async function isLoginPageConnection({ip, message}) {
 	let id = await generateClientID.forLoginPage();
 	
 	await clientWorker.client.create('login', id, message);
-	await clientWorker.client.setIP(id, ip);
+	await clientWorker.client.ipAddress.set(id, ip);
 	
 	return { id };
 }
 
 /* app page connection */
 async function isAppPageConnection(options) {
-	let id = await clientWorker.client.getAppLinkID(options.message.client);
+	let id = await clientWorker.client.appLinksID.get(options.message.client);
 	return id
 		? await isNotFirstClientConnection(id, options)
 		: await isFirstClientConnection(options);
@@ -47,9 +47,9 @@ async function isAppPageConnection(options) {
 async function isFirstClientConnection({ip, message}) {
 	let id = await generateClientID.forAppPage();
 	
-	await clientWorker.client.setAppLinkID(message.client, id);
+	await clientWorker.client.appLinksID.set(message.client, id);
 	await clientWorker.client.create('app', id, message);
-	await clientWorker.client.setIP(id, options.ip);
+	await clientWorker.client.ipAddress.set(id, ip);
 	
 	return { id }
 }
@@ -58,7 +58,7 @@ async function isNotFirstClientConnection(id, {ip, message}) {
 	let connectionLabel = await clientWorker.client.createConnection(client, message.connection);
 	
 	id = `${id}/${connectionLabel}`;
-	await clientWorker.client.setIP(id, ip);
+	await clientWorker.client.ipAddress.set(id, ip);
 	
 	return { id }
 }

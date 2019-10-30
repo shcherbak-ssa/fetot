@@ -11,15 +11,16 @@ const connections = require('./connections');
 /*** exports [begin] ***/
 
 class Client {
-	constructor(ip, config) {
-		this.ip = ip;
+	constructor(config) {}
+	
+	static async create({client, connection}) {
+		return new Client();
 	}
 	
-	static async create({ip, message: {client, connection}}) {}
-	
 	connections = connections;
-	async run(message) {
 	
+	async run(options) {
+		console.log(options);
 	}
 }
 
