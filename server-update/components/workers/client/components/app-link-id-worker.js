@@ -7,7 +7,7 @@ const appLinksIDCollection = new Map();
 /*** init [end] ***/
 /*** exports [begin] ***/
 
-const clientAppLinkIDWorker = {
+const appLinkIdWorker = {
 	get(client) {
 		return appLinksIDCollection.get(client);
 	},
@@ -23,4 +23,4 @@ const clientAppLinkIDWorker = {
 
 /*** exports [end] ***/
 
-module.exports = clientAppLinkIDWorker;
+module.exports = appLinkIdWorker;

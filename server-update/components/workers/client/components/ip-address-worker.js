@@ -7,7 +7,7 @@ const ipAddressCollection = new Map();
 /*** init [end] ***/
 /*** exports [begin] ***/
 
-const clientIPAddressWorker = {
+const ipAddressWorker = {
 	set(id, ip) {
 		ipAddressCollection.set(id, ip);
 	},
@@ -21,4 +21,4 @@ const clientIPAddressWorker = {
 
 /*** exports [end] ***/
 
-module.exports = clientIPAddressWorker;
+module.exports = ipAddressWorker;

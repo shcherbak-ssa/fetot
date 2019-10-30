@@ -8,11 +8,12 @@ const messageParser = require('./src/message-parser');
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
-async function connectionHandler(options) {
+async function connectionHandler(options) { // options = { ip, message, response }
 	let errors = await messageValidation(options.message);
+	
 	if( errors ) {
 		console.log(errors);
-		return options.response(null);
+		return await options.response(null);
 	}
 	
 	await messageParser(options);

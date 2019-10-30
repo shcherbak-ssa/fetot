@@ -8,59 +8,61 @@ const clientWorker = require('../../client');
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
-async function parseConnectionMessage(options) {
-	let {ip, message: {content: {type, data}}} = options,
-		message = await parse(type,{ip, message: data});
+async function parseConnectionMessage({ip, message: {content: {type, data: message}}, response}) {
+	let id = await parse(type, message); // message = data = { client, connection }
 	
-	await options.response({message});
+	if( id === null ) message = null;
+	else {
+		await clientWorker.client.ipAddress.set(id, ip);
+		message = { message: {id} };
+	}
+	
+	await response(message);
 }
 
 /*** exports [end] ***/
 /*** src [begin] ***/
 
-async function parse(type, options) {
+async function parse(type, message) {
 	switch( type ) {
 		case 'login':
-			return await isLoginPageConnection(options);
+			return await isLoginPageConnection(message);
 		case 'app':
-			return await isAppPageConnection(options);
+			return await isAppPageConnection(message);
 	}
 }
 
 /* login page connection */
-async function isLoginPageConnection({ip, message}) {
+async function isLoginPageConnection({client}) {
 	let id = await generateClientID.forLoginPage();
+	let success = await clientWorker.client.create('login', id, client);
 	
-	await clientWorker.client.create('login', id, message);
-	await clientWorker.client.ipAddress.set(id, ip);
-	
-	return { id };
+	return success ? id : null;
 }
 
 /* app page connection */
-async function isAppPageConnection(options) {
-	let id = await clientWorker.client.appLinksID.get(options.message.client);
-	return id
-		? await isNotFirstClientConnection(id, options)
-		: await isFirstClientConnection(options);
+async function isAppPageConnection(message) {
+	let id = await clientWorker.client.appLinksID.get(message.client);
+	return id ? await isNotFirstClientConnection(id, message) : await isFirstClientConnection(message);
 }
-async function isFirstClientConnection({ip, message}) {
+async function isFirstClientConnection({client: clientOptions, connection}) {
 	let id = await generateClientID.forAppPage();
 	
-	await clientWorker.client.appLinksID.set(message.client, id);
-	await clientWorker.client.create('app', id, message);
-	await clientWorker.client.ipAddress.set(id, ip);
+	let client = await clientWorker.client.create('app', id, clientOptions);
+	if( !client ) return null;
 	
-	return { id }
+	await clientWorker.client.appLinksID.set(clientOptions, id);
+	return await createClientConnection(client, connection, id);
 }
-async function isNotFirstClientConnection(id, {ip, message}) {
+async function isNotFirstClientConnection(id, {connection}) {
 	let client = clientWorker.client('app', id);
-	let connectionLabel = await clientWorker.client.createConnection(client, message.connection);
+	return await createClientConnection(client, connection, id);
+}
+
+async function createClientConnection(client, connection, id) {
+	let connectionLabel = await clientWorker.client.createConnection(client, connection);
+	return `${id}/${connectionLabel}`;
 	
-	id = `${id}/${connectionLabel}`;
-	await clientWorker.client.ipAddress.set(id, ip);
-	
-	return { id }
 }
 
 /*** src [end] ***/

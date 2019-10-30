@@ -10,13 +10,13 @@ connections.label = 0;
 connections.map = new Map();
 connections.size = () => connections.map.size;
 
-connections.create = createConnection;
+connections.add = addConnection;
 connections.remove = removeConnection;
 
 /*** exports [end] ***/
 /*** src [begin] ***/
 
-async function createConnection(connection) {
+async function addConnection(connection) {
 	connections.map.set(connections.label, connection);
 	return connections.label += 1;
 }

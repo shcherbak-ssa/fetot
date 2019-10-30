@@ -2,11 +2,10 @@
 
 /*** imports [begin] ***/
 
-const Client = require('./components/client');
-const Connection = require('./components/connection');
+const Client = require('./components/Client');
 
-const clientIPAddressWorker = require('./components/client-ip-address-worker');
-const clientAppLinkIDWorker = require('./components/client-app-link-id-worker');
+const ipAddressWorker = require('./components/ip-address-worker');
+const appLinkIDWorker = require('./components/app-link-id-worker');
 
 /*** imports [end] ***/
 /*** init [begin] ***/
@@ -33,20 +32,22 @@ client.createConnection = createClientConnection;
 client.remove = removeClient;
 client.removeConnection = removeClientConnection;
 
-client.appLinksID = clientAppLinkIDWorker;
-client.ipAddress = clientIPAddressWorker;
+client.appLinksID = appLinkIDWorker;
+client.ipAddress = ipAddressWorker;
 
 /*** exports [end] ***/
 /*** src [begin] ***/
 
 // create functions
-async function createClient(page, id, message) {
-	let client = await Client.create(message);
+async function createClient(page, id, clientOptions) {
+	let client = await Client.create(clientOptions);
+	if( !client ) return false;
+	
 	clientsCollections.get(page).set(id, client);
+	return client;
 }
-async function createClientConnection(client, options) {
-	let connection = await Connection.create(options);
-	return await client.connections.append(connection);
+async function createClientConnection(client, connection) {
+	return await client.createConnection(connection);
 }
 
 // remove functions
@@ -54,7 +55,7 @@ async function removeClient(page, id) {
 	clientsCollections.get(page).delete(id);
 }
 async function removeClientConnection(client, connectionsLabel) {
-	await client.connections.remove(connectionsLabel);
+	await client.removeConnection(connectionsLabel);
 }
 
 /*** src [end] ***/

@@ -2,10 +2,10 @@
 
 /*** imports [begin] ***/
 
-const insertDocuments = require('./components/insert-documents'),
-	findDocuments = require('./components/find-documents'),
-	deleteDocuments = require('./components/delete-documents'),
-	updateDocuments = require('./components/update-documents');
+const insertDocuments = require('./components/insert-documents');
+const findDocuments = require('./components/find-documents');
+const deleteDocuments = require('./components/delete-documents');
+const updateDocuments = require('./components/update-documents');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/

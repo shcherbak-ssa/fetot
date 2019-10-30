@@ -9,10 +9,9 @@ const clientWorker = require('../../client');
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
-async function parseCloseMessage(options) {
-	await options.response(null);
+async function parseCloseMessage({ip, message: {id}, response}) {
+	await response(null);
 	
-	let {ip, message: {id}} = options;
 	if( !clientWorker.client.ipAddress.isCorrect(id, ip) ) return;
 	
 	await closeClientConnection(id);
@@ -25,10 +24,10 @@ async function parseCloseMessage(options) {
 
 async function closeClientConnection(clientID) {
 	let [id, label] = await parseClientID(clientID);
-	if( label === 'l' ) return await clientWorker.client.remove('login', id);
+	if( label === 'l' ) return await clientWorker.client.remove('login', clientID);
 	
 	let client = await clientWorker.client('app', id);
-	if( client.connections.size() === 1 ) return await clientWorker.client.removeConnection(client, label);
+	if( client.connections.size() > 1 ) return await clientWorker.client.removeConnection(client, label);
 	
 	await clientWorker.client.appLinksID.remove(id);
 	await clientWorker.client.remove('app', id);

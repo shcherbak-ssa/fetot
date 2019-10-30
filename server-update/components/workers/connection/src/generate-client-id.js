@@ -21,8 +21,8 @@ async function generateClientIDForAppPage() {
 	return generateClientID('', appPageCollection);
 }
 async function removeIDFromCollection(id) {
-	let [, collectionSymbol] = await parseClientID(id);
-	collectionSymbol === 'l' ? loginPageCollection.delete(id) : appPageCollection.delete(id);
+	let [parsedID, label] = await parseClientID(id);
+	label === 'l' ? loginPageCollection.delete(id) : appPageCollection.delete(parsedID);
 }
 
 /*** exports [end] ***/
