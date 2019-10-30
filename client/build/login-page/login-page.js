@@ -3,8 +3,10 @@
 /*** imports [begin] ***/
 
 import fetot from 'fetot';
-
 import $localStorage from 'fetot-services-components/local-storage';
+
+import initLoginPage from './components/init-login-page';
+import loginPageView from './vue/login-page.vue';
 
 /*** imports [end] ***/
 /*** init [begin] ***/
@@ -17,7 +19,10 @@ controlClientExist()
 		return fetot.preparingConnectionOptions(options);
 	})
 	.then((connectionOptions) => {
-		return fetot.init(connectionOptions, {});
+		return fetot.init(connectionOptions, loginPageView);
+	})
+	.then(() => {
+		return initLoginPage()
 	})
 	.catch((err) => {
 		console.log(err);

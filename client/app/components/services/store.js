@@ -7,20 +7,41 @@
 
 const storeCollections = new Map();
 
-/*** init [end] ***/
-/*** exports [begin] ***/
-
 function collection(name) {
 	return storeCollections.get(name);
 }
 
-collection.create = '';
-collection.remove = '';
-collection.exist = '';
+collection.create = createCollection;
+collection.remove = removeCollection;
+collection.exist = existCollection;
+
+/*** init [end] ***/
+/*** exports [begin] ***/
+
+const Store = new Proxy({collection}, {
+	get(target, prop) {
+		if( prop === 'collection' ) return target.collection;
+		return storeCollections.get(prop);
+	}
+});
 
 /*** exports [end] ***/
 /*** src [begin] ***/
 
+function createCollection(name, object) {
+	object = extendObject(object);
+	storeCollections.set(name, object);
+	
+	return object;
+}
+function removeCollection(name) {
+	storeCollections.delete(name)
+}
+function existCollection(name) {
+	return storeCollections.has(name);
+}
+
+// extend function
 function extendObject(object) {
 	return Object.assign(object, {
 		get(key) {
@@ -34,4 +55,4 @@ function extendObject(object) {
 
 /*** src [end] ***/
 
-export default { collection };
+export default Store;
