@@ -14,7 +14,7 @@ const inputMessageSchema = {
 	type: {
 		type: String,
 		required: true,
-		enum: ['connection', 'close', 'client', 'mode', 'module']
+		enum: ['connection', 'close', 'message']
 	},
 	content: {
 		properties: {
@@ -35,7 +35,5 @@ async function messageValidation(message) {
 }
 
 /*** exports [end] ***/
-/*** src [begin] ***/
-/*** src [end] ***/
 
 module.exports = messageValidation;

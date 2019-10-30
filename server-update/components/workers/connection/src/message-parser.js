@@ -2,26 +2,23 @@
 
 /*** imports [begin] ***/
 
-const parseConnectionMessage = require('../components/parse-connection-message'),
-	parseCloseMessage = require('../components/parse-close-message'),
-	parseOthersMessage = require('../components/parse-others-message');
+const parseConnectionMessage = require('../components/parse-connection-message');
+const parseCloseMessage = require('../components/parse-close-message');
+const parseMessageMessage = require('../components/parse-message-message');
 
 /*** imports [end] ***/
-/*** init [begin] ***/
-
-/*** init [end] ***/
 /*** exports [begin] ***/
 
 async function messageParser(options) {
 	switch( options.message.type ) {
 		case 'connection':
-			return await parseConnectionMessage(options);
+			await parseConnectionMessage(options);
+			break;
 		case 'close':
-			return await parseCloseMessage(options);
-		case 'others': // need to fix
-			return await parseOthersMessage(options);
-		default:
-			options.response({error: 'Invalid message type'});
+			await parseCloseMessage(options);
+			break;
+		case 'message':
+			await parseMessageMessage(options);
 	}
 }
 

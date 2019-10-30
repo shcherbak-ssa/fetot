@@ -2,8 +2,8 @@
 
 /*** imports [begin] ***/
 
-const Client = require('./components/client'),
-	Connection = require('./components/connection');
+const Client = require('./components/client');
+const Connection = require('./components/connection');
 
 /*** imports [end] ***/
 /*** init [begin] ***/
@@ -11,7 +11,11 @@ const Client = require('./components/client'),
 const clientsCollections = {
 	app: new Map(),
 	appLinksID: new Map(),
+	
 	login: new Map(),
+	
+	ipAddress: new Map(),
+	
 	get(key) {
 		return this[key];
 	}
@@ -20,8 +24,8 @@ const clientsCollections = {
 /*** init [end] ***/
 /*** exports [begin] ***/
 
-async function client(label, id) {
-	return (label === 'login') ? clientsCollections.login.get(id) : clientsCollections.app.get(id);
+async function client(page, id) {
+	return clientsCollections.get(page).get(id);
 }
 
 client.create = createClient;
@@ -33,6 +37,10 @@ client.removeAppLinkID = removeAppClientLinkID;
 
 client.remove = removeClient;
 client.removeConnection = removeClientConnection;
+
+client.setIP = setClientIPAddress;
+client.removeIP = removeClientIPAddress;
+client.isCorrectIP = isCorrectClientIPAddress;
 
 client.run = runClient;
 
@@ -70,6 +78,18 @@ async function removeClientConnection(client, connectionsLabel) {
 	await client.connections.remove(connectionsLabel);
 }
 
+// ip functions
+async function setClientIPAddress(id, ip) {
+	clientsCollections.ipAddress.set(id, ip);
+}
+async function removeClientIPAddress(id) {
+	clientsCollections.ipAddress.delete(id)
+}
+async function isCorrectClientIPAddress(id, ip) {
+	return clientsCollections.ipAddress.get(id) === ip;
+}
+
+// run function
 async function runClient(client, message) {}
 
 /*** src [end] ***/

@@ -2,8 +2,8 @@
 
 /*** imports [begin] ***/
 
-const generateClientID = require('../src/generate-client-id'),
-	clientWorker = require('../../client');
+const generateClientID = require('../src/generate-client-id');
+const clientWorker = require('../../client');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
@@ -28,33 +28,39 @@ async function parse(type, options) {
 }
 
 /* login page connection */
-async function isLoginPageConnection(options) {
+async function isLoginPageConnection({ip, message}) {
 	let id = await generateClientID.forLoginPage();
 	
-	await clientWorker.client.create('login', id, options);
+	await clientWorker.client.create('login', id, message);
+	await clientWorker.client.setIP(id, ip);
+	
 	return { id };
 }
 
 /* app page connection */
 async function isAppPageConnection(options) {
-	let id = await clientWorker.client.getAppLinkID(options.client);
+	let id = await clientWorker.client.getAppLinkID(options.message.client);
 	return id
-		? await isNotFirstClientConnection(id, options.connection)
+		? await isNotFirstClientConnection(id, options)
 		: await isFirstClientConnection(options);
 }
-async function isFirstClientConnection(options) {
+async function isFirstClientConnection({ip, message}) {
 	let id = await generateClientID.forAppPage();
 	
-	await clientWorker.client.setAppLinkID(options.client, id);
-	await clientWorker.client.create('app', id, options);
+	await clientWorker.client.setAppLinkID(message.client, id);
+	await clientWorker.client.create('app', id, message);
+	await clientWorker.client.setIP(id, options.ip);
 	
 	return { id }
 }
-async function isNotFirstClientConnection(id, options) {
-	let client = clientWorker.client('app', id),
-		connectionLabel = await clientWorker.client.createConnection(client, options);
+async function isNotFirstClientConnection(id, {ip, message}) {
+	let client = clientWorker.client('app', id);
+	let connectionLabel = await clientWorker.client.createConnection(client, message.connection);
 	
-	return { id: `${id}/${connectionLabel}` }
+	id = `${id}/${connectionLabel}`;
+	await clientWorker.client.setIP(id, ip);
+	
+	return { id }
 }
 
 /*** src [end] ***/

@@ -2,23 +2,28 @@
 
 /*** imports [begin] ***/
 
-const {removeIDFromCollection} = require('../src/generate-client-id'),
-	parseClientID = require('../src/parse-client-id'),
-	clientWorker = require('../../client');
+const {removeIDFromCollection} = require('../src/generate-client-id');
+const parseClientID = require('../src/parse-client-id');
+const clientWorker = require('../../client');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
 async function parseCloseMessage(options) {
-	options.response(null);
+	await options.response(null);
 	
-	await parse(options);
-	await removeIDFromCollection(options.id);
+	let {ip, message: {id}} = options;
+	if( !clientWorker.client.isCorrectIP(id, ip) ) return;
+	
+	await closeClientConnection(id);
+	await clientWorker.client.removeIP(id);
+	await removeIDFromCollection(id);
 }
 
 /*** exports [end] ***/
 /*** src [begin] ***/
-async function parse({id: clientID}) {
+
+async function closeClientConnection(clientID) {
 	let [id, label] = await parseClientID(clientID);
 	if( label === 'l' ) return await clientWorker.client.remove('login', id);
 	

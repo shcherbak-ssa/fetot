@@ -2,14 +2,14 @@
 
 /*** imports [begin] ***/
 
-const parseClientID = require('./parse-client-id'),
-	generateID = require('../../../../lib/generate-id');
+const generateID = require('../../../../lib/generate-id');
+const parseClientID = require('./parse-client-id');
 
 /*** imports [end] ***/
 /*** init [begin] ***/
 
-const appPageCollection = new Set(),
-	loginPageCollection = new Set();
+const appPageCollection = new Set();
+const loginPageCollection = new Set();
 
 /*** init [end] ***/
 /*** exports [begin] ***/

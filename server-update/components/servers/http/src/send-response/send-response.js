@@ -2,16 +2,14 @@
 
 /*** imports [begin] ***/
 
-const sendFile = require('./send-file'),
-	sendError = require('./send-error'),
-	sendMessage = require('./send-message');
+const sendFile = require('./src/send-file'),
+	sendError = require('./src/send-error'),
+	sendMessage = require('./src/send-message');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
 async function sendResponse(options, response) {
-	if( options === null ) return response.end();
-	
 	switch( true ) {
 		case 'error' in options:
 			await sendError[options.error](response);

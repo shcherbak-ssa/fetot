@@ -27,8 +27,9 @@ async function parsePostRequest(request, response) {
 async function preparingOptions(ip, message, response) {
 	return {
 		ip, message,
-		response: async (outputMessage) => {
-			await sendResponse({message: outputMessage}, response);
+		response: async (options) => {
+			if( options === null ) return response.end();
+			await sendResponse(options, response);
 		}
 	}
 }

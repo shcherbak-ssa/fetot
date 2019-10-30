@@ -2,26 +2,22 @@
 
 /*** imports [begin] ***/
 
-const messageValidation = require('./src/message-validation'),
-	messageParser = require('./src/message-parser'),
-	{serverEvents} = require('../../server-events');
+const messageValidation = require('./src/message-validation');
+const messageParser = require('./src/message-parser');
 
 /*** imports [end] ***/
-/*** init [begin] ***/
-
-/*** init [end] ***/
 /*** exports [begin] ***/
 
 async function connectionHandler(options) {
 	let errors = await messageValidation(options.message);
-	if( errors ) return options.response(errors);
+	if( errors ) {
+		console.log(errors);
+		return options.response(null);
+	}
 	
-	let clientOptions = await messageParser(options);
-	serverEvents.emit('client-event', clientOptions);
+	await messageParser(options);
 }
 
 /*** exports [end] ***/
 
-module.exports = {
-	connectionHandler
-};
+module.exports = { connectionHandler };
