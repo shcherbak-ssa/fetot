@@ -31,7 +31,9 @@ async function getInputMessage(request) {
 	})
 }
 async function messageValidation(message, headers) {
-	switch( headers['content-type'] ) {
+	let [contentType] = headers['content-type'].split(';');
+	switch( contentType ) {
+		case 'text/plain':
 		case 'application/json':
 			return JSON.parse(message);
 		default:

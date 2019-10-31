@@ -1,3 +1,3 @@
 'use strict';
 
-export {default} from './login-page'
+import './login-page'

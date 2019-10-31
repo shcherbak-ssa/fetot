@@ -20,7 +20,7 @@ class Client {
 	
 	static async create(clientOptions) {
 		if( '$module' in clientOptions ) {
-			console.log(clientOptions);
+			// console.log(clientOptions);
 			return new Client({});
 		}
 		

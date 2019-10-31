@@ -3,7 +3,7 @@
 /*** imports [begin] ***/
 
 const sendFile = require('./send-file'),
-	getPublicFilename = require('../get-public-filename');
+	getPublicFilename = require('../../get-public-filename');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/

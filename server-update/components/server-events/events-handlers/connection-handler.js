@@ -2,7 +2,7 @@
 
 /*** imports [begin] ***/
 
-const connectionWorker = require('../../../workers/connection');
+const connectionWorker = require('../../workers/connection');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/

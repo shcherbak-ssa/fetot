@@ -2,12 +2,12 @@
 
 /*** imports [begin] ***/
 
-const {join} = require('path');
+const {join, resolve} = require('path');
 
 /*** imports [end] ***/
 /*** init [begin] ***/
 
-const publicDirname = join(process.cwd(), 'public'),
+const publicDirname = resolve(process.cwd(), '../public'),
 	publicAssetsDirname = join(publicDirname, 'assets'),
 	publicIconsDirname = join(publicAssetsDirname, 'icons'),
 	

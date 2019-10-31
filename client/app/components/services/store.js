@@ -28,7 +28,7 @@ const Store = new Proxy({collection}, {
 /*** exports [end] ***/
 /*** src [begin] ***/
 
-function createCollection(name, object) {
+function createCollection(name, object = {}) {
 	object = extendObject(object);
 	storeCollections.set(name, object);
 	

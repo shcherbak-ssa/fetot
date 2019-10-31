@@ -1,9 +1,16 @@
 'use strict';
 
+/*** imports [begin] ***/
+
 const path = require('path');
 const VueLoader = require('vue-loader/lib/plugin');
 
+/*** imports [end] ***/
+/*** init [begin] ***/
+
 const appDirname = path.join(__dirname, 'app');
+
+/*** init [end] ***/
 
 module.exports = (env) => {
 	let outputFilename = `${env.page}.js`,
@@ -55,8 +62,8 @@ module.exports = (env) => {
 		resolve: {
 			alias: {
 				'fetot': path.join(appDirname, 'fetot'),
-				'fetot-scss': path.join(appDirname, 'UI', 'scss', 'src.scss'),
-				'fetot-vue': path.join(appDirname, 'UI', 'vue'),
+				'fetot-scss': path.join(appDirname, 'view', 'scss', 'src.scss'),
+				'fetot-vue': path.join(appDirname, 'view', 'vue'),
 				'fetot-network-components': path.join(appDirname, 'components', 'network'),
 				'fetot-workers-components': path.join(appDirname, 'components', 'workers'),
 				'fetot-services-components': path.join(appDirname, 'components', 'services'),

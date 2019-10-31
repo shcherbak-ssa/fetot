@@ -16,12 +16,15 @@ const inputMessageSchema = {
 		required: true,
 		enum: ['connection', 'close', 'message']
 	},
-	content: {
+	content: {}
+};
+const inputMessageContentSchema = {
+	type: {
+		type: String,
+	},
+	data: {
 		properties: {
-			type: {
-				type: String,
-			},
-			data: {}
+		
 		}
 	}
 };
@@ -30,7 +33,11 @@ const inputMessageSchema = {
 /*** exports [begin] ***/
 
 async function messageValidation(message) {
-	let errors = await validation(inputMessageSchema, message);
+	inputMessageSchema.content = await validation.createSchema(inputMessageContentSchema);
+
+	let schema = await validation.createSchema(inputMessageSchema);
+	let errors = await validation.validate(schema, message);
+	
 	return errors[0] ? errors : false;
 }
 

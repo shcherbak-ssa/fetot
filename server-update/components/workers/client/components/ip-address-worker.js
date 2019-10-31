@@ -1,21 +1,21 @@
 'use strict';
 
-/*** init [begin] ***/
-
-const ipAddressCollection = new Map();
-
-/*** init [end] ***/
 /*** exports [begin] ***/
 
 const ipAddressWorker = {
+	collection: new Map(),
 	set(id, ip) {
-		ipAddressCollection.set(id, ip);
+		this.collection.set(id, ip);
 	},
 	isCorrect(id, ip) {
-		return ipAddressCollection.get(id) === ip;
+		return this.collection.get(id) === ip;
 	},
 	remove(id) {
-		ipAddressCollection.delete(id);
+		this.collection.delete(id);
+	},
+	// for testing
+	showCollection() {
+		console.log('ip address collection', this.collection.entries());
 	}
 };
 

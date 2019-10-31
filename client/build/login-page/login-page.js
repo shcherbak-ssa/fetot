@@ -15,9 +15,6 @@ controlClientExist()
 	.then(($module) => {
 		return {type: 'login', mode: 'login', $module}
 	})
-	.then((options) => {
-		return fetot.preparingConnectionOptions(options);
-	})
 	.then((connectionOptions) => {
 		return fetot.init(connectionOptions, loginPageView);
 	})
@@ -29,9 +26,6 @@ controlClientExist()
 	});
 
 /*** init [end] ***/
-/*** exports [begin] ***/
-
-/*** exports [end] ***/
 /*** src [begin] ***/
 
 async function controlClientExist() {
@@ -39,5 +33,3 @@ async function controlClientExist() {
 }
 
 /*** src [end] ***/
-
-export default {};

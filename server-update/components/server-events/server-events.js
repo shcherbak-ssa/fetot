@@ -2,13 +2,11 @@
 
 /*** imports [begin] ***/
 
-const Events = require('events'),
-	
-	connectionHandler = require('./events-handlers/connections/connection-handler'),
-	connectionMongodbHandler = require('./events-handlers/connections/connection-mongodb-handler'),
-	connectionEventSourceHandler = require('./events-handlers/connections/connection-event-source-handler'),
+const Events = require('events');
 
-	clientEventHandler = require('./events-handlers/client-event-handler');
+const connectionHandler = require('./events-handlers/connection-handler');
+const connectionMongodbHandler = require('./events-handlers/connection-mongodb-handler');
+const connectionEventSourceHandler = require('./events-handlers/connection-event-source-handler');
 
 /*** imports [end] ***/
 /*** init [begin] ***/
@@ -25,9 +23,6 @@ async function initServerEvents() {
 		.on('connection-event-source', connectionEventSourceHandler)
 		.on('connection-mongodb', connectionMongodbHandler)
 		.on('connection', connectionHandler);
-	
-	/* client events */
-	serverEvents.on('client-event', clientEventHandler);
 }
 
 /*** exports [end] ***/

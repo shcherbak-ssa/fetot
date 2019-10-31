@@ -4,7 +4,7 @@
   "description": "application",
   "main": "index.js",
   "scripts": {
-    "fetot": "supervisor --watch ./server -- server",
+    "fetot": "supervisor server.js",
     "mongod": "mongod.bat",
     "email-test": "node ../util/email-test.js",
     "drop-mongodb-collection": "node ../util/drop-mongodb-collection.js",

@@ -33,7 +33,10 @@ client.remove = removeClient;
 client.removeConnection = removeClientConnection;
 
 client.appLinksID = appLinkIDWorker;
-client.ipAddress = ipAddressWorker;
+client.ipAddress = {
+	login: Object.assign({}, ipAddressWorker),
+	app: Object.assign({}, ipAddressWorker)
+};
 
 /*** exports [end] ***/
 /*** src [begin] ***/
@@ -60,4 +63,13 @@ async function removeClientConnection(client, connectionsLabel) {
 
 /*** src [end] ***/
 
-module.exports = { client };
+// for testing
+function showCollection() {
+	console.log('login collection -', clientsCollections.login.keys());
+	// console.log('app collection -', 	clientsCollections.app.entries());
+	
+	client.ipAddress.login.showCollection();
+	// client.appLinksID.showCollection();
+}
+
+module.exports = { client, showCollection };

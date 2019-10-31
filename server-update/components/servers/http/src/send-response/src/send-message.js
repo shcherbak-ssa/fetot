@@ -3,9 +3,7 @@
 /*** init [begin] ***/
 
 const responseHeaders = {
-	headers: {
-		'Content-Type': 'application/json'
-	}
+	'Content-Type': 'application/json'
 };
 
 /*** init [end] ***/

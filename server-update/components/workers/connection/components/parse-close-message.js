@@ -10,13 +10,17 @@ const clientWorker = require('../../client');
 /*** exports [begin] ***/
 
 async function parseCloseMessage({ip, message: {id}, response}) {
+	console.log('parse close message init', id);
 	await response(null);
 	
-	if( !clientWorker.client.ipAddress.isCorrect(id, ip) ) return;
+	let page = id[id.length - 1] === 'l' ? 'login' : 'app';
+	if( !clientWorker.client.ipAddress[page].isCorrect(id, ip) ) return;
 	
 	await closeClientConnection(id);
 	await removeIDFromCollection(id);
-	await clientWorker.client.ipAddress.remove(id);
+	await clientWorker.client.ipAddress[page].remove(id);
+	
+	clientWorker.showCollection(); // for testing
 }
 
 /*** exports [end] ***/

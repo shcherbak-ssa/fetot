@@ -15,8 +15,8 @@ async function parsePostRequest(request, response) {
 	let message = await parseInputMessage(request);
 	if( !message ) return response.end({error: 'invalid message'});
 	
-	let ip = getClientIPAddress(request),
-		options = await preparingOptions(ip, message, response);
+	let ip = getClientIPAddress(request);
+	let options = await preparingOptions(ip, message, response);
 	
 	serverEvents.emit('connection', options);
 }

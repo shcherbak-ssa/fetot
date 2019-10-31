@@ -9,15 +9,18 @@ const clientWorker = require('../../client');
 /*** exports [begin] ***/
 
 async function parseConnectionMessage({ip, message: {content: {type, data: message}}, response}) {
-	let id = await parse(type, message); // message = data = { client, connection }
+	if( type === '' || !('client' in message) || !('connection' in message) )
+		return await response(null);
 	
+	let id = await parse(type, message); // message = data = { client, connection }
 	if( id === null ) message = null;
 	else {
-		await clientWorker.client.ipAddress.set(id, ip);
+		await clientWorker.client.ipAddress[type].set(id, ip);
 		message = { message: {id} };
 	}
 	
 	await response(message);
+	clientWorker.showCollection(); // for testing
 }
 
 /*** exports [end] ***/
@@ -62,7 +65,6 @@ async function isNotFirstClientConnection(id, {connection}) {
 async function createClientConnection(client, connection, id) {
 	let connectionLabel = await clientWorker.client.createConnection(client, connection);
 	return `${id}/${connectionLabel}`;
-	
 }
 
 /*** src [end] ***/

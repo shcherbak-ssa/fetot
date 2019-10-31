@@ -8,7 +8,7 @@ import inputs from '../store/inputs.json';
 /*** imports [end] ***/
 /*** init [begin] ***/
 
-let inputsCollection = Store.collection.create('inputs');
+const inputsCollection = Store.collection.create('inputs');
 for( let [inputName, inputObject] of Object.entries(inputs) )
 	inputsCollection.set(inputName, inputObject);
 
@@ -16,8 +16,7 @@ for( let [inputName, inputObject] of Object.entries(inputs) )
 /*** exports [begin] ***/
 
 async function initLoginPage() {
-	console.log('by call function', Store.collection('inputs'));
-	console.log('by property', Store.inputs)
+	console.log('init login page')
 }
 
 /*** exports [end] ***/

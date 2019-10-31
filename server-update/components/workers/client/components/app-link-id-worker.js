@@ -18,6 +18,10 @@ const appLinkIdWorker = {
 		for( let [key, val] of appLinksIDCollection.entries() ) {
 			if( val === id ) return appLinksIDCollection.delete(key);
 		}
+	},
+	// for testing
+	showCollection() {
+		console.log('app link id collection', appLinksIDCollection.entries());
 	}
 };
 

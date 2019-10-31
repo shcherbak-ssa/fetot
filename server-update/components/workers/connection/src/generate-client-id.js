@@ -30,7 +30,9 @@ async function removeIDFromCollection(id) {
 
 async function generateClientID(label, collection) {
 	let id = await generateID() + label;
-	return controlIDInCollection(collection, id) ? await generateClientID(label, collection) : id;
+	let exist = await controlIDInCollection(collection, id);
+	
+	return exist ? await generateClientID(label, collection) : id;
 }
 async function controlIDInCollection(collection, id) {
 	if( collection.has(id) ) return true;

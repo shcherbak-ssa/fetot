@@ -14,7 +14,7 @@ async function sendRequest(options) {
 /*** exports [end] ***/
 /*** src [begin] ***/
 
-async function postRequest({url = '/', message, headers = {}, options = {}}) {
+async function postRequest({url = '/', message, headers, options = {}}) {
 	return await fetch(url, {
 		method: 'POST',
 		body: outputMessage.getMessage(message),
