@@ -2,10 +2,10 @@
 
 /*** exports [begin] ***/
 
-const validationSchema = {
+const commonSchemas = {
 	email: {
-		checkEmpty: true,
 		type: String,
+		required: true,
 		validate(value) {
 			return /^[^@\s]+@(gmail|mail)\.(com|ru)$/i.test(value)
 		},
@@ -15,8 +15,8 @@ const validationSchema = {
 		}
 	},
 	password: {
-		checkEmpty: true,
 		type: String,
+		required: true,
 		validate(value) {
 			return value.length >= 8
 		},
@@ -29,4 +29,4 @@ const validationSchema = {
 
 /*** exports [end] ***/
 
-module.exports = validationSchema;
+module.exports = commonSchemas;

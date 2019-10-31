@@ -2,17 +2,21 @@
 
 /*** imports [begin] ***/
 
-const ValidateSchema = require('validate');
+// const ValidateSchema = require('validate');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
-async function createSchema(schema) {
-	return new ValidateSchema(schema, { typecast: true });
+async function validationService(schema, object) {
+
 }
-async function validate(schema, object) {
-	return schema.validate(object);
-}
+
+// async function createSchema(schema) {
+// 	return new ValidateSchema(schema, { typecast: true });
+// }
+// async function validate(schema, object) {
+// 	return schema.validate(object);
+// }
 
 /*** exports [end] ***/
 

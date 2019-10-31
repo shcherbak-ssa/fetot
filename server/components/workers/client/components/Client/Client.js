@@ -5,7 +5,7 @@
 const Connection = require('../Connection');
 const connections = require('./connections');
 
-const LoginClient = require('./Login-client');
+const LoginClient = require('../LoginClient');
 const MongodbWorker = require('../../../mongodb');
 
 /*** imports [end] ***/
