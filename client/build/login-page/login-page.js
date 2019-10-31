@@ -13,7 +13,7 @@ import loginPageView from './vue/login-page.vue';
 
 controlClientExist()
 	.then(($module) => {
-		return {type: 'login', mode: 'login', $module}
+		return {type: 'login', mode: '', $module}
 	})
 	.then((connectionOptions) => {
 		return fetot.init(connectionOptions, loginPageView);

@@ -14,13 +14,11 @@ import outputMessage from './components/network/output-message'
 /*** imports [end] ***/
 /*** init [begin] ***/
 
-const client = $localStorage.item.has('client') ? $localStorage.item('client') : false;
 window.addEventListener("unload", function() {
-	// let message = outputMessage.getMessage({type: 'close'});
-	// let blob = new Blob([message], { type: 'application/json' });
-
 	navigator.sendBeacon('/', outputMessage.getMessage({type: 'close'}));
 }, false);
+
+const client = $localStorage.item.has('client') ? $localStorage.item('client') : false;
 
 /*** init [end] ***/
 /*** exports [begin] ***/

@@ -5,6 +5,7 @@
 const Connection = require('../Connection');
 const connections = require('./connections');
 
+const LoginClient = require('./Login-client');
 const MongodbWorker = require('../../../mongodb');
 
 /*** imports [end] ***/
@@ -19,10 +20,7 @@ class Client {
 	}
 	
 	static async create(clientOptions) {
-		if( '$module' in clientOptions ) {
-			// console.log(clientOptions);
-			return new Client({});
-		}
+		if( '$module' in clientOptions ) return LoginClient.create(clientOptions);
 		
 		let mongodbWorker = await MongodbWorker.createCollection({db: 'clients', collection: 'clients'});
 		let {config} = await mongodbWorker.findOneDocument(clientOptions);

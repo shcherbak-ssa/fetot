@@ -33,6 +33,7 @@ client.remove = removeClient;
 client.removeConnection = removeClientConnection;
 
 client.appLinksID = appLinkIDWorker;
+
 client.ipAddress = {
 	login: Object.assign({}, ipAddressWorker),
 	app: Object.assign({}, ipAddressWorker)
