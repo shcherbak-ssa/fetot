@@ -2,10 +2,10 @@
 
 /*** imports [begin] ***/
 
-const http = require('http'),
-	server = http.createServer(),
+const http = require('http');
+const server = http.createServer();
 
-	requestHandler = require('./src/request-handler');
+const requestHandler = require('./src/request-handler');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/

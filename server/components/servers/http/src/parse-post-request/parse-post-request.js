@@ -2,11 +2,11 @@
 
 /*** imports [begin] ***/
 
-const parseInputMessage = require('./parse-input-message'),
-	sendResponse = require('../send-response'),
-	
-	{serverEvents} = require('../../../../server-events'),
-	getClientIPAddress = require('../../../../../lib/get-client-ip-address');
+const parseInputMessage = require('./parse-input-message');
+const sendResponse = require('../send-response');
+
+const connectionWorker = require('../../../../workers/connection');
+const getClientIPAddress = require('../../../../../lib/get-client-ip-address');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
@@ -18,7 +18,7 @@ async function parsePostRequest(request, response) {
 	let ip = getClientIPAddress(request);
 	let options = await preparingOptions(ip, message, response);
 	
-	serverEvents.emit('connection', options);
+	await connectionWorker.connectionHandler(options);
 }
 
 /*** exports [end] ***/

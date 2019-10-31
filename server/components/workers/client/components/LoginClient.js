@@ -2,13 +2,13 @@
 
 /*** imports [begin] ***/
 
-const MongodbWorker = require('../../mongodb');
+const MongodbService = require('../../../services/mongodb');
 const loginModeModules = require('../../../../fetot/login-mode-modules');
 
 /*** imports [end] ***/
 /*** init [begin] ***/
 
-const mongodbWorker = MongodbWorker.createCollection({db: 'client', collection: 'client'});
+const mongodbCollection = MongodbService.createCollection({db: 'client', collection: 'client'});
 
 /*** init [end] ***/
 /*** exports [begin] ***/
@@ -18,7 +18,7 @@ class LoginClient {
 		this.currentModule = $module;
 		this.options = {
 			store: new Map(),
-			mongodb: mongodbWorker,
+			mongodb: mongodbCollection,
 			message: {},
 			response: {}
 		};

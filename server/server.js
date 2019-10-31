@@ -5,8 +5,6 @@
 const initHttpServer = require('./components/servers/http');
 const initMongodbServer = require('./components/servers/mongodb');
 
-const {initServerEvents} = require('./components/server-events');
-
 /*** imports [end] ***/
 /*** init [begin] ***/
 
@@ -27,8 +25,6 @@ async function runFetotServer(port, hostname) {
 		// let httpServer = await initHttpServer(port, hostname);
 		await initHttpServer(port, hostname);
 		await initMongodbServer();
-		
-		await initServerEvents();
 		
 		return Promise.resolve();
 	} catch( err ) {

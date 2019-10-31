@@ -10,20 +10,20 @@ const updateDocuments = require('./components/update-documents');
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
-class MongodbWorker {
+class MongodbService {
 	constructor(collection) {
 		this.collection = collection;
 	}
 	
 	static mongoClient = {};
 	static createCollection({db, collection}) {
-		let mongoCollection = MongodbWorker.mongoClient.db(db).collection(collection);
-		return new MongodbWorker(mongoCollection);
+		let mongoCollection = MongodbService.mongoClient.db(db).collection(collection);
+		return new MongodbService(mongoCollection);
 	}
 }
 
 Object.assign(
-	MongodbWorker.prototype,
+	MongodbService.prototype,
 	insertDocuments,
 	findDocuments,
 	deleteDocuments,
@@ -32,4 +32,4 @@ Object.assign(
 
 /*** exports [end] ***/
 
-module.exports = MongodbWorker;
+module.exports = MongodbService;

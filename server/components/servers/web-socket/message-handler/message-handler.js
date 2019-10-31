@@ -2,10 +2,10 @@
 
 /*** imports [begin] ***/
 
-const parseInputMessage = require('./parse-input-message'),
-	preparingOptions = require('./preparing-options'),
+const parseInputMessage = require('./parse-input-message');
+const preparingOptions = require('./preparing-options');
 
-	{serverEvents} = require('../../../server-events');
+const connectionWorker = require('../../../workers/connection');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
@@ -15,7 +15,7 @@ async function messageHandler({ip, message}, socket) {
 	if( !message ) return socket.close('invalid message');
 	
 	let options = await preparingOptions(ip, message, socket);
-	serverEvents.emit('connection', options);
+	await connectionWorker.connectionHandler(options);
 }
 
 /*** exports [end] ***/

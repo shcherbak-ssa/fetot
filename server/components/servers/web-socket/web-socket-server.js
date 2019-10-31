@@ -2,9 +2,10 @@
 
 /*** imports [begin] ***/
 
-const WebSocket = require('ws'),
-	messageHandler = require('./message-handler'),
-	getClientIPAddress = require('../../../lib/get-client-ip-address');
+const WebSocket = require('ws');
+const messageHandler = require('./message-handler');
+
+const getClientIPAddress = require('../../../lib/get-client-ip-address');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
