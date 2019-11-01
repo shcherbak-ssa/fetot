@@ -3,12 +3,10 @@
 /*** imports [begin] ***/
 
 const MongodbService = require('../../../services/mongodb');
-const loginModeModules = require('../../../../fetot/login-mode-modules');
+// const loginModeModules = require('../../../../fetot/login-modules');
 
 /*** imports [end] ***/
 /*** init [begin] ***/
-
-const mongodbCollection = MongodbService.createCollection({db: 'client', collection: 'client'});
 
 /*** init [end] ***/
 /*** exports [begin] ***/
@@ -18,35 +16,39 @@ class LoginClient {
 		this.currentModule = $module;
 		this.options = {
 			store: new Map(),
-			mongodb: mongodbCollection,
+			mongodb: MongodbService.createCollection({db: 'client', collection: 'client'}),
 			message: {},
 			response: {}
 		};
 	}
 	
 	static async create({$module}) {
-		return new LoginClient(loginModeModules[$module]);
+		// return new LoginClient(loginModeModules[$module]);
+		console.log($module);
+		return new LoginClient($module);
 	}
 	
 	async run({message: {type, data: message}, response}) {
 		if( type === 'run-worker' ) {
-			message = this.validate(message);
-			if( !message ) return await this.runWorker({message, response});
-		} else if( type === 'change-module' ) await this.changeModule(message);
+			
+			message = this._validate(message);
+			if( !message ) return await this._runWorker({message, response});
+			
+		} else if( type === 'change-module' ) await this._changeModule(message);
 		
 		await response(null);
 	}
 	
-	async validate(message) {
-	
+	async _validate(message) {
+		return message;
 	}
-	async runWorker(options) {
+	async _runWorker(options) {
 		options = Object.assign({}, this.options, options);
 		this.currentModule.worker(options);
 	}
-	async changeModule({$module}) {
+	async _changeModule({$module}) {
 		if( $module === undefined ) return ;
-		this.currentModule = loginModeModules[$module];
+		// this.currentModule = loginModeModules[$module];
 	}
 }
 

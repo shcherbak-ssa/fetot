@@ -2,14 +2,14 @@
 
 /*** imports [begin] ***/
 
-const validationSchema = require('../../../../lib/validation-schema');
+// const validationSchema = require('../../../../lib/validation-schema');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
 const schema = {
-	email: validationSchema.email,
-	password: validationSchema.password,
+	// email: validationSchema.email,
+	// password: validationSchema.password,
 	__length: 2
 };
 

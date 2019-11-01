@@ -23,8 +23,8 @@ runFetotServer(8080, 'localhost')
 async function runFetotServer(port, hostname) {
 	try {
 		// let httpServer = await initHttpServer(port, hostname);
-		await initHttpServer(port, hostname);
 		await initMongodbServer();
+		await initHttpServer(port, hostname);
 		
 		return Promise.resolve();
 	} catch( err ) {

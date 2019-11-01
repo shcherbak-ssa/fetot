@@ -2,11 +2,11 @@
 
 /*** imports [begin] ***/
 
-const Connection = require('../Connection');
+const Connection = require('./Connection');
 const connections = require('./connections');
 
-const LoginClient = require('../LoginClient');
-const MongodbService = require('../../../../services/mongodb');
+const LoginClient = require('./LoginClient');
+const MongodbService = require('../../../services/mongodb');
 
 /*** imports [end] ***/
 /*** init [begin] ***/

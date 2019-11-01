@@ -2,13 +2,9 @@
 
 /*** exports [begin] ***/
 
-const singInModuleConfig = {
+const loginModuleConfig = {
 	name: 'login',
-	mongodb: {
-		db: 'clients',
-		collection: 'clients'
-	},
-	response: {
+	responseOptions: {
 		'many-enter-count': {
 			type: 'error',
 			message: {
@@ -32,4 +28,4 @@ const singInModuleConfig = {
 
 /*** exports [end] ***/
 
-module.exports = singInModuleConfig;
+module.exports = loginModuleConfig;

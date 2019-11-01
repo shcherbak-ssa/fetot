@@ -10,7 +10,7 @@ const createAccountModule = require('./modules/create-account');
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
-const loginModeModules = {
+const loginModules = {
 	'login': loginModule,
 	'sing-in': singInModule,
 	'confirm-email': confirmEmailModule,
@@ -19,4 +19,4 @@ const loginModeModules = {
 
 /*** exports [end] ***/
 
-module.exports = loginModeModules;
+module.exports = loginModules;

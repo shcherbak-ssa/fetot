@@ -2,12 +2,9 @@
 
 /*** imports [begin] ***/
 
-const transformInputObject = require('./transform-input-object');
+const getTrueValueTypeof = require('../src/get-true-value-typeof');
 
 /*** imports [end] ***/
-/*** init [begin] ***/
-
-/*** init [end] ***/
 /*** exports [begin] ***/
 
 class Schema {
@@ -15,38 +12,34 @@ class Schema {
 		this.schema = schema;
 	}
 	
+	[Symbol.toStringTag] = 'Schema';
+	
 	async validate(object) {
-		object = await transformInputObject(object);
 		return await this._parse(object)
 	}
+	
 	async _parse(object) {
-		return Promise.all(object.map(this._parseItem));
+		return Promise.all(Object.entries(object).map(this._parseItem.bind(this)));
 	}
 	async _parseItem([key, value]) {
-		if( !(key in this.schema) ) return reject('unknown key');
+		if( !(key in this.schema) ) return Promise.reject('unknown key');
 		
-		if( value instanceof Array ) return await this._parse(value);
+		let s = this.schema[key]; // current schema item
+		if( getTrueValueTypeof(s) === 'Schema' && getTrueValueTypeof(value) === 'Object' ) // control nesting
+			return s.validate(value);
 		
-		let s = this.schema[key]; // current schema
-		switch( true ) {
-			case s.required !== value.required:
-				return reject({key: key, error: 'cannot be empty'});
-				
-			case value.type !== s.type:
-			case s.valid && !s.valid.include(value.value):
-			case s.validate && !s.validate(value.value):
-				return reject(s.error);
+		if( s.required && (value === null || value === '') )
+			return Promise.reject({message: {key: key, message: 'cannot be empty'}});
+		
+		if( (getTrueValueTypeof(value) !== s.type)
+				|| (s.valid && !s.valid.includes(value))
+				|| (s.validate && !s.validate(value))
+		) {
+			return Promise.reject(s.error ? {message: s.error} : null);
 		}
 	}
 }
 
 /*** exports [end] ***/
-/*** src [begin] ***/
-
-function reject(err) {
-	return Promise.reject(err);
-}
-
-/*** src [end] ***/
 
 module.exports = Schema;
