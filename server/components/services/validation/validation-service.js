@@ -2,22 +2,26 @@
 
 /*** imports [begin] ***/
 
-// const ValidateSchema = require('validate');
+const createSchema = require('./components/create-schema');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
 async function validationService(schema, object) {
-
+	try {
+		schema = await createSchema(schema);
+		await schema.validate(object);
+		
+		return true;
+	} catch( err ) {
+		if( typeof err === 'string' ) {
+			console.log(new Error(err));
+			return false;
+		}
+		return err;
+	}
 }
-
-// async function createSchema(schema) {
-// 	return new ValidateSchema(schema, { typecast: true });
-// }
-// async function validate(schema, object) {
-// 	return schema.validate(object);
-// }
 
 /*** exports [end] ***/
 
-module.exports = { createSchema, validate };
+module.exports = validationService;
