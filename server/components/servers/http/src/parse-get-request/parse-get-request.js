@@ -21,7 +21,7 @@ async function parse({url, headers}) {
 	switch( true ) {
 		case url === '/':
 			return await isRootRequest(headers);
-		case /\/[-\w]+\.\w{1,5}/i.test(url):
+		case /\/[-.\w]+\.\w{1,5}/i.test(url):
 			return await isFileRequest(url.slice(1));
 		default:
 			return {error: '404'};

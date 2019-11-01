@@ -2,6 +2,9 @@
 
 /*** imports [begin] ***/
 
+const fs = require('fs');
+const path = require('path');
+
 const getPublicFilename = require('../get-public-filename');
 let fileResponseConfig = require('./src/file-response-config.json');
 
@@ -10,12 +13,10 @@ let fileResponseConfig = require('./src/file-response-config.json');
 
 fileResponseConfig = new Proxy(fileResponseConfig, {
 	get(target, prop) {
-		let {valid, options} = target[prop];
+		let options = target[prop];
 		return async (name, filename) => {
-			if( !valid.includes(name) ) return false;
-			
 			filename = getPublicFilename(filename);
-			return Object.assign({}, options, {filename});
+			return fs.existsSync(filename) ? Object.assign({filename}, options) : false;
 		}
 	}
 });
@@ -24,8 +25,11 @@ fileResponseConfig = new Proxy(fileResponseConfig, {
 /*** exports [begin] ***/
 
 async function isFileRequest(filename) {
-	let [name, type] = filename.split('.'),
-		options = (type in fileResponseConfig) ? await fileResponseConfig[type](name, filename) : false;
+	let parsedFilename = path.parse(filename);
+	let [, type] = parsedFilename.ext.split('.');
+	
+	let options = (type in fileResponseConfig)
+		? await fileResponseConfig[type](parsedFilename.name, filename) : false;
 	
 	return options || {error: '404'};
 }

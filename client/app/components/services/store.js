@@ -28,6 +28,7 @@ const Store = new Proxy({collection}, {
 /*** exports [end] ***/
 /*** src [begin] ***/
 
+// collection functions
 function createCollection(name, object = {}) {
 	object = extendObject(object);
 	storeCollections.set(name, object);
@@ -49,6 +50,12 @@ function extendObject(object) {
 		},
 		set(key, value) {
 			this[key] = value;
+		},
+		setObject(object) {
+			let self = this;
+			Object.entries(object).forEach((item) => {
+				self.set(...item)
+			});
 		}
 	})
 }

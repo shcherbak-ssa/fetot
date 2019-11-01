@@ -1,0 +1,19 @@
+{
+  "module": {
+    "title": "New account",
+    "link": "Back to start",
+    "content": {
+      "inputs": [ "fullname", "password" ],
+      "button": [ "Create" ]
+    }
+  },
+  "inputs": {
+    "fullname": {
+      "type": "text",
+      "value": "",
+      "placeholder": "Full name",
+      "icon": "&#xe800;",
+      "error": ""
+    }
+  }
+}
