@@ -3,12 +3,10 @@
 /*** imports [begin] ***/
 
 const MongodbService = require('../../../services/mongodb');
+const validationService = require('../../../services/validation');
 // const loginModeModules = require('../../../../fetot/login-modules');
 
 /*** imports [end] ***/
-/*** init [begin] ***/
-
-/*** init [end] ***/
 /*** exports [begin] ***/
 
 class LoginClient {
@@ -31,7 +29,7 @@ class LoginClient {
 	async run({message: {type, data: message}, response}) {
 		if( type === 'run-worker' ) {
 			
-			message = this._validate(message);
+			message = await this._validate(message);
 			if( !message ) return await this._runWorker({message, response});
 			
 		} else if( type === 'change-module' ) await this._changeModule(message);
@@ -39,16 +37,15 @@ class LoginClient {
 		await response(null);
 	}
 	
-	async _validate(message) {
-		return message;
-	}
 	async _runWorker(options) {
 		options = Object.assign({}, this.options, options);
 		this.currentModule.worker(options);
 	}
 	async _changeModule({$module}) {
 		if( $module === undefined ) return ;
+		
 		// this.currentModule = loginModeModules[$module];
+		this._validate = validationService(this.currentModule.schema);
 	}
 }
 
