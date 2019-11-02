@@ -20,6 +20,9 @@ class ModuleWorker {
 	
 	}
 	
+	async runWorker() {
+		await this.currentModule.run();
+	}
 	async changeModule($module) {
 		if( ModuleWorker.modules.has($module) ) await this._initNewModule($module);
 		

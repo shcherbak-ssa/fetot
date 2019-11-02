@@ -2,44 +2,40 @@
 
 /*** imports [begin] ***/
 
-import EventsEmitter from 'fetot-js-modules/events-emitter';
-import OutputDataWorker from 'fetot-worker-modules/output-data-worker';
-import storeWorker from 'fetot-worker-modules/store-worker';
-import fetchRequest from 'fetot-network-modules/fetch-request';
+import Store from 'fetot-services/store';
+import OutputMessage from 'fetot-workers/output-message';
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
 async function singInModuleWorker() {
-	let loginModeEventsEmitter = EventsEmitter.getEmitter('login-mode'),
-		inputs = storeWorker.getGlobalStore('inputs'),
-		outputDataWorker = new OutputDataWorker('check-email');
+	let input = Store.inputs.email;
 	
-	let email = inputs.get('email').value;
-	outputDataWorker.set('email', email);
+	if( input.value === '' ) return input.error = 'Current field cannot be empty';
 	
-	let response = await fetchRequest.post({
-		message: outputDataWorker.getData()
-	});
+	let outputMessage = new OutputMessage({type: 'worker'});
+	outputMessage.set('email', input.value);
 	
-	await parseServerResponse(inputs, response, loginModeEventsEmitter);
+	let response = await outputMessage.send();
+	await parseServerResponse(input, response);
 }
 
 /*** exports [end] ***/
 /*** src [begin] ***/
 
-async function parseServerResponse(inputs, {type, message}, loginModeEventsEmitter) {
+async function parseServerResponse(input, {type, message}) {
 	switch( type ) {
 		case 'error':
-			console.log('error', message);
-			inputs.get('email').error = message.error;
-			break;
+			input.error = message.error;
+			return false;
 		case 'success':
 			console.log('success', message);
-			loginModeEventsEmitter.emit('change-module');
+			
 	}
 }
 
 /*** src [end] ***/
 
-export default singInModuleWorker;
+export default {
+	run: singInModuleWorker
+};

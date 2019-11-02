@@ -7,15 +7,15 @@ import Vue from 'vue/dist/vue';
 import './view/scss/main.scss';
 import fetotContainer from './view/vue/fetot-container.vue';
 
-import $fetch from './components/network/fetch'
 import $localStorage from './components/services/local-storage';
-import outputMessage from './components/network/output-message'
+import OutputMessage from './components/workers/output-message'
 
 /*** imports [end] ***/
 /*** init [begin] ***/
 
 window.addEventListener("unload", function() {
-	navigator.sendBeacon('/', outputMessage.getMessage({type: 'close'}));
+	let message = new OutputMessage({messageType: 'close'}).getMessage();
+	navigator.sendBeacon('/', JSON.stringify(message));
 }, false);
 
 const client = $localStorage.item.has('client') ? $localStorage.item('client') : false;
@@ -24,7 +24,6 @@ const client = $localStorage.item.has('client') ? $localStorage.item('client') :
 /*** exports [begin] ***/
 
 async function initFetot(connectionOptions, mainComponent) {
-	connectionOptions = await preparingConnectionOptions(connectionOptions);
 	await connectionRequest(connectionOptions);
 	
 	return new Vue({
@@ -43,29 +42,14 @@ async function initFetot(connectionOptions, mainComponent) {
 /*** exports [end] ***/
 /*** src [begin] ***/
 
-async function preparingConnectionOptions({type, mode, $module}) {
-	return { type, connection: { mode, $module } }
-}
-async function connectionRequest({type, connection}) {
-	let response = await $fetch.request({
-		message: {
-			type: 'connection',
-			content: {
-				type: type,
-				data: {
-					client: client ? JSON.parse(client) : {},
-					connection
-				}
-			}
-		}
-	});
+async function connectionRequest({type, mode, $module}) {
+	let outputMessage = new OutputMessage({messageType: 'connection', type});
+	outputMessage.set('client', client).set('connection', {mode, $module});
 	
-	outputMessage.template.id = response.id;
+	let response = await outputMessage.send();
+	OutputMessage.clientID = response.id;
 }
 
 /*** src [end] ***/
 
-export default {
-	init: initFetot,
-	preparingConnectionOptions
-};
+export default { init: initFetot };

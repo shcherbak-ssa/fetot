@@ -26,6 +26,8 @@ async function client(page, id) {
 	return clientsCollections.get(page).get(id);
 }
 
+client.run = runClient;
+
 client.create = createClient;
 client.createConnection = createClientConnection;
 
@@ -60,6 +62,11 @@ async function removeClient(page, id) {
 }
 async function removeClientConnection(client, connectionsLabel) {
 	await client.removeConnection(connectionsLabel);
+}
+
+// run function
+async function runClient(client, options) {
+	await client.run(options);
 }
 
 /*** src [end] ***/

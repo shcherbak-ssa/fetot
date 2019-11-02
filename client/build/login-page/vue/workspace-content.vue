@@ -20,6 +20,8 @@
 	import fetotInput from 'fetot-vue/form/fetot-input.vue';
 	import fetotButton from 'fetot-vue/buttons/fetot-button.vue';
 
+	import singInModule from '../modules/sing-in';
+
 	export default {
 		name: 'workspace-content',
     components: {
@@ -33,10 +35,11 @@
       }
     },
     methods: {
-	    buttonClickHandler() {
-		    console.log('fetot-button-click')
+	    async buttonClickHandler() {
+		    console.log('fetot-button-click');
+		    await singInModule.run(); // for testing
 	    },
-	    inputInputHandler() {
+	    async inputInputHandler() {
 		    console.log('fetot-input-input')
 	    }
     },

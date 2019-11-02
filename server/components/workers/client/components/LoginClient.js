@@ -22,31 +22,34 @@ class LoginClient {
 	
 	static async create({$module}) {
 		// return new LoginClient(loginModeModules[$module]);
-		console.log($module);
+		console.log('$module', $module);
 		return new LoginClient($module);
 	}
 	
-	async run({message: {type, data: message}, response}) {
-		if( type === 'run-worker' ) {
-			
-			message = await this._validate(message);
-			if( !message ) return await this._runWorker({message, response});
-			
-		} else if( type === 'change-module' ) await this._changeModule(message);
-		
-		await response(null);
+	async run(options) {
+		console.log(options);
 	}
-	
-	async _runWorker(options) {
-		options = Object.assign({}, this.options, options);
-		this.currentModule.worker(options);
-	}
-	async _changeModule({$module}) {
-		if( $module === undefined ) return ;
-		
-		// this.currentModule = loginModeModules[$module];
-		this._validate = validationService(this.currentModule.schema);
-	}
+	// async run({message: {type, data: message}, response}) {
+	// 	if( type === 'worker' ) {
+	//
+	// 		message = await this._validate(message);
+	// 		if( !message ) return await this._runWorker({message, response});
+	//
+	// 	} else if( type === 'change-module' ) await this._runChangeModule(message);
+	//
+	// 	await response(null);
+	// }
+	//
+	// async _runWorker(options) {
+	// 	options = Object.assign({}, this.options, options);
+	// 	this.currentModule.worker(options);
+	// }
+	// async _runChangeModule({$module}) {
+	// 	if( $module === undefined ) return ;
+	//
+	// 	// this.currentModule = loginModeModules[$module];
+	// 	this._validate = validationService(this.currentModule.schema);
+	// }
 }
 
 /*** exports [end] ***/

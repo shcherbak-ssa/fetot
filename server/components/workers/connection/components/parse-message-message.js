@@ -11,14 +11,15 @@ const clientWorker = require('../../client');
 async function parseMessageMessage({ip, message: {id, content}, response}) {
 	console.log('parse message message init');
 	
-	let page = id[id.length - 1] === 'l' ? 'login' : 'app';
+	let [parsedID, label] = await parseClientID(id);
+	let page = label === 'l' ? 'login' : 'app';
+	
 	if( !clientWorker.client.ipAddress[page].isCorrect(id, ip) ) return await response(null);
 	
-	let [parsedID, label] = await parseClientID(id);
-	if( page === 'app' ) id = parsedID;
-	
-	let client = await clientWorker.client(page, id);
-	await client.run({ connectionLabel: label, message: content, response });
+	let client = await clientWorker.client(page, page === 'app' ? parsedID : id);
+	let options = { connectionLabel: label, message: content, response };
+
+	await clientWorker.client.run(client, options)
 }
 
 /*** exports [end] ***/

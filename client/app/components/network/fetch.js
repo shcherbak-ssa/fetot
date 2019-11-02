@@ -2,6 +2,14 @@
 
 /*** exports [begin] ***/
 
+async function $fetch(options) {
+	let response = await fetch('/', {method: 'POST', ...options});
+	return await parseResponse(response);
+}
+
+/*** exports [end] ***/
+/*** src [begin] ***/
+
 async function parseResponse(response) {
 	let [, contentType] = response.headers.get('Content-Type').split('/');
 	if( contentType === 'json' ) return response.json();
@@ -12,6 +20,6 @@ async function parseResponse(response) {
 	// }
 }
 
-/*** exports [end] ***/
+/*** src [end] ***/
 
-export default parseResponse;
+export default $fetch;
