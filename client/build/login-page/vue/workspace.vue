@@ -1,47 +1,45 @@
 <template>
   <div class="workspace">
     <fetot-title>
-      <div class="title">{{ options.store.get('title') }}</div>
+      <div class="title">{{ title }}</div>
     </fetot-title>
-    <workspace-content :options="setContentOptions()"/>
+    <workspace-content></workspace-content>
     <fetot-link @fetot-link-click="linkClickHandler">
-      <span class="link">{{ options.store.get('link') }}</span>
+      <div class="link">{{ link }}</div>
     </fetot-link>
   </div>
 </template>
 
 <script>
-	import fetotTitle from 'fetot-components/elements/fetot-title.vue';
-	import fetotLink from 'fetot-components/elements/fetot-link.vue';
+	import Store from 'fetot-services/store';
 
+	import fetotTitle from 'fetot-vue/text/fetot-title.vue';
+	import fetotLink from 'fetot-vue/text/fetot-link.vue';
 	import workspaceContent from './workspace-content.vue';
 
 	export default {
 		name: 'workspace',
-    props: {
-			options: Object
-		},
-		components: {
+    components: {
 			'fetot-title': fetotTitle,
-			'fetot-link': fetotLink,
+      'fetot-link': fetotLink,
       'workspace-content': workspaceContent
-		},
+    },
+    data() {
+			return {
+				title: Store.collection('current-module').title,
+        link: Store.collection('current-module').link
+      }
+    },
     methods: {
-			linkClickHandler() {
-				this.options.events.emit('fetot-link-click')
-      },
-      setContentOptions() {
-				return {
-					events: this.options.events,
-					store: this.options.store.content
-        }
+	    linkClickHandler() {
+	    	console.log('fetot-link-click')
       }
     }
 	}
 </script>
 
 <style lang="scss" scoped>
-  @import 'fetot-src-scss';
+  @import 'fetot-scss';
 
   .workspace {
     position: absolute;

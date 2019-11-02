@@ -5,14 +5,12 @@
 <script>
 	export default {
 		name: 'fetot-icon',
-    props: {
-			icon: String
-    }
+    props: { icon: String }
 	}
 </script>
 
 <style lang="scss">
-  @import 'fetot-src-scss';
+  @import 'fetot-scss';
 
   .fetot-icon {
     font: 24px 'icons-font';

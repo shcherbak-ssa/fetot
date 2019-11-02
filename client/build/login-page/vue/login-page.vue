@@ -1,10 +1,23 @@
 <template>
-  <div class="login-page"></div>
+  <div class="login-page">
+    <transition name="change-module" mode="out-in" appear>
+      <workspace :key="currentModuleName"/>
+    </transition>
+  </div>
 </template>
 
 <script>
+	import Store from 'fetot-services/store';
+  import workspace from './workspace.vue';
+
 	export default {
-		name: 'login-page'
+		name: 'login-page',
+    components: { workspace },
+    data() {
+			return {
+				currentModuleName: Store.collection('current-module').name
+      }
+    }
 	}
 </script>
 
@@ -12,10 +25,27 @@
   @import 'fetot-scss';
 
   .login-page {
-    background: #fff;
-    width: 300px;
-    height: 180px;
-    @include static-shadow;
-    @include position-center;
+    position: relative;
+    @include full-sizes;
+  }
+
+  .change-module {
+    &-enter, &-leave-to {
+      opacity: 0;
+
+      .fetot-title {
+        transform: translateY(300%);
+      }
+      .fetot-link {
+        transform: translateY(-400%);
+      }
+    }
+    &-enter-to, &-leave {
+      opacity: 1;
+
+      .fetot-title, .fetot-link {
+        transform: translateY(0);
+      }
+    }
   }
 </style>

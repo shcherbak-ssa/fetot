@@ -2,7 +2,7 @@
 
 /*** imports [begin] ***/
 
-import Store from 'fetot-services-components/store';
+import Store from 'fetot-services/store';
 
 /*** imports [end] ***/
 /*** init [begin] ***/

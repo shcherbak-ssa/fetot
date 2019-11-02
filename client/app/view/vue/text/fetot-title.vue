@@ -5,13 +5,11 @@
 </template>
 
 <script>
-	export default {
-		name: 'fetot-title'
-	}
+	export default { name: 'fetot-title' }
 </script>
 
 <style lang="scss" scoped>
-  @import 'fetot-src-scss';
+  @import 'fetot-scss';
 
   .fetot-title {
     color: $fetot-dark-blue;

@@ -5,13 +5,11 @@
 </template>
 
 <script>
-  export default {
-		name: 'fetot-button'
-	}
+  export default { name: 'fetot-button' }
 </script>
 
 <style lang="scss" scoped>
-  @import 'fetot-src-scss';
+  @import 'fetot-scss';
 
   .fetot-button {
     background: $fetot-blue;

@@ -9,6 +9,8 @@ const VueLoader = require('vue-loader/lib/plugin');
 /*** init [begin] ***/
 
 const appDirname = path.join(__dirname, 'app');
+const viewDirname = path.join(appDirname, 'view');
+const componentsDirname = path.join(appDirname, 'components');
 
 /*** init [end] ***/
 
@@ -62,11 +64,11 @@ module.exports = (env) => {
 		resolve: {
 			alias: {
 				'fetot': path.join(appDirname, 'fetot'),
-				'fetot-scss': path.join(appDirname, 'view', 'scss', 'src.scss'),
-				'fetot-vue': path.join(appDirname, 'view', 'vue'),
-				'fetot-network-components': path.join(appDirname, 'components', 'network'),
-				'fetot-workers-components': path.join(appDirname, 'components', 'workers'),
-				'fetot-services-components': path.join(appDirname, 'components', 'services'),
+				'fetot-scss': path.join(viewDirname, 'scss', 'src.scss'),
+				'fetot-vue': path.join(viewDirname, 'vue'),
+				'fetot-network': path.join(componentsDirname, 'network'),
+				'fetot-workers': path.join(componentsDirname, 'workers'),
+				'fetot-services': path.join(componentsDirname, 'services'),
 			}
 		},
 		plugins: [

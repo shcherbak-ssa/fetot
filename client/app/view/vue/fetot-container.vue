@@ -1,19 +1,19 @@
 <template>
-  <div class="ftt-container">
+  <div class="fetot-container">
     <slot></slot>
   </div>
 </template>
 
 <script>
 	export default {
-		name: 'ftt-container'
+		name: 'fetot-container'
 	}
 </script>
 
 <style lang="scss" scoped>
   @import '../scss/src.scss';
 
-  .ftt-container {
+  .fetot-container {
     background: #fff;
     position: relative;
     overflow: hidden;

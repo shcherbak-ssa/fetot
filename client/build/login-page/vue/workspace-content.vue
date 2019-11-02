@@ -1,52 +1,53 @@
 <template>
   <div class="workspace-content">
     <div class="content">
-      <p class="txt" v-if="options.store.text" v-html="options.store.text"></p>
+      <p class="txt" v-if="content.text" v-html="content.text"></p>
       <fetot-input
-              v-for="(input, index) in options.store.inputs"
+              v-for="(input, index) in content.inputs"
               :key="index" :input="inputs[input]"
               @fetot-input-input="inputInputHandler"
       />
-      <fetot-button v-if="options.store.button" @fetot-button-click="buttonClickHandler">
-        {{ options.store.button }}
+      <fetot-button v-if="content.button" @fetot-button-click="buttonClickHandler">
+        {{ content.button }}
       </fetot-button>
     </div>
   </div>
 </template>
 
 <script>
-	import fetotInput from 'fetot-components/form/fetot-input.vue';
-	import fetotButton from 'fetot-components/form/fetot-button.vue';
+	import Store from 'fetot-services/store';
 
-	import storeWorker from 'fetot-worker-modules/store-worker';
+	import fetotInput from 'fetot-vue/form/fetot-input.vue';
+	import fetotButton from 'fetot-vue/buttons/fetot-button.vue';
 
 	export default {
 		name: 'workspace-content',
+    components: {
+			'fetot-input': fetotInput,
+      'fetot-button': fetotButton
+    },
     data() {
 			return {
-				inputs: storeWorker.getGlobalStore('inputs')
+				content: Store.collection('current-module').content,
+        inputs: Store.inputs
       }
-    },
-    props: {
-			options: Object
-    },
-    components: {
-	    'fetot-input': fetotInput,
-	    'fetot-button': fetotButton
     },
     methods: {
-			buttonClickHandler() {
-				this.options.events.emit('fetot-button-click')
-      },
-      inputInputHandler() {
-				this.options.events.emit('fetot-input-input')
-      }
+	    buttonClickHandler() {
+		    console.log('fetot-button-click')
+	    },
+	    inputInputHandler() {
+		    console.log('fetot-input-input')
+	    }
+    },
+    mounted() {
+			console.log(this.currentModule);
     }
 	}
 </script>
 
 <style lang="scss" scoped>
-  @import 'fetot-src-scss';
+  @import 'fetot-scss';
 
   .workspace-content {
     background: #fff;

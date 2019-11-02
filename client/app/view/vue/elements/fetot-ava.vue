@@ -28,7 +28,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import 'fetot-src-scss';
+  @import 'fetot-scss';
 
   .fetot-ava {
     background: $fetot-dark-blue;

@@ -5,7 +5,7 @@
 import Vue from 'vue/dist/vue';
 
 import './view/scss/main.scss';
-import fttContainer from './view/vue/ftt-container.vue';
+import fetotContainer from './view/vue/fetot-container.vue';
 
 import $fetch from './components/network/fetch'
 import $localStorage from './components/services/local-storage';
@@ -30,11 +30,11 @@ async function initFetot(connectionOptions, mainComponent) {
 	return new Vue({
 		el: '#ftt',
 		template:
-			`<ftt-container>
+			`<fetot-container>
 				<main-component/>
-			</ftt-container>`,
+			</fetot-container>`,
 		components: {
-			'ftt-container': fttContainer,
+			'fetot-container': fetotContainer,
 			'main-component': mainComponent
 		}
 	})

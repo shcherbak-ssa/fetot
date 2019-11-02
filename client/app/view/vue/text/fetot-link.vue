@@ -5,13 +5,11 @@
 </template>
 
 <script>
-	export default {
-		name: 'fetot-link',
-	}
+	export default { name: 'fetot-link' }
 </script>
 
 <style lang="scss" scoped>
-  @import 'fetot-src-scss';
+  @import 'fetot-scss';
 
   .fetot-link {
     color: $fetot-azure;

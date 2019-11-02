@@ -2,20 +2,18 @@
 
 /*** imports [begin] ***/
 
-import Store from 'fetot-services-components/store';
+import Store from 'fetot-services/store';
 import loginPageVueComponent from '../vue/login-page.vue';
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
 async function initLoginPage($module) {
-	let moduleStore = await import(`../store/${$module}-store.json`);
+	let moduleStore = await import(`../store/${$module}-store`);
 	let {module: moduleData, inputs: moduleInputs} = moduleStore.default;
 	
 	Store.collection.create('current-module').setObject(moduleData);
 	Store.collection.create('inputs').setObject(moduleInputs);
-	
-	console.log(Store.collection('current-module'));
 	
 	return {
 		connectionOptions: {type: 'login', mode: '', $module},

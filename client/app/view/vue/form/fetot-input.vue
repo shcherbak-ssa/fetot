@@ -13,5 +13,5 @@
   </div>
 </template>
 
-<script src="./fetot-input/fetot-input.js"></script>
-<style src="./fetot-input/fetot-input.scss" lang="scss" scoped></style>
+<script src="./fetot-input/script.js"></script>
+<style src="./fetot-input/style.scss" lang="scss" scoped></style>

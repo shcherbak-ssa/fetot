@@ -3,7 +3,7 @@
 /*** imports [begin] ***/
 
 import fetot from 'fetot';
-import $localStorage from 'fetot-services-components/local-storage';
+import $localStorage from 'fetot-services/local-storage';
 
 import initLoginPage from './components/init-login-page';
 
