@@ -8,9 +8,7 @@ const clientWorker = require('../../client');
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
-async function parseMessageMessage({ip, message: {id, content}, response}) {
-	console.log('parse message message init');
-	
+async function messageWorker({ip, message: {id, content}, response}) {
 	let [parsedID, label] = await parseClientID(id);
 	let page = label === 'l' ? 'login' : 'app';
 	
@@ -24,4 +22,4 @@ async function parseMessageMessage({ip, message: {id, content}, response}) {
 
 /*** exports [end] ***/
 
-module.exports = parseMessageMessage;
+module.exports = messageWorker;

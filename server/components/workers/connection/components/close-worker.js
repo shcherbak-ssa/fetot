@@ -9,8 +9,7 @@ const clientWorker = require('../../client');
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
-async function parseCloseMessage({ip, message: {id}, response}) {
-	console.log('parse close message init', id);
+async function closeWorker({ip, message: {id}, response}) {
 	await response(null);
 	
 	let page = id[id.length - 1] === 'l' ? 'login' : 'app';
@@ -39,4 +38,4 @@ async function closeClientConnection(clientID) {
 
 /*** src [end] ***/
 
-module.exports = parseCloseMessage;
+module.exports = closeWorker;

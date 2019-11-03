@@ -8,7 +8,7 @@ const clientWorker = require('../../client');
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
-async function parseConnectionMessage({ip, message: {content: {type, data: message}}, response}) {
+async function connectionWorker({ip, message: {content: {type, data: message}}, response}) {
 	if( type === '' || !('client' in message) || !('connection' in message) )
 		return await response(null);
 	
@@ -69,4 +69,4 @@ async function createClientConnection(client, connection, id) {
 
 /*** src [end] ***/
 
-module.exports = parseConnectionMessage;
+module.exports = connectionWorker;

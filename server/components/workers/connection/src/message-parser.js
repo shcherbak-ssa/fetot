@@ -2,9 +2,9 @@
 
 /*** imports [begin] ***/
 
-const parseConnectionMessage = require('../components/parse-connection-message');
-const parseCloseMessage = require('../components/parse-close-message');
-const parseMessageMessage = require('../components/parse-message-message');
+const connectionWorker = require('../components/connection-worker');
+const closeWorker = require('../components/close-worker');
+const messageWorker = require('../components/message-worker');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
@@ -12,13 +12,13 @@ const parseMessageMessage = require('../components/parse-message-message');
 async function messageParser(options) {
 	switch( options.message.type ) {
 		case 'connection':
-			await parseConnectionMessage(options);
+			await connectionWorker(options);
 			break;
 		case 'close':
-			await parseCloseMessage(options);
+			await closeWorker(options);
 			break;
 		case 'message':
-			await parseMessageMessage(options);
+			await messageWorker(options);
 	}
 }
 
