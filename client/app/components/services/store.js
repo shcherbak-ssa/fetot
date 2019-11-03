@@ -1,8 +1,5 @@
 'use strict';
 
-/*** imports [begin] ***/
-
-/*** imports [end] ***/
 /*** init [begin] ***/
 
 const storeCollections = new Map();
@@ -12,6 +9,7 @@ function collection(name) {
 }
 
 collection.create = createCollection;
+collection.update = updateCollection;
 collection.remove = removeCollection;
 collection.exist = existCollection;
 
@@ -29,8 +27,16 @@ const Store = new Proxy({collection}, {
 /*** src [begin] ***/
 
 // collection functions
-function createCollection(name, object = {}) {
-	object = extendObject(object);
+function createCollection(name) {
+	let object = extendObject();
+	storeCollections.set(name, object);
+	
+	return object;
+}
+function updateCollection(name, object) {
+	storeCollections.delete(name);
+	
+	object = Object.assign(extendObject(), object);
 	storeCollections.set(name, object);
 	
 	return object;
@@ -43,19 +49,26 @@ function existCollection(name) {
 }
 
 // extend function
-function extendObject(object) {
-	return Object.assign(object, {
+function extendObject() {
+	return Object.assign({}, {
 		get(key) {
 			return this[key]
 		},
 		set(key, value) {
-			this[key] = value;
+			if( typeof key === 'object' ) {
+				let self = this;
+				Object.entries(key).forEach((item) => {
+					self.set(...item)
+				});
+			} else this[key] = value;
+			
+			return this;
 		},
-		setObject(object) {
-			let self = this;
-			Object.entries(object).forEach((item) => {
-				self.set(...item)
-			});
+		delete(key) {
+			if( key in this ) delete this[key];
+		},
+		has(key) {
+			return key in this;
 		}
 	})
 }

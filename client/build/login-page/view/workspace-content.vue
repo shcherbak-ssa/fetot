@@ -16,11 +16,10 @@
 
 <script>
 	import Store from 'fetot-services/store';
+	import EventsEmitter from 'fetot-workers/events-emitter';
 
-	import fetotInput from 'fetot-vue/form/fetot-input.vue';
-	import fetotButton from 'fetot-vue/buttons/fetot-button.vue';
-
-	import singInModule from '../modules/sing-in';
+	import fetotInput from 'fetot-view/form/fetot-input.vue';
+	import fetotButton from 'fetot-view/buttons/fetot-button.vue';
 
 	export default {
 		name: 'workspace-content',
@@ -30,21 +29,20 @@
     },
     data() {
 			return {
+				inputs: Store.inputs,
 				content: Store.collection('current-module').content,
-        inputs: Store.inputs
       }
     },
     methods: {
 	    async buttonClickHandler() {
-		    console.log('fetot-button-click');
-		    await singInModule.run(); // for testing
+		    await this.runWorker();
 	    },
 	    async inputInputHandler() {
-		    console.log('fetot-input-input')
-	    }
-    },
-    mounted() {
-			console.log(this.currentModule);
+		    await this.runWorker()
+	    },
+      async runWorker() {
+	      EventsEmitter.getEmitter('module-worker').emit('run-worker', 'byLink');
+      }
     }
 	}
 </script>

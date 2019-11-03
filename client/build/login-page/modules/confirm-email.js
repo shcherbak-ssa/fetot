@@ -2,45 +2,41 @@
 
 /*** imports [begin] ***/
 
-import EventsEmitter from 'fetot-js-modules/events-emitter';
-import OutputDataWorker from 'fetot-worker-modules/output-data-worker';
-import storeWorker from 'fetot-worker-modules/store-worker';
-import fetchRequest from 'fetot-network-modules/fetch-request';
+import confirmEmailStore from '../store/confirm-email-store';
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
-async function confirmEmailModuleWorker() {
-	const input = storeWorker.getGlobalStore('inputs').get('confirm-email'),
-		loginModeEventsEmitter = EventsEmitter.getEmitter('login-mode');
-		
-	let	{value} = input;
-	if( value.length < 6 ) return;
+async function confirmEmailModuleWorker({inputs, outputMessage}) {
+	let input = inputs['confirm-email'];
+	if( input.value.length < 6 ) return false;
 	
-	if( /[^\w]/i.test(value) ) return input.error = 'Invalid confirmation code';
+	if( /[^\w]/i.test(value) ) {
+		input.error = 'Invalid confirmation code';
+		return false;
+	}
 	
-	let response = await fetchRequest.post({
-		message: OutputDataWorker.getData('confirm-email', {code: value})
-	});
-	
-	await parseServerResponse(input, response, loginModeEventsEmitter);
+	let response = await outputMessage.set('code', input.value).send();
+	return await parseServerResponse(input, response);
 }
 
 /*** exports [end] ***/
 /*** src [begin] ***/
 
-async function parseServerResponse(input, {type, message}, loginModeEventsEmitter) {
+async function parseServerResponse(input, {type, message}) {
 	switch( type ) {
 		case 'error':
-			console.log('error', message);
 			input.error = message.error;
-			break;
+			return false;
 		case 'success':
 			console.log('success', message);
-			loginModeEventsEmitter.emit('change-module');
+			return true;
 	}
 }
 
 /*** src [end] ***/
 
-export default confirmEmailModuleWorker;
+export default {
+	store: confirmEmailStore,
+	worker: confirmEmailModuleWorker
+};

@@ -3,11 +3,18 @@
 /*** exports [begin] ***/
 
 const createAccountStore = {
-	module: {
+	config: {
 		name: 'create-account',
+		next: {
+			byLink: 'sing-in',
+			byButton: false
+		}
+	},
+	data: {
 		title: 'New account',
 		link: 'Back to start',
 		content: {
+			text: '',
 			inputs: [ 'fullname', 'password' ],
 			button: [ 'Create' ]
 		}

@@ -3,7 +3,10 @@
 /*** exports [begin] ***/
 
 function item(key) {
-	return localStorage.getItem(key);
+	let item = localStorage.getItem(key);
+	if( item.startsWith('{') ) item = JSON.parse(item);
+	
+	return item;
 }
 
 item.create = createStorageItem;
@@ -14,6 +17,7 @@ item.has = hasStorageItem;
 /*** src [begin] ***/
 
 function createStorageItem(key, value) {
+	if( typeof value === 'object' ) value = JSON.stringify(value);
 	localStorage.setItem(key, value);
 }
 function removeStorageItem(key) {

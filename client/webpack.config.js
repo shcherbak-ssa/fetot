@@ -9,20 +9,21 @@ const VueLoader = require('vue-loader/lib/plugin');
 /*** init [begin] ***/
 
 const appDirname = path.join(__dirname, 'app');
-const viewDirname = path.join(appDirname, 'view');
 const componentsDirname = path.join(appDirname, 'components');
 
 /*** init [end] ***/
 
 module.exports = (env) => {
-	let outputFilename = `${env.page}.js`,
-		entryFilename = `./build/${env.page}-page/index.js`;
+	let outputFilename = `${env.page}.js`;
+	let entryFilename = `./build/${env.page}-page/index.js`;
+	let chunkFilename = `[name].${env.page}.js`;
 	
 	return {
 		entry: entryFilename,
 		output: {
 			path: path.resolve(__dirname, '../public/js/'),
 			filename: outputFilename,
+			chunkFilename
 		},
 		devtool: 'inline-source-map',
 		module: {
@@ -64,8 +65,8 @@ module.exports = (env) => {
 		resolve: {
 			alias: {
 				'fetot': path.join(appDirname, 'fetot'),
-				'fetot-scss': path.join(viewDirname, 'scss', 'src.scss'),
-				'fetot-vue': path.join(viewDirname, 'vue'),
+				'fetot-scss': path.join(appDirname, 'scss', 'src.scss'),
+				'fetot-view': path.join(appDirname, 'view'),
 				'fetot-network': path.join(componentsDirname, 'network'),
 				'fetot-workers': path.join(componentsDirname, 'workers'),
 				'fetot-services': path.join(componentsDirname, 'services'),

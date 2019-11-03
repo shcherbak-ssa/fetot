@@ -3,29 +3,20 @@
 /*** imports [begin] ***/
 
 import fetot from 'fetot';
-import $localStorage from 'fetot-services/local-storage';
-
 import initLoginPage from './components/init-login-page';
 
 /*** imports [end] ***/
 /*** init [begin] ***/
 
-controlClientExist()
-	.then(($module) => {
-		return initLoginPage($module);
+Promise.resolve()
+	.then(() => {
+		return initLoginPage();
 	})
-	.then(({connectionOptions, mainComponent}) => {
-		return fetot.init(connectionOptions, mainComponent);
+	.then((options) => {
+		return fetot.init(options);
 	})
 	.catch((err) => {
 		console.log(err);
 	});
 
 /*** init [end] ***/
-/*** src [begin] ***/
-
-async function controlClientExist() {
-	return $localStorage.item.has('client-exist') ? 'login' : 'sing-in'
-}
-
-/*** src [end] ***/

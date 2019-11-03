@@ -30,7 +30,7 @@ async function isRootRequest(headers) {
 
 async function parseCookie(cookie) {
 	let [key, value] = cookie.split('=');
-	return key === '$fetot' ? JSON.parse(value) : false;
+	return key === '$ftt' ? JSON.parse(value) : false;
 }
 async function getResponseConfig(filename) {
 	filename = getPublicFilename(`${filename}.html`);

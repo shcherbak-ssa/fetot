@@ -2,30 +2,23 @@
 
 /*** imports [begin] ***/
 
-import OutputDataWorker from 'fetot-worker-modules/output-data-worker';
-import storeWorker from 'fetot-worker-modules/store-worker';
-import fetchRequest from 'fetot-network-modules/fetch-request';
-import EventsEmitter from 'fetot-js-modules/events-emitter';
+import Store from 'fetot-services/store';
+import OutputMessage from 'fetot-workers/output-message';
+
+import loginStore from '../store/login-store';
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
-async function loginModuleWorker() {
-	const inputs = storeWorker.getGlobalStore('inputs'),
-		outputDataWorker = new OutputDataWorker('check-client');
+async function loginModuleWorker({inputs: {email, password}, outputMessage}) {
+	if( email.isEmpty() ) return false;
+	outputMessage.set('email', email.value);
 	
-	let email = inputs.get('email').value;
-	outputDataWorker.set('email', email);
+	if( password.isEmpty() ) return false;
+	outputMessage.set('password', password.value);
 	
-	let password = inputs.get('password').value;
-	outputDataWorker.set('password', password);
-	
-	console.log(outputDataWorker.getData());
-	let response = await fetchRequest.post({
-		message: outputDataWorker.getData()
-	});
-	
-	await parseServerResponse(inputs, response);
+	let response = await outputMessage.send();
+	return await parseServerResponse({email, password}, response);
 }
 
 /*** exports [end] ***/
@@ -34,20 +27,22 @@ async function loginModuleWorker() {
 async function parseServerResponse(inputs, {type, message}) {
 	switch( type ) {
 		case 'error':
-			console.log(message);
-			if( 'input' in message )
-				inputs.get(message.input).error = message.error;
-			else {
-				let text = `<span style="color:#FF2105;">${message.error}</span>`;
-				storeWorker.getGlobalStore('login-module').content.text = text;
+			if( 'input' in message ) {
+				inputs[message.input].error = message.error;
+			} else {
+				Store.collection('current-module').content.text
+					= `<span style="color:#FF2105;">${message.error}</span>`;
 			}
-			break;
+			return false;
 		case 'success':
 			console.log('Login success', message);
-			EventsEmitter.getEmitter('login-mode').emit('save-client');
+			return true;
 	}
 }
 
 /*** src [end] ***/
 
-export default loginModuleWorker;
+export default {
+	store: loginStore,
+	worker: loginModuleWorker
+};

@@ -12,9 +12,10 @@
 
 <script>
 	import Store from 'fetot-services/store';
+	import EventsEmitter from 'fetot-workers/events-emitter';
 
-	import fetotTitle from 'fetot-vue/text/fetot-title.vue';
-	import fetotLink from 'fetot-vue/text/fetot-link.vue';
+	import fetotTitle from 'fetot-view/text/fetot-title.vue';
+	import fetotLink from 'fetot-view/text/fetot-link.vue';
 	import workspaceContent from './workspace-content.vue';
 
 	export default {
@@ -25,14 +26,15 @@
       'workspace-content': workspaceContent
     },
     data() {
+			let currentModule = Store.collection('current-module');
 			return {
-				title: Store.collection('current-module').title,
-        link: Store.collection('current-module').link
+				title: currentModule.title,
+        link: currentModule.link,
       }
     },
     methods: {
 	    linkClickHandler() {
-	    	console.log('fetot-link-click')
+	    	EventsEmitter.getEmitter('module-worker').emit('change-module', 'byLink');
       }
     }
 	}

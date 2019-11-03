@@ -2,29 +2,20 @@
 
 /*** imports [begin] ***/
 
-import OutputDataWorker from 'fetot-worker-modules/output-data-worker';
-import storeWorker from 'fetot-worker-modules/store-worker';
-import fetchRequest from 'fetot-network-modules/fetch-request';
-import EventsEmitter from 'fetot-js-modules/events-emitter';
+import createAccountStore from '../store/create-account-store';
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
-async function createAccountModuleWorker() {
-	const inputs = storeWorker.getGlobalStore('inputs'),
-		outputDataWorker = new OutputDataWorker('create-account');
+async function createAccountModuleWorker({inputs: {fullname, password}, outputMessage}) {
+	if( fullname.isEmpty() ) return false;
+	outputMessage.set('fullname', fullname.value);
 	
-	let fullname = inputs.get('fullname').value;
-	outputDataWorker.set('fullname', fullname);
+	if( password.isEmpty() ) return false;
+	outputMessage.set('password', password.value);
 	
-	let password = inputs.get('password').value;
-	outputDataWorker.set('password', password);
-	
-	let response = await fetchRequest.post({
-		message: outputDataWorker.getData()
-	});
-	
-	await parseServerResponse(inputs, response);
+	let response = await outputMessage.send();
+	return await parseServerResponse({fullname, password}, response);
 }
 
 /*** exports [end] ***/
@@ -33,15 +24,17 @@ async function createAccountModuleWorker() {
 async function parseServerResponse(inputs, {type, message}) {
 	switch( type ) {
 		case 'error':
-			console.log(message);
-			inputs.get(message.input).error = message.error;
-			break;
+			inputs[message.input].error = message.error;
+			return false;
 		case 'success':
 			console.log('Created success', message);
-			EventsEmitter.getEmitter('login-mode').emit('save-client');
+			return true;
 	}
 }
 
 /*** src [end] ***/
 
-export default createAccountModuleWorker;
+export default {
+	store: createAccountStore,
+	worker: createAccountModuleWorker
+};

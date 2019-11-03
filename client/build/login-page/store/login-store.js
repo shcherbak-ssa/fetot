@@ -3,8 +3,14 @@
 /*** exports [begin] ***/
 
 const loginStore = {
-	module: {
+	config: {
 		name: 'login',
+		next: {
+			byLink: 'sing-in',
+			byButton: false
+		}
+	},
+	data: {
 		title: 'Login',
 		link: 'Do not have an account',
 		content: {

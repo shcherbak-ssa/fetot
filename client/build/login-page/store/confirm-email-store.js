@@ -3,8 +3,14 @@
 /*** exports [begin] ***/
 
 const confirmEmailStore = {
-	module: {
+	config: {
 		name: 'confirm-email',
+		next: {
+			byLink: 'sing-in',
+			byButton: 'create-account'
+		}
+	},
+	data: {
 		title: 'Confirm email',
 		link: 'Change email',
 		content: {

@@ -2,22 +2,17 @@
 
 /*** imports [begin] ***/
 
-import Store from 'fetot-services/store';
-import OutputMessage from 'fetot-workers/output-message';
+import singInStore from '../store/sing-in-store';
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
-async function singInModuleWorker() {
-	let input = Store.inputs.email;
-	
-	if( input.value === '' ) return input.error = 'Current field cannot be empty';
-	
-	let outputMessage = new OutputMessage({type: 'worker'});
-	outputMessage.set('email', input.value);
+async function singInModuleWorker({inputs: {email}, outputMessage}) {
+	if( email.isEmpty() ) return false;
+	outputMessage.set('email', email.value);
 	
 	let response = await outputMessage.send();
-	await parseServerResponse(input, response);
+	return await parseServerResponse(email, response);
 }
 
 /*** exports [end] ***/
@@ -30,12 +25,13 @@ async function parseServerResponse(input, {type, message}) {
 			return false;
 		case 'success':
 			console.log('success', message);
-			
+			return true;
 	}
 }
 
 /*** src [end] ***/
 
 export default {
-	run: singInModuleWorker
+	store: singInStore,
+	worker: singInModuleWorker
 };

@@ -3,8 +3,14 @@
 /*** exports [begin] ***/
 
 const singInStore = {
-	module: {
+	config: {
 		name: 'sing-in',
+		next: {
+			byLink: 'login',
+			byButton: 'confirm-email'
+		}
+	},
+	data: {
 		title: 'Sing in',
 		link: 'Already have an account',
 		content: {

@@ -4,8 +4,8 @@
 
 import Vue from 'vue/dist/vue';
 
-import './view/scss/main.scss';
-import fetotContainer from './view/vue/fetot-container.vue';
+import './scss/main.scss';
+import fetotContainer from './view/fetot-container.vue';
 
 import $localStorage from './components/services/local-storage';
 import OutputMessage from './components/workers/output-message'
@@ -23,14 +23,14 @@ const client = $localStorage.item.has('client') ? $localStorage.item('client') :
 /*** init [end] ***/
 /*** exports [begin] ***/
 
-async function initFetot(connectionOptions, mainComponent) {
+async function initFetot({connectionOptions, mainComponent}) {
 	await connectionRequest(connectionOptions);
 	
 	return new Vue({
 		el: '#ftt',
 		template:
 			`<fetot-container>
-				<main-component/>
+				<main-component />
 			</fetot-container>`,
 		components: {
 			'fetot-container': fetotContainer,
