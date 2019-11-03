@@ -4,57 +4,75 @@
 
 const MongodbService = require('../../../services/mongodb');
 const validationService = require('../../../services/validation');
-// const loginModeModules = require('../../../../fetot/login-modules');
+const loginModules = require('../../../../fetot/login-modules');
 
 /*** imports [end] ***/
+/*** init [begin] ***/
+
+const changeModuleValidation = validationService({
+	$module: {
+		type: String,
+		required: true,
+		valid: ['login', 'sing-in', 'confirm-email', 'create-account']
+	}
+});
+
+/*** init [end] ***/
 /*** exports [begin] ***/
 
 class LoginClient {
-	constructor($module) {
-		this.currentModule = $module;
+	constructor({worker, schema}) {
+		this.worker = worker;
+		this.messageValidation = validationService(schema);
+		
 		this.options = {
 			store: new Map(),
-			mongodb: MongodbService.createCollection({db: 'client', collection: 'client'}),
+			mongodb: LoginClient.mongodb,
 			message: {},
 			response: {}
 		};
 	}
 	
+	/* static */
+	static mongodb = null;
 	static async create({$module}) {
-		// return new LoginClient(loginModeModules[$module]);
-		console.log('$module', $module);
-		return new LoginClient($module);
+		if( LoginClient.mongodb === null ) LoginClient.mongodb =
+			MongodbService.createCollection({db: 'client', collection: 'client'});
+		
+		return new LoginClient(loginModules[$module]);
 	}
 	
-	async run(options) {
-		console.log(options);
+	/* public */
+	async run({message: {type, data: message}, response}) {
+		let result = '';
+		switch( type ) {
+			case 'worker':
+				result = await this.messageValidation(message);
+				if( typeof result === 'object' ) return await response(result);
+				
+				return await this._workerHandler({message, response});
+			case 'change-module':
+				result = await changeModuleValidation(message);
+				if( typeof result !== 'object' ) await this._changeModuleHandler(message);
+		}
+		await response(null)
 	}
-	// async run({message: {type, data: message}, response}) {
-	// 	if( type === 'worker' ) {
-	//
-	// 		message = await this._validate(message);
-	// 		if( !message ) return await this._runWorker({message, response});
-	//
-	// 	} else if( type === 'change-module' ) await this._runChangeModule(message);
-	//
-	// 	await response(null);
-	// }
-	//
-	// async _runWorker(options) {
-	// 	options = Object.assign({}, this.options, options);
-	// 	this.currentModule.worker(options);
-	// }
-	// async _runChangeModule({$module}) {
-	// 	if( $module === undefined ) return ;
-	//
-	// 	// this.currentModule = loginModeModules[$module];
-	// 	this._validate = validationService(this.currentModule.schema);
-	// }
+
+	/* privet */
+	async _workerHandler(options) {
+		console.log('worker', options.message);
+		
+		options = Object.assign({}, this.options, options);
+		await this.worker(options);
+	}
+	async _changeModuleHandler({$module}) {
+		let {worker, schema} = loginModules[$module];
+		
+		this.worker = worker;
+		this.messageValidation = validationService(schema);
+	}
 }
 
 /*** exports [end] ***/
-/*** src [begin] ***/
-
-/*** src [end] ***/
 
 module.exports = LoginClient;
