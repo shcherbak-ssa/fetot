@@ -9,13 +9,16 @@ import confirmEmailStore from '../store/confirm-email-store';
 
 async function confirmEmailModuleWorker({inputs, outputMessage}) {
 	let input = inputs['confirm-email'];
+	console.log('confirm-email', input);
 	if( input.value.length < 6 ) return false;
 	
-	if( /[^\w]/i.test(value) ) {
+	console.log('confirm-email value 1', input.value);
+	if( /[^\d]+/i.test(input.value) ) {
 		input.error = 'Invalid confirmation code';
 		return false;
 	}
 	
+	console.log('confirm-email value 2', input.value);
 	let response = await outputMessage.set('code', input.value).send();
 	return await parseServerResponse(input, response);
 }

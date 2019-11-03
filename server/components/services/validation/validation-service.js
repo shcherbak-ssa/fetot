@@ -22,10 +22,10 @@ const createSchema = require('./components/create-schema');
 /*** exports [begin] ***/
 
 function validationService(schema) {
-	schema = createSchema(schema);
+	let currentSchema = createSchema(Object.assign({}, schema));
 	
 	return async (message) => {
-		return await validate(schema, message);
+		return await validate(currentSchema, message);
 	}
 }
 
@@ -45,7 +45,7 @@ async function validate(schema, object) {
 			return null;
 		}
 		
-		console.log(err);
+		if( err === null ) return null;
 		
 		if( 'message' in err ) return err;
 	}

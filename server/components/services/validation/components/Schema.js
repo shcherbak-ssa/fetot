@@ -29,17 +29,29 @@ class Schema {
 			return s.validate(value);
 		
 		if( s.required && (value === null || value === '') )
-			return Promise.reject({message: {key: key, message: 'cannot be empty'}});
+			return Promise.reject(rejectMessage({key: key, error: 'cannot be empty'}));
 		
 		if( (getTrueValueTypeof(value) !== s.type)
 				|| (s.valid && !s.valid.includes(value))
 				|| (s.validate && !s.validate(value))
 		) {
-			return Promise.reject(s.error ? {message: s.error} : null);
+			return Promise.reject(s.error ? rejectMessage(s.error) : null);
 		}
 	}
 }
 
 /*** exports [end] ***/
+/*** src [begin] ***/
+
+function rejectMessage(error) {
+	return {
+		message: {
+			type: 'error',
+			message: error
+		}
+	}
+}
+
+/*** src [end] ***/
 
 module.exports = Schema;

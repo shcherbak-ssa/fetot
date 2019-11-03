@@ -11,6 +11,8 @@ async function $fetch(options) {
 /*** src [begin] ***/
 
 async function parseResponse(response) {
+	if( response.headers.get('Content-Type') === null ) return 0;
+	
 	let [, contentType] = response.headers.get('Content-Type').split('/');
 	if( contentType === 'json' ) return response.json();
 	

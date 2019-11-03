@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports = require('./login-mode-modules');
+module.exports = require('./login-modules');

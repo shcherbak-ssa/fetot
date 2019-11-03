@@ -24,12 +24,15 @@ function parseSchema(schema) {
 }
 function parseSchemaItem([key, value]) {
 	// if value is string => it is common-schema label
-	if( getTrueValueTypeof(value) === 'String' ) value = commonSchemas[value];
+	if( getTrueValueTypeof(value) === 'String' )
+		value = Object.assign({}, commonSchemas[value]);
 	
-	if( '__props' in value )
+	if( '__props' in value ) {
 		value = createSchema(value.__props);
-	else
+	} else {
+		console.log(key, value);
 		value.type = getTrueValueTypeof(value.type());
+	}
 	
 	return [key, value]
 }

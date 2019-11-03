@@ -5,14 +5,17 @@
 const config = {
 	response: {
 		'invalid-code': {
-			type: 'error',
 			message: {
-				error: 'Invalid confirmation code'
+				type: 'error',
+				message: {
+					error: 'Invalid confirmation code'
+				}
 			}
 		},
 		'success': {
-			type: 'success',
-			message: {}
+			message: {
+				type: 'success'
+			}
 		}
 	}
 };
@@ -36,6 +39,7 @@ const schema = {
 
 async function confirmEmailWorker({message, store, response}) {
 	let confirmEmailCode = store.get('confirm-email-code');
+	console.log('confirmation code', confirmEmailCode);
 	let responseLabel = message.code === confirmEmailCode ? 'success' : 'invalid-code';
 	
 	await response(config.response[responseLabel]);
