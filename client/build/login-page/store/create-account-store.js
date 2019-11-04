@@ -16,7 +16,7 @@ const createAccountStore = {
 		content: {
 			text: '',
 			inputs: [ 'fullname', 'password' ],
-			button: [ 'Create' ]
+			button: 'Create'
 		}
 	},
 	inputs: {

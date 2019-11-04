@@ -51,18 +51,21 @@ function existCollection(name) {
 // extend function
 function extendObject() {
 	return Object.assign({}, {
+		map: {},
 		get(key) {
 			return this[key]
 		},
 		set(key, value) {
-			if( typeof key === 'object' ) {
-				let self = this;
+			let self = this;
+			if( key instanceof Object ) {
 				Object.entries(key).forEach((item) => {
 					self.set(...item)
 				});
-			} else this[key] = value;
+			} else {
+				self.map = Object.assign({}, self.map, {[key]: value});
+			}
 			
-			return this;
+			return self;
 		},
 		delete(key) {
 			if( key in this ) delete this[key];

@@ -15,11 +15,11 @@ const confirmEmailStore = {
 		link: 'Change email',
 		content: {
 			text: 'Please, check your email and enter the received code',
-			inputs: [ 'confirm-email' ]
+			inputs: [ 'code' ]
 		}
 	},
 	inputs: {
-		'confirm-email': {
+		code: {
 			type: 'text',
 			value: '',
 			placeholder: 'Confirmation code',

@@ -31,7 +31,6 @@ const schema = {
 			return value.length === 6 && /\d{1,6}/.test(value)
 		},
 		error: {
-			input: 'confirm-email',
 			error: 'Invalid confirmation code'
 		}
 	}
@@ -39,7 +38,6 @@ const schema = {
 
 async function confirmEmailWorker({message, store, response}) {
 	let confirmEmailCode = store.get('confirm-email-code');
-	console.log('confirmation code', confirmEmailCode);
 	let responseLabel = message.code === confirmEmailCode ? 'success' : 'invalid-code';
 	
 	await response(config.response[responseLabel]);

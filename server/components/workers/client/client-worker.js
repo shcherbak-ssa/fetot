@@ -4,8 +4,8 @@
 
 const Client = require('./components/Client');
 
-const ipAddressWorker = require('./components/ip-address-worker');
-const appLinkIDWorker = require('./components/app-link-id-worker');
+const ipAddressWorker = require('./components/workers/ip-address-worker');
+const appLinkIDWorker = require('./components/workers/app-link-id-worker');
 
 /*** imports [end] ***/
 /*** init [begin] ***/

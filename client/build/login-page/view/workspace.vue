@@ -28,8 +28,8 @@
     data() {
 			let currentModule = Store.collection('current-module');
 			return {
-				title: currentModule.title,
-        link: currentModule.link,
+				title: currentModule.get('title'),
+        link: currentModule.get('link'),
       }
     },
     methods: {

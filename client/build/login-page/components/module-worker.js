@@ -85,6 +85,7 @@ function getInputsFromStore(inputs) {
 	let storeInputs = Store.inputs;
 	let retInputs = {};
 	
+	console.log('collection - inputs', storeInputs);
 	inputs.forEach((name) => {
 		retInputs[name] = Object.assign(storeInputs.get(name), {
 			isEmpty() {

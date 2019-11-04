@@ -1,7 +1,7 @@
 <template>
   <div class="login-page">
     <transition name="change-module" mode="out-in" appear>
-      <workspace :key="wtf.name"></workspace>
+      <workspace :key="wtf"></workspace>
     </transition>
   </div>
 </template>
@@ -15,7 +15,7 @@
     components: { workspace },
     data() {
 			return {
-				wtf: Store.collection('current-module')
+				wtf: Store.collection('current-module').get('name')
       }
     }
 	}

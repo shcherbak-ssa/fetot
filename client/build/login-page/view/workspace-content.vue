@@ -29,8 +29,8 @@
     },
     data() {
 			return {
-				inputs: Store.inputs,
-				content: Store.collection('current-module').content,
+				inputs: Store.collection('inputs').map,
+				content: Store.collection('current-module').get('content'),
       }
     },
     methods: {
@@ -72,7 +72,7 @@
     }
     .txt {
       color: $fetot-dark-gray;
-      font-size: 18px;
+      font-size: 24px;
       text-align: center;
       margin-bottom: 30px;
     }

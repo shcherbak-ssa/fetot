@@ -12,12 +12,14 @@ class Schema {
 		this.schema = schema;
 	}
 	
+	/* public */
 	[Symbol.toStringTag] = 'Schema';
 	
 	async validate(object) {
 		return await this._parse(object)
 	}
 	
+	/* privet */
 	async _parse(object) {
 		return Promise.all(Object.entries(object).map(this._parseItem.bind(this)));
 	}
@@ -31,7 +33,7 @@ class Schema {
 		if( s.required && (value === null || value === '') )
 			return Promise.reject(rejectMessage({key: key, error: 'cannot be empty'}));
 		
-		if( (getTrueValueTypeof(value) !== s.type)
+		if( (getTrueValueTypeof(value) !== getTrueValueTypeof(s.type()))
 				|| (s.valid && !s.valid.includes(value))
 				|| (s.validate && !s.validate(value))
 		) {

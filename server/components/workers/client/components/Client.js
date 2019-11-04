@@ -3,9 +3,10 @@
 /*** imports [begin] ***/
 
 const Connection = require('./Connection');
-const connections = require('./connections');
-
 const LoginClient = require('./LoginClient');
+
+const connections = require('./workers/connections-worker');
+
 const MongodbService = require('../../../services/mongodb');
 
 /*** imports [end] ***/
@@ -19,6 +20,7 @@ class Client {
 		this.config = config;
 	}
 	
+	/* static */
 	static async create(clientOptions) {
 		if( '$module' in clientOptions ) return LoginClient.create(clientOptions);
 		
@@ -28,11 +30,14 @@ class Client {
 		return config ? new Client(config) : false;
 	}
 	
+	/* public */
 	connections = connections;
 	
 	async run(options) {
 		console.log(options);
 	}
+	
+	// connections
 	async createConnection(connection) {
 		connection = await Connection.create(connection);
 		return await this.connections.add(connection);

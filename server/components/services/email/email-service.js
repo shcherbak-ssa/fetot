@@ -14,9 +14,15 @@ const transporter = nodeMailer.createTransport(transportOptions);
 /*** init [end] ***/
 /*** exports [begin] ***/
 
-async function sendEmailLetter(config) {
-	let letter = await getLetterConfig(config);
-	return await transporter.sendMail(letter);
+async function sendEmailLetter(config, sendCount = 0) {
+	try {
+		let letter = await getLetterConfig(config);
+		return await transporter.sendMail(letter);
+	} catch( err ) {
+		console.log(err);
+		if( sendCount === 7 ) return false;
+		return await sendEmailLetter(config, sendCount + 1)
+	}
 }
 
 /*** exports [end] ***/
