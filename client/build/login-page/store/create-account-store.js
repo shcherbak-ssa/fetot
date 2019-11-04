@@ -4,13 +4,13 @@
 
 const createAccountStore = {
 	config: {
-		name: 'create-account',
 		next: {
 			byLink: 'sing-in',
 			byButton: false
 		}
 	},
 	data: {
+		name: 'create-account',
 		title: 'New account',
 		link: 'Back to start',
 		content: {

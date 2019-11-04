@@ -2,9 +2,6 @@
 
 /*** imports [begin] ***/
 
-import Store from 'fetot-services/store';
-import OutputMessage from 'fetot-workers/output-message';
-
 import loginStore from '../store/login-store';
 
 /*** imports [end] ***/
@@ -30,8 +27,8 @@ async function parseServerResponse(inputs, {type, message}) {
 			if( 'input' in message ) {
 				inputs[message.input].error = message.error;
 			} else {
-				Store.collection('current-module').content.text
-					= `<span style="color:#FF2105;">${message.error}</span>`;
+				// Store.collection('current-module').content.text
+				// 	= `<span style="color:#FF2105;">${message.error}</span>`;
 			}
 			return false;
 		case 'success':

@@ -1,37 +1,28 @@
 <template>
   <div class="workspace-content">
     <div class="content">
-      <p class="txt" v-if="content.text" v-html="content.text"></p>
-      <fetot-input
-              v-for="(input, index) in content.inputs"
-              :key="index" :input="inputs[input]"
-              @fetot-input-input="inputInputHandler"
-      />
-      <fetot-button v-if="content.button" @fetot-button-click="buttonClickHandler">
-        {{ content.button }}
-      </fetot-button>
+<!--      <p class="txt" v-if="content.text" v-html="content.text"></p>-->
+<!--      <fetot-input-->
+<!--              v-for="(input, index) in content.inputs"-->
+<!--              :key="index" :input="inputs[input]"-->
+<!--              @fetot-input-input="inputInputHandler"-->
+<!--      />-->
+<!--      <fetot-button v-if="content.button" @fetot-button-click="buttonClickHandler">-->
+<!--        {{ content.button }}-->
+<!--      </fetot-button>-->
     </div>
   </div>
 </template>
 
 <script>
-	import Store from 'fetot-services/store';
-	import EventsEmitter from 'fetot-workers/events-emitter';
-
-	import fetotInput from 'fetot-view/form/fetot-input.vue';
+	// import inputs from 'fetot-workers/inputs';
 	import fetotButton from 'fetot-view/buttons/fetot-button.vue';
 
 	export default {
 		name: 'workspace-content',
     components: {
-			'fetot-input': fetotInput,
+			// 'fetot-input': inputs.view,
       'fetot-button': fetotButton
-    },
-    data() {
-			return {
-				inputs: Store.collection('inputs').map,
-				content: Store.collection('current-module').get('content'),
-      }
     },
     methods: {
 	    async buttonClickHandler() {
@@ -40,9 +31,7 @@
 	    async inputInputHandler() {
 		    await this.runWorker()
 	    },
-      async runWorker() {
-	      EventsEmitter.getEmitter('module-worker').emit('run-worker', 'byLink');
-      }
+      async runWorker() {}
     }
 	}
 </script>

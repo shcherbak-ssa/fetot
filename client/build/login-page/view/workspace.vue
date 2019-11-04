@@ -1,18 +1,17 @@
 <template>
   <div class="workspace">
     <fetot-title>
-      <div class="title">{{ title }}</div>
+      <div class="title">{{ getData('title') }}</div>
     </fetot-title>
     <workspace-content></workspace-content>
     <fetot-link @fetot-link-click="linkClickHandler">
-      <div class="link">{{ link }}</div>
+      <div class="link">{{ getData('link') }}</div>
     </fetot-link>
   </div>
 </template>
 
 <script>
-	import Store from 'fetot-services/store';
-	import EventsEmitter from 'fetot-workers/events-emitter';
+  import {mapGetters} from 'vuex';
 
 	import fetotTitle from 'fetot-view/text/fetot-title.vue';
 	import fetotLink from 'fetot-view/text/fetot-link.vue';
@@ -25,17 +24,13 @@
       'fetot-link': fetotLink,
       'workspace-content': workspaceContent
     },
-    data() {
-			let currentModule = Store.collection('current-module');
-			return {
-				title: currentModule.get('title'),
-        link: currentModule.get('link'),
-      }
-    },
     methods: {
-	    linkClickHandler() {
-	    	EventsEmitter.getEmitter('module-worker').emit('change-module', 'byLink');
-      }
+	    linkClickHandler() {}
+    },
+    computed: {
+			...mapGetters('module-worker', {
+				getData: 'getCurrentModuleData'
+      })
     }
 	}
 </script>

@@ -7,7 +7,6 @@
 </template>
 
 <script>
-	import Store from 'fetot-services/store';
   import workspace from './workspace.vue';
 
 	export default {
@@ -15,7 +14,7 @@
     components: { workspace },
     data() {
 			return {
-				wtf: Store.collection('current-module').get('name')
+				wtf: ''
       }
     }
 	}

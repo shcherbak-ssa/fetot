@@ -8,8 +8,6 @@ import $fetch from '../network/fetch';
 /*** exports [begin] ***/
 
 class OutputMessage {
-	static clientID = '';
-	
 	constructor({messageType = 'message', type}) {
 		this.messageType = messageType; // 'connection', 'close', 'message'
 		
@@ -17,7 +15,10 @@ class OutputMessage {
 		this.data = {};
 	}
 	
-	/* public properties and methods */
+	/* static */
+	static clientID = '';
+	
+	/* public */
 	append(key, value) {
 		let d = this.data;
 		if( !this._withFile ) this._isFile(value);
@@ -63,7 +64,7 @@ class OutputMessage {
 		}
 	}
 	
-	/* privet properties and methods */
+	/* privet */
 	_withFile = false;
 	_isFile(value) {
 		this._withFile = value instanceof Blob;
@@ -101,10 +102,8 @@ function transformToFormData() {
 
 // to json
 function transformToJSON(message) {
-	return new Blob(
-		[ JSON.stringify(message) ],
-		{type: 'application/json'}
-		)
+	return new Blob([ JSON.stringify(message) ],
+		{type: 'application/json'})
 }
 
 /*** src [end] ***/

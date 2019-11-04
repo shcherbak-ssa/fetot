@@ -69,7 +69,9 @@ module.exports = (env) => {
 				'fetot-view': path.join(appDirname, 'view'),
 				'fetot-network': path.join(componentsDirname, 'network'),
 				'fetot-workers': path.join(componentsDirname, 'workers'),
-				'fetot-services': path.join(componentsDirname, 'services'),
+				'fetot-store-workers': path.join(componentsDirname, 'store-workers.js'),
+				'fetot-events-emitter': path.join(componentsDirname, 'events-emitter.js'),
+				'fetot-storage': path.join(componentsDirname, 'storage'),
 			}
 		},
 		plugins: [

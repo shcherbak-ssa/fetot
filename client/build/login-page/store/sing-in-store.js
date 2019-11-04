@@ -4,13 +4,13 @@
 
 const singInStore = {
 	config: {
-		name: 'sing-in',
 		next: {
 			byLink: 'login',
 			byButton: 'confirm-email'
 		}
 	},
 	data: {
+		name: 'sing-in',
 		title: 'Sing in',
 		link: 'Already have an account',
 		content: {

@@ -4,13 +4,13 @@
 
 const loginStore = {
 	config: {
-		name: 'login',
 		next: {
 			byLink: 'sing-in',
 			byButton: false
 		}
 	},
 	data: {
+		name: 'login',
 		title: 'Login',
 		link: 'Do not have an account',
 		content: {
