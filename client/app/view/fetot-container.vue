@@ -1,12 +1,22 @@
 <template>
   <div class="fetot-container">
-    <slot></slot>
+    <component :is="changePageComponent"></component>
   </div>
 </template>
 
 <script>
 	export default {
-		name: 'fetot-container'
+		name: 'fetot-container',
+    date() {
+	    return {
+		    pageComponent: ''
+      }
+    },
+    computed: {
+			changePageComponent() {
+				return this.pageComponent
+      }
+    }
 	}
 </script>
 

@@ -4,8 +4,8 @@
 
 const emitterCollection = new Map();
 
-const EventsEmitter = {
-	handlers: new Map(),
+class EventsEmitter {
+	handlers = new Map();
 	on(event, handler) {
 		if( this.handlers.has(event) ) {
 			let oldHandlers = this.handlers.get(event);
@@ -15,11 +15,11 @@ const EventsEmitter = {
 		}
 		
 		return this;
-	},
+	}
 	remove(event, handler) {
 		let handlers = this.handlers.get(event).filter((item) => item !== handler);
 		this.handlers.set(event, handlers);
-	},
+	}
 	emit(event, ...args) {
 		if( !this.handlers.has(event) )
 			return console.log(new Error(`event '${event}' didn't add`));
@@ -28,17 +28,19 @@ const EventsEmitter = {
 			handler(...args)
 		})
 	}
-};
+}
 
 /*** init [end] ***/
 /*** exports [begin] ***/
 
-const EventsEmitterWorker = {
+const eventsEmitterWorker = {
 	createEmitter(name) {
-		let events = Object.assign({}, EventsEmitter);
-		emitterCollection.set(name, events);
+		if( emitterCollection.has(name) ) return emitterCollection.get(name);
 		
-		return events;
+		let emitter = new EventsEmitter();
+		emitterCollection.set(name, emitter);
+		
+		return emitter;
 	},
 	getEmitter(name) {
 		return emitterCollection.has(name) ? emitterCollection.get(name) : this.createEmitter(name)
@@ -47,4 +49,4 @@ const EventsEmitterWorker = {
 
 /*** exports [end] ***/
 
-export default EventsEmitterWorker;
+export default eventsEmitterWorker;

@@ -4,7 +4,7 @@
 
 function item(key) {
 	let item = localStorage.getItem(key);
-	if( item.startsWith('{') ) item = JSON.parse(item);
+	if( item.startsWith('{"') ) item = JSON.parse(item);
 	
 	return item;
 }

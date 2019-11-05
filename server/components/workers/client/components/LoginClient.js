@@ -22,9 +22,9 @@ const changeModuleValidation = validationService({
 /*** exports [begin] ***/
 
 class LoginClient {
-	constructor({worker, schema}) {
-		this.worker = worker;
-		this.messageValidation = validationService(schema);
+	constructor() {
+		this.worker = {};
+		this.messageValidation = {};
 		
 		this.options = {
 			store: new Map(),
@@ -36,11 +36,11 @@ class LoginClient {
 	
 	/* static */
 	static mongodb = null;
-	static async create({$module}) {
+	static async create() {
 		if( LoginClient.mongodb === null ) LoginClient.mongodb =
 			MongodbService.createCollection({db: 'client', collection: 'client'});
 		
-		return new LoginClient(loginModules[$module]);
+		return new LoginClient();
 	}
 	
 	/* public */

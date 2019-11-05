@@ -22,7 +22,7 @@ class Client {
 	
 	/* static */
 	static async create(clientOptions) {
-		if( '$module' in clientOptions ) return LoginClient.create(clientOptions);
+		if( clientOptions.mode === 'login' ) return LoginClient.create(clientOptions);
 		
 		let mongodbCollection = await MongodbService.createCollection({db: 'clients', collection: 'clients'});
 		let {config} = await mongodbCollection.findOneDocument(clientOptions);

@@ -13,7 +13,7 @@ const publicIconsDirname = join(publicAssetsDirname, 'icons');
 
 const clientDirnameMap = new Map(Object.entries({
 	'html': join(publicDirname, 'view'),
-	'js': join(publicDirname, 'js'),
+	'l-js': join(publicDirname, 'js', 'login'),
 	'ico': publicAssetsDirname,
 	'png': join(publicAssetsDirname, 'images'),
 	'f-ttf': join(publicAssetsDirname, 'fonts'),
@@ -38,7 +38,7 @@ function getPublicFilename(filename) {
 
 function parseFileType(filename) {
 	let [, type] = parse(filename).ext.split('.');
-	return /^(ttf|svg|eot|woff|woff2)$/.test(type) ? `${filename[0]}-${type}` : type;
+	return /^(ttf|svg|eot|woff|woff2|js)$/.test(type) ? `${filename[0]}-${type}` : type;
 }
 
 /*** src [end] ***/
