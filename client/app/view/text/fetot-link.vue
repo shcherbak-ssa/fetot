@@ -9,7 +9,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import 'fetot-scss';
+  @import '$fetot-scss';
 
   .fetot-link {
     color: $fetot-azure;

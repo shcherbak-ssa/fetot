@@ -10,7 +10,7 @@
 </script>
 
 <style lang="scss">
-  @import 'fetot-scss';
+  @import '$fetot-scss';
 
   .fetot-icon {
     font: 24px 'icons-font';

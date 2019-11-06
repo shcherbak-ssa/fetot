@@ -2,12 +2,16 @@
 
 /*** imports [begin] ***/
 
-import $localStorage from 'fetot-storage/local-storage';
+import {loginPageStore} from './store/login-page-store';
+import $localStorage from '$fetot-services/local-storage';
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
-async function saveClientAndGotoApp({email, password}) {
+async function saveClientAndGotoApp() {
+	let email = loginPageStore.getters.getInput('email').value;
+	let password = loginPageStore.getters.getInput('password').value;
+	
 	$localStorage.item.create('client', {email, password});
 	document.cookie = '$fetot={client:true};path=/;max-age=60';
 	

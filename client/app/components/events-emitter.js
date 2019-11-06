@@ -22,11 +22,11 @@ class EventsEmitter {
 	}
 	emit(event, ...args) {
 		if( !this.handlers.has(event) )
-			return console.log(new Error(`event '${event}' didn't add`));
+			return Promise.reject(new Error(`event '${event}' didn't add`));
 		
-		this.handlers.get(event).map((handler) => {
-			handler(...args)
-		})
+		return Promise.all(this.handlers.get(event).map((handler) => {
+			return handler(...args)
+		}))
 	}
 }
 

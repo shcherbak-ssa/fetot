@@ -4,7 +4,6 @@
 
 import eventsEmitterWorker from './events-emitter';
 
-import importEventHandler from './events-handlers/import-event-handler';
 import sendOutputMessageEventHandler from './events-handlers/send-output-message-event-handler';
 
 /*** imports [end] ***/
@@ -16,9 +15,7 @@ const fetotEventEmitter = eventsEmitterWorker.createEmitter('fetot');
 /*** exports [begin] ***/
 
 async function initFetotEvents() {
-	fetotEventEmitter
-		.on('send-output-message', sendOutputMessageEventHandler)
-		.on('import', importEventHandler)
+	fetotEventEmitter.on('send-output-message', sendOutputMessageEventHandler)
 }
 
 /*** exports [end] ***/

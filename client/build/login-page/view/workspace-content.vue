@@ -16,7 +16,7 @@
 
 <script>
 	// import inputs from 'fetot-workers/inputs';
-	import fetotButton from 'fetot-view/buttons/fetot-button.vue';
+	import fetotButton from '$fetot-view/buttons/fetot-button.vue';
 
 	export default {
 		name: 'workspace-content',
@@ -37,7 +37,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import 'fetot-scss';
+  @import '$fetot-scss';
 
   .workspace-content {
     background: #fff;

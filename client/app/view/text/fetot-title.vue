@@ -9,7 +9,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import 'fetot-scss';
+  @import '$fetot-scss';
 
   .fetot-title {
     color: $fetot-dark-blue;

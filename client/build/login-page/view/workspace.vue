@@ -1,42 +1,45 @@
 <template>
   <div class="workspace">
     <fetot-title>
-      <div class="title">{{ getData('title') }}</div>
+      <div class="title">{{ store.title }}</div>
     </fetot-title>
-    <workspace-content></workspace-content>
+<!--    <workspace-content></workspace-content>-->
     <fetot-link @fetot-link-click="linkClickHandler">
-      <div class="link">{{ getData('link') }}</div>
+      <div class="link">{{ store.link }}</div>
     </fetot-link>
   </div>
 </template>
 
 <script>
-  import {mapGetters} from 'vuex';
+	import currentModuleWorker from '../components/workers/current-module';
 
-	import fetotTitle from 'fetot-view/text/fetot-title.vue';
-	import fetotLink from 'fetot-view/text/fetot-link.vue';
-	import workspaceContent from './workspace-content.vue';
+	import fetotTitle from '$fetot-view/text/fetot-title.vue';
+	import fetotLink from '$fetot-view/text/fetot-link.vue';
+	// import workspaceContent from './workspace-content.vue';
 
 	export default {
 		name: 'workspace',
+    data() {
+			return {
+				store: currentModuleWorker.store.data,
+        worker: currentModuleWorker
+      }
+    },
     components: {
 			'fetot-title': fetotTitle,
       'fetot-link': fetotLink,
-      'workspace-content': workspaceContent
+      // 'workspace-content': workspaceContent
     },
     methods: {
-	    linkClickHandler() {}
-    },
-    computed: {
-			...mapGetters('module-worker', {
-				getData: 'getCurrentModuleData'
-      })
+	    async linkClickHandler() {
+	    	await this.worker.changeModule('byLink')
+      }
     }
 	}
 </script>
 
 <style lang="scss" scoped>
-  @import 'fetot-scss';
+  @import '$fetot-scss';
 
   .workspace {
     position: absolute;

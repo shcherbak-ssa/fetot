@@ -11,7 +11,7 @@
 
 <script>
   import {mapState} from 'vuex';
-	import fetotIcon from 'fetot-view/icons/fetot-icon.vue';
+	import fetotIcon from '$fetot-view/icons/fetot-icon.vue';
 
 	export default {
 		name: 'fetot-input',
@@ -57,7 +57,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import 'fetot-scss';
+  @import '$fetot-scss';
 
   .fetot-input {
     font-size: 18px;

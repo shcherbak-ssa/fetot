@@ -1,22 +1,13 @@
 <template>
   <div class="fetot-container">
-    <component :is="changePageComponent"></component>
+    <component :is="pageComponent"></component>
   </div>
 </template>
 
 <script>
 	export default {
 		name: 'fetot-container',
-    date() {
-	    return {
-		    pageComponent: ''
-      }
-    },
-    computed: {
-			changePageComponent() {
-				return this.pageComponent
-      }
-    }
+    props: { pageComponent: String }
 	}
 </script>
 

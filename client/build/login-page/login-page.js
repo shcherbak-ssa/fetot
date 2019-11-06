@@ -7,12 +7,16 @@ import Fetot from '$fetot';
 import $localStorage from '$fetot-services/local-storage';
 import eventsEmitterWorker from '$fetot-events-emitter';
 
-import {importModuleHandler} from './components/login-page-handlers';
+import {initLoginPageStore} from './components/store/login-page-store';
+import currentModuleWorker from './components/workers/current-module';
+
+import './components/login-page-events';
+import importModuleHandler from './components/handlers/import-module-handler';
 
 /*** imports [end] ***/
 /*** init [begin] ***/
 
-const fetotEventEmitter = eventsEmitterWorker.getEmitter('fetot');
+const loginPageEventEmitter = eventsEmitterWorker.getEmitter('login-page');
 
 Fetot.init()
 	.then((Vue) => {
@@ -30,18 +34,19 @@ Fetot.init()
 /*** src [begin] ***/
 
 async function initLoginPage(VueModel) {
-	let $module = $localStorage.item.has('client-exist') ? 'login' : 'sing-in';
+	await initLoginPageStore();
 	
-	fetotEventEmitter.emit('import', {
-		options: {
-			type: 'module',
-			path: `l${$module}.js`
-		},
+	let moduleName = $localStorage.item.has('client-exist') ? 'login' : 'sing-in';
+	let $module = await loginPageEventEmitter.emit('import-module', {
+		options: { name: moduleName },
 		handler: importModuleHandler
-	})
+	});
 	
-	// imports( IMPORT_LOGIN_PAGE_COMPONENT, {name: 'login-page', path: './view/login-page.vue'} );
-	// importEventEmitter.on( IMPORT_LOGIN_PAGE_COMPONENT, () => {} )
+	await currentModuleWorker.init(moduleName, $module[0]);
+	
+	await loginPageEventEmitter.emit('import-login-page-component', {
+		handler: () => VueModel.$data.pageComponent = 'login-page'
+	});
 }
 
 /*** src [end] ***/

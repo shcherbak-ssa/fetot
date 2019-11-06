@@ -1,42 +1,41 @@
 'use strict';
 
-/*** imports [begin] ***/
-
-/*** imports [end] ***/
-/*** init [begin] ***/
-
-/*** init [end] ***/
 /*** exports [begin] ***/
 
 class StoreInterface {
 	constructor(path) {
 		this.path = path;
 		
-		let SIStore = StoreInterface.store;
-		
+		let SIStore = StoreInterface.Store;
 		this.state = SIStore.state[this.path];
-		this.getters = SIStore.getters[this.path];
+		
+		this.getters = new Proxy({}, {
+			get(target, prop) {
+				return (options) => {
+					let getter = [path, prop].join('/');
+					return SIStore.getters[getter](options);
+				}
+			}
+		});
 		
 		this.actions = new Proxy({}, {
 			get(target, prop) {
-				return (options) => {
-					return SIStore.actions[path].dispatch(prop, options);
+				return async (options) => {
+					let dispatch = [path, prop].join('/');
+					return await SIStore.dispatch(dispatch, options);
 				}
 			}
 		});
 	}
 	
 	/* static */
-	static store = {};
+	static Store = {};
 	static createStore(path, data) {
-		StoreInterface.store.registerModule(path, data);
+		StoreInterface.Store.registerModule(path, data);
 		return new StoreInterface(path);
 	}
 }
 
 /*** exports [end] ***/
-/*** src [begin] ***/
-
-/*** src [end] ***/
 
 export default StoreInterface;

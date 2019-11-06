@@ -1,27 +1,28 @@
 <template>
   <div class="login-page">
-<!--    <transition name="change-module" mode="out-in" appear>-->
-<!--      <workspace :key="wtf"></workspace>-->
-<!--    </transition>-->
+    <transition name="change-module" mode="out-in" appear>
+      <workspace :key="currentModuleName"></workspace>
+    </transition>
   </div>
 </template>
 
 <script>
-  // import workspace from './workspace.vue';
+  import currentModuleWorker from '../components/workers/current-module';
+  import workspace from './workspace.vue';
 
 	export default {
 		name: 'login-page',
-    // components: { workspace },
-    // data() {
-		// 	return {
-		// 		wtf: ''
-    //   }
-    // }
+    components: { workspace },
+    data() {
+			return {
+				currentModuleName: currentModuleWorker.store.data.name
+      }
+    }
 	}
 </script>
 
 <style lang="scss" scoped>
-  @import 'fetot-scss';
+  @import '$fetot-scss';
 
   .login-page {
     position: relative;

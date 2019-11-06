@@ -16,8 +16,6 @@ import $localStorage from './components/services/local-storage';
 import OutputMessage from './components/services/output-message'
 
 /*** imports [end] ***/
-/*** init [begin] ***/
-/*** init [end] ***/
 /*** exports [begin] ***/
 
 async function initFetot() {
@@ -27,14 +25,17 @@ async function initFetot() {
 	}, false);
 	
 	await initFetotEvents();
-	connectionRequest(currentPageOptions);
+	connectionRequest();
 	
 	Vue.use(Vuex);
-	StoreInterface.store = new Vuex.Store({});
+	StoreInterface.Store = new Vuex.Store({modules: {}});
 	
 	return new Vue({
 		el: '#ftt',
-		template: '<fetot-container></fetot-container>',
+		data() {
+			return { pageComponent: '' }
+		},
+		template: '<fetot-container :pageComponent="pageComponent"/>',
 		components: { 'fetot-container': fetotContainer }
 	})
 }
@@ -42,9 +43,9 @@ async function initFetot() {
 /*** exports [end] ***/
 /*** src [begin] ***/
 
-function connectionRequest({type, connection}) {
-	let client = $localStorage.item.has('client')
-		? $localStorage.item('client') : false;
+function connectionRequest() {
+	let client = $localStorage.item.has('client') ? $localStorage.item('client') : false;
+	let {type, connection} = currentPageOptions;
 	
 	let outputMessage = new OutputMessage({messageType: 'connection', type});
 	outputMessage.set('client', client).set('connection', connection);
