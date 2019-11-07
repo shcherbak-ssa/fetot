@@ -15,7 +15,9 @@ async function initMongodbServer() {
 	
 	return mongoClient.connect((err, client) => {
 		if( err ) return Promise.reject(err);
+		
 		MongodbService.mongoClient = client;
+		return Promise.resolve()
 	})
 }
 

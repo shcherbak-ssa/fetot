@@ -6,9 +6,7 @@
   "scripts": {
     "fetot": "supervisor server.js",
     "mongod": "mongod.bat",
-    "email-test": "node ../util/email-test.js",
-    "drop-mongodb-collection": "node ../util/drop-mongodb-collection.js",
-    "server-update-test": "node ../util/server-update-test.js"
+    "drop-collection": "node drop-collection.js"
   },
   "repository": {
     "type": "git",

@@ -36,8 +36,6 @@ const currentModuleWorker = {
 		let responseHandler = await this.store.worker(this.store.options);
 		if( !responseHandler ) return ;
 		
-		console.log(responseHandler);
-		
 		let self = this;
 		fetotEventEmitter.emit('send-output-message', {
 			outputMessage: self.store.options.outputMessage,
