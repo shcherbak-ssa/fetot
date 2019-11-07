@@ -2,12 +2,12 @@
   <div class="workspace-content">
     <div class="content">
       <p class="txt" v-if="content.text" v-html="content.text"></p>
-<!--      <fetot-input-->
-<!--              v-for="(input, index) in content.inputs"-->
-<!--              :key="index" :input="inputs[input]"-->
-<!--              @fetot-input-input="inputInputHandler"-->
-<!--      />-->
-      <fetot-button v-if="content.button" @fetot-button-click="buttonClickHandler">
+      <login-input
+              v-for="(input, index) in content.inputs"
+              :key="index" :input="input"
+              @fetot-input-input="runCurrentModuleWorker"
+      />
+      <fetot-button v-if="content.button" @fetot-button-click="runCurrentModuleWorker">
         {{ content.button }}
       </fetot-button>
     </div>
@@ -17,7 +17,7 @@
 <script>
 	import {currentModuleStore, currentModuleWorker} from '../components/workers/current-module';
 
-	// import inputs from 'fetot-workers/inputs';
+	import loginInput from './login-input.vue';
 	import fetotButton from '$fetot-view/buttons/fetot-button.vue';
 
 	export default {
@@ -28,17 +28,11 @@
       }
     },
     components: {
-			// 'fetot-input': inputs.view,
+			'login-input': loginInput,
       'fetot-button': fetotButton
     },
     methods: {
-	    async buttonClickHandler() {
-		    await this.runWorker();
-	    },
-	    async inputInputHandler() {
-		    await this.runWorker()
-	    },
-      async runWorker() {
+      async runCurrentModuleWorker() {
 	    	alert('@fetot-button-click')
       }
     }

@@ -1,20 +1,19 @@
 <template>
-  <div class="fetot-input" :class="states" @click="isActive">
-    <input class="input"
-           :type="type" :value="value"
-           @blur="isBlur" @input="setValue">
-    <div class="placeholder">{{ placeholder }}</div>
-    <fetot-icon :icon="icon"></fetot-icon>
-    <div class="error">{{ error }}</div>
+  <div class="login-input" :class="states" > <!-- @click="isActive" -->
+<!--    <input class="input"-->
+<!--           :type="type" :value="value"-->
+<!--           @blur="isBlur" @input="setValue">-->
+    <div class="placeholder">{{ input }}</div>
+<!--    <fetot-icon :icon="icon"></fetot-icon>-->
+<!--    <div class="error">{{ error }}</div>-->
   </div>
 </template>
 
 <script>
-  import {mapState} from 'vuex';
 	import fetotIcon from '$fetot-view/icons/fetot-icon.vue';
 
 	export default {
-		name: 'fetot-input',
+		name: 'login-input',
 		props: { input: String },
 		components: { 'fetot-icon': fetotIcon },
     data: () => ({
@@ -24,42 +23,41 @@
         'has-error': false
 	    }
 		}),
-		methods: {
-			isActive() {
-				this.setStates(1, 0, 0);
-				this.input.dispatch('setInputError')
-			},
-			isBlur({target}) {
-				this.setStates(0, !!target.value,0);
-			},
-			setValue({target}) {
-				this.input.dispatch('updateInputValue', target.value);
-				if( this.event() ) this.$emit('fetot-input-input');
-			},
-			setStates(isActive, hasValue, hasError) {
-				this.states['is-active'] = !!isActive;
-				this.states['has-value'] = !!hasValue;
-				this.states['has-error'] = !!hasError;
-			}
-		},
-		computed: {
-			toggleError() {
-				if( this.error() ) this.setStates(1, 0, 1);
-				return this.error()
-			},
-      ...mapState(this.input.id, this.input.states)
-		},
-		mounted() {
-			this.setStates(0, !!this.value(), 0);
-			this.input.dispatch('setInputError')
-		}
+		// methods: {
+		// 	isActive() {
+		// 		this.setStates(1, 0, 0);
+		// 		this.input.dispatch('setInputError')
+		// 	},
+		// 	isBlur({target}) {
+		// 		this.setStates(0, !!target.value,0);
+		// 	},
+		// 	setValue({target}) {
+		// 		this.input.dispatch('updateInputValue', target.value);
+		// 		if( this.event() ) this.$emit('fetot-input-input');
+		// 	},
+		// 	setStates(isActive, hasValue, hasError) {
+		// 		this.states['is-active'] = !!isActive;
+		// 		this.states['has-value'] = !!hasValue;
+		// 		this.states['has-error'] = !!hasError;
+		// 	}
+		// },
+		// computed: {
+		// 	toggleError() {
+		// 		if( this.error() ) this.setStates(1, 0, 1);
+		// 		return this.error()
+		// 	}
+		// },
+		// mounted() {
+		// 	this.setStates(0, !!this.value(), 0);
+		// 	this.input.dispatch('setInputError')
+		// }
 	}
 </script>
 
 <style lang="scss" scoped>
   @import '$fetot-scss';
 
-  .fetot-input {
+  .login-input {
     font-size: 18px;
     width: 100%;
     height: 42px;
@@ -107,7 +105,7 @@
       height: 2px;
       bottom: 0;
       left: 0;
-      transition: .4s;
+      transition: .2s;
       @include psevdo-element;
     }
     &.is-active, &:hover {
