@@ -21,11 +21,9 @@ const createAccountStore = {
 	},
 	inputs: {
 		fullname: {
-			type: 'text',
-			value: '',
+			name: 'fullname',
 			placeholder: 'Full name',
-			icon: '&#xe800;',
-			error: ''
+			icon: '&#xe800;'
 		}
 	}
 };

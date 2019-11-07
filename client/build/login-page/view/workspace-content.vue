@@ -33,7 +33,7 @@
     },
     methods: {
       async runCurrentModuleWorker() {
-	    	alert('@fetot-button-click')
+	    	await currentModuleWorker.runWorker();
       }
     }
 	}

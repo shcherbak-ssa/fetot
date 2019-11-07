@@ -5,6 +5,7 @@
 import eventsEmitterWorker from '$fetot-events-emitter';
 import OutputMessage from '$fetot-services/output-message';
 
+import inputWorker from '../input';
 import {loginPageStore} from '../../store/login-page-store';
 import initCurrentModuleStore from './current-module-store';
 
@@ -26,7 +27,6 @@ const currentModuleWorker = {
 	async init(name, $module) {
 		currentModuleStore = await initCurrentModuleStore();
 		
-		// this.store = currentModuleStore.state.store;
 		this.store = currentModuleStore.state;
 		this.actions = currentModuleStore.actions;
 		
@@ -55,7 +55,7 @@ const currentModuleWorker = {
 		let {inputs} = $module.data.content;
 		
 		await this.actions.updateCurrentModule({$module, options: {
-			inputs: loginPageStore.getters.getInputsForModuleWorker(inputs),
+			inputs: inputWorker.getInputsForWorker(inputs),
 			outputMessage: new OutputMessage({type: 'worker'})
 		}});
 		

@@ -20,11 +20,9 @@ const confirmEmailStore = {
 	},
 	inputs: {
 		code: {
-			type: 'text',
-			value: '',
+			name: 'code',
 			placeholder: 'Confirmation code',
 			icon: '&#xe802;',
-			error: '',
 			event: true
 		}
 	}

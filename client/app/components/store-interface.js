@@ -31,6 +31,9 @@ class StoreInterface {
 		StoreInterface.Store.registerModule(path, data);
 		return new StoreInterface(path);
 	}
+	static removeStore(path) {
+		StoreInterface.Store.unregisterModule(path)
+	}
 }
 
 /*** exports [end] ***/

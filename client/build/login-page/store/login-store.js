@@ -21,18 +21,15 @@ const loginStore = {
 	},
 	inputs: {
 		email: {
-			type: 'text',
-			value: '',
+			name: 'email',
 			placeholder: 'E-mail',
-			icon: '&#xf0e0;',
-			error: ''
+			icon: '&#xf0e0;'
 		},
 		password: {
+			name: 'password',
 			type: 'password',
-			value: '',
 			placeholder: 'Password',
-			icon: '&#xe801;',
-			error: ''
+			icon: '&#xe801;'
 		}
 	}
 };

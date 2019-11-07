@@ -1,56 +1,68 @@
 <template>
-  <div class="login-input" :class="states" > <!-- @click="isActive" -->
-<!--    <input class="input"-->
-<!--           :type="type" :value="value"-->
-<!--           @blur="isBlur" @input="setValue">-->
-    <div class="placeholder">{{ input }}</div>
-<!--    <fetot-icon :icon="icon"></fetot-icon>-->
-<!--    <div class="error">{{ error }}</div>-->
+  <div class="login-input" :class="states" @click="isActive">
+    <input class="input"
+           :type="data.state.type" :value="data.state.value"
+           @blur="isBlur" @input="setValue"
+    >
+    <div class="placeholder">{{ data.state.placeholder }}</div>
+    <fetot-icon :icon="data.state.icon"></fetot-icon>
+    <div class="error">{{ data.state.error }}</div>
   </div>
 </template>
 
 <script>
-	import fetotIcon from '$fetot-view/icons/fetot-icon.vue';
+	import inputWorker from '../components/workers/input';
+  import fetotIcon from '$fetot-view/icons/fetot-icon.vue';
 
 	export default {
 		name: 'login-input',
-		props: { input: String },
-		components: { 'fetot-icon': fetotIcon },
-    data: () => ({
-	    states: {
-		    'is-active': false,
-        'has-value': false,
-        'has-error': false
-	    }
-		}),
-		// methods: {
-		// 	isActive() {
-		// 		this.setStates(1, 0, 0);
-		// 		this.input.dispatch('setInputError')
-		// 	},
-		// 	isBlur({target}) {
-		// 		this.setStates(0, !!target.value,0);
-		// 	},
-		// 	setValue({target}) {
-		// 		this.input.dispatch('updateInputValue', target.value);
-		// 		if( this.event() ) this.$emit('fetot-input-input');
-		// 	},
-		// 	setStates(isActive, hasValue, hasError) {
-		// 		this.states['is-active'] = !!isActive;
-		// 		this.states['has-value'] = !!hasValue;
-		// 		this.states['has-error'] = !!hasError;
-		// 	}
-		// },
-		// computed: {
-		// 	toggleError() {
-		// 		if( this.error() ) this.setStates(1, 0, 1);
-		// 		return this.error()
-		// 	}
-		// },
-		// mounted() {
-		// 	this.setStates(0, !!this.value(), 0);
-		// 	this.input.dispatch('setInputError')
-		// }
+		props: {
+			input: String
+    },
+		components: {
+			'fetot-icon': fetotIcon
+    },
+    data() {
+			return {
+				data: {},
+				states: {
+					'is-active': false,
+					'has-value': false,
+					'has-error': false
+				}
+      }
+		},
+		methods: {
+			isActive() {
+				this.setStates(1, 0, 0);
+				this.data.actions.updateError();
+			},
+			isBlur({target}) {
+				this.setStates(0, !!target.value,0);
+			},
+			setValue({target}) {
+				this.data.actions.updateValue(target.value);
+				if( this.data.state.event ) this.$emit('fetot-input-input');
+			},
+			setStates(isActive, hasValue, hasError) {
+				this.states['is-active'] = !!isActive;
+				this.states['has-value'] = !!hasValue;
+				this.states['has-error'] = !!hasError;
+			}
+		},
+		computed: {
+			toggleError() {
+				if( this.data.state.error ) this.setStates(1, 0, 1);
+				return this.data.state.error
+			}
+		},
+		created() {
+			this.data = inputWorker.getInput(this.input)
+		},
+		mounted() {
+			this.setStates(0, !!this.data.state.value, 0);
+			this.data.actions.updateError();
+		}
 	}
 </script>
 
