@@ -3,7 +3,7 @@
     <fetot-title>
       <div class="title">{{ store.title }}</div>
     </fetot-title>
-<!--    <workspace-content></workspace-content>-->
+    <workspace-content></workspace-content>
     <fetot-link @fetot-link-click="linkClickHandler">
       <div class="link">{{ store.link }}</div>
     </fetot-link>
@@ -11,24 +11,24 @@
 </template>
 
 <script>
-	import currentModuleWorker from '../components/workers/current-module';
+	import {currentModuleStore, currentModuleWorker} from '../components/workers/current-module';
 
 	import fetotTitle from '$fetot-view/text/fetot-title.vue';
 	import fetotLink from '$fetot-view/text/fetot-link.vue';
-	// import workspaceContent from './workspace-content.vue';
+	import workspaceContent from './workspace-content.vue';
 
 	export default {
 		name: 'workspace',
     data() {
 			return {
-				store: currentModuleWorker.store.data,
+				store: currentModuleStore.state.data,
         worker: currentModuleWorker
       }
     },
     components: {
 			'fetot-title': fetotTitle,
       'fetot-link': fetotLink,
-      // 'workspace-content': workspaceContent
+      'workspace-content': workspaceContent
     },
     methods: {
 	    async linkClickHandler() {

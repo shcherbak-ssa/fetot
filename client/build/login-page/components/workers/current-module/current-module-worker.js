@@ -20,12 +20,15 @@ const fetotEventEmitter = eventsEmitterWorker.getEmitter('fetot');
 /*** init [end] ***/
 /*** exports [begin] ***/
 
+let currentModuleStore;
+
 const currentModuleWorker = {
 	async init(name, $module) {
-		this.currentModuleStore = await initCurrentModuleStore();
+		currentModuleStore = await initCurrentModuleStore();
 		
-		this.store = this.currentModuleStore.state.store;
-		this.actions = this.currentModuleStore.actions;
+		// this.store = currentModuleStore.state.store;
+		this.store = currentModuleStore.state;
+		this.actions = currentModuleStore.actions;
 		
 		await this._sendMessageAndUpdateCurrentModule(name, $module);
 	},
@@ -65,4 +68,4 @@ const currentModuleWorker = {
 
 /*** exports [end] ***/
 
-export default currentModuleWorker;
+export { currentModuleStore, currentModuleWorker };

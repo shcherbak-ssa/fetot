@@ -1,25 +1,32 @@
 <template>
   <div class="workspace-content">
     <div class="content">
-<!--      <p class="txt" v-if="content.text" v-html="content.text"></p>-->
+      <p class="txt" v-if="content.text" v-html="content.text"></p>
 <!--      <fetot-input-->
 <!--              v-for="(input, index) in content.inputs"-->
 <!--              :key="index" :input="inputs[input]"-->
 <!--              @fetot-input-input="inputInputHandler"-->
 <!--      />-->
-<!--      <fetot-button v-if="content.button" @fetot-button-click="buttonClickHandler">-->
-<!--        {{ content.button }}-->
-<!--      </fetot-button>-->
+      <fetot-button v-if="content.button" @fetot-button-click="buttonClickHandler">
+        {{ content.button }}
+      </fetot-button>
     </div>
   </div>
 </template>
 
 <script>
+	import {currentModuleStore, currentModuleWorker} from '../components/workers/current-module';
+
 	// import inputs from 'fetot-workers/inputs';
 	import fetotButton from '$fetot-view/buttons/fetot-button.vue';
 
 	export default {
 		name: 'workspace-content',
+    data() {
+			return {
+				content: currentModuleStore.state.data.content
+      }
+    },
     components: {
 			// 'fetot-input': inputs.view,
       'fetot-button': fetotButton
@@ -31,7 +38,9 @@
 	    async inputInputHandler() {
 		    await this.runWorker()
 	    },
-      async runWorker() {}
+      async runWorker() {
+	    	alert('@fetot-button-click')
+      }
     }
 	}
 </script>

@@ -4,25 +4,22 @@
 
 class StoreInterface {
 	constructor(path) {
-		this.path = path;
+		this.state = StoreInterface.Store.state[path];
 		
-		let SIStore = StoreInterface.Store;
-		this.state = SIStore.state[this.path];
-		
-		this.getters = new Proxy({}, {
+		this.getters = new Proxy({path}, {
 			get(target, prop) {
 				return (options) => {
-					let getter = [path, prop].join('/');
-					return SIStore.getters[getter](options);
+					let getter = [target.path, prop].join('/');
+					return StoreInterface.Store.getters[getter](options);
 				}
 			}
 		});
 		
-		this.actions = new Proxy({}, {
+		this.actions = new Proxy({path}, {
 			get(target, prop) {
 				return async (options) => {
-					let dispatch = [path, prop].join('/');
-					return await SIStore.dispatch(dispatch, options);
+					let dispatch = [target.path, prop].join('/');
+					return await StoreInterface.Store.dispatch(dispatch, options);
 				}
 			}
 		});

@@ -8,7 +8,7 @@ import $localStorage from '$fetot-services/local-storage';
 import eventsEmitterWorker from '$fetot-events-emitter';
 
 import {initLoginPageStore} from './components/store/login-page-store';
-import currentModuleWorker from './components/workers/current-module';
+import {currentModuleWorker} from './components/workers/current-module';
 
 import './components/login-page-events';
 import importModuleHandler from './components/handlers/import-module-handler';

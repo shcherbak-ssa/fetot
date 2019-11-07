@@ -8,20 +8,14 @@ import StoreInterface from '$fetot-store-interface';
 /*** init [begin] ***/
 
 const state = {
-	store: {
-		data: {}, worker: {}, config: {}, options: {}
-	}
+	data: {}, worker: {}, config: {}, options: {}
 };
 
 const getters = {};
 
 const mutations = {
 	UPDATE(state, newModule) {
-		console.log('new Module', newModule);
-		// state.store = {...newModule};
-		
-		for( let [key, value] of Object.entries(newModule) )
-			state.store[key] = value
+		for( let [key, value] of Object.entries(newModule) ) state[key] = value;
 	}
 };
 

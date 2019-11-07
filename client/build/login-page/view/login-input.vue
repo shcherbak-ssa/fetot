@@ -15,7 +15,7 @@
 
 	export default {
 		name: 'fetot-input',
-		props: { input: Object },
+		props: { input: String },
 		components: { 'fetot-icon': fetotIcon },
     data: () => ({
 	    states: {

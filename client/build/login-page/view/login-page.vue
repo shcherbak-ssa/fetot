@@ -1,22 +1,22 @@
 <template>
   <div class="login-page">
     <transition name="change-module" mode="out-in" appear>
-      <workspace :key="currentModuleName"></workspace>
+      <workspace :key="updateCurrentModuleName"></workspace>
     </transition>
   </div>
 </template>
 
 <script>
-  import currentModuleWorker from '../components/workers/current-module';
+  import {currentModuleStore} from '../components/workers/current-module';
   import workspace from './workspace.vue';
 
 	export default {
 		name: 'login-page',
     components: { workspace },
-    data() {
-			return {
-				currentModuleName: currentModuleWorker.store.data.name
-      }
+    computed: {
+			updateCurrentModuleName() {
+				return currentModuleStore.state.data.name
+			}
     }
 	}
 </script>

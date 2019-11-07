@@ -1,3 +1,3 @@
 'use strict';
 
-export {default} from './current-module-worker';
+export {currentModuleStore, currentModuleWorker} from './current-module-worker';
