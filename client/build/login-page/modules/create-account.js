@@ -8,27 +8,27 @@ import createAccountStore from '../store/create-account-store';
 /*** exports [begin] ***/
 
 async function createAccountModuleWorker({inputs: {fullname, password}, outputMessage}) {
-	if( fullname.isEmpty() ) return false;
-	outputMessage.set('fullname', fullname.value);
+	if( fullname.actions.isEmpty() ) return false;
+	if( password.actions.isEmpty() ) return false;
 	
-	if( password.isEmpty() ) return false;
-	outputMessage.set('password', password.value);
+	outputMessage.set('fullname', fullname.state.value);
+	outputMessage.set('password', password.state.value);
 	
-	let response = await outputMessage.send();
-	return await parseServerResponse({fullname, password}, response);
+	return await serverResponseHandler({fullname, password});
 }
 
 /*** exports [end] ***/
 /*** src [begin] ***/
 
-async function parseServerResponse(inputs, {type, message}) {
-	switch( type ) {
-		case 'error':
-			inputs[message.input].error = message.error;
-			return false;
-		case 'success':
-			console.log('Created success', message);
-			return true;
+async function serverResponseHandler(inputs) {
+	return async ({type, message}) => {
+		switch( type ) {
+			case 'error':
+				inputs[message.input].actions.updateError(message.error);
+				return false;
+			case 'success':
+				return true;
+		}
 	}
 }
 

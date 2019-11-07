@@ -24,6 +24,12 @@ const createAccountStore = {
 			name: 'fullname',
 			placeholder: 'Full name',
 			icon: '&#xe800;'
+		},
+		password: {
+			name: 'password',
+			type: 'password',
+			placeholder: 'Password',
+			icon: '&#xe801;'
 		}
 	}
 };

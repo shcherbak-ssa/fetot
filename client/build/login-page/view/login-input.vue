@@ -2,11 +2,11 @@
   <div class="login-input" :class="states" @click="isActive">
     <input class="input"
            :type="data.state.type" :value="data.state.value"
-           @blur="isBlur" @input="setValue"
+           @blur="isBlur" @input="isInput"
     >
     <div class="placeholder">{{ data.state.placeholder }}</div>
     <fetot-icon :icon="data.state.icon"></fetot-icon>
-    <div class="error">{{ data.state.error }}</div>
+    <div class="error">{{ toggleError }}</div>
   </div>
 </template>
 
@@ -38,11 +38,14 @@
 				this.data.actions.updateError();
 			},
 			isBlur({target}) {
+				this.data.actions.updateValue(target.value);
 				this.setStates(0, !!target.value,0);
 			},
-			setValue({target}) {
-				this.data.actions.updateValue(target.value);
-				if( this.data.state.event ) this.$emit('fetot-input-input');
+			isInput({target}) {
+				if( this.data.state.event ) {
+					this.data.actions.updateValue(target.value);
+					this.$emit('fetot-input-input');
+				}
 			},
 			setStates(isActive, hasValue, hasError) {
 				this.states['is-active'] = !!isActive;

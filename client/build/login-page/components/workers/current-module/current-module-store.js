@@ -16,12 +16,18 @@ const getters = {};
 const mutations = {
 	UPDATE(state, newModule) {
 		for( let [key, value] of Object.entries(newModule) ) state[key] = value;
+	},
+	UPDATE_TEXT(state, text) {
+		state.data.content.text = text;
 	}
 };
 
 const actions = {
 	async updateCurrentModule(context, {$module, options}) {
 		context.commit('UPDATE', {...$module, options});
+	},
+	async updateText(context, text) {
+		context.commit('UPDATE_TEXT', text);
 	}
 };
 

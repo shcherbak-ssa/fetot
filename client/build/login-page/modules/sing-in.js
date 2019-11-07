@@ -8,24 +8,24 @@ import singInStore from '../store/sing-in-store';
 /*** exports [begin] ***/
 
 async function singInModuleWorker({inputs: {email}, outputMessage}) {
-	if( email.isEmpty() ) return false;
-	outputMessage.set('email', email.value);
+	if( await email.actions.isEmpty() ) return false;
 	
-	let response = await outputMessage.send();
-	return await parseServerResponse(email, response);
+	outputMessage.set('email', email.state.value);
+	return await serverResponseHandler(email);
 }
 
 /*** exports [end] ***/
 /*** src [begin] ***/
 
-async function parseServerResponse(input, {type, message}) {
-	switch( type ) {
-		case 'error':
-			input.error = message.error;
-			return false;
-		case 'success':
-			console.log('success', message);
-			return true;
+async function serverResponseHandler(input) {
+	return async ({type, message}) => {
+		switch( type ) {
+			case 'error':
+				input.actions.updateError(message.error);
+				return false;
+			case 'success':
+				return true;
+		}
 	}
 }
 

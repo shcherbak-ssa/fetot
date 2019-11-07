@@ -33,8 +33,19 @@ const currentModuleWorker = {
 		await this._sendMessageAndUpdateCurrentModule(name, $module);
 	},
 	async runWorker() {
-		let response = await this.store.worker(this.store.options);
-		if( response ) await this.changeModule();
+		let responseHandler = await this.store.worker(this.store.options);
+		if( !responseHandler ) return ;
+		
+		console.log(responseHandler);
+		
+		let self = this;
+		fetotEventEmitter.emit('send-output-message', {
+			outputMessage: self.store.options.outputMessage,
+			async handler(response) {
+				let result = await responseHandler(response);
+				if( result ) await self.changeModule();
+			}
+		});
 	},
 	async changeModule(label = 'byButton') {
 		let nextModule = this.store.config.next[label];

@@ -17,11 +17,7 @@ const state = {
 	event: false
 };
 
-const getters = {
-	isEmpty(state) {
-		return state.value === '' ? 'Current field cannot be empty' : false
-	}
-};
+const getters = {};
 
 const mutations = {
 	UPDATE_VALUE(state, newValue) {
@@ -38,6 +34,14 @@ const actions = {
 	},
 	updateError(context, error = '') {
 		context.commit('UPDATE_ERROR', error)
+	},
+	isEmpty({commit, state}) {
+		if( state.value === '' ) {
+			commit('UPDATE_ERROR', 'Current field cannot be empty');
+			return true;
+		}
+		
+		return false
 	}
 };
 
