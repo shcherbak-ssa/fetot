@@ -8,8 +8,8 @@ import createAccountStore from '../store/create-account-store';
 /*** exports [begin] ***/
 
 async function createAccountModuleWorker({inputs: {fullname, password}, outputMessage}) {
-	if( fullname.actions.isEmpty() ) return false;
-	if( password.actions.isEmpty() ) return false;
+	if( await fullname.actions.isEmpty() ) return false;
+	if( await password.actions.isEmpty() ) return false;
 	
 	outputMessage.set('fullname', fullname.state.value);
 	outputMessage.set('password', password.state.value);

@@ -9,8 +9,8 @@ import $localStorage from '$fetot-services/local-storage';
 /*** exports [begin] ***/
 
 async function saveClientAndGotoApp() {
-	let email = inputWorker.getInput('email').value;
-	let password = inputWorker.getInput('password').value;
+	let email = inputWorker.getInput('email').state.value;
+	let password = inputWorker.getInput('password').state.value;
 	
 	$localStorage.item.create('client', {email, password});
 	document.cookie = '$fetot={client:true};path=/;max-age=60';

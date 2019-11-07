@@ -9,8 +9,8 @@ import {currentModuleWorker} from '../components/workers/current-module';
 /*** exports [begin] ***/
 
 async function loginModuleWorker({inputs: {email, password}, outputMessage}) {
-	if( email.actions.isEmpty() ) return false;
-	if( password.actions.isEmpty() ) return false;
+	if( await email.actions.isEmpty() ) return false;
+	if( await password.actions.isEmpty() ) return false;
 	
 	outputMessage.set('email', email.state.value);
 	outputMessage.set('password', password.state.value);
