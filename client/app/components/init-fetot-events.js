@@ -20,7 +20,7 @@ const fetotEventEmitter = eventsEmitterWorker.createEmitter('fetot');
 /*** init [end] ***/
 /*** exports [begin] ***/
 
-async function initFetotEvents() {
+function initFetotEvents() {
 	fetotEventEmitter.on('send-output-message', sendOutputMessageEventHandler)
 }
 

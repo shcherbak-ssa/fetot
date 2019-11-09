@@ -6,30 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <!--<link rel="manifest" href="manifest.json">-->
-  <style>
-    * { margin: 0; padding: 0; }
-
-    body {
-      color: #004466;
-      font: 48px sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      width: 100vw;
-      height: 100vh;
-    }
-  </style>
 </head>
 <body>
   <div id="ftt"></div>
   <script>
-    let client = localStorage.getItem('client');
-    client = JSON.parse(client);
-
-    const ftt = document.getElementById('ftt');
-    ftt.innerHTML = `Hello, ${client.email}!<br>Your password is ${client.password} :)`
+	  const currentPageOptions = { type: 'app', connection: {} };
   </script>
-<!--  <script src="app.js"></script>-->
+  <script src="aapp.js"></script>
 </body>
 </html>

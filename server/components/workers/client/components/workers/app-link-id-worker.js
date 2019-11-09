@@ -9,6 +9,7 @@ const appLinksIDCollection = new Map();
 
 const appLinkIdWorker = {
 	get(client) {
+		console.log('appLinksIDCollection.get(client)', appLinksIDCollection.get(client));
 		return appLinksIDCollection.get(client);
 	},
 	set(client, id) {

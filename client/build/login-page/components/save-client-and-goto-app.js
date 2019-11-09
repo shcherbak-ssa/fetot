@@ -15,7 +15,7 @@ async function saveClientAndGotoApp() {
 	$localStorage.item.create('client-exist', true);
 	$localStorage.item.create('client', {email, password});
 	
-	document.cookie = '$fetot={"client":true};path=/;max-age=60';
+	document.cookie = '$fetot={"client":true};path=/;max-age=3600';
 	
 	location.reload();
 }

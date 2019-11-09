@@ -16,6 +16,15 @@ class MongodbService {
 	}
 	
 	static mongoClient = {};
+	static createDatabase(db) {
+		db += '';
+		
+		return {
+			collection(collection) {
+				return MongodbService.createCollection({db, collection});
+			}
+		}
+	}
 	static createCollection({db, collection}) {
 		let mongoCollection = MongodbService.mongoClient.db(db).collection(collection);
 		return new MongodbService(mongoCollection);

@@ -12,10 +12,14 @@ import initFetotEvents from './components/init-fetot-events';
 import StoreInterface from './components/store-interface';
 
 /*** imports [end] ***/
+/*** init [begin] ***/
+
+initFetotEvents();
+
+/*** init [end] ***/
 /*** exports [begin] ***/
 
 async function initFetot() {
-	await initFetotEvents();
 	Vue.use(Vuex);
 	StoreInterface.Store = new Vuex.Store({modules: {}});
 	

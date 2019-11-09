@@ -12,12 +12,8 @@ async function connectionWorker({ip, message: {content: {type, data: message}}, 
 	if( type === '' || !('client' in message) || !('connection' in message) )
 		return await response(null);
 	
-	let id = await parse(type, message); // message = data = { client, connection }
-	if( id === null ) message = null;
-	else {
-		await clientWorker.client.ipAddress[type].set(id, ip);
-		message = { message: {id} };
-	}
+	message = await parse(type, message); // message = data = { client, connection }
+	if( message !== null ) await clientWorker.client.ipAddress[type].set(message.message.id, ip);
 	
 	await response(message);
 	clientWorker.showCollection(); // for testing
@@ -40,12 +36,13 @@ async function isLoginPageConnection({connection}) {
 	let id = await generateClientID.forLoginPage();
 	let success = await clientWorker.client.create('login', id, connection);
 	
-	return success ? id : null;
+	return success ? { message: {id} } : null;
 }
 
 /* app page connection */
 async function isAppPageConnection(message) {
-	let id = await clientWorker.client.appLinksID.get(message.client);
+	console.log('message.client', message.client);
+	const id = await clientWorker.client.appLinksID.get(message.client);
 	return id ? await isNotFirstClientConnection(id, message) : await isFirstClientConnection(message);
 }
 async function isFirstClientConnection({client: clientOptions, connection}) {
@@ -63,8 +60,14 @@ async function isNotFirstClientConnection(id, {connection}) {
 }
 
 async function createClientConnection(client, connection, id) {
-	let connectionLabel = await clientWorker.client.createConnection(client, connection);
-	return `${id}/${connectionLabel}`;
+	const connectionLabel = await clientWorker.client.createConnection(client, connection);
+	
+	return {
+		message: {
+			id: `${id}/${connectionLabel}`,
+			config: client.config
+		}
+	};
 }
 
 /*** src [end] ***/

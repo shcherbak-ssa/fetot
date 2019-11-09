@@ -1,5 +1,10 @@
 'use strict';
 
+/*** modules [begin] ***/
+
+const clientService = require('../../../components/services/client');
+
+/*** modules [end] ***/
 /*** init [begin] ***/
 
 const config = {
@@ -30,15 +35,10 @@ const schema = {
 	}
 };
 
-async function createAccountWorker({message: {fullname, password}, mongodb, store, response}) {
-	/*
-	* need to add default modules
-	* */
+async function createAccountWorker({message: {fullname, password}, store, response}) {
+	const email = store.get('current-client-email');
+	await clientService.create({email, password, fullname});
 	
-	let email = store.get('current-client-email');
-	let document = await mongodb.insertOneDocument({email, password, config: {fullname}});
-	
-	console.log('new client', document);
 	await response(config.response.success);
 }
 

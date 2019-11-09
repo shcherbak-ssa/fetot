@@ -7,7 +7,7 @@ const LoginClient = require('./LoginClient');
 
 const connections = require('./workers/connections-worker');
 
-const MongodbService = require('../../../services/mongodb');
+const clientService = require('../../../services/client');
 
 /*** imports [end] ***/
 /*** init [begin] ***/
@@ -24,9 +24,7 @@ class Client {
 	static async create(clientOptions) {
 		if( clientOptions.mode === 'login' ) return LoginClient.create(clientOptions);
 		
-		let mongodbCollection = await MongodbService.createCollection({db: 'clients', collection: 'clients'});
-		let {config} = await mongodbCollection.findOneDocument(clientOptions);
-		
+		let config = await clientService.get(clientOptions);
 		return config ? new Client(config) : false;
 	}
 	

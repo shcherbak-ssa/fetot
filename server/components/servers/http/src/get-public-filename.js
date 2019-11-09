@@ -14,6 +14,7 @@ const publicIconsDirname = join(publicAssetsDirname, 'icons');
 const clientDirnameMap = new Map(Object.entries({
 	'html': join(publicDirname, 'view'),
 	'l-js': join(publicDirname, 'js', 'login'),
+	'a-js': join(publicDirname, 'js', 'app'),
 	'ico': publicAssetsDirname,
 	'png': join(publicAssetsDirname, 'images'),
 	'f-ttf': join(publicAssetsDirname, 'fonts'),
