@@ -23,13 +23,13 @@ const loginStore = {
 		email: {
 			name: 'email',
 			placeholder: 'E-mail',
-			icon: '&#xf0e0;'
+			icon: '&#xF0E0;'
 		},
 		password: {
 			name: 'password',
 			type: 'password',
 			placeholder: 'Password',
-			icon: '&#xe801;'
+			icon: '&#xE80B;'
 		}
 	}
 };

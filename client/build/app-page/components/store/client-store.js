@@ -9,19 +9,15 @@ import StoreInterface from '$fetot-store-interface';
 
 const state = {
 	config: {},
-	modules: []
+	modules: {}
 };
 
-const getters = {
-	getModulesView(state) {
-		return state.modules.map(({view}) => view);
-	}
-};
+const getters = {};
 
 const mutations = {
 	INIT(state, {config, modules}) {
 		state.config = {...config};
-		state.modules = [...modules];
+		state.modules = {...modules};
 	}
 };
 

@@ -22,7 +22,7 @@ const confirmEmailStore = {
 		code: {
 			name: 'code',
 			placeholder: 'Confirmation code',
-			icon: '&#xe802;',
+			icon: '&#xE81F;',
 			event: true
 		}
 	}

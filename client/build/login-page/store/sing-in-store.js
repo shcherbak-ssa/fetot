@@ -23,7 +23,7 @@ const singInStore = {
 		email: {
 			name: 'email',
 			placeholder: 'E-mail',
-			icon: '&#xf0e0;'
+			icon: '&#xF0E0;'
 		}
 	}
 };

@@ -8,7 +8,7 @@ import connectionRequest from '$fetot-components/network/connection-request';
 import OutputMessage from '$fetot-services/output-message';
 // import eventsEmitterWorker from '$fetot-events-emitter';
 
-import {clientStore, createClientStore} from './components/store/client-store';
+import {createClientStore} from './components/store/client-store';
 
 /*** imports [end] ***/
 /*** init [begin] ***/
@@ -30,7 +30,6 @@ Fetot.init()
 
 async function initAppPage(VueModel) {
 	await appConnection();
-	console.log('clientStore', clientStore);
 }
 
 async function appConnection() {

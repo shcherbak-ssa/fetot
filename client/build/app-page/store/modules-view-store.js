@@ -3,7 +3,14 @@
 /*** exports [begin] ***/
 
 const modulesViewStore = {
-
+	notes: {
+		name: 'Notes',
+		icon: ''
+	},
+	lists: {
+		name: 'Lists',
+		icon: ''
+	}
 };
 
 /*** exports [end] ***/
