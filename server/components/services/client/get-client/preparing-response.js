@@ -10,14 +10,14 @@ const {responseTemplate, modulesView, moduleTemplate} = require('./config');
 const preparingResponse = {
 	create() {
 		return {
-			response: Object.assign({}, {...responseTemplate}),
+			response: { config: {}, modules: [] },
 			async setClientConfig(config) {
 				this.response.config = config
 			},
 			async setModules(modules, database) {
 				const self = this;
 				return Promise.all(modules.map( async ({name, categories_id}) => {
-					const $module = Object.assign({}, {...moduleTemplate});
+					const $module = { view: {}, categories: [] };
 					$module.view = modulesView[name];
 					
 					const categoriesCollection = database.collection(categories_id);

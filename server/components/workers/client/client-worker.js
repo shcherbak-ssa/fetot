@@ -69,7 +69,7 @@ async function runClient(client, options) {
 
 // for testing
 function showCollection() {
-	console.log('app collection -', 	clientsCollections.app.entries());
+	console.log('app collection -', 	clientsCollections.app.keys());
 	
 	client.ipAddress.app.showCollection();
 	client.appLinksID.showCollection();

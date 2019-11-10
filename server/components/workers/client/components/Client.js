@@ -24,7 +24,7 @@ class Client {
 	static async create(clientOptions) {
 		if( clientOptions.mode === 'login' ) return LoginClient.create(clientOptions);
 		
-		let config = await clientService.get(clientOptions);
+		const config = await clientService.get(clientOptions);
 		return config ? new Client(config) : false;
 	}
 	

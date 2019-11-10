@@ -13,7 +13,7 @@ async function createClient(options) {
 	const clientCollection = MongodbService.createCollection(config.mongodb);
 	
 	const result = await clientCollection.insertOneDocument(
-		getClientTemplate({email, password, config: {fullname}})
+		getClientTemplate({email, password, config: {fullname, ava: null}})
 	);
 	
 	if( !result ) return setTimeout(createClient, 10000, options);

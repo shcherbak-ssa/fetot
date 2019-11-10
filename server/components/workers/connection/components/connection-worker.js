@@ -13,7 +13,10 @@ async function connectionWorker({ip, message: {content: {type, data: message}}, 
 		return await response(null);
 	
 	message = await parse(type, message); // message = data = { client, connection }
-	if( message !== null ) await clientWorker.client.ipAddress[type].set(message.message.id, ip);
+	if( message !== null ) {
+		await clientWorker.client.ipAddress[type].set(message.id, ip);
+		message = {message}
+	}
 	
 	await response(message);
 	clientWorker.showCollection(); // for testing
@@ -36,7 +39,7 @@ async function isLoginPageConnection({connection}) {
 	const id = await generateClientID.forLoginPage();
 	const success = await clientWorker.client.create('login', id, connection);
 	
-	return success ? { message: {id} } : null;
+	return success ? { id } : null;
 }
 
 /* app page connection */
@@ -54,19 +57,13 @@ async function isFirstClientConnection({client: clientOptions, connection}) {
 	return await createClientConnection(client, connection, id);
 }
 async function isNotFirstClientConnection(id, {connection}) {
-	let client = await clientWorker.client('app', id);
+	const client = await clientWorker.client('app', id);
 	return await createClientConnection(client, connection, id);
 }
 
 async function createClientConnection(client, connection, id) {
 	const connectionLabel = await clientWorker.client.createConnection(client, connection);
-	
-	return {
-		message: {
-			id: `${id}/${connectionLabel}`,
-			config: client.config
-		}
-	};
+	return { id: `${id}/${connectionLabel}`, config: client.config }
 }
 
 /*** src [end] ***/
