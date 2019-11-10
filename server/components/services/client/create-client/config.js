@@ -1,8 +1,13 @@
 'use strict';
 
+/*** imports [begin] ***/
+
+const generateID = require('../../../../lib/generate-id');
+
+/*** imports [end] ***/
 /*** exports [begin] ***/
 
-const createClientConfig = {
+const config = {
 	mongodb: { db: 'client', collection: 'client' },
 	client: {
 		email: '',
@@ -16,7 +21,7 @@ const createClientConfig = {
 		{
 			collectionItem: {
 				name: 'notes',
-				categories: []
+				categories_id: generateCategoriesID('notes')
 			},
 			defaultBlock: {
 				title: 'I am the first note'
@@ -25,7 +30,7 @@ const createClientConfig = {
 		{
 			collectionItem: {
 				name: 'lists',
-				categories: []
+				categories_id: generateCategoriesID('lists')
 			},
 			defaultBlock: {
 				title: 'I am the first list'
@@ -35,5 +40,12 @@ const createClientConfig = {
 };
 
 /*** exports [end] ***/
+/*** src [begin] ***/
 
-module.exports = createClientConfig;
+function generateCategoriesID(name) {
+	return name + generateID.sync('1234567890', 6)
+}
+
+/*** src [end] ***/
+
+module.exports = config;

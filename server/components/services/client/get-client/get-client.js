@@ -3,25 +3,34 @@
 /*** imports [begin] ***/
 
 const MongodbService = require('../../mongodb');
+const preparingResponse = require('./preparing-response');
 
 /*** imports [end] ***/
-/*** init [begin] ***/
-
-/*** init [end] ***/
 /*** exports [begin] ***/
 
 async function getClient(clientOptions) {
+	/* find current client */
 	const clientCollection = MongodbService.createCollection({db: 'client', collection: 'client'});
 	const client = await clientCollection.findOneDocument(clientOptions);
 	
-	console.log(client);
+	if( !client ) return false; // if didn't find => return false;
 	
-	return { ...clientOptions };
+	/* set client config to response */
+	const currentPreparingResponse = preparingResponse.create();
+	await currentPreparingResponse.setClientConfig(client.config);
+	
+	/* create current client database by found client id */
+	const currentClientDatabase = MongodbService.createDatabase(client._id);
+	
+	/* preparing current client modules */
+	const currentClientModulesCollection = currentClientDatabase.collection('modules');
+	const currentClientModules = await currentClientModulesCollection.findAllDocuments();
+	
+	/* set current client modules */
+	await currentPreparingResponse.setModules(currentClientModules, currentClientDatabase);
+	return currentPreparingResponse.response;
 }
 
 /*** exports [end] ***/
-/*** src [begin] ***/
-
-/*** src [end] ***/
 
 module.exports = getClient;

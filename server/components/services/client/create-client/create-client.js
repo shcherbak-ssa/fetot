@@ -3,19 +3,18 @@
 /*** imports [begin] ***/
 
 const MongodbService = require('../../mongodb');
-const createClientConfig = require('./create-client-config');
+const config = require('./config');
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
 async function createClient(options) {
 	const {email, password, fullname} = options;
-	const clientCollection = MongodbService.createCollection(createClientConfig.mongodb);
+	const clientCollection = MongodbService.createCollection(config.mongodb);
 	
 	const result = await clientCollection.insertOneDocument(
 		getClientTemplate({email, password, config: {fullname}})
 	);
-	console.log(result);
 	
 	if( !result ) return setTimeout(createClient, 10000, options);
 	
@@ -27,18 +26,16 @@ async function createClient(options) {
 /*** src [begin] ***/
 
 function getClientTemplate(object) {
-	return Object.assign({}, createClientConfig.client, object);
+	return Object.assign({}, config.client, object);
 }
 async function createModulesCollections(database) {
 	const clientModulesCollection = database.collection('modules');
 	
-	return Promise.all(createClientConfig.modules.map( async ({collectionItem, defaultBlock}) => {
-		let result = await clientModulesCollection.insertOneDocument(collectionItem);
-		console.log(result);
+	return Promise.all(config.modules.map( async ({collectionItem, defaultBlock}) => {
+		await clientModulesCollection.insertOneDocument(collectionItem);
 		
 		const currentModuleCollection = database.collection(collectionItem.name);
-		result = await  currentModuleCollection.insertOneDocument(defaultBlock);
-		console.log(result);
+		await currentModuleCollection.insertOneDocument(defaultBlock);
 	}))
 }
 

@@ -2,7 +2,7 @@
 
 /*** exports [begin] ***/
 
-const getClientConfig = {
+const config = {
 	responseTemplate: {
 		config: {},
 		modules: []
@@ -25,4 +25,4 @@ const getClientConfig = {
 
 /*** exports [end] ***/
 
-module.exports = getClientConfig;
+module.exports = config;
