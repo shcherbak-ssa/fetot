@@ -6,14 +6,15 @@ import Fetot from '$fetot';
 
 import connectionRequest from '$fetot-components/network/connection-request';
 // import $localStorage from '$fetot-services/local-storage';
-// import OutputMessage from '$fetot-services/output-message';
+import OutputMessage from '$fetot-services/output-message';
 // import eventsEmitterWorker from '$fetot-events-emitter';
 
 /*** imports [end] ***/
 /*** init [begin] ***/
 
 connectionRequest((response) => {
-	console.log(response)
+	console.log(response);
+	OutputMessage.clientID = response.id;
 });
 
 Fetot.init()

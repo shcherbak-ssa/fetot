@@ -9,9 +9,11 @@ const clientWorker = require('../../client');
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
-async function closeWorker({ip, message: {id}, response}) {
+async function closeWorker({ip, message, response}) {
 	await response(null);
+	console.log('close-worker', message);
 	
+	let id = message.id;
 	let page = id[id.length - 1] === 'l' ? 'login' : 'app';
 	if( !clientWorker.client.ipAddress[page].isCorrect(id, ip) ) return;
 	
@@ -30,7 +32,8 @@ async function closeClientConnection(clientID) {
 	if( label === 'l' ) return await clientWorker.client.remove('login', clientID);
 	
 	let client = await clientWorker.client('app', id);
-	if( client.connections.size() > 1 ) return await clientWorker.client.removeConnection(client, label);
+	console.log('client.connections.size()', client.connections.size());
+	if( client.connections.size() !== 1 ) return await clientWorker.client.removeConnection(client, label);
 	
 	await clientWorker.client.appLinksID.remove(id);
 	await clientWorker.client.remove('app', id);

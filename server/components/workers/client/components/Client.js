@@ -5,7 +5,7 @@
 const Connection = require('./Connection');
 const LoginClient = require('./LoginClient');
 
-const connections = require('./workers/connections-worker');
+const createConnectionsWorker = require('./workers/connections-worker');
 
 const clientService = require('../../../services/client');
 
@@ -29,7 +29,7 @@ class Client {
 	}
 	
 	/* public */
-	connections = connections;
+	connections = createConnectionsWorker();
 	
 	async run(options) {
 		console.log(options);

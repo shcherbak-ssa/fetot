@@ -8,17 +8,15 @@ const appLinksIDCollection = new Map();
 /*** exports [begin] ***/
 
 const appLinkIdWorker = {
-	get(client) {
-		console.log('appLinksIDCollection.get(client)', appLinksIDCollection.get(client));
-		return appLinksIDCollection.get(client);
+	get({email, password}) {
+		return appLinksIDCollection.get(email + password);
 	},
-	set(client, id) {
-		appLinksIDCollection.set(client, id);
+	set({email, password}, id) {
+		appLinksIDCollection.set(email + password, id);
 	},
 	remove(id) {
-		for( let [key, val] of appLinksIDCollection.entries() ) {
+		for( let [key, val] of appLinksIDCollection.entries() )
 			if( val === id ) return appLinksIDCollection.delete(key);
-		}
 	},
 	// for testing
 	showCollection() {

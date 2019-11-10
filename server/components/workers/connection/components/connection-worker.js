@@ -33,29 +33,28 @@ async function parse(type, message) {
 
 /* login page connection */
 async function isLoginPageConnection({connection}) {
-	let id = await generateClientID.forLoginPage();
-	let success = await clientWorker.client.create('login', id, connection);
+	const id = await generateClientID.forLoginPage();
+	const success = await clientWorker.client.create('login', id, connection);
 	
 	return success ? { message: {id} } : null;
 }
 
 /* app page connection */
 async function isAppPageConnection(message) {
-	console.log('message.client', message.client);
 	const id = await clientWorker.client.appLinksID.get(message.client);
 	return id ? await isNotFirstClientConnection(id, message) : await isFirstClientConnection(message);
 }
 async function isFirstClientConnection({client: clientOptions, connection}) {
-	let id = await generateClientID.forAppPage();
+	const id = await generateClientID.forAppPage();
 	
-	let client = await clientWorker.client.create('app', id, clientOptions);
+	const client = await clientWorker.client.create('app', id, clientOptions);
 	if( !client ) return null;
 	
 	await clientWorker.client.appLinksID.set(clientOptions, id);
 	return await createClientConnection(client, connection, id);
 }
 async function isNotFirstClientConnection(id, {connection}) {
-	let client = clientWorker.client('app', id);
+	let client = await clientWorker.client('app', id);
 	return await createClientConnection(client, connection, id);
 }
 

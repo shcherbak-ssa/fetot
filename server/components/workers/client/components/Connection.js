@@ -9,11 +9,12 @@
 /*** exports [begin] ***/
 
 class Connection {
-	constructor() {
-		this.mode = {}
-	}
+	constructor() {}
 	
-	static async create(options) {}
+	static async create(options) {
+		console.log('connection', options);
+		return new Connection();
+	}
 }
 
 /*** exports [end] ***/
