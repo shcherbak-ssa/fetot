@@ -63,7 +63,7 @@ async function isNotFirstClientConnection(id, {connection}) {
 
 async function createClientConnection(client, connection, id) {
 	const connectionLabel = await clientWorker.client.createConnection(client, connection);
-	return { id: `${id}/${connectionLabel}`, config: client.config }
+	return { id: `${id}/${connectionLabel}`, client: client.config }
 }
 
 /*** src [end] ***/

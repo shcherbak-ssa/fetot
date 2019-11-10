@@ -5,17 +5,13 @@
 import Fetot from '$fetot';
 
 import connectionRequest from '$fetot-components/network/connection-request';
-// import $localStorage from '$fetot-services/local-storage';
 import OutputMessage from '$fetot-services/output-message';
 // import eventsEmitterWorker from '$fetot-events-emitter';
 
+import {clientStore, createClientStore} from './components/store/client-store';
+
 /*** imports [end] ***/
 /*** init [begin] ***/
-
-connectionRequest((response) => {
-	console.log(response);
-	OutputMessage.clientID = response.id;
-});
 
 Fetot.init()
 	.then((Vue) => {
@@ -32,6 +28,22 @@ Fetot.init()
 /*** init [end] ***/
 /*** src [begin] ***/
 
-async function initAppPage(VueModel) {}
+async function initAppPage(VueModel) {
+	await appConnection();
+	console.log('clientStore', clientStore);
+}
+
+async function appConnection() {
+	return new Promise((success) => {
+		connectionRequest( async (response) => {
+			const clientStore = await createClientStore();
+			clientStore.actions.init(response.client);
+			
+			OutputMessage.clientID = response.id;
+			
+			success()
+		});
+	})
+}
 
 /*** src [end] ***/
