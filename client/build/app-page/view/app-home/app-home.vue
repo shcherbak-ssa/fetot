@@ -29,6 +29,7 @@
   import moduleItem from './module-item.vue';
 
   import modulesViewStore from '../../store/modules-view-store';
+  import {currentModuleWorker} from '../../components/workers/current-module';
 
 	export default {
 		name: 'app-home',
@@ -54,7 +55,8 @@
 	    hamburgerButtonClickHandler(isActive) {
 	    	isActive ? this.closeHome() : this.openHome()
       },
-	    moduleItemClickHandler(item) {
+	    moduleItemClickHandler(name) {
+	    	currentModuleWorker.updateCurrentModule(name);
 	    	this.closeButtonClickHandler();
       },
 			closeButtonClickHandler() {

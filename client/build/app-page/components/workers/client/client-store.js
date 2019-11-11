@@ -2,6 +2,7 @@
 
 /*** imports [begin] ***/
 
+import $localStorage from '$fetot-services/local-storage';
 import StoreInterface from '$fetot-store-interface';
 
 /*** imports [end] ***/
@@ -16,14 +17,26 @@ const getters = {};
 
 const mutations = {
 	INIT(state, {config, modules}) {
-		state.config = {...config};
-		state.modules = {...modules};
+		state.config = {...config, ...$localStorage.item('client')};
+		
+		for( let [name, $module] of Object.entries(modules) )
+			state.modules[name] = {...$module, blocks: [], workers: { init: false }};
+	},
+	UPDATE_MODULE(state, {name, $module}) {
+		state.modules[name] = {...$module}
 	}
 };
 
 const actions = {
 	async init(context, options) {
 		context.commit('INIT', options);
+	},
+	async updateModule(context, options) {
+		context.commit('UPDATE_MODULE', options);
+	},
+	
+	hasModule(context, name) {
+		return context.state.modules[name].workers.init;
 	}
 };
 

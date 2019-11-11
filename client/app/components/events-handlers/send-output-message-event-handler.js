@@ -3,7 +3,7 @@
 /*** exports [begin] ***/
 
 async function sendOutputMessageEventHandler({outputMessage, handler}) {
-	let response = await outputMessage.send(event);
+	let response = await outputMessage.send();
 	await handler(response);
 }
 

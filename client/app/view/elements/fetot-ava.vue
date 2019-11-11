@@ -1,5 +1,5 @@
 <template>
-  <div class="fetot-ava" :style="setSize">
+  <div class="fetot-ava" :style="setSize" @click="$emit('fetot-ava-click')">
     {{ setClientLetters }}
   </div>
 </template>
@@ -35,7 +35,18 @@
     border-radius: 50%;
     color: #fff;
     font: 18px 'roboto-medium';
+    position: relative;
     @include flex-center;
     @include static-shadow;
+
+    &::after {
+      border-radius: 50%;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      @include full-sizes;
+      @include psevdo-element;
+    }
   }
 </style>

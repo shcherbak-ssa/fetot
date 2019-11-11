@@ -1,5 +1,5 @@
 <template>
-  <div class="module-item" :data-module-label="item.label" @click="$emit('module-item-click', item)">
+  <div class="module-item" @click="$emit('module-item-click', item.label)">
     <fetot-icon :icon="item.icon"></fetot-icon>
     <div class="name">{{ item.name }}</div>
   </div>
@@ -31,6 +31,7 @@
     height: 100px;
     margin: 0 20px 20px 0;
     justify-content: center;
+    transition: .2s;
     @include flex-center-column;
     @include static-shadow;
     @include border-radius-6;

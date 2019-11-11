@@ -2,14 +2,14 @@
   <div class="app-home-header">
     <div class="client-info">
       <div class="name">{{ client.fullname }}</div>
-      <fetot-ava :fullname="client.fullname" size="46"/>
+      <fetot-ava @fetot-ava-click="avaClickHandler" :fullname="client.fullname" size="46"/>
     </div>
   </div>
 </template>
 
 <script>
 	import fetotAva from '$fetot-view/elements/fetot-ava.vue';
-	import {clientStore} from '../../components/store/client-store';
+	import {clientStore, clientHandlers} from '../../components/workers/client';
 
 	export default {
 		name: 'app-home-header',
@@ -20,6 +20,11 @@
     },
     components: {
 			'fetot-ava': fetotAva
+    },
+    methods: {
+			avaClickHandler() {
+				return clientHandlers.clientOpenMenuHandler()
+      }
     }
 	}
 </script>
