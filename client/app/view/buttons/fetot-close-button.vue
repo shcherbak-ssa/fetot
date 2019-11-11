@@ -1,6 +1,6 @@
 <template>
-  <div class="fetot-close-button">
-    <div class="icon">&#xe813;</div>
+  <div class="fetot-close-button" @click="$emit('fetot-close-button-click')">
+    <fetot-icon icon="&#xE817;"></fetot-icon>
     <div class="txt">
       <slot></slot>
     </div>
@@ -8,8 +8,11 @@
 </template>
 
 <script>
+  import fetotIcon from '../icons/fetot-icon.vue';
+
 	export default {
-		name: 'fetot-close-button'
+		name: 'fetot-close-button',
+    components: { 'fetot-icon': fetotIcon }
 	}
 </script>
 
@@ -18,9 +21,16 @@
 
   .fetot-close-button {
     color: $fetot-azure;
+    cursor: pointer;
+    font-family: 'roboto-light', sans-serif;
+    width: 120px;
+    bottom: 5%;
+    transition: .4s;
+    @include position-gor-center;
+    @include flex-center-column;
 
-    .txt {
-      font: 18px 'roboto-light';
+    .txt, .fetot-icon {
+      font-size: 16px;
     }
   }
 </style>

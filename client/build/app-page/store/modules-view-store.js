@@ -2,16 +2,18 @@
 
 /*** exports [begin] ***/
 
-const modulesViewStore = {
-	notes: {
+const modulesViewStore = [
+	{
 		name: 'Notes',
-		icon: ''
+		icon: '&#xE80C;',
+		label: 'notes'
 	},
-	lists: {
+	{
 		name: 'Lists',
-		icon: ''
+		icon: '&#xE806;',
+		label: 'lists'
 	}
-};
+];
 
 /*** exports [end] ***/
 

@@ -2,6 +2,7 @@
 
 /*** imports [begin] ***/
 
+import Vue from 'vue/dist/vue';
 import Fetot from '$fetot';
 
 import connectionRequest from '$fetot-components/network/connection-request';
@@ -30,6 +31,9 @@ Fetot.init()
 
 async function initAppPage(VueModel) {
 	await appConnection();
+	await Vue.component('app-page', () => import(`./view/app-page.vue`))();
+	
+	VueModel.$data.pageComponent = 'app-page';
 }
 
 async function appConnection() {
