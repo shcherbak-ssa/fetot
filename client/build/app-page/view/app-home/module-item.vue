@@ -40,8 +40,24 @@
       @include hover-shadow;
     }
 
+    @media screen and (max-width: 670px) {
+      font-size: 20px;
+      width: 100%;
+      height: 64px;
+      flex-direction: row;
+      justify-content: left;
+      padding: 15px;
+      margin-right: 0;
+      @include box-sizing;
+    }
+
     .fetot-icon {
       margin-bottom: 5px;
+
+      @media screen and (max-width: 670px) {
+        margin: 0 10px 0 0;
+        font-size: 20px;
+      }
     }
   }
 </style>

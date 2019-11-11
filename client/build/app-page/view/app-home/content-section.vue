@@ -20,7 +20,16 @@
 
   .content-section {
     position: relative;
-    height: 100%;
+    /*height: 100%;*/
+    margin: 0 10px 20px 0;
+
+    @media screen and (max-width: 670px) {
+      margin: 0 0 30px 0;
+      width: 320px;
+    }
+    @media screen and (max-width: 419px) {
+      width: 100%;
+    }
   }
   .title {
     color: $fetot-dark-gray;
@@ -34,5 +43,10 @@
     overflow: hidden;
     padding: 10px;
     @include full-sizes;
+    @include box-sizing;
+
+    @media screen and (max-width: 670px) {
+      flex-direction: column;
+    }
   }
 </style>

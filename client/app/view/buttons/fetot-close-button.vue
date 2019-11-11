@@ -24,7 +24,7 @@
     cursor: pointer;
     font-family: 'roboto-light', sans-serif;
     width: 120px;
-    bottom: 5%;
+    bottom: 10px;
     transition: .4s;
     @include position-gor-center;
     @include flex-center-column;

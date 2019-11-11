@@ -4,6 +4,14 @@
     <app-home-header :isActive="states['is-active']" @hamburger-button-click="hamburgerButtonClickHandler"/>
     <div class="workspace">
       <content-section>
+        <template v-slot:title>Today</template>
+        <template v-slot:content>
+          <module-item v-for="(item, index) in modulesViewStore" :key="index" :item="item"
+                       @module-item-click="moduleItemClickHandler"
+          />
+        </template>
+      </content-section>
+      <content-section>
         <template v-slot:title>Modules</template>
         <template v-slot:content>
           <module-item v-for="(item, index) in modulesViewStore" :key="index" :item="item"
@@ -91,15 +99,31 @@
       @include hover-shadow;
     }
 
+    @media screen and (max-width: 419px) {
+      padding: 12px;
+    }
+
     &.is-active {
       padding: 36px 128px;
       height: 97%;
+
+      @media screen and (max-width: 1023px) {
+        padding: 36px 72px;
+      }
+
+      @media screen and (max-width: 670px) {
+        padding: 36px;
+      }
+      @media screen and (max-width: 419px) {
+        padding: 24px;
+      }
     }
     &.is-first-time {
       height: 100%;
 
       .fetot-close-button {
         opacity: 0;
+        bottom: -200px;
       }
     }
 
@@ -108,14 +132,24 @@
         opacity: 0;
       }
       .workspace {
-        transform: translateY(-150%);
+        transform: translateY(-300px);
         opacity: 0;
       }
     }
   }
   .workspace {
     display: flex;
-    padding: 10px;
+    /*padding: 32px 10px 10px;*/
+    padding-top: 32px;
     transition: .4s;
+    width: 100%;
+    height: calc(100% - 120px);
+    overflow: hidden;
+    @include box-sizing;
+
+    @media screen and (max-width: 670px) {
+      align-items: center;
+      flex-direction: column;
+    }
   }
 </style>

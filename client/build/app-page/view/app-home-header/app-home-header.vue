@@ -1,6 +1,6 @@
 <template>
   <div class="app-home-header">
-    <hamburger-button :active="isActive" @hamburger-button-click="$emit('hamburger-button-click')"/>
+    <hamburger-button :active="isActive" @hamburger-button-click="hamburgerButtonClickHandler"/>
     <div class="client-info">
       <div class="name">{{ client.fullname }}</div>
       <fetot-ava @fetot-ava-click="avaClickHandler" :fullname="client.fullname" size="46"/>
@@ -39,6 +39,9 @@
     methods: {
 			avaClickHandler() {
 				return clientHandlers.clientOpenMenuHandler()
+      },
+      hamburgerButtonClickHandler(isActive) {
+				this.$emit('hamburger-button-click', isActive)
       }
     },
     computed: {
@@ -74,7 +77,7 @@
     font: 18px 'roboto-medium';
     transition: .4s;
 
-    @media screen and (max-width: 640px) {
+    @media screen and (max-width: 670px) {
       display: none;
     }
 
@@ -96,11 +99,19 @@
     left: -72px;
     @include position-vert-center;
 
+    @media screen and (max-width: 1023px) {
+      left: -42px;
+    }
+    @media screen and (max-width: 670px) {
+      left: 0;
+    }
+
     .is-close & {
       left: 0;
     }
     .is-first-time & {
       opacity: 0;
+      left: -200px;
     }
   }
 </style>
