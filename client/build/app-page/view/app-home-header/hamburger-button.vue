@@ -31,8 +31,6 @@
   .hamburger-button {
     cursor: pointer;
     position: absolute;
-    top: 36px;
-    left: 44px;
     width: 36px;
     height: 36px;
     transition: .4s;

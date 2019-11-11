@@ -31,13 +31,17 @@ class Client {
 	/* public */
 	connections = createConnectionsWorker();
 	
-	async run(options) {
-		console.log(options);
+	async run({connectionLabel, message, response}) {
+		const currentConnection = await this.connections(connectionLabel);
+		console.log('connectionLabel', connectionLabel);
+		message = await currentConnection.parseMessage(message);
+		
+		await response(message);
 	}
 	
 	// connections
 	async createConnection(connection) {
-		connection = await Connection.create(connection);
+		connection = new Connection(connection);
 		return await this.connections.add(connection);
 	}
 	async removeConnection(connectionLabel) {

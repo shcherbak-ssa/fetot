@@ -3,20 +3,22 @@
 /*** exports [begin] ***/
 
 function createConnectionsWorker() {
+	const connectionsCollection = new Map();
+	let label = 0;
+	
 	async function connections(connectionLabel) {
-		return connections.map.get(connectionLabel);
+		return connectionsCollection.get(+connectionLabel);
 	}
 	
-	connections.label = 0;
-	connections.map = new Map();
-	connections.size = () => connections.map.size;
-	
+	connections.size = () => {
+		return connectionsCollection.size;
+	};
 	connections.add = (connection) => {
-		connections.map.set(connections.label, connection);
-		return connections.label += 1;
+		connectionsCollection.set(label += 1, connection);
+		return label;
 	};
 	connections.remove = (connectionLabel) => {
-		connections.map.delete(connectionLabel);
+		connectionsCollection.delete(connectionLabel);
 	};
 	
 	return connections

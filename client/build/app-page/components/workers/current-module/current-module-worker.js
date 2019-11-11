@@ -19,18 +19,19 @@ const currentModuleStore = initCurrentModuleStore();
 
 const currentModuleWorker = {
 	async updateCurrentModule(name) {
+		if( currentModuleStore.state.name === name ) return ;
+		
 		const $module = await this.changeModule(name);
-		currentModuleStore.actions.update($module);
+		currentModuleStore.actions.update({...$module, name});
 	},
 	
 	async changeModule(name) {
 		const moduleInit = await clientStore.actions.hasModule(name);
-		console.log(moduleInit);
 		const outputMessage = new OutputMessage({type: 'change-module'});
 		
 		outputMessage.set('$module', name);
 		
-		if( moduleInit ) {
+		if( !moduleInit ) {
 			outputMessage.send();
 			return clientStore.state.modules[name];
 		}

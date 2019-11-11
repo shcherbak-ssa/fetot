@@ -1,29 +1,50 @@
 <template>
   <div class="app-home-header">
+    <hamburger-button :active="isActive" @hamburger-button-click="$emit('hamburger-button-click')"/>
     <div class="client-info">
       <div class="name">{{ client.fullname }}</div>
       <fetot-ava @fetot-ava-click="avaClickHandler" :fullname="client.fullname" size="46"/>
     </div>
+    <fetot-title>
+      <div class="title">{{ setCurrentModuleName }}</div>
+    </fetot-title>
   </div>
 </template>
 
 <script>
 	import fetotAva from '$fetot-view/elements/fetot-ava.vue';
+	import fetotTitle from '$fetot-view/text/fetot-title.vue';
+
+	import hamburgerButton from './hamburger-button.vue';
+
 	import {clientStore, clientHandlers} from '../../components/workers/client';
+	import {currentModuleStore} from '../../components/workers/current-module';
 
 	export default {
 		name: 'app-home-header',
+    props: {
+			isActive: Boolean
+    },
     data() {
 			return {
 				client: clientStore.state.config
       }
     },
     components: {
-			'fetot-ava': fetotAva
+			'fetot-ava': fetotAva,
+      'fetot-title': fetotTitle,
+
+	    'hamburger-button': hamburgerButton
     },
     methods: {
 			avaClickHandler() {
 				return clientHandlers.clientOpenMenuHandler()
+      }
+    },
+    computed: {
+			setCurrentModuleName() {
+				const name = currentModuleStore.state.name;
+				return name ? `${name[0].toUpperCase()}${name.slice(1)}` : '';
       }
     }
 	}
@@ -58,6 +79,27 @@
     }
 
     .is-close & {
+      opacity: 0;
+    }
+  }
+  .fetot-title {
+    font-size: 24px;
+    transition-delay: .2s;
+    @include position-center;
+
+    .is-active & {
+      opacity: 0;
+      transition-delay: 0s;
+    }
+  }
+  .hamburger-button {
+    left: -72px;
+    @include position-vert-center;
+
+    .is-close & {
+      left: 0;
+    }
+    .is-first-time & {
       opacity: 0;
     }
   }

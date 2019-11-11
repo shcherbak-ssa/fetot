@@ -36,7 +36,7 @@ const actions = {
 	},
 	
 	hasModule(context, name) {
-		return context.state.modules[name].workers.init;
+		return 'init' in context.state.modules[name].workers;
 	}
 };
 

@@ -1,7 +1,7 @@
 <template>
   <div class="app-home" :class="states">
     <!-- content -->
-    <app-home-header></app-home-header>
+    <app-home-header :isActive="states['is-active']" @hamburger-button-click="hamburgerButtonClickHandler"/>
     <div class="workspace">
       <content-section>
         <template v-slot:title>Modules</template>
@@ -14,7 +14,6 @@
     </div>
 
     <!-- src -->
-    <hamburger-button :active="states['is-active']" @hamburger-button-click="hamburgerButtonClickHandler"/>
     <fetot-close-button @fetot-close-button-click="closeButtonClickHandler">close home</fetot-close-button>
 
   </div>
@@ -22,10 +21,9 @@
 
 <script>
   import fetotCloseButton from '$fetot-view/buttons/fetot-close-button.vue';
-  import hamburgerButton from '../src/hamburger-button.vue';
 
   import contentSection from './content-section.vue';
-  import appHomeHeader from './app-home-header.vue';
+  import appHomeHeader from '../app-home-header/app-home-header.vue';
   import moduleItem from './module-item.vue';
 
   import modulesViewStore from '../../store/modules-view-store';
@@ -45,7 +43,6 @@
     },
     components: {
 			'fetot-close-button': fetotCloseButton,
-	    'hamburger-button': hamburgerButton,
 
 	    'app-home-header': appHomeHeader,
       'module-item': moduleItem,
@@ -101,7 +98,7 @@
     &.is-first-time {
       height: 100%;
 
-      .fetot-close-button, .hamburger-button {
+      .fetot-close-button {
         opacity: 0;
       }
     }
@@ -111,12 +108,8 @@
         opacity: 0;
       }
       .workspace {
-        transform: translateY(-100%);
+        transform: translateY(-150%);
         opacity: 0;
-      }
-      .hamburger-button {
-        top: 12px;
-        left: 24px;
       }
     }
   }

@@ -2,6 +2,8 @@
 
 /*** imports [begin] ***/
 
+const ModuleWorker = require('../../module');
+
 /*** imports [end] ***/
 /*** init [begin] ***/
 
@@ -9,11 +11,13 @@
 /*** exports [begin] ***/
 
 class Connection {
-	constructor() {}
+	constructor() {
+		this.currentModule = {};
+	}
 	
-	static async create(options) {
-		console.log('connection', options);
-		return new Connection();
+	async parseMessage(message) {
+		console.log(message);
+		return { message: { blocks: ['hello', 'world'] } }
 	}
 }
 
