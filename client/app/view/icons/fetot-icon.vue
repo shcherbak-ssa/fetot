@@ -13,6 +13,6 @@
   @import '$fetot-scss';
 
   .fetot-icon {
-    font: 24px 'icons-font';
+    font-family: 'icons-font';
   }
 </style>

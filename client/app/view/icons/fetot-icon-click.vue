@@ -1,5 +1,5 @@
 <template>
-  <div class="fetot-icon-click br50 cp hover_st-sh fc" @click="$emit('fetot-icon-click')">
+  <div class="fetot-icon-click br50 cp hover_st-sh fc" :class="isActive" @click="$emit('fetot-icon-click')">
     <fetot-icon :icon="icon"></fetot-icon>
   </div>
 </template>
@@ -9,18 +9,30 @@
 
 	export default {
 		name: 'fetot-icon-click',
-    props: { icon: String },
-    components: { 'fetot-icon': fetotIcon }
+    props: {
+			icon: String,
+      active: {
+				type: Boolean,
+        default: false
+      }
+    },
+    components: { 'fetot-icon': fetotIcon },
+    computed: {
+			isActive() {
+				return { 'is-active': this.active }
+      }
+    }
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   @import '$fetot-scss';
 
   .fetot-icon-click {
-    background: #fff;
-    width: 42px;
-    height: 42px;
     transition: .4s;
+
+    &.is-active {
+      @include static-shadow;
+    }
   }
 </style>

@@ -24,10 +24,19 @@ body {
 .full {
   @include full-sizes;
 }
+.bs {
+  box-sizing: border-box;
+}
 
 // border-radius => br
 .br50 {
   border-radius: 50%;
+}
+.br3px {
+  @include border-radius-3;
+}
+.br6px {
+  @include border-radius-6;
 }
 
 // cursor => c
@@ -61,4 +70,16 @@ body {
 }
 .pr {
   position: relative;
+}
+
+// pseudo
+.bfr-click {
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    @include full-sizes;
+  }
 }

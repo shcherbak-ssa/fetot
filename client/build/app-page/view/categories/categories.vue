@@ -1,36 +1,54 @@
 <template>
   <div class="categories pa">
-    <fetot-icon-click icon="&#xF292;" @fetot-icon-click="iconClickHandler"></fetot-icon-click>
-    <category :isDefault="true" @fetot-category-click="categoryClickHandler"></category>
-    <category v-for="(name, index) in categories" :key="index"
-              :item="{name, index}" @fetot-category-click="categoryClickHandler">
-    </category>
+    <div class="categories-icon fc">
+      <fetot-icon-click icon="&#xF292;" :active="isMenuOpen" @fetot-icon-click="iconClickHandler"/>
+    </div>
+    <categories-menu v-if="isMenuOpen" @fetot-close-button-click="closeButtonClickHandler"></categories-menu>
+
+    <div class="content">
+      <category-item :isDefault="true" @fetot-category-item-click="categoryItemClickHandler"/>
+
+      <category-item v-for="(name, index) in getCategories" :key="index"
+                     :item="{name, index}" @fetot-category-item-click="categoryItemClickHandler"/>
+    </div>
   </div>
 </template>
 
 <script>
   import fetotIconClick from '$fetot-view/icons/fetot-icon-click.vue';
-  import category from './category.vue';
 
-  import {currentCategoriesStore, currentCategoriesWorker} from '../../components/workers/current-categories';
+  import categoryItem from './category-item.vue';
+  import categoriesMenu from './categories-menu.vue';
+
+  import {currentCategoriesStore} from '../../components/workers/current-categories';
 
 	export default {
 		name: 'categories',
     data() {
 			return {
-				categories: currentCategoriesStore.state.categories
+        isMenuOpen: false
       }
     },
     components: {
 	    'fetot-icon-click': fetotIconClick,
-			'category': category
+			'category-item': categoryItem,
+      'categories-menu': categoriesMenu
 		},
     methods: {
+			async closeButtonClickHandler() {
+				this.toggleMenuOpen();
+			},
 	    async iconClickHandler() {
-	    	await currentCategoriesWorker.rename({index: 1, name: 'Hello'})
+				this.toggleMenuOpen();
       },
-			categoryClickHandler(categoryIndex) {
-	    	console.log('categoryIndex', categoryIndex);
+			async categoryItemClickHandler(categoryIndex) {},
+      toggleMenuOpen() {
+	      this.isMenuOpen = !this.isMenuOpen;
+      }
+    },
+    computed: {
+			getCategories() {
+				return currentCategoriesStore.state.categories
       }
     }
 	}
@@ -51,9 +69,21 @@
       left: -100vw;
     }
   }
-  .fetot-icon-click {
-    /*font-size: 18px;*/
-    color: $fetot-dark-blue;
+  .categories-icon {
+    width: 42px;
+    height: 42px;
     margin-right: 10px;
+  }
+  .fetot-icon-click {
+    background: #fff;
+    color: $fetot-dark-blue;
+    font-size: 20px;
+    width: 38px;
+    height: 38px;
+  }
+  .content {
+    display: flex;
+    width: calc(100% - 52px);
+    overflow: hidden;
   }
 </style>

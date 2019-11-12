@@ -1,12 +1,12 @@
 <template>
-  <div class="category pr fc cp" @click="clickHandler">
+  <div class="category-item pr fc cp" @click="clickHandler">
     {{ item.name.toUpperCase() }}
   </div>
 </template>
 
 <script>
 	export default {
-		name: 'category',
+		name: 'category-item',
     props: {
 			item: {
 				type: Object,
@@ -19,7 +19,7 @@
     },
     methods: {
 			clickHandler() {
-				this.$emit('fetot-category-click', this.item.index)
+				this.$emit('fetot-category-item-click', this.item.index)
       }
     }
 	}
@@ -28,9 +28,9 @@
 <style lang="scss" scoped>
   @import '$fetot-scss';
 
-  .category {
+  .category-item {
     color: $fetot-dark-blue;
-    font: 18px 'roboto-reqular';
+    font: 18px 'roboto-medium';
     width: 120px;
     height: 42px;
     transition: .4s;

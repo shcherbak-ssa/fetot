@@ -15,6 +15,22 @@ const currentCategoriesStore = createCurrentCategoriesStore();
 /*** exports [begin] ***/
 
 const currentCategoriesWorker = {
+	async create(name) {
+		await currentCategoriesStore.actions.createCategory(name);
+		
+		const outputMessage = new OutputMessage({type: 'category/create'});
+		outputMessage.set('name', name);
+		
+		outputMessage.send();
+	},
+	async delete(name) {
+		await currentCategoriesStore.actions.deleteCategory(name);
+		
+		const outputMessage = new OutputMessage({type: 'category/delete'});
+		outputMessage.set('name', name);
+		
+		outputMessage.send();
+	},
 	async rename({index, name}) {
 		await currentCategoriesStore.actions.renameCategory({index, name});
 		

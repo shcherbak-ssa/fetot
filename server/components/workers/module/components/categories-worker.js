@@ -15,7 +15,8 @@ const categoriesWorker = {
 	
 	/* private */
 	async _createCategory(options) {
-		console.log('create category', options)
+		console.log('create category', options);
+		console.log('module-config', this.moduleConfig)
 	},
 	async _deleteCategory(options) {
 		console.log('delete category', options)
