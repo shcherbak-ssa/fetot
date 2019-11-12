@@ -5,6 +5,7 @@
 import OutputMessage from '$fetot-services/output-message';
 
 import {clientStore} from '../client';
+import {currentCategoriesStore} from '../current-categories';
 import importModuleService from '../../services/import-module-service';
 
 import initCurrentModuleStore from './current-module-store';
@@ -21,8 +22,9 @@ const currentModuleWorker = {
 	async updateCurrentModule(name) {
 		if( currentModuleStore.state.name === name ) return ;
 		
-		const $module = await this.changeModule(name);
-		currentModuleStore.actions.update({...$module, name});
+		const {categories, workers, blocks} = await this.changeModule(name);
+		currentModuleStore.actions.update({name, blocks, workers});
+		currentCategoriesStore.actions.update(categories);
 	},
 	
 	async changeModule(name) {

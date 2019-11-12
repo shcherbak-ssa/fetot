@@ -10,17 +10,15 @@ import StoreInterface from '$fetot-store-interface';
 const state = {
 	name: '',
 	blocks: [],
-	categories: [],
 	workers: {}
 };
 
 const getters = {};
 
 const mutations = {
-	UPDATE(state, {name, blocks, categories, workers}) {
+	UPDATE(state, {name, blocks, workers}) {
 		state.name = name;
 		state.blocks = blocks;
-		state.categories = categories;
 		state.workers = {...workers};
 	}
 };

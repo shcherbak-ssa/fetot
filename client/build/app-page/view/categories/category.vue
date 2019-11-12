@@ -7,9 +7,6 @@
 <script>
 	export default {
 		name: 'category',
-    data() {
-			return {}
-    },
     props: {
 			item: {
 				type: Object,
@@ -21,7 +18,7 @@
       }
     },
     methods: {
-			clickHandler(event) {
+			clickHandler() {
 				this.$emit('fetot-category-click', this.item.index)
       }
     }

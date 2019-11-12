@@ -12,13 +12,13 @@
   import fetotIconClick from '$fetot-view/icons/fetot-icon-click.vue';
   import category from './category.vue';
 
-  import {currentModuleStore} from '../../components/workers/current-module';
+  import {currentCategoriesStore} from '../../components/workers/current-categories';
 
 	export default {
 		name: 'categories',
     data() {
 			return {
-				categories: currentModuleStore.state.categories
+				categories: currentCategoriesStore.state.categories
       }
     },
     components: {
