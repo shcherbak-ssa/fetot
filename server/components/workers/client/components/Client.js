@@ -16,16 +16,17 @@ const clientService = require('../../../services/client');
 /*** exports [begin] ***/
 
 class Client {
-	constructor(config) {
+	constructor(config, client_id) {
 		this.config = config;
+		this.client_id = client_id;
 	}
 	
 	/* static */
 	static async create(clientOptions) {
 		if( clientOptions.mode === 'login' ) return LoginClient.create(clientOptions);
 		
-		const config = await clientService.get(clientOptions);
-		return config ? new Client(config) : false;
+		const [config, client_id] = await clientService.get(clientOptions);
+		return config ? new Client(config, client_id) : false;
 	}
 	
 	/* public */
@@ -33,15 +34,14 @@ class Client {
 	
 	async run({connectionLabel, message, response}) {
 		const currentConnection = await this.connections(connectionLabel);
-		console.log('connectionLabel', connectionLabel);
 		message = await currentConnection.parseMessage(message);
 		
 		await response(message);
 	}
 	
 	// connections
-	async createConnection(connection) {
-		connection = new Connection(connection);
+	async createConnection() {
+		const connection = new Connection(this.client_id);
 		return await this.connections.add(connection);
 	}
 	async removeConnection(connectionLabel) {

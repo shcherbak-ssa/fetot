@@ -1,6 +1,6 @@
 <template>
   <div class="categories pa">
-    <fetot-icon-click icon="&#xF292;"></fetot-icon-click>
+    <fetot-icon-click icon="&#xF292;" @fetot-icon-click="iconClickHandler"></fetot-icon-click>
     <category :isDefault="true" @fetot-category-click="categoryClickHandler"></category>
     <category v-for="(name, index) in categories" :key="index"
               :item="{name, index}" @fetot-category-click="categoryClickHandler">
@@ -12,7 +12,7 @@
   import fetotIconClick from '$fetot-view/icons/fetot-icon-click.vue';
   import category from './category.vue';
 
-  import {currentCategoriesStore} from '../../components/workers/current-categories';
+  import {currentCategoriesStore, currentCategoriesWorker} from '../../components/workers/current-categories';
 
 	export default {
 		name: 'categories',
@@ -26,7 +26,10 @@
 			'category': category
 		},
     methods: {
-	    categoryClickHandler(categoryIndex) {
+	    async iconClickHandler() {
+	    	await currentCategoriesWorker.rename({index: 1, name: 'Hello'})
+      },
+			categoryClickHandler(categoryIndex) {
 	    	console.log('categoryIndex', categoryIndex);
       }
     }

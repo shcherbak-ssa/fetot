@@ -28,7 +28,7 @@ async function getClient(clientOptions) {
 	
 	/* set current client modules */
 	await currentPreparingResponse.setClientModules(currentClientModules);
-	return currentPreparingResponse.response;
+	return [ currentPreparingResponse.response, client._id ];
 }
 
 /*** exports [end] ***/

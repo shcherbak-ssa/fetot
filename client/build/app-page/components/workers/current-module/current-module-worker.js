@@ -43,9 +43,10 @@ const currentModuleWorker = {
 		const {categories} = clientStore.state.modules[name];
 		const workers = await importModuleService(name);
 		const {blocks} = await outputMessage.send();
-		const $module = {categories, workers, blocks};
 		
+		const $module = {categories, workers, blocks};
 		await clientStore.actions.updateModule({name, $module});
+		
 		return $module;
 	}
 };

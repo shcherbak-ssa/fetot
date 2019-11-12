@@ -2,19 +2,17 @@
 
 /*** imports [begin] ***/
 
-/*** imports [end] ***/
-/*** init [begin] ***/
+const categoriesWorker = require('./components/categories-worker');
+const blocksWorker = require('./components/blocks-worker');
 
-/*** init [end] ***/
+/*** imports [end] ***/
 /*** exports [begin] ***/
 
-class ModuleWorker {
-
-}
+const moduleWorker = {
+	...categoriesWorker,
+	...blocksWorker
+};
 
 /*** exports [end] ***/
-/*** src [begin] ***/
 
-/*** src [end] ***/
-
-module.exports = ModuleWorker;
+module.exports = moduleWorker;
