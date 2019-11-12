@@ -4,6 +4,8 @@
 
 import OutputMessage from '$fetot-services/output-message';
 
+import {clientStore} from '../client';
+import {currentModuleStore} from '../current-module';
 import createCurrentCategoriesStore from './current-categories-store';
 
 /*** imports [end] ***/
@@ -17,40 +19,37 @@ const currentCategoriesStore = createCurrentCategoriesStore();
 const currentCategoriesWorker = {
 	async create(name) {
 		await currentCategoriesStore.actions.createCategory(name);
-		
-		const outputMessage = new OutputMessage({type: 'category/create'});
-		outputMessage.set('name', name);
-		
-		outputMessage.send();
+		await sendOutputMessage('create', {name});
 	},
 	async delete(name) {
 		await currentCategoriesStore.actions.deleteCategory(name);
-		
-		const outputMessage = new OutputMessage({type: 'category/delete'});
-		outputMessage.set('name', name);
-		
-		outputMessage.send();
+		await sendOutputMessage('delete', {name});
 	},
-	async rename({index, name}) {
-		await currentCategoriesStore.actions.renameCategory({index, name});
-		
-		const outputMessage = new OutputMessage({type: 'category/rename'});
-		outputMessage.set('index', index).set('name', name);
-		
-		outputMessage.send();
+	async rename(options) {
+		await currentCategoriesStore.actions.renameCategory(options);
+		await sendOutputMessage('rename', options);
 	},
-	async move({currentIndex, newIndex}) {
-		await currentCategoriesStore.actions.moveCategory({currentIndex, newIndex});
-		
-		const outputMessage = new OutputMessage({type: 'category/move'});
-		outputMessage.set('currentIndex', currentIndex).set('newIndex', newIndex);
-		
-		outputMessage.send();
+	async move(options) {
+		await currentCategoriesStore.actions.moveCategory(options);
+		await sendOutputMessage('move', options);
 	}
 };
 
 /*** exports [end] ***/
 /*** src [begin] ***/
+
+async function sendOutputMessage(type, options) {
+	const outputMessage = new OutputMessage({type: `category/${type}`});
+	Object.entries(options).forEach((item) => outputMessage.set(...item));
+	
+	outputMessage.send();
+	
+	await clientStore.actions.updateModuleKey({
+		name: currentModuleStore.state.name,
+		key: 'categories',
+		value: currentCategoriesStore.state.categories
+	})
+}
 
 /*** src [end] ***/
 

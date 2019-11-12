@@ -3,8 +3,8 @@
 /*** exports [begin] ***/
 
 const updateDocuments = {
-	async updateOneDocument() {
-	
+	async updateOneDocument(updated, updateObject) {
+		await this.collection.updateOne(updated, updateObject)
 	},
 	async updateManyDocuments() {
 	

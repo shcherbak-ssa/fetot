@@ -4,28 +4,46 @@
 
 const categoriesWorker = {
 	/* public */
-	async categories(type, options) {
+	async categories(type, message) {
 		switch( type ) {
-			case 'create': return await this._createCategory(options);
-			case 'delete': return await this._deleteCategory(options);
-			case 'rename': return await this._renameCategory(options);
-			case 'move': return await this._moveCategory(options);
+			case 'create': return await this._createCategory(message);
+			case 'delete': return await this._deleteCategory(message);
+			case 'rename': return await this._renameCategory(message);
+			case 'move': return await this._moveCategory(message);
 		}
 	},
 	
 	/* private */
-	async _createCategory(options) {
-		console.log('create category', options);
-		console.log('module-config', this.moduleConfig)
+	async _createCategory({name}) {
+		await this._updateDocument({
+			$push: { categories: name }
+		});
 	},
-	async _deleteCategory(options) {
-		console.log('delete category', options)
+	async _deleteCategory({name}) {
+		const categories = this._getCategories();
+		await this._updateDocument({
+			$set: {
+				categories: categories.filter((item) => item !== name)
+			}
+		});
 	},
-	async _renameCategory(options) {
-		console.log('rename category', options)
+	async _renameCategory({index, name}) {
+		const categories = this._getCategories();
+		await this._updateDocument({
+			$set: {
+				categories: categories.map((item, i) => i === index ? name : item)
+			}
+		});
+		console.log('rename category success: ', index, name);
 	},
-	async _moveCategory(options) {
-		console.log('move category', options)
+	async _moveCategory(options) {}, // @todo
+	
+	/* src */
+	_getCategories() {
+		return this.moduleConfig.categories;
+	},
+	async _updateDocument(updateObject) {
+		await this.clientModulesCollection.updateOneDocument(this.moduleConfig, updateObject);
 	}
 };
 
