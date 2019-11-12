@@ -9,15 +9,11 @@ const preparingResponse = {
 			async setClientConfig(config) {
 				this.response.config = config
 			},
-			async setModules(modules, database) {
+			async setClientModules(modules) {
 				const self = this;
-				return Promise.all(modules.map( async ({name, categories_id}) => {
-					const $module = { categories: [] };
-
-					const categoriesCollection = database.collection(categories_id);
-					$module.categories = await categoriesCollection.findAllDocuments();
-					
-					self.response.modules[name] = {...$module};
+				return Promise.all(modules.map( async ($module) => {
+					delete $module._id;
+					self.response.modules[$module.name] = {...$module};
 				}))
 			}
 		}

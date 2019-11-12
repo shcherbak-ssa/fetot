@@ -1,18 +1,28 @@
 <template>
-  <div class="fetot-categories-item" @click="clickHandler">
-    {{ item.name }}
+  <div class="category pr fc cp" @click="clickHandler">
+    {{ item.name.toUpperCase() }}
   </div>
 </template>
 
 <script>
 	export default {
-		name: 'fetot-categories-item',
+		name: 'category',
+    data() {
+			return {}
+    },
     props: {
-			item: Object
+			item: {
+				type: Object,
+        default: () => ({ index: -1, name: 'all' })
+      },
+      isDefault: {
+      	type: Boolean,
+        default: false
+      }
     },
     methods: {
 			clickHandler(event) {
-				this.$emit('fetot-categories-item-click', item.id)
+				this.$emit('fetot-category-click', this.item.index)
       }
     }
 	}
@@ -21,17 +31,13 @@
 <style lang="scss" scoped>
   @import '$fetot-scss';
 
-  .fetot-categories-item {
-    color: $fetot-blue;
+  .category {
+    color: $fetot-dark-blue;
     font: 18px 'roboto-reqular';
     width: 120px;
-    height: 24px;
-    position: relative;
-    @include flex-center;
+    height: 42px;
+    transition: .4s;
 
-    &:hover, .is-active {
-      color: $fetot-dark-blue;
-    }
     &:hover {
       background: $fetot-dark-blue-20;
     }
@@ -39,11 +45,21 @@
       font-family: 'roboto-bold', sans-serif;
 
       &::after {
+        animation: border-animation .4s forwards;
         width: 100%;
         bottom: 0;
         left: 0;
         @include psevdo-element;
       }
+    }
+    &::after {
+      transition: .4s;
+    }
+    &::before {
+      top: 0;
+      left: 0;
+      @include full-sizes;
+      @include psevdo-element;
     }
   }
   @keyframes border-animation {
@@ -53,7 +69,7 @@
     }
     to {
       background: $fetot-dark-blue;
-      height: 4px;
+      height: 3px;
     }
   }
 </style>

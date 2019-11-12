@@ -27,7 +27,7 @@ async function getClient(clientOptions) {
 	const currentClientModules = await currentClientModulesCollection.findAllDocuments();
 	
 	/* set current client modules */
-	await currentPreparingResponse.setModules(currentClientModules, currentClientDatabase);
+	await currentPreparingResponse.setClientModules(currentClientModules);
 	return currentPreparingResponse.response;
 }
 

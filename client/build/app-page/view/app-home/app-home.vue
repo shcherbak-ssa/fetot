@@ -23,6 +23,7 @@
 
     <!-- src -->
     <fetot-close-button @fetot-close-button-click="closeButtonClickHandler">close home</fetot-close-button>
+    <categories></categories>
 
   </div>
 </template>
@@ -30,9 +31,10 @@
 <script>
   import fetotCloseButton from '$fetot-view/buttons/fetot-close-button.vue';
 
-  import contentSection from './content-section.vue';
   import appHomeHeader from '../app-home-header/app-home-header.vue';
+  import contentSection from './content-section.vue';
   import moduleItem from './module-item.vue';
+  import categories from '../categories/categories.vue';
 
   import modulesViewStore from '../../store/modules-view-store';
   import {currentModuleWorker} from '../../components/workers/current-module';
@@ -54,7 +56,8 @@
 
 	    'app-home-header': appHomeHeader,
       'module-item': moduleItem,
-      'content-section': contentSection
+      'content-section': contentSection,
+	    'categories': categories
     },
     methods: {
 	    hamburgerButtonClickHandler(isActive) {

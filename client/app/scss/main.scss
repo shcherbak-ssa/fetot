@@ -18,3 +18,47 @@ body {
   height: 100vh;
   position: relative;
 }
+
+/* common styles */
+
+.full {
+  @include full-sizes;
+}
+
+// border-radius => br
+.br50 {
+  border-radius: 50%;
+}
+
+// cursor => c
+.cp {
+  cursor: pointer;
+}
+
+// hover styles => hov
+.hover_hov-sh {
+  &:hover {
+    @include hover-shadow;
+  }
+}
+.hover_st-sh {
+  &:hover {
+    @include static-shadow;
+  }
+}
+
+// flex
+.fc {
+  @include flex-center;
+}
+.fcc {
+  @include flex-center-column;
+}
+
+// position
+.pa {
+  position: absolute;
+}
+.pr {
+  position: relative;
+}

@@ -1,10 +1,5 @@
 'use strict';
 
-/*** imports [begin] ***/
-
-const generateID = require('../../../../lib/generate-id');
-
-/*** imports [end] ***/
 /*** exports [begin] ***/
 
 const config = {
@@ -21,7 +16,7 @@ const config = {
 		{
 			collectionItem: {
 				name: 'notes',
-				categories_id: generateCategoriesID('notes')
+				categories: []
 			},
 			defaultBlock: {
 				title: 'I am the first note'
@@ -30,7 +25,7 @@ const config = {
 		{
 			collectionItem: {
 				name: 'lists',
-				categories_id: generateCategoriesID('lists')
+				categories: []
 			},
 			defaultBlock: {
 				title: 'I am the first list'
@@ -40,12 +35,5 @@ const config = {
 };
 
 /*** exports [end] ***/
-/*** src [begin] ***/
-
-function generateCategoriesID(name) {
-	return name + generateID.sync('1234567890', 6)
-}
-
-/*** src [end] ***/
 
 module.exports = config;

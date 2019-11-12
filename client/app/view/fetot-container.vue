@@ -1,5 +1,5 @@
 <template>
-  <div class="fetot-container">
+  <div class="fetot-container full pr">
     <component :is="pageComponent"></component>
   </div>
 </template>
@@ -16,8 +16,6 @@
 
   .fetot-container {
     background: #fff;
-    position: relative;
     overflow: hidden;
-    @include full-sizes;
   }
 </style>

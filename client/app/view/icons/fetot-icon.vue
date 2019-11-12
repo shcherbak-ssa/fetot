@@ -1,5 +1,5 @@
 <template>
-  <div class="fetot-icon" v-html="icon"></div>
+  <div class="fetot-icon fc" v-html="icon"></div>
 </template>
 
 <script>
@@ -14,6 +14,5 @@
 
   .fetot-icon {
     font: 24px 'icons-font';
-    @include flex-center;
   }
 </style>

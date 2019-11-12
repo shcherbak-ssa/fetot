@@ -1,5 +1,5 @@
 <template>
-  <div class="fetot-close-button" @click="$emit('fetot-close-button-click')">
+  <div class="fetot-close-button cp fcc" @click="$emit('fetot-close-button-click')">
     <fetot-icon icon="&#xE817;"></fetot-icon>
     <div class="txt">
       <slot></slot>
@@ -21,13 +21,11 @@
 
   .fetot-close-button {
     color: $fetot-azure;
-    cursor: pointer;
     font-family: 'roboto-light', sans-serif;
     width: 120px;
     bottom: 10px;
     transition: .4s;
     @include position-gor-center;
-    @include flex-center-column;
 
     .txt, .fetot-icon {
       font-size: 16px;

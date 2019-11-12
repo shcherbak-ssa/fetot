@@ -1,5 +1,5 @@
 <template>
-  <div class="fetot-link" @click="$emit('fetot-link-click')">
+  <div class="fetot-link cp" @click="$emit('fetot-link-click')">
     <slot></slot>
   </div>
 </template>
@@ -13,7 +13,6 @@
 
   .fetot-link {
     color: $fetot-azure;
-    cursor: pointer;
     font: 14px 'roboto-light', sans-serif;
     transition: .2s;
 
