@@ -1,5 +1,5 @@
 <template>
-  <div class="login-page">
+  <div class="login-page pr full">
     <transition name="change-module" mode="out-in" appear>
       <workspace :key="updateCurrentModuleName"></workspace>
     </transition>
@@ -23,11 +23,6 @@
 
 <style lang="scss" scoped>
   @import '$fetot-scss';
-
-  .login-page {
-    position: relative;
-    @include full-sizes;
-  }
 
   .change-module {
     &-enter, &-leave-to {

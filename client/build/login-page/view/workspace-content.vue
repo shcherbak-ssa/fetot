@@ -1,6 +1,6 @@
 <template>
-  <div class="workspace-content">
-    <div class="content">
+  <div class="workspace-content fc bs br6px bg-fff hover_hov-sh">
+    <div class="content fcc">
       <p class="txt" v-if="content.text" v-html="content.text"></p>
       <login-input
               v-for="(input, index) in content.inputs"
@@ -43,24 +43,15 @@
   @import '$fetot-scss';
 
   .workspace-content {
-    background: #fff;
     padding: 42px;
     margin: 35px 0;
     transition: .4s;
     width: 510px;
     z-index: 1;
-    @include box-sizing;
-    @include border-radius-6;
-    @include flex-center;
     @include static-shadow;
-
-    &:hover {
-      @include hover-shadow;
-    }
 
     .content {
       width: 320px;
-      @include flex-center-column;
     }
     .txt {
       color: $fetot-dark-gray;
@@ -74,7 +65,7 @@
       padding: 0;
 
       &, &:hover {
-        box-shadow: none;
+        box-shadow: none !important;
       }
     }
   }

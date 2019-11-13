@@ -3,7 +3,10 @@
     <div class="name">{{ client.fullname }}</div>
     <fetot-ava @fetot-ava-click="avaClickHandler" :fullname="client.fullname" size="46"/>
 
-    <menu-component v-if="isMenuOpen" :list="appMenuService.list" @menu-event="menuEventHandler"></menu-component>
+    <menu-component v-if="isMenuOpen"
+                    :submenu="submenu" :list="appMenuService.list"
+                    @menu-event="menuEventHandler">
+    </menu-component>
   </div>
 </template>
 
@@ -12,14 +15,17 @@
 	import menuComponent from '../menu/menu-component.vue';
 
 	import {clientStore} from '../../components/workers/client';
+	import menuWorker from '../../components/workers/menu-worker';
 
 	export default {
 		name: 'client-info',
 		data() {
 			return {
 				client: clientStore.state.config,
+
         isMenuOpen: false,
-				appMenuService: null
+				appMenuService: null,
+        submenu: false,
 			}
 		},
     components: {
@@ -30,9 +36,24 @@
 	    avaClickHandler() {
 	    	this.toggleOpenMenu();
       },
-	    menuEventHandler(label) {
-	    	if( label !== undefined ) this.appMenuService[label]();
-        this.toggleOpenMenu();
+
+      /* menu */
+	    async menuEventHandler(label) {
+	    	if( label === undefined ) return this.toggleOpenMenu();
+		    const result = await this.appMenuService.parseLabel(label);
+
+		    if( typeof result === 'function' ) {
+		    	this.toggleOpenMenu();
+		    	return await result();
+		    }
+
+		    const {submenu, handler} = result;
+        this.submenu = submenu;
+
+        await menuWorker.addSubmenuEventListener(submenu.type, handler);
+
+        this.submenu = false;
+        // this.toggleOpenMenu();
       },
 
       /* src */

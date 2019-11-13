@@ -1,12 +1,12 @@
 <template>
-  <div class="login-input" :class="states" @click="isActive">
-    <input class="input"
+  <div class="login-input pr" :class="states" @click="isActive">
+    <input class="input bs full pa"
            :type="data.state.type" :value="data.state.value"
            @blur="isBlur" @input="isInput"
     >
     <div class="placeholder">{{ data.state.placeholder }}</div>
     <fetot-icon :icon="data.state.icon"></fetot-icon>
-    <div class="error">{{ toggleError }}</div>
+    <div class="error pa">{{ toggleError }}</div>
   </div>
 </template>
 
@@ -77,17 +77,13 @@
     width: 100%;
     height: 42px;
     margin-bottom: 30px;
-    position: relative;
     transition: .4s;
 
     .input {
       color: $fetot-dark-gray;
-      position: absolute;
       z-index: 2;
       padding: 0 10px;
-      @include box-sizing;
       @include form-element;
-      @include full-sizes;
     }
     .placeholder {
       color: $fetot-dark-gray-60;
@@ -107,7 +103,6 @@
     .error {
       color: $fetot-red;
       font: 14px 'roboto-light', sans-serif;
-      position: absolute;
       bottom: 0;
       left: 6px;
       opacity: 0;

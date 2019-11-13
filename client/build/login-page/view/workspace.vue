@@ -1,5 +1,5 @@
 <template>
-  <div class="workspace">
+  <div class="workspace pa full bs fcc">
     <fetot-title>
       <div class="title">{{ store.title }}</div>
     </fetot-title>
@@ -42,15 +42,11 @@
   @import '$fetot-scss';
 
   .workspace {
-    position: absolute;
     top: 0;
     left: 0;
     padding: 48px;
     transition: .4s;
     justify-content: center;
-    @include full-sizes;
-    @include box-sizing;
-    @include flex-center-column;
 
     .title {
       font-size: 32px;

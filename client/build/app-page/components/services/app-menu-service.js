@@ -20,23 +20,39 @@ const list = [
 		label: 'logout'
 	}
 ];
+const submenu = {
+	type: 'confirm',
+	icon: '&#xE820;',
+	text: 'You are want to log out.<br>Are you sure?'
+};
 
 /*** init [end] ***/
 /*** exports [begin] ***/
 
 const appMenuService = {
 	list,
-	logout() {
+	async parseLabel(label) {
+		switch( label ) {
+			case 'settings':
+				return await this.settings();
+			case 'logout':
+				const self = this;
+				return { submenu, handler: self.logout }
+		}
+	},
+	async logout(label) {
+		if( !label ) return ;
+		
 		$localStorage.item.remove('client');
 		$cookie.remove('$fetot', { path: '/' });
 		
 		location.reload();
+	},
+	async settings() {
+		alert('client settings')
 	}
 };
 
 /*** exports [end] ***/
-/*** src [begin] ***/
-
-/*** src [end] ***/
 
 export default appMenuService;
