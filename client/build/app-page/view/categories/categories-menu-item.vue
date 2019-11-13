@@ -7,7 +7,7 @@
       <div class="name">{{ item.name ? item.name[0].toUpperCase() + item.name.slice(1) : '' }}</div>
     </div>
 
-    <div class="controllers pa" v-if="!isDefault">
+    <div class="controllers pa faic" v-if="!isDefault">
       <fetot-icon-click icon="&#xE811;" @fetot-icon-click="renameCategoryEventHandler"/>
       <fetot-icon-click icon="&#xF1F8;" @fetot-icon-click="deleteCategoryEventHandler"/>
     </div>
@@ -76,7 +76,7 @@
     }
   }
   .fetot-icon {
-    margin-right: 10px;
+    margin-right: 24px;
   }
   .controllers {
     height: 100%;
@@ -85,7 +85,10 @@
     opacity: 0;
     transition: .4s;
     z-index: 10;
-    @include flex-align-items-center;
+
+    @media screen and (max-width: 1024px) {
+      opacity: 1;
+    }
   }
   .fetot-icon-click {
     color: $fetot-dark-gray;

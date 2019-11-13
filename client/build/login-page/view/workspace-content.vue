@@ -69,4 +69,7 @@
       }
     }
   }
+  .fetot-button {
+    width: 100%;
+  }
 </style>

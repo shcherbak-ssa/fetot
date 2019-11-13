@@ -1,5 +1,5 @@
 <template>
-  <div class="fetot-icon-click br50 cp hover_st-sh fc" :class="isActive" @click.stop="$emit('fetot-icon-click')">
+  <div class="fetot-icon-click br50 cp fc" :class="isActive" @click.stop="$emit('fetot-icon-click')">
     <fetot-icon :icon="icon"></fetot-icon>
   </div>
 </template>
@@ -31,8 +31,14 @@
   .fetot-icon-click {
     transition: .4s;
 
-    &.is-active {
+    &:hover, &.is-active {
       @include static-shadow;
+    }
+
+    @media screen and (max-width: 1024px) {
+      &:hover {
+        box-shadow: none;
+      }
     }
   }
 </style>

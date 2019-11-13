@@ -1,5 +1,5 @@
 <template>
-  <div class="fetot-button cp fc hover_hov-sh" @click="$emit('fetot-button-click')">
+  <div class="fetot-button br3px cp fc pr bfr-click" @click.stop="$emit('fetot-button-click')">
     <slot></slot>
   </div>
 </template>
@@ -8,22 +8,21 @@
   export default { name: 'fetot-button' }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   @import '$fetot-scss';
 
   .fetot-button {
-    background: $fetot-blue;
-    color: $fetot-light-gray;
+    background: $fetot-light-gray;
+    color: $fetot-dark-blue;
     font: 18px 'roboto-medium', sans-serif;
-    width: 100%;
     height: 42px;
     transition: .4s;
     user-select: none;
     @include static-shadow;
-    @include border-radius-3;
 
     &:hover {
       background: $fetot-dark-blue;
+      color: $fetot-light-gray;
     }
     &:active {
       box-shadow: none;

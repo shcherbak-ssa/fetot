@@ -9,16 +9,7 @@
 
 <script>
   import fetotIcon from '../icons/fetot-icon.vue';
-
-  const confirmButton = {
-  	name: 'confirm-button',
-	  template: '<div class="confirm-button pr cp bfr-click fc br3px"' +
-                    '@click.stop="$emit(\'confirm-event\', item.label)">' +
-		            '<fetot-icon :icon="item.icon"></fetot-icon>' +
-		          '</div>',
-    props: { item: Object },
-    components: { 'fetot-icon': fetotIcon, }
-  };
+  import fetotButton from './fetot-button.vue';
 
 	export default {
 		name: 'fetot-confirm-buttons',
@@ -31,7 +22,16 @@
       }
     },
     components: {
-			'confirm-button': confirmButton
+			'confirm-button': {
+				template: '<fetot-button @fetot-button-click="$emit(\'confirm-event\', item.label)">' +
+                    '<fetot-icon :icon="item.icon"></fetot-icon>' +
+                  '</fetot-button>',
+				props: { item: Object },
+				components: {
+					'fetot-button': fetotButton,
+					'fetot-icon': fetotIcon,
+        }
+			}
     },
     methods: {
 	    confirmEventHandler(label) {
@@ -47,16 +47,10 @@
   .fetot-confirm-buttons {
     justify-content: space-around;
 
-    .confirm-button {
-      color: $fetot-dark-blue;
+    .fetot-button {
       font-size: 24px;
       width: 92px;
-      height: 38px;
-      transition: .2s;
-
-      &:hover {
-        background: $fetot-dark-blue-20;
-      }
+      height: 36px;
     }
   }
 </style>

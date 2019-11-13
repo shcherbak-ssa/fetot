@@ -1,6 +1,6 @@
 <template>
-  <div class="categories-menu br6px bs pa hover_hov-sh">
-    <div class="content pr">
+  <div class="categories-menu bg-fff br6px bs pa hover_hov-sh">
+    <div class="content w100 pr">
       <!-- default item -->
       <categories-menu-item :isDefault="true"
                             @select-category-event="selectCategoryHandler">
@@ -20,16 +20,17 @@
       </categories-name-worker>
     </div>
 
-    <div class="add-category-button cp fc pr bfr-click" @click="addCategoryButtonClickHandler">
+    <fetot-button @fetot-button-click="addCategoryButtonClickHandler">
       <fetot-icon icon="&#xE809;"></fetot-icon>
-    </div>
+    </fetot-button>
 
     <fetot-close-button @fetot-close-button-click="closeMenuHandler">close</fetot-close-button>
   </div>
 </template>
 
 <script>
-	import fetotCloseButton from '$fetot-view/buttons/fetot-close-button.vue';
+	import fetotButton from '$fetot-view/buttons/fetot-button.vue';
+  import fetotCloseButton from '$fetot-view/buttons/fetot-close-button.vue';
 	import fetotIcon from '$fetot-view/icons/fetot-icon.vue'
 
   import categoriesMenuItem from './categories-menu-item.vue';
@@ -49,6 +50,7 @@
       }
     },
 		components: {
+			'fetot-button': fetotButton,
 			'fetot-close-button': fetotCloseButton,
       'fetot-icon': fetotIcon,
 
@@ -114,7 +116,6 @@
   @import '$fetot-scss';
 
   .categories-menu {
-    background: #fff;
     width: 280px;
     max-height: 360px;
     padding: 10px 0 54px;
@@ -128,21 +129,14 @@
     }
 
     .content {
-      width: 100%;
       height: calc(100% - 55px);
       overflow: hidden;
     }
-    .add-category-button {
-      color: $fetot-dark-blue;
+    .fetot-button {
       font-size: 24px;
-      width: 100%;
-      height: 42px;
-      transition: .4s;
-      margin-top: 13px;
-
-      &:hover {
-        background: $fetot-dark-blue-20;
-      }
+      width: 240px;
+      height: 36px;
+      margin: 13px auto 0;
     }
   }
 </style>
