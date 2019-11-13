@@ -35,8 +35,9 @@
     color: $fetot-dark-blue;
     font: 18px 'roboto-medium';
     width: 120px;
-    height: 42px;
+    height: 38px;
     transition: .4s;
+    flex-shrink: 0;
 
     &:hover {
       background: $fetot-dark-blue-20;

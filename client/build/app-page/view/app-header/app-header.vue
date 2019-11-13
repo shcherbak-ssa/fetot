@@ -2,10 +2,8 @@
   <div class="app-header pr">
     <hamburger-button :active="isActive" @hamburger-button-click="hamburgerButtonClickHandler"/>
 
-    <transition name="changeModuleTitle" mode="out-in">
-      <fetot-title>
-        <div class="title">{{ setCurrentModuleName }}</div>
-      </fetot-title>
+    <transition name="change-module-title" mode="out-in">
+      <fetot-title>{{ setCurrentModuleName }}</fetot-title>
     </transition>
 
     <div class="client-info pa faic">
@@ -61,7 +59,7 @@
   @import '$fetot-scss';
 
   .app-header {
-    height: 60px;
+    height: 46px;
     margin-bottom: 24px;
   }
   .client-info {
@@ -109,11 +107,11 @@
       left: -200px;
     }
   }
-  .changeModuleTitle {
-    &-enter-to {
+  .change-module-title {
+    &-enter-to, &-leave {
       opacity: 1;
     }
-    &-leave-to {
+    &-leave-to, &-enter {
       opacity: 0;
     }
   }

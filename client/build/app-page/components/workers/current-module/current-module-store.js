@@ -23,6 +23,7 @@ const mutations = {
 		state.name = name;
 		state.blocks = blocks;
 		state.workers = {...workers};
+		state.actives.category = -1;
 	},
 	UPDATE_ACTIVES(state, {key, value}) {
 		state.actives[key] = value === undefined ? -1 : value;

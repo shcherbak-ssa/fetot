@@ -1,8 +1,8 @@
 <template>
-  <div class="app-home pa bs hover_hov-sh" :class="states">
+  <div class="app-home bg-fff pa bs hover_hov-sh" :class="states">
     <!-- content -->
     <app-header :isActive="states['is-active']" @hamburger-button-click="hamburgerButtonClickHandler"/>
-    <div class="workspace flex bs">
+    <div class="workspace flex bs pa">
       <content-section>
         <template v-slot:title>Today</template>
         <template v-slot:content>
@@ -92,7 +92,7 @@
     left: 0;
     z-index: 1000;
     width: 100%;
-    height: 120px;
+    height: 106px;
     transition: .4s;
     @include static-shadow;
 
@@ -102,7 +102,7 @@
 
     &.is-active {
       padding: 36px 128px;
-      height: 97%;
+      height: 100%;
 
       @media screen and (max-width: 1023px) {
         padding: 36px 72px;
@@ -114,13 +114,9 @@
         padding: 24px;
       }
     }
-    &.is-first-time {
-      height: 100%;
-
-      .fetot-close-button {
-        opacity: 0;
-        bottom: -200px;
-      }
+    &.is-first-time .fetot-close-button {
+      opacity: 0;
+      bottom: -200px;
     }
 
     &.is-close {
@@ -128,22 +124,34 @@
         opacity: 0;
       }
       .workspace {
-        transform: translateY(-300px);
-        transition: .2s;
+        transition: .4s;
+        top: -60vh;
         opacity: 0;
       }
     }
   }
   .workspace {
     padding-top: 32px;
-    transition: .2s .2s;
-    width: 100%;
-    height: calc(100% - 120px);
+    transition: .4s;
+    width: calc(100% - 256px);
+    height: calc(100% - 192px);
     overflow: hidden;
+    left: 128px;
+    top: 156px;
 
+    @media screen and (max-width: 1023px) {
+      width: calc(100% - 144px);
+      left: 72px;
+      top: 106px;
+    }
     @media screen and (max-width: 670px) {
+      width: calc(100% - 48px);
       align-items: center;
       flex-direction: column;
+      left: 24px;
+    }
+    @media screen and (max-width: 419px) {
+      top: 144px;
     }
   }
 </style>

@@ -74,19 +74,19 @@
     }
   }
   .categories-icon {
-    width: 42px;
-    height: 42px;
+    width: 38px;
+    height: 38px;
     margin-right: 10px;
   }
   .fetot-icon-click {
     background: #fff;
     color: $fetot-dark-blue;
     font-size: 20px;
-    width: 38px;
-    height: 38px;
+    width: 32px;
+    height: 32px;
   }
   .content {
-    width: calc(100% - 52px);
+    width: calc(100% - 48px);
     overflow: hidden;
   }
 </style>
