@@ -1,5 +1,5 @@
 <template>
-  <div class="fetot-ava br50 pr fc cp" :style="setSize" @click="$emit('fetot-ava-click')">
+  <div class="fetot-ava br50 pr fc cp" :style="setSize" @click.stop="$emit('fetot-ava-click')">
     {{ setClientLetters }}
   </div>
 </template>

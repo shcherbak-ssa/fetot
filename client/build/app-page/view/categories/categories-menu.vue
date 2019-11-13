@@ -123,6 +123,10 @@
     transition: .4s;
     @include static-shadow;
 
+    @media screen and (max-width: 1024px) {
+      left: 10px;
+    }
+
     .content {
       width: 100%;
       height: calc(100% - 55px);

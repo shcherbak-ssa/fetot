@@ -6,20 +6,15 @@
       <fetot-title>{{ setCurrentModuleName }}</fetot-title>
     </transition>
 
-    <div class="client-info pa faic">
-      <div class="name">{{ client.fullname }}</div>
-      <fetot-ava @fetot-ava-click="avaClickHandler" :fullname="client.fullname" size="46"/>
-    </div>
-
+    <client-info></client-info>
   </div>
 </template>
 
 <script>
-	import fetotAva from '$fetot-view/elements/fetot-ava.vue';
 	import fetotTitle from '$fetot-view/text/fetot-title.vue';
+	import clientInfo from './client-info.vue';
 	import hamburgerButton from './hamburger-button.vue';
 
-	import {clientStore, clientHandlers} from '../../components/workers/client';
 	import {currentModuleStore} from '../../components/workers/current-module';
 
 	export default {
@@ -27,21 +22,12 @@
     props: {
 			isActive: Boolean
     },
-    data() {
-			return {
-				client: clientStore.state.config
-      }
-    },
     components: {
-			'fetot-ava': fetotAva,
       'fetot-title': fetotTitle,
-
+      'client-info': clientInfo,
 	    'hamburger-button': hamburgerButton
     },
     methods: {
-			avaClickHandler() {
-				return clientHandlers.clientOpenMenuHandler()
-      },
       hamburgerButtonClickHandler(isActive) {
 				this.$emit('hamburger-button-click', isActive)
       }
@@ -62,28 +48,7 @@
     height: 46px;
     margin-bottom: 24px;
   }
-  .client-info {
-    overflow: hidden;
-    padding: 5px;
-    top: 0;
-    right: 0;
-  }
-  .fetot-ava {
-    margin-left: 12px;
-  }
-  .name {
-    color: $fetot-dark-blue;
-    font: 18px 'roboto-medium';
-    transition: .4s;
 
-    @media screen and (max-width: 670px) {
-      display: none;
-    }
-
-    .is-close & {
-      opacity: 0;
-    }
-  }
   .fetot-title {
     font-size: 24px;
     @include position-center;

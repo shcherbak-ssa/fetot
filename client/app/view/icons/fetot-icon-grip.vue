@@ -1,6 +1,6 @@
 <template>
   <div class="fetot-icon-grip">
-    <fetot-icon icon=""></fetot-icon>
+    <fetot-icon icon="&#xE826;"></fetot-icon>
   </div>
 </template>
 

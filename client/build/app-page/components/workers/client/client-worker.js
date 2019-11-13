@@ -3,7 +3,6 @@
 /*** imports [begin] ***/
 
 import {clientStore, createClientStore} from './client-store';
-import clientHandlers from './client-handlers';
 
 /*** imports [end] ***/
 /*** init [begin] ***/
@@ -20,4 +19,4 @@ const clientWorker = {
 
 /*** src [end] ***/
 
-export { clientStore, clientWorker, clientHandlers };
+export { clientStore, clientWorker };

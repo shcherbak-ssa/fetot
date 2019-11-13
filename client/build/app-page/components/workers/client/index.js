@@ -1,3 +1,3 @@
 'use strict';
 
-export {clientStore, clientWorker, clientHandlers} from './client-worker';
+export {clientStore, clientWorker} from './client-worker';

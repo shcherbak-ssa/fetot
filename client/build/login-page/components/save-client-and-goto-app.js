@@ -4,6 +4,7 @@
 
 import inputWorker from './workers/input';
 import $localStorage from '$fetot-services/local-storage';
+import $cookie from '$fetot-services/cookie';
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
@@ -15,7 +16,7 @@ async function saveClientAndGotoApp() {
 	$localStorage.item.create('client-exist', true);
 	$localStorage.item.create('client', {email, password});
 	
-	document.cookie = '$fetot={"client":true};path=/;max-age=3600';
+	$cookie.set('$fetot', { client: true }, { path: '/', expires: 14 });
 	
 	location.reload();
 }

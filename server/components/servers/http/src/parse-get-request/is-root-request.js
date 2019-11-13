@@ -16,12 +16,13 @@ const headers = {
 /*** exports [begin] ***/
 
 async function isRootRequest(headers) {
+	// return await getResponseConfig('login')
 	let {cookie} = headers;
 	if( !cookie ) return await getResponseConfig('login');
-	
+
 	cookie = await parseCookie(cookie);
 	if( !cookie || !cookie.client ) return {error: '404'};
-	
+
 	return await getResponseConfig('app');
 }
 
@@ -30,7 +31,7 @@ async function isRootRequest(headers) {
 
 async function parseCookie(cookie) {
 	let [key, value] = cookie.split('=');
-	return key === '$fetot' ? JSON.parse(value) : false;
+	return key === '$fetot' ? JSON.parse( decodeURIComponent(value) ) : false;
 }
 async function getResponseConfig(filename) {
 	filename = getPublicFilename(`${filename}.html`);
