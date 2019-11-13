@@ -2,12 +2,7 @@
   <div class="app-module pa bs">
     <add-button @add-block-event="addBlockHandler"></add-button>
     <div class="content flex full pr">
-      <block-component></block-component>
-      <block-component></block-component>
-      <block-component></block-component>
-      <block-component></block-component>
-      <block-component></block-component>
-      <block-component></block-component>
+      <block-component :block="{title: 'I am block'}"></block-component>
     </div>
   </div>
 </template>

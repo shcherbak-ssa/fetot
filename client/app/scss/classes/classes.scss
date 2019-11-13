@@ -3,6 +3,9 @@
 .full {
   @include full-sizes;
 }
+.w100 {
+  width: 100%;
+}
 .bs {
   box-sizing: border-box;
 }

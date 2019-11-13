@@ -151,7 +151,7 @@
       left: 24px;
     }
     @media screen and (max-width: 419px) {
-      top: 144px;
+      top: 92px;
     }
   }
 </style>
