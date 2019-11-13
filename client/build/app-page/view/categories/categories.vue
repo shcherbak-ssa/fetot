@@ -1,15 +1,20 @@
 <template>
   <div class="categories pa">
     <div class="categories-icon fc">
-      <fetot-icon-click icon="&#xF292;" :active="isMenuOpen" @fetot-icon-click="iconClickHandler"/>
+      <fetot-icon-click icon="&#xF292;" :active="isMenuOpen" @fetot-icon-click="toggleMenuOpen"/>
     </div>
-    <categories-menu v-if="isMenuOpen" @fetot-close-button-click="closeButtonClickHandler"></categories-menu>
+    <categories-menu v-if="isMenuOpen"
+                     @select-category-event="selectCategoryHandler"
+                     @close-category-menu-event="toggleMenuOpen">
+    </categories-menu>
 
     <div class="content">
-      <category-item :isDefault="true" @fetot-category-item-click="categoryItemClickHandler"/>
+      <category-item :isDefault="true" @select-category-event="selectCategoryHandler"/>
 
-      <category-item v-for="(name, index) in getCategories" :key="index"
-                     :item="{name, index}" @fetot-category-item-click="categoryItemClickHandler"/>
+      <category-item v-for="(name, index) in getCategories"
+                     :key="index" :item="{name, index}"
+                     @select-category-event="selectCategoryHandler">
+      </category-item>
     </div>
   </div>
 </template>
@@ -21,6 +26,7 @@
   import categoriesMenu from './categories-menu.vue';
 
   import {currentCategoriesStore} from '../../components/workers/current-categories';
+  import {currentModuleStore} from '../../components/workers/current-module';
 
 	export default {
 		name: 'categories',
@@ -35,15 +41,15 @@
       'categories-menu': categoriesMenu
 		},
     methods: {
-			async closeButtonClickHandler() {
-				this.toggleMenuOpen();
-			},
-	    async iconClickHandler() {
-				this.toggleMenuOpen();
-      },
-			async categoryItemClickHandler(categoryIndex) {},
-      toggleMenuOpen() {
-	      this.isMenuOpen = !this.isMenuOpen;
+	    toggleMenuOpen() {
+		    this.isMenuOpen = !this.isMenuOpen;
+	    },
+
+			async selectCategoryHandler(index) {
+	    	await currentModuleStore.actions.updateActives({
+          key: 'category',
+          value: index
+	    	})
       }
     },
     computed: {

@@ -1,0 +1,70 @@
+@import '../src.scss';
+
+.full {
+  @include full-sizes;
+}
+.bs {
+  box-sizing: border-box;
+}
+
+// border-radius => br
+.br50 {
+  border-radius: 50%;
+}
+.br3px {
+  @include border-radius-3;
+}
+.br6px {
+  @include border-radius-6;
+}
+
+// cursor => c
+.cp {
+  cursor: pointer;
+}
+
+// hover styles => hov
+.hover_hov-sh {
+  &:hover {
+    @include hover-shadow;
+  }
+}
+.hover_st-sh {
+  &:hover {
+    @include static-shadow;
+  }
+}
+
+// flex
+.flex {
+  display: flex;
+}
+.fc {
+  @include flex-center;
+}
+.fcc {
+  @include flex-center-column;
+}
+.faic {
+  @include flex-align-items-center;
+}
+
+// position
+.pa {
+  position: absolute;
+}
+.pr {
+  position: relative;
+}
+
+// pseudo
+.bfr-click {
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    @include full-sizes;
+  }
+}

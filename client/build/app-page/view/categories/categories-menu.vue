@@ -2,7 +2,9 @@
   <div class="categories-menu br6px bs pa hover_hov-sh">
     <div class="content pr">
       <!-- default item -->
-      <categories-menu-item :isDefault="true"></categories-menu-item>
+      <categories-menu-item :isDefault="true"
+                            @select-category-event="selectCategoryHandler">
+      </categories-menu-item>
 
       <!-- categories -->
       <categories-menu-item v-for="(name, index) in getCategories"
@@ -22,7 +24,7 @@
       <fetot-icon icon="&#xE809;"></fetot-icon>
     </div>
 
-    <fetot-close-button @fetot-close-button-click="$emit('fetot-close-button-click')">close</fetot-close-button>
+    <fetot-close-button @fetot-close-button-click="closeMenuHandler">close</fetot-close-button>
   </div>
 </template>
 
@@ -34,6 +36,7 @@
 	import categoriesNameWorker from './categories-name-worker.vue';
 
 	import {currentCategoriesStore, currentCategoriesWorker} from '../../components/workers/current-categories';
+	import {currentModuleStore} from '../../components/workers/current-module';
 
 	export default {
 		name: 'categories-menu',
@@ -59,7 +62,6 @@
 
       /* name worker */
 	    async nameWorkerBlurHandler({index, name}) {
-	    	console.log('name-worker-blur', {index, name});
 	    	this.nameWorkerActive = false;
 
 	    	if( index === -1 ) {
@@ -71,18 +73,22 @@
 	    	await currentCategoriesWorker.rename({index, name})
       },
 
-      /* menu item */
+      /* menu item handlers */
 	    selectCategoryHandler(index) {
-	    	console.log('select-category', index)
+	    	this.$emit('select-category-event', index);
+	    	this.closeMenuHandler();
       },
-	    renameCategoryHandler(item) {
-	    	const top = ((item.index + 1) * 42) + '';
-	    	item.name = item.name[0].toUpperCase() + item.name.slice(1);
+	    renameCategoryHandler({index, name}) {
+	    	const top = ((index + 1) * 42) + '';
+	    	name = name[0].toUpperCase() + name.slice(1);
 
-	    	this.updateNameWorkerData(item, top);
+	    	this.updateNameWorkerData({index, name}, top);
       },
-	    async deleteCategoryHandler(name) {
-	    	await currentCategoriesWorker.delete(name)
+	    async deleteCategoryHandler({index, name}) {
+	    	if( currentModuleStore.state.actives.category === index )
+			    this.$emit('select-category-event');
+
+	    	await currentCategoriesWorker.delete(name);
 	    },
 
 	    /* src */
@@ -90,6 +96,9 @@
 	      this.nameWorkerItem = item;
 	      this.nameWorkerTop = top;
 	      this.nameWorkerActive = true;
+      },
+      closeMenuHandler() {
+      	this.$emit('close-category-menu-event')
       }
     },
     computed: {

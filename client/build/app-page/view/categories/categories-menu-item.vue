@@ -1,8 +1,11 @@
 <template>
-  <div class="categories-menu-item cp bs pr bfr-click" @click="$emit('select-category-event', item.index)">
+  <div class="categories-menu-item bs pr" :class="setActive"
+       @click="$emit('select-category-event', item.index)">
 
-    <fetot-icon icon="&#xF292;"></fetot-icon>
-    <div class="name">{{ item.name ? item.name[0].toUpperCase() + item.name.slice(1) : '' }}</div>
+    <div class="content cp pr bfr-click full faic">
+      <fetot-icon icon="&#xF292;"></fetot-icon>
+      <div class="name">{{ item.name ? item.name[0].toUpperCase() + item.name.slice(1) : '' }}</div>
+    </div>
 
     <div class="controllers pa" v-if="!isDefault">
       <fetot-icon-click icon="&#xE811;" @fetot-icon-click="renameCategoryEventHandler"/>
@@ -14,6 +17,8 @@
 <script>
   import fetotIcon from '$fetot-view/icons/fetot-icon.vue';
   import fetotIconClick from '$fetot-view/icons/fetot-icon-click.vue';
+
+  import {currentModuleStore} from '../../components/workers/current-module';
 
 	export default {
 		name: 'categories-menu-item',
@@ -32,12 +37,18 @@
       'fetot-icon-click': fetotIconClick
     },
     methods: {
-			renameCategoryEventHandler(event) {
+			renameCategoryEventHandler() {
 				this.$emit('rename-category-event', this.item)
       },
 	    deleteCategoryEventHandler() {
-		    this.$emit('delete-category-event', this.item.name)
+		    this.$emit('delete-category-event', this.item)
 	    }
+    },
+    computed: {
+			setActive() {
+				const activeCategory = currentModuleStore.state.actives.category;
+				return { 'is-active': activeCategory === this.item.index }
+      }
     }
 	}
 </script>
@@ -51,14 +62,17 @@
     width: 100%;
     height: 42px;
     padding-left: 42px;
-    @include flex-align-items-center;
 
     &:hover {
-      background: $fetot-dark-blue-20;
+      background: $fetot-dark-blue-10;
 
       .controllers {
         opacity: 1;
       }
+    }
+    &.is-active {
+      background: $fetot-dark-blue-20;
+      font-family: 'roboto-bold', sans-serif;
     }
   }
   .fetot-icon {
@@ -70,7 +84,7 @@
     top: 0;
     opacity: 0;
     transition: .4s;
-    z-index: 1;
+    z-index: 10;
     @include flex-align-items-center;
   }
   .fetot-icon-click {

@@ -10,7 +10,10 @@ import StoreInterface from '$fetot-store-interface';
 const state = {
 	name: '',
 	blocks: [],
-	workers: {}
+	workers: {},
+	actives: {
+		category: -1
+	}
 };
 
 const getters = {};
@@ -20,12 +23,18 @@ const mutations = {
 		state.name = name;
 		state.blocks = blocks;
 		state.workers = {...workers};
+	},
+	UPDATE_ACTIVES(state, {key, value}) {
+		state.actives[key] = value === undefined ? -1 : value;
 	}
 };
 
 const actions = {
 	async update(context, options) {
 		context.commit('UPDATE', options);
+	},
+	async updateActives(context, options) {
+		context.commit('UPDATE_ACTIVES', options)
 	}
 };
 

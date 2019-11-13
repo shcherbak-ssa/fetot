@@ -1,15 +1,18 @@
 <template>
-  <div class="app-home-header pr">
+  <div class="app-header pr">
     <hamburger-button :active="isActive" @hamburger-button-click="hamburgerButtonClickHandler"/>
-    <div class="client-info pa">
-      <div class="name">{{ client.fullname }}</div>
-      <fetot-ava @fetot-ava-click="avaClickHandler" :fullname="client.fullname" size="46"/>
-    </div>
+
     <transition name="changeModuleTitle" mode="out-in">
       <fetot-title>
         <div class="title">{{ setCurrentModuleName }}</div>
       </fetot-title>
     </transition>
+
+    <div class="client-info pa">
+      <div class="name">{{ client.fullname }}</div>
+      <fetot-ava @fetot-ava-click="avaClickHandler" :fullname="client.fullname" size="46"/>
+    </div>
+
   </div>
 </template>
 
@@ -22,7 +25,7 @@
 	import {currentModuleStore} from '../../components/workers/current-module';
 
 	export default {
-		name: 'app-home-header',
+		name: 'app-header',
     props: {
 			isActive: Boolean
     },
@@ -57,7 +60,7 @@
 <style lang="scss" scoped>
   @import '$fetot-scss';
 
-  .app-home-header {
+  .app-header {
     height: 60px;
     margin-bottom: 24px;
   }

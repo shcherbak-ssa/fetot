@@ -26,7 +26,7 @@ const mutations = {
 	},
 	
 	RENAME_CATEGORY(state, {index, name}) {
-		state.categories[index] = name;
+		state.categories = state.categories.map((it, i) => i === index ? name : it);
 	},
 	MOVE_CATEGORY(state, {currentIndex, newIndex}) {
 		state.categories = [] // @todo

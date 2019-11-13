@@ -1,7 +1,7 @@
 <template>
   <div class="app-home" :class="states">
     <!-- content -->
-    <app-home-header :isActive="states['is-active']" @hamburger-button-click="hamburgerButtonClickHandler"/>
+    <app-header :isActive="states['is-active']" @hamburger-button-click="hamburgerButtonClickHandler"/>
     <div class="workspace">
       <content-section>
         <template v-slot:title>Today</template>
@@ -31,7 +31,7 @@
 <script>
   import fetotCloseButton from '$fetot-view/buttons/fetot-close-button.vue';
 
-  import appHomeHeader from '../app-home-header/app-home-header.vue';
+  import appHeader from '../app-header/app-header.vue';
   import contentSection from './content-section.vue';
   import moduleItem from './module-item.vue';
   import categories from '../categories/categories.vue';
@@ -54,7 +54,7 @@
     components: {
 			'fetot-close-button': fetotCloseButton,
 
-	    'app-home-header': appHomeHeader,
+	    'app-header': appHeader,
       'module-item': moduleItem,
       'content-section': contentSection,
 	    'categories': categories

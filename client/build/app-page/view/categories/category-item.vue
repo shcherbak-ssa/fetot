@@ -1,10 +1,12 @@
 <template>
-  <div class="category-item pr fc cp" @click="clickHandler">
+  <div class="category-item pr fc cp" :class="setActive" @click="$emit('select-category-event', item.index)">
     {{ item.name.toUpperCase() }}
   </div>
 </template>
 
 <script>
+	import {currentModuleStore} from '../../components/workers/current-module';
+
 	export default {
 		name: 'category-item',
     props: {
@@ -17,11 +19,12 @@
         default: false
       }
     },
-    methods: {
-			clickHandler() {
-				this.$emit('fetot-category-item-click', this.item.index)
-      }
-    }
+		computed: {
+			setActive() {
+				const activeCategory = currentModuleStore.state.actives.category;
+				return { 'is-active': activeCategory === this.item.index }
+			}
+		}
 	}
 </script>
 
@@ -38,15 +41,20 @@
     &:hover {
       background: $fetot-dark-blue-20;
     }
+    &::after {
+      width: 100%;
+      height: 3px;
+      bottom: 0;
+      left: 0;
+      transition: .2s;
+      @include psevdo-element;
+    }
     &.is-active {
+      background: $fetot-dark-blue-10;
       font-family: 'roboto-bold', sans-serif;
 
       &::after {
-        animation: border-animation .4s forwards;
-        width: 100%;
-        bottom: 0;
-        left: 0;
-        @include psevdo-element;
+        background: $fetot-dark-blue;
       }
     }
     &::after {
@@ -57,16 +65,6 @@
       left: 0;
       @include full-sizes;
       @include psevdo-element;
-    }
-  }
-  @keyframes border-animation {
-    from {
-      background: $fetot-dark-blue-20;
-      height: 100%;
-    }
-    to {
-      background: $fetot-dark-blue;
-      height: 3px;
     }
   }
 </style>
