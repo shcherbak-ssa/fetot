@@ -1,5 +1,5 @@
 <template>
-  <div class="categories pa">
+  <div class="categories pa flex">
     <div class="categories-icon fc">
       <fetot-icon-click icon="&#xF292;" :active="isMenuOpen" @fetot-icon-click="toggleMenuOpen"/>
     </div>
@@ -8,7 +8,7 @@
                      @close-category-menu-event="toggleMenuOpen">
     </categories-menu>
 
-    <div class="content">
+    <div class="content flex">
       <category-item :isDefault="true" @select-category-event="selectCategoryHandler"/>
 
       <category-item v-for="(name, index) in getCategories"
@@ -64,15 +64,13 @@
   @import '$fetot-scss';
 
   .categories {
-    display: flex;
     width: calc(100% - 10px);
     bottom: 0;
     left: 10px;
     transition: .4s;
 
     .is-active & {
-      opacity: 0;
-      left: -100vw;
+      display: none;
     }
   }
   .categories-icon {
@@ -88,7 +86,6 @@
     height: 38px;
   }
   .content {
-    display: flex;
     width: calc(100% - 52px);
     overflow: hidden;
   }

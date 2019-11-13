@@ -8,7 +8,7 @@
       </fetot-title>
     </transition>
 
-    <div class="client-info pa">
+    <div class="client-info pa faic">
       <div class="name">{{ client.fullname }}</div>
       <fetot-ava @fetot-ava-click="avaClickHandler" :fullname="client.fullname" size="46"/>
     </div>
@@ -69,7 +69,6 @@
     padding: 5px;
     top: 0;
     right: 0;
-    @include flex-align-items-center;
   }
   .fetot-ava {
     margin-left: 12px;

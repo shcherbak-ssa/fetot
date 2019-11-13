@@ -56,6 +56,9 @@
 .pr {
   position: relative;
 }
+.pc {
+  @include position-center;
+}
 
 // pseudo
 .bfr-click {

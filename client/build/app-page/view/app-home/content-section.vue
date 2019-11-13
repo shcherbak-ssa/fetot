@@ -1,9 +1,9 @@
 <template>
-  <div class="content-section">
-    <div class="title">
+  <div class="content-section pr">
+    <div class="title pa">
       <slot name="title"></slot>
     </div>
-    <div class="content">
+    <div class="content flex full bs">
       <slot name="content"></slot>
     </div>
   </div>
@@ -19,8 +19,6 @@
   @import '$fetot-scss';
 
   .content-section {
-    position: relative;
-    /*height: 100%;*/
     margin: 0 10px 20px 0;
 
     @media screen and (max-width: 670px) {
@@ -34,16 +32,12 @@
   .title {
     color: $fetot-dark-gray;
     font: 18px 'roboto-bold';
-    position: absolute;
     top: -30px;
     left: 10px;
   }
   .content {
-    display: flex;
     overflow: hidden;
     padding: 10px;
-    @include full-sizes;
-    @include box-sizing;
 
     @media screen and (max-width: 670px) {
       flex-direction: column;

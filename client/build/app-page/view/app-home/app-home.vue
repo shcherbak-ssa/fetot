@@ -1,8 +1,8 @@
 <template>
-  <div class="app-home" :class="states">
+  <div class="app-home pa bs hover_hov-sh" :class="states">
     <!-- content -->
     <app-header :isActive="states['is-active']" @hamburger-button-click="hamburgerButtonClickHandler"/>
-    <div class="workspace">
+    <div class="workspace flex bs">
       <content-section>
         <template v-slot:title>Today</template>
         <template v-slot:content>
@@ -88,7 +88,6 @@
 
   .app-home {
     padding: 12px 24px;
-    position: absolute;
     top: 0;
     left: 0;
     z-index: 1000;
@@ -96,11 +95,6 @@
     height: 120px;
     transition: .4s;
     @include static-shadow;
-    @include box-sizing;
-
-    &:hover {
-      @include hover-shadow;
-    }
 
     @media screen and (max-width: 419px) {
       padding: 12px;
@@ -113,7 +107,6 @@
       @media screen and (max-width: 1023px) {
         padding: 36px 72px;
       }
-
       @media screen and (max-width: 670px) {
         padding: 36px;
       }
@@ -136,19 +129,17 @@
       }
       .workspace {
         transform: translateY(-300px);
+        transition: .2s;
         opacity: 0;
       }
     }
   }
   .workspace {
-    display: flex;
-    /*padding: 32px 10px 10px;*/
     padding-top: 32px;
-    transition: .4s;
+    transition: .2s .2s;
     width: 100%;
     height: calc(100% - 120px);
     overflow: hidden;
-    @include box-sizing;
 
     @media screen and (max-width: 670px) {
       align-items: center;

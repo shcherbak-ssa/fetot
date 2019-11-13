@@ -1,5 +1,5 @@
 <template>
-  <div class="module-item" @click="$emit('module-item-click', item.label)">
+  <div class="module-item cp fcc br6px hover_hov-sh" @click="$emit('module-item-click', item.label)">
     <fetot-icon :icon="item.icon"></fetot-icon>
     <div class="name">{{ item.name }}</div>
   </div>
@@ -25,20 +25,13 @@
   .module-item {
     background: #fff;
     color: $fetot-dark-blue;
-    cursor: pointer;
     font: 24px 'roboto-medium';
     width: 100px;
     height: 100px;
     margin: 0 20px 20px 0;
     justify-content: center;
     transition: .2s;
-    @include flex-center-column;
     @include static-shadow;
-    @include border-radius-6;
-
-    &:hover {
-      @include hover-shadow;
-    }
 
     @media screen and (max-width: 670px) {
       font-size: 20px;

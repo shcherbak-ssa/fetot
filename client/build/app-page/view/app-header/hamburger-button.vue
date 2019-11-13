@@ -1,8 +1,8 @@
 <template>
-  <div class="hamburger-button" :class="isActive" @click="clickHandler">
-    <div class="it"></div>
-    <div class="it"></div>
-    <div class="it"></div>
+  <div class="hamburger-button cp pa" :class="isActive" @click="clickHandler">
+    <div class="it pa"></div>
+    <div class="it pc"></div>
+    <div class="it pa"></div>
   </div>
 </template>
 
@@ -29,8 +29,6 @@
   @import '$fetot-scss';
 
   .hamburger-button {
-    cursor: pointer;
-    position: absolute;
     width: 36px;
     height: 36px;
     transition: .4s;
@@ -43,7 +41,6 @@
 
     &:nth-child(1), &:nth-child(3) {
       width: 70%;
-      position: absolute;
     }
     &:nth-child(1) {
       top: 7px;
@@ -51,7 +48,6 @@
     }
     &:nth-child(2) {
       width: 100%;
-      @include position-center;
     }
     &:nth-child(3) {
       bottom: 7px;
