@@ -57,10 +57,10 @@
 
     @media screen and (max-width: 1024px) {
       padding: 20px;
-      width: 460px;
+      width: 360px;
       height: 280px;
     }
-    @media screen and (max-width: 640px) {
+    @media screen and (max-width: 460px) {
       width: 100%;
     }
   }

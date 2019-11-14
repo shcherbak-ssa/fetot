@@ -4,14 +4,6 @@
     <app-header :isActive="states['is-active']" @hamburger-button-click="hamburgerButtonClickHandler"/>
     <div class="workspace flex bs pa">
       <content-section>
-        <template v-slot:title>Today</template>
-        <template v-slot:content>
-          <module-item v-for="(item, index) in modulesViewStore" :key="index" :item="item"
-                       @module-item-click="moduleItemClickHandler"
-          />
-        </template>
-      </content-section>
-      <content-section>
         <template v-slot:title>Modules</template>
         <template v-slot:content>
           <module-item v-for="(item, index) in modulesViewStore" :key="index" :item="item"

@@ -117,11 +117,11 @@
 
   .categories-menu {
     width: 280px;
-    max-height: 360px;
     padding: 10px 0 54px;
     top: 46px;
     left: 0;
     transition: .4s;
+    overflow: hidden;
     @include hover-shadow;
 
     @media screen and (max-width: 1024px) {
@@ -129,8 +129,14 @@
     }
 
     .content {
-      height: calc(100% - 55px);
-      overflow: hidden;
+      width: calc(100% + 17px);
+      max-height: 200px;
+      overflow-x: hidden;
+      overflow-y: scroll;
+
+      @media screen and (max-width: 1024px) {
+        width: 100%;
+      }
     }
     .fetot-button {
       font-size: 24px;

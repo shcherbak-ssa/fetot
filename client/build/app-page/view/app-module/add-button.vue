@@ -1,5 +1,5 @@
 <template>
-  <div class="add-button cp fc pa br50 bfr-click" @click.stop="$emit('add-block-event')">
+  <div class="add-button cp fc  br50 bfr-click" @click.stop="$emit('add-block-event')">
     <fetot-icon icon="&#xE809;"></fetot-icon>
   </div>
 </template>
@@ -25,6 +25,7 @@
     width: 46px;
     height: 46px;
     transition: .4s;
+    position: fixed;
     bottom: 20px;
     right: 20px;
     z-index: 100;

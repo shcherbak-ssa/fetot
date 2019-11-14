@@ -1,10 +1,19 @@
 <template>
   <div class="app-module pa bs">
     <add-button @add-block-event="addBlockHandler"></add-button>
-    <div class="content flex full pr">
-      <block-component :block="{title: 'I am block'}"></block-component>
-      <block-component :block="{title: 'I am block'}"></block-component>
-      <block-component :block="{title: 'I am block'}"></block-component>
+    <div class="module-workspace pr w100 flex bs" @scroll="scrollHandler">
+      <block-component :block="{title: 'I am block 1'}"></block-component>
+      <block-component :block="{title: 'I am block 2'}"></block-component>
+      <block-component :block="{title: 'I am block 3'}"></block-component>
+      <block-component :block="{title: 'I am block 4'}"></block-component>
+      <block-component :block="{title: 'I am block 5'}"></block-component>
+      <block-component :block="{title: 'I am block 6'}"></block-component>
+      <block-component :block="{title: 'I am block 7'}"></block-component>
+      <block-component :block="{title: 'I am block 8'}"></block-component>
+      <block-component :block="{title: 'I am block 9'}"></block-component>
+      <block-component :block="{title: 'I am block 10'}"></block-component>
+      <block-component :block="{title: 'I am block 11'}"></block-component>
+      <block-component :block="{title: 'I am block 12'}"></block-component>
     </div>
   </div>
 </template>
@@ -22,27 +31,35 @@
     methods: {
 	    addBlockHandler() {
 	    	alert('add-block-event')
+      },
+	    scrollHandler() {
+	    	console.log('scroll')
       }
     }
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   @import '$fetot-scss';
 
   .app-module {
-    width: 100%;
-    height: calc(100% - 106px);
-    padding: 42px 90px 0;
+    padding: 148px 90px 42px;
+    width: calc(100% + 24px);
+    height: 100%;
     left: 0;
-    bottom: 0;
+    top: 0;
     z-index: 1;
+    overflow-y: scroll;
+    overflow-x: hidden;
 
+    @media screen and (max-width: 1024px) {
+      width: 100%;
+    }
     @media screen and (max-width: 419px) {
       padding: 24px 6.25% 0;
     }
   }
-  .content {
+  .module-workspace {
     justify-content: space-between;
     flex-wrap: wrap;
 
