@@ -16,15 +16,7 @@
 }
 
 // border-radius => br
-.br50 {
-  border-radius: 50%;
-}
-.br3px {
-  @include border-radius-3;
-}
-.br6px {
-  @include border-radius-6;
-}
+@import './border-radius-classes.scss';
 
 // cursor => c
 .cp {
@@ -44,29 +36,10 @@
 }
 
 // flex
-.flex {
-  display: flex;
-}
-.fc {
-  @include flex-center;
-}
-.fcc {
-  @include flex-center-column;
-}
-.faic {
-  @include flex-align-items-center;
-}
+@import './flex-classes.scss';
 
 // position
-.pa {
-  position: absolute;
-}
-.pr {
-  position: relative;
-}
-.pc {
-  @include position-center;
-}
+@import './position-classes.scss';
 
 // pseudo
 .bfr-click {

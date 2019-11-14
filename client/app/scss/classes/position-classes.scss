@@ -1,0 +1,10 @@
+
+.pa {
+  position: absolute;
+}
+.pr {
+  position: relative;
+}
+.pc {
+  @include position-center;
+}

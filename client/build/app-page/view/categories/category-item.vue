@@ -38,9 +38,10 @@
     height: 38px;
     transition: .4s;
     flex-shrink: 0;
+    user-select: none;
 
     &:hover {
-      background: $fetot-dark-blue-20;
+      background: $fetot-dark-blue-10;
     }
     &::after {
       width: 100%;
@@ -51,7 +52,7 @@
       @include psevdo-element;
     }
     &.is-active {
-      background: $fetot-dark-blue-10;
+      background: $fetot-dark-blue-20;
       font-family: 'roboto-bold', sans-serif;
 
       &::after {

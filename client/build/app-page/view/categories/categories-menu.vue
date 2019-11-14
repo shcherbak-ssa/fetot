@@ -1,5 +1,5 @@
 <template>
-  <div class="categories-menu bg-fff br6px bs pa hover_hov-sh">
+  <div class="categories-menu bg-fff br6px bs pa">
     <div class="content w100 pr">
       <!-- default item -->
       <categories-menu-item :isDefault="true"
@@ -122,7 +122,7 @@
     top: 46px;
     left: 0;
     transition: .4s;
-    @include static-shadow;
+    @include hover-shadow;
 
     @media screen and (max-width: 1024px) {
       left: 10px;

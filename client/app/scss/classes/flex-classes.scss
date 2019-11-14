@@ -1,0 +1,16 @@
+
+.flex {
+  display: flex;
+}
+.flex-inline {
+  display: inline-flex;
+}
+.fc {
+  @include flex-center;
+}
+.fcc {
+  @include flex-center-column;
+}
+.faic {
+  @include flex-align-items-center;
+}

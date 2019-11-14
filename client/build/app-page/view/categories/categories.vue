@@ -8,13 +8,15 @@
                      @close-category-menu-event="toggleMenuOpen">
     </categories-menu>
 
-    <div class="content flex">
-      <category-item :isDefault="true" @select-category-event="selectCategoryHandler"/>
+    <div class="content">
+      <scroll-container contentClass="flex-inline" scrollType="horizontal">
+        <category-item :isDefault="true" @select-category-event="selectCategoryHandler"/>
 
-      <category-item v-for="(name, index) in getCategories"
-                     :key="index" :item="{name, index}"
-                     @select-category-event="selectCategoryHandler">
-      </category-item>
+        <category-item v-for="(name, index) in getCategories"
+                       :key="index" :item="{name, index}"
+                       @select-category-event="selectCategoryHandler">
+        </category-item>
+      </scroll-container>
     </div>
   </div>
 </template>
@@ -24,6 +26,7 @@
 
   import categoryItem from './category-item.vue';
   import categoriesMenu from './categories-menu.vue';
+  import scrollContainer from '../scroll/scroll-container.vue';
 
   import {currentCategoriesStore} from '../../components/workers/current-categories';
   import {currentModuleStore} from '../../components/workers/current-module';
@@ -38,8 +41,9 @@
     components: {
 	    'fetot-icon-click': fetotIconClick,
 			'category-item': categoryItem,
-      'categories-menu': categoriesMenu
-		},
+      'categories-menu': categoriesMenu,
+      'scroll-container': scrollContainer
+    },
     methods: {
 	    toggleMenuOpen() {
 		    this.isMenuOpen = !this.isMenuOpen;
@@ -50,7 +54,7 @@
           key: 'category',
           value: index
 	    	})
-      }
+      },
     },
     computed: {
 			getCategories() {

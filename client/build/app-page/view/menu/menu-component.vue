@@ -53,7 +53,7 @@
     flex-direction: column;
     z-index: 10;
     transition: .4s;
-    @include static-shadow;
+    @include hover-shadow;
 
     &.is-confirm {
       height: 240px;
