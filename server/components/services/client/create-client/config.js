@@ -17,20 +17,14 @@ const config = {
 			collectionItem: {
 				name: 'notes',
 				categories: []
-			},
-			defaultBlock: {
-				title: 'I am the first note'
 			}
 		},
-		{
-			collectionItem: {
-				name: 'lists',
-				categories: []
-			},
-			defaultBlock: {
-				title: 'I am the first list'
-			}
-		}
+		// {
+		// 	collectionItem: {
+		// 		name: 'lists',
+		// 		categories: []
+		// 	}
+		// }
 	]
 };
 

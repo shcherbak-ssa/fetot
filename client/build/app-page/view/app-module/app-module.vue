@@ -1,39 +1,21 @@
 <template>
   <div class="app-module pa bs">
     <add-button @add-block-event="addBlockHandler"></add-button>
-    <div class="module-workspace pr w100 flex bs" @scroll="scrollHandler">
-      <block-component :block="{title: 'I am block 1'}"></block-component>
-      <block-component :block="{title: 'I am block 2'}"></block-component>
-      <block-component :block="{title: 'I am block 3'}"></block-component>
-      <block-component :block="{title: 'I am block 4'}"></block-component>
-      <block-component :block="{title: 'I am block 5'}"></block-component>
-      <block-component :block="{title: 'I am block 6'}"></block-component>
-      <block-component :block="{title: 'I am block 7'}"></block-component>
-      <block-component :block="{title: 'I am block 8'}"></block-component>
-      <block-component :block="{title: 'I am block 9'}"></block-component>
-      <block-component :block="{title: 'I am block 10'}"></block-component>
-      <block-component :block="{title: 'I am block 11'}"></block-component>
-      <block-component :block="{title: 'I am block 12'}"></block-component>
-    </div>
+    <div class="module-workspace pr w100 flex bs"></div>
   </div>
 </template>
 
 <script>
   import addButton from './add-button.vue';
-  import blockComponent from '../block/block-component.vue';
 
 	export default {
 		name: 'app-module',
     components: {
-			'add-button': addButton,
-      'block-component': blockComponent
+			'add-button': addButton
     },
     methods: {
 	    addBlockHandler() {
 	    	alert('add-block-event')
-      },
-	    scrollHandler() {
-	    	console.log('scroll')
       }
     }
 	}

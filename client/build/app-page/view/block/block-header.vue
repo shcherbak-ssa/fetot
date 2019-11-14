@@ -1,5 +1,5 @@
 <template>
-  <div class="block-header flex pa">
+  <div class="block-header w100 flex">
     <fetot-title>
       <slot></slot>
     </fetot-title>
@@ -24,21 +24,22 @@
   @import '$fetot-scss';
 
   .block-header {
-    width: 100%;
-    height: 38px;
+    height: 32px;
     align-items: center;
     justify-content: space-between;
-    top: 0;
-    left: 0;
 
     .fetot-title {
-      font-size: 24px;
+      font-size: 20px;
     }
     .fetot-icon-click {
       opacity: 0;
       font-size: 24px;
-      width: 38px;
-      height: 38px;
+      width: 32px;
+      height: 32px;
+
+      [class*="block"]:hover & {
+        opacity: 1;
+      }
 
       @media screen and (max-width: 1024px) {
         opacity: 1;

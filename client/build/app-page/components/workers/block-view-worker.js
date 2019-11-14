@@ -5,15 +5,14 @@
 /*** imports [end] ***/
 /*** init [begin] ***/
 
-const notesConfig = {
-	blockType: 'common'
-};
-
 /*** init [end] ***/
 /*** exports [begin] ***/
 
-const notesModule = {
-	config: notesConfig
+const blockViewWorker = {
+	preparingInfo(info) {
+		const date = new Date(info.date);
+		return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
+	}
 };
 
 /*** exports [end] ***/
@@ -21,4 +20,4 @@ const notesModule = {
 
 /*** src [end] ***/
 
-export default notesModule
+export default {}; // module.exports = {};

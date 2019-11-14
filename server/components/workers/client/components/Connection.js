@@ -27,6 +27,7 @@ class Connection {
 				await this.categories(worker, message);
 				break;
 			case 'block':
+				
 				await this.blocks(worker, message);
 				break;
 		}

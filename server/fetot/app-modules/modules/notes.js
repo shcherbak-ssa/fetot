@@ -5,15 +5,23 @@
 /*** imports [end] ***/
 /*** init [begin] ***/
 
-const notesConfig = {
-	blockType: 'common'
-};
-
 /*** init [end] ***/
 /*** exports [begin] ***/
 
-const notesModule = {
-	config: notesConfig
+const schema = {
+	title: {
+		type: String,
+		required: true
+	},
+	content: {
+		type: Array
+	},
+	info: {
+		__props: {
+			date: Number,
+			required: true
+		}
+	}
 };
 
 /*** exports [end] ***/
@@ -21,4 +29,4 @@ const notesModule = {
 
 /*** src [end] ***/
 
-export default notesModule
+export default { schema }; // module.exports = {};

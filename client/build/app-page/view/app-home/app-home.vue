@@ -2,6 +2,7 @@
   <div class="app-home bg-fff pa bs hover_hov-sh" :class="states">
     <!-- content -->
     <app-header :isActive="states['is-active']" @hamburger-button-click="hamburgerButtonClickHandler"/>
+
     <div class="workspace flex bs pa">
       <content-section>
         <template v-slot:title>Modules</template>
