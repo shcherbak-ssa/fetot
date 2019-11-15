@@ -2,16 +2,18 @@
 
 /*** imports [begin] ***/
 
-import OutputMessage from '$fetot-services/output-message';
-
-import {clientStore} from '../client';
-import {currentModuleStore} from '../current-module';
 import createCurrentCategoriesStore from './current-categories-store';
+
+import sendOutputMessageService from '../../services/send-output-message';
+import updateModuleDataService from '../../services/update-module-data';
 
 /*** imports [end] ***/
 /*** init [begin] ***/
 
 const currentCategoriesStore = createCurrentCategoriesStore();
+
+const sendOutputMessage = sendOutputMessageService('category');
+const updateModuleData = updateModuleDataService('categories', currentCategoriesStore);
 
 /*** init [end] ***/
 /*** exports [begin] ***/
@@ -19,36 +21,28 @@ const currentCategoriesStore = createCurrentCategoriesStore();
 const currentCategoriesWorker = {
 	async create(name) {
 		await currentCategoriesStore.actions.createCategory(name);
-		await sendOutputMessage('create', {name});
+		await sendOutputMessageAndUpdateModuleData('create', {name});
 	},
 	async delete(name) {
 		await currentCategoriesStore.actions.deleteCategory(name);
-		await sendOutputMessage('delete', {name});
+		await sendOutputMessageAndUpdateModuleData('delete', {name});
 	},
 	async rename(options) {
 		await currentCategoriesStore.actions.renameCategory(options);
-		await sendOutputMessage('rename', options);
+		await sendOutputMessageAndUpdateModuleData('rename', options);
 	},
 	async move(options) {
 		await currentCategoriesStore.actions.moveCategory(options);
-		await sendOutputMessage('move', options);
+		await sendOutputMessageAndUpdateModuleData('move', options);
 	}
 };
 
 /*** exports [end] ***/
 /*** src [begin] ***/
 
-async function sendOutputMessage(type, options) {
-	const outputMessage = new OutputMessage({type: `category/${type}`});
-	Object.entries(options).forEach((item) => outputMessage.set(...item));
-	
-	outputMessage.send();
-	
-	await clientStore.actions.updateModuleKey({
-		name: currentModuleStore.state.name,
-		key: 'categories',
-		value: currentCategoriesStore.state.categories
-	})
+async function sendOutputMessageAndUpdateModuleData(type, message) {
+	updateModuleData();
+	sendOutputMessage(type, message);
 }
 
 /*** src [end] ***/

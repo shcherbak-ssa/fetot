@@ -5,7 +5,8 @@
 const blocksWorker = {
 	/* public */
 	async getAllBlocks() {
-		return await this.blocksCollection.findAllDocuments();
+		const blocks = await this.blocksCollection.findAllDocuments();
+		return blocks.map(transformBlockID)
 	},
 	async blocks(type, message) {
 		switch( type ) {
@@ -19,7 +20,10 @@ const blocksWorker = {
 	
 	/* private */
 	async _createBlock(message) {
-		console.log('create-block: ', message)
+		console.log('create-block: ', message);
+		
+		const block = this.blocksCollection.insertOneDocument(message);
+		return { message: transformBlockID(block) }
 	},
 	async _deleteBlock(options) {
 		console.log(options)
@@ -36,5 +40,15 @@ const blocksWorker = {
 };
 
 /*** exports [end] ***/
+/*** src [begin] ***/
+
+function transformBlockID(block) {
+	block.id = block._id;
+	delete block._id;
+	
+	return block;
+}
+
+/*** src [end] ***/
 
 module.exports = blocksWorker;

@@ -1,8 +1,10 @@
 <template>
   <div class="block-footer w100 flex">
-    <div class="info"></div>
+    <div class="states">
+      <slot name="states"></slot>
+    </div>
     <div class="date">
-      <slot></slot>
+      <slot name="date"></slot>
     </div>
   </div>
 </template>
@@ -13,12 +15,12 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @import '$fetot-scss';
 
   .block-footer {
     color: $fetot-dark-gray;
-    font: 16px 'roboto-medium';
+    font: 14px 'roboto-bold';
     margin-top: 10px;
     height: 20px;
     justify-content: space-between;

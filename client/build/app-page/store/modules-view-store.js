@@ -8,11 +8,11 @@ const modulesViewStore = [
 		icon: '&#xE80C;',
 		label: 'notes'
 	},
-	{
-		name: 'Lists',
-		icon: '&#xE806;',
-		label: 'lists'
-	}
+	// {
+	// 	name: 'Lists',
+	// 	icon: '&#xE806;',
+	// 	label: 'lists'
+	// }
 ];
 
 /*** exports [end] ***/

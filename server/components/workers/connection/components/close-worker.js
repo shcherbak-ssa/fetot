@@ -21,7 +21,7 @@ async function closeWorker({ip, message, response}) {
 	await removeIDFromCollection(id);
 	await clientWorker.client.ipAddress[page].remove(id);
 	
-	clientWorker.showCollection(); // for testing
+	//clientWorker.showCollection(); // for testing
 }
 
 /*** exports [end] ***/

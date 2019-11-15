@@ -18,15 +18,19 @@ const schema = {
 	},
 	info: {
 		__props: {
-			date: Number,
-			required: true
+			date: {
+				type: Number,
+				required: true
+			}
 		}
 	}
 };
+
+const notesWorkers = {};
 
 /*** exports [end] ***/
 /*** src [begin] ***/
 
 /*** src [end] ***/
 
-export default { schema }; // module.exports = {};
+module.exports = { schema, workers: notesWorkers };

@@ -19,7 +19,7 @@ async function connectionWorker({ip, message: {content: {type, data: message}}, 
 	}
 	
 	await response(message);
-	clientWorker.showCollection(); // for testing
+	//clientWorker.showCollection(); // for testing
 }
 
 /*** exports [end] ***/

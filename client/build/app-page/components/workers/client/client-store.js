@@ -49,16 +49,12 @@ const actions = {
 /*** init [end] ***/
 /*** exports [begin] ***/
 
-let clientStore;
-
-async function createClientStore() {
-	clientStore = StoreInterface.createStore('client', {
+function createClientStore() {
+	return StoreInterface.createStore('client', {
 		namespaced: true, state, getters, mutations, actions
-	});
-	
-	return clientStore;
+	})
 }
 
 /*** exports [end] ***/
 
-export { clientStore, createClientStore };
+export default createClientStore;

@@ -16,7 +16,6 @@ const menuWorker = {
 	async addSubmenuEventListener(type, handler) {
 		return new Promise((success) => {
 			const submenuEvent = `submenu-${type}-event`;
-			
 			return appEventsEmitter.on(submenuEvent, submenuHandler);
 			
 			async function submenuHandler(label) {

@@ -2,8 +2,11 @@
 
 /*** imports [begin] ***/
 
+const appModules = require('../../../../fetot/app-modules');
 const moduleWorker = require('../../module');
+
 const MongodbService = require('../../../services/mongodb');
+const validationService = require('../../../services/validation');
 
 /*** imports [end] ***/
 /*** init [begin] ***/
@@ -12,6 +15,9 @@ const MongodbService = require('../../../services/mongodb');
 
 class Connection {
 	constructor(client_id) {
+		this.moduleWorkers = {};
+		this.moduleMessageValidation = {};
+		
 		this.moduleConfig = {};
 		this.blocksCollection = {};
 		this.clientDatabase = MongodbService.createDatabase(client_id);
@@ -24,12 +30,15 @@ class Connection {
 		
 		switch( workerType ) {
 			case 'category':
-				await this.categories(worker, message);
-				break;
+				return await this.categories(worker, message);
 			case 'block':
+				const result = await this.moduleMessageValidation(message);
+				if( typeof result === 'object' ) return result;
 				
-				await this.blocks(worker, message);
-				break;
+				// if( worker in this.moduleWorkers )
+				// 	message =
+				
+				return await this.blocks(worker, message);
 		}
 		
 		return null
@@ -44,6 +53,11 @@ class Connection {
 		return { message: {blocks} }
 	}
 	async _updateModuleData(name) {
+		const {schema, workers} = appModules[name];
+		
+		this.moduleWorkers = workers;
+		this.moduleMessageValidation = validationService(schema);
+		
 		this.moduleConfig = await this.clientModulesCollection.findOneDocument({name});
 		this.blocksCollection = this.clientDatabase.collection(name);
 	}

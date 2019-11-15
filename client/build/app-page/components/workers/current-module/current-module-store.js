@@ -9,21 +9,24 @@ import StoreInterface from '$fetot-store-interface';
 
 const state = {
 	name: '',
-	blocks: [],
+	config: {},
 	workers: {},
 	actives: {
-		category: -1
+		category: -1,
+		block: -1
 	}
 };
 
 const getters = {};
 
 const mutations = {
-	UPDATE(state, {name, blocks, workers}) {
+	UPDATE(state, {name, config, workers}) {
 		state.name = name;
-		state.blocks = blocks;
+		state.config = {...config};
 		state.workers = {...workers};
+		
 		state.actives.category = -1;
+		state.actives.block = -1
 	},
 	UPDATE_ACTIVES(state, {key, value}) {
 		state.actives[key] = value === undefined ? -1 : value;

@@ -37,12 +37,11 @@ async function initAppPage(VueModel) {
 
 async function appConnection() {
 	return new Promise((success) => {
-		connectionRequest( async (response) => {
-			const clientStore = await clientWorker.createClientStore();
+		connectionRequest((response) => {
+			const clientStore = clientWorker.createClientStore();
 			clientStore.actions.init(response.client);
 			
 			OutputMessage.clientID = response.id;
-			
 			success()
 		});
 	})

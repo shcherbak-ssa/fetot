@@ -2,6 +2,8 @@
 
 /*** imports [begin] ***/
 
+import {currentModuleStore} from './current-module';
+
 /*** imports [end] ***/
 /*** init [begin] ***/
 
@@ -9,8 +11,11 @@
 /*** exports [begin] ***/
 
 const blockViewWorker = {
-	preparingInfo(info) {
-		const date = new Date(info.date);
+	preparingContent(content) {
+		return currentModuleStore.state.workers.drawBlockContentWorker(content);
+	},
+	preparingDate(date) {
+		date = new Date(date);
 		return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
 	}
 };
@@ -20,4 +25,4 @@ const blockViewWorker = {
 
 /*** src [end] ***/
 
-export default {}; // module.exports = {};
+export default blockViewWorker;
