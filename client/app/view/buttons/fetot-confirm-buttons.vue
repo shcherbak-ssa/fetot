@@ -41,7 +41,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   @import '$fetot-scss';
 
   .fetot-confirm-buttons {

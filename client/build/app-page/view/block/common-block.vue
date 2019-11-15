@@ -6,7 +6,7 @@
       <block-status-line></block-status-line>
 
       <!--<component :is="setBlockContent"></component>-->
-      <div class="content pr" :class="textState" ref="content">
+      <div class="content cp pr" :class="textState" ref="content">
         <div v-html="setBlockContent"></div>
       </div>
 
@@ -74,6 +74,9 @@
       height: auto;
       max-height: 400px;
     }
+    .has-frame & {
+      //height: 32px;
+    }
 
     @media screen and (max-width: 1024px) {
       padding: 16px;
@@ -99,6 +102,10 @@
       width: 100%;
       height: 24px;
       @include psevdo-element;
+    }
+
+    .has-frame & {
+      display: none;
     }
   }
 </style>

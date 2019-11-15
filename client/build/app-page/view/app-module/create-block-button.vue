@@ -1,5 +1,5 @@
 <template>
-  <div class="add-button cp fc  br50 bfr-click" @click.stop="$emit('add-block-event')">
+  <div class="create-block-button cp fc  br50 bfr-click" @click.stop="$emit('create-block-event')">
     <fetot-icon icon="&#xE809;"></fetot-icon>
   </div>
 </template>
@@ -8,7 +8,7 @@
   import fetotIcon from '$fetot-view/icons/fetot-icon.vue';
 
 	export default {
-		name: 'add-button',
+		name: 'create-block-button',
     components: {
 			'fetot-icon': fetotIcon
     }
@@ -18,7 +18,7 @@
 <style lang="scss" scoped>
   @import '$fetot-scss';
 
-  .add-button {
+  .create-block-button {
     background: $fetot-blue;
     color: #fff;
     font-size: 18px;

@@ -25,5 +25,9 @@
     height: 20px;
     justify-content: space-between;
     align-items: center;
+
+    .has-frame & {
+      display: none;
+    }
   }
 </style>

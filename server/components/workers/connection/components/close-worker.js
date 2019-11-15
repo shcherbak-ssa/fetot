@@ -11,10 +11,10 @@ const clientWorker = require('../../client');
 
 async function closeWorker({ip, message, response}) {
 	await response(null);
-	console.log('close-worker', message);
 	
-	let id = message.id;
-	let page = id[id.length - 1] === 'l' ? 'login' : 'app';
+	const id = message.id;
+	const page = id[id.length - 1] === 'l' ? 'login' : 'app';
+	
 	if( !clientWorker.client.ipAddress[page].isCorrect(id, ip) ) return;
 	
 	await closeClientConnection(id);
@@ -28,11 +28,10 @@ async function closeWorker({ip, message, response}) {
 /*** src [begin] ***/
 
 async function closeClientConnection(clientID) {
-	let [id, label] = await parseClientID(clientID);
+	const [id, label] = await parseClientID(clientID);
 	if( label === 'l' ) return await clientWorker.client.remove('login', clientID);
 	
-	let client = await clientWorker.client('app', id);
-	console.log('client.connections.size()', client.connections.size());
+	const client = await clientWorker.client('app', id);
 	if( client.connections.size() !== 1 ) return await clientWorker.client.removeConnection(client, label);
 	
 	await clientWorker.client.appLinksID.remove(id);

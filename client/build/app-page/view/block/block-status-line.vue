@@ -20,8 +20,9 @@
       background: $fetot-dark-gray-40;
       height: 2px;
     }
-    /*@media screen and (max-width: 1024px) {*/
-    /*  height: 12px;*/
-    /*}*/
+
+    .has-frame & {
+      display: none;
+    }
   }
 </style>
