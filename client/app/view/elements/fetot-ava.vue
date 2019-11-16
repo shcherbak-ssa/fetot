@@ -14,8 +14,8 @@
     computed: {
 	    setClientLetters() {
 	    	let [first, second] = this.fullname.split(' ');
-        first = first[0] || '';
-        second = second[0] || '';
+        first = first ? first[0] : '';
+        second = second ? second[0] : '';
 
         return (first + second).toUpperCase();
       },

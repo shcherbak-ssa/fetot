@@ -19,16 +19,18 @@ const config = {
 				categories: []
 			},
 			defaultBlock: {
-				title: 'Test store',
-				content: [
-					'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, illum?',
-					[
-						'Lorem ipsum dolor',
-						'Doloribus, eos nam.',
-						'Magnam, unde, voluptates.'
-					],
-					'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum, eveniet?'
-				],
+				title: 'How to use',
+				data: {
+					content: [
+						'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, illum?',
+						[
+							'Lorem ipsum dolor',
+							'Doloribus, eos nam.',
+							'Magnam, unde, voluptates.'
+						],
+						'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum, eveniet?'
+					]
+				},
 				info: {
 					date: Date.now()
 				}

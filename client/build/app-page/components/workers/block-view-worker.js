@@ -12,7 +12,7 @@ import {currentModuleStore} from './current-module';
 
 const blockViewWorker = {
 	preparingContent(content) {
-		return currentModuleStore.state.workers.drawBlockContentWorker(content);
+		return currentModuleStore.state.workers.drawBlockContent(content);
 	},
 	preparingDate(date) {
 		date = new Date(date);

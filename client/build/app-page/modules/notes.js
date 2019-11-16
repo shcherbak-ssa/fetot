@@ -8,7 +8,19 @@ import drawBlockContentService from '../components/services/draw-block-content-s
 /*** init [begin] ***/
 
 const notesConfig = {
-	blockType: 'common'
+	blockType: 'common',
+	blockContent: {},
+	createBlockModalOptions: {
+		header: {
+			title: 'New note',
+			icon: '&#xE80C;'
+		},
+		modalType: 'is-small',
+		confirmHandler: '',
+		data: {
+			title: ''
+		}
+	}
 };
 
 /*** init [end] ***/
@@ -17,7 +29,7 @@ const notesConfig = {
 const notesModule = {
 	config: notesConfig,
 	workers: {
-		drawBlockContentWorker(content) {
+		drawBlockContent(content) {
 			content = content.map(parseContentItem);
 			return content.join('');
 		}

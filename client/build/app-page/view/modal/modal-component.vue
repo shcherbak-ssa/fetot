@@ -1,7 +1,7 @@
 <template>
   <modal-container>
     <div class="modal-component br6px bg-fff pc flex" :class="options.modalType">
-      <modal-header :header="options.header" @close-event="closeHandler"></modal-header>
+      <modal-header :header="options.header"></modal-header>
       <modal-content :content="options.contentData"></modal-content>
       <modal-footer @confirm-event="confirmEventHandler"></modal-footer>
     </div>
@@ -20,11 +20,6 @@
 
 	export default {
 		name: 'modal-component',
-    data() {
-			return {
-				appEventsEmitter: eventsEmitterWorker.getEmitter('app')
-      }
-    },
     props: {
 			options: Object
     },
@@ -37,16 +32,10 @@
 			'modal-footer': modalFooter
 		},
     methods: {
-	    closeHandler() {
-	    	this.appEventsEmitter.emit('close-modal');
-      },
 	    confirmEventHandler(label) {
 	    	if( label ) this.options.confirmHandler(this.options.contentData);
-	    	this.closeHandler();
+		    eventsEmitterWorker.getEmitter('app').emit('close-modal');
       }
-    },
-    mounted() {
-
     }
 	}
 </script>

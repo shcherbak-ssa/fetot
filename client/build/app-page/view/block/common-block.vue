@@ -6,7 +6,7 @@
       <block-status-line></block-status-line>
 
       <!--<component :is="setBlockContent"></component>-->
-      <div class="content cp pr" :class="textState" ref="content">
+      <div class="content cp pr" :class="textState" ref="content" @click.stop="contentClickHandler">
         <div v-html="setBlockContent"></div>
       </div>
 
@@ -41,9 +41,14 @@
       'block-status-line': blockStatusLine,
       'block-footer': blockFooter
     },
+    methods: {
+	    contentClickHandler() {
+
+      }
+    },
     computed: {
 	    setBlockContent() {
-	    	return blockViewWorker.preparingContent(this.block.content);
+	    	return blockViewWorker.preparingContent(this.block.data.content);
       },
       setBlockDate() {
 	    	return blockViewWorker.preparingDate(this.block.info.date)

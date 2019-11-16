@@ -1,7 +1,8 @@
 <template>
   <div class="app-module pa bs flex" :class="setState">
-    <div class="frame">
-      <frame-component v-if="hasFrame"></frame-component>
+    <div class="frame" v-if="hasFrame">
+      <component :is=""></component>
+      <frame-component :options="frameOptions"></frame-component>
     </div>
     <div class="blocks">
       <app-module-workspace></app-module-workspace>
@@ -20,15 +21,17 @@
   import eventsEmitterWorker from '$fetot-events-emitter';
 
   import {currentModuleStore} from '../../components/workers/current-module';
-  import createBlockModalStore from '../../store/create-block-modal-store';
+  import modulesViewStore from '../../store/modules-view-store';
 
 	export default {
 		name: 'app-module',
     data() {
 			return {
 				hasFrame: false,
-        modalOptions: {
-					header: {},
+        appEventsEmitter: eventsEmitterWorker.getEmitter('app'),
+
+        createBlockModalOptions: {
+					title: {},
 	        modalType: 'is-small',
 	        confirmHandler: '',
 	        contentData: {
@@ -45,20 +48,21 @@
     },
     methods: {
 	    createBlockHandler() {
-		    this.modalOptions.confirmHandler = this.confirmHandler;
-		    this.modalOptions.contentData.title = '';
-		    this.updateModalOptionsHeader();
+	    	const modalOptions = this.currentModuleStore.state.config.createBlockModalOptions;
+	    	modalOptions.confirmHandler = this.confirmCreateBlockModalHandler;
 
-		    eventsEmitterWorker.getEmitter('app').emit('show-modal', this.modalOptions);
+		    this.appEventsEmitter.emit('show-modal', modalOptions);
       },
-      confirmHandler(contentData) {
-        if( contentData.title ) this.hasFrame = true;
-      },
+      confirmCreateBlockModalHandler(contentData) {
+        if( !contentData.title ) return;
 
-      /* src */
-      updateModalOptionsHeader() {
-	      this.modalOptions.header = {...createBlockModalStore[ currentModuleStore.state.name ]}
-      }
+	      this.hasFrame = true;
+	      this.appEventsEmitter.on('close-frame', this.closeFrameHandler)
+      },
+	    closeFrameHandler() {
+	    	this.hasFrame = false;
+		    this.appEventsEmitter.remove('close-frame', this.closeFrameHandler)
+      },
     },
     computed: {
 			setState() {
@@ -72,7 +76,7 @@
   @import '$fetot-scss';
 
   .app-module {
-    padding: 148px 90px 42px;
+    padding: 148px 128px 0;
     width: calc(100% + 24px);
     height: 100%;
     z-index: 1;
@@ -83,12 +87,9 @@
       width: 100%;
     }
     @media screen and (max-width: 419px) {
-      padding: 24px 6.25% 0;
+      padding: 148px 6.25% 0;
     }
 
-    .frame {
-      display: none;
-    }
     .blocks {
       width: 100%;
     }
@@ -97,8 +98,7 @@
       justify-content: space-around;
 
       .frame {
-        display: block;
-        width: 40%;
+        width: 60%;
       }
       .blocks {
         width: 30%;

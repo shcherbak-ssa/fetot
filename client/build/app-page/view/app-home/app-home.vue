@@ -7,7 +7,7 @@
       <content-section>
         <template v-slot:title>Modules</template>
         <template v-slot:content>
-          <module-item v-for="(item, index) in modulesViewStore" :key="index" :item="item"
+          <module-item v-for="(item, index) in modulesViewStore.home" :key="index" :item="item"
                        @module-item-click="moduleItemClickHandler"
           />
         </template>

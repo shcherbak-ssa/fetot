@@ -20,7 +20,7 @@
 				isModalOpen: false,
         modalOptions: {},
 
-        // appEventsEmitter: eventsEmitterWorker.getEmitter('app')
+        appEventsEmitter: eventsEmitterWorker.getEmitter('app')
       }
     },
     components: {
@@ -31,16 +31,17 @@
     methods: {
 			showModalHandler(modalOptions) {
 				this.modalOptions = {...modalOptions};
-				this.isModalOpen = true
+				this.isModalOpen = true;
+
+        this.appEventsEmitter.on('close-modal', this.closeModalHandler)
       },
 	    closeModalHandler() {
 				this.isModalOpen = false;
+		    this.appEventsEmitter.remove('close-modal', this.closeModalHandler)
       }
     },
     mounted() {
-	    eventsEmitterWorker.getEmitter('app')
-        .on('show-modal', this.showModalHandler)
-        .on('close-modal', this.closeModalHandler)
+	    this.appEventsEmitter.on('show-modal', this.showModalHandler)
     }
 	}
 </script>

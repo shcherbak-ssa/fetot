@@ -28,7 +28,7 @@
     @include position-gor-center;
 
     .txt, .fetot-icon {
-      font-size: 16px;
+      font-size: 14px;
     }
   }
 </style>
