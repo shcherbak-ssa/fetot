@@ -1,5 +1,5 @@
 <template>
-  <div class="menu-item pr bs cp w100 faic bfr-click" @click.stop="$emit('menu-item-click', item.label)">
+  <div class="menu-item pr bs cp w100 faic bfr-click" @click.stop="$emit('menu-item-click', item)">
     <fetot-icon :icon="item.icon"></fetot-icon>
     <div class="title">{{ item.title }}</div>
   </div>
@@ -13,7 +13,9 @@
     props: {
 			item: Object
     },
-    components: { 'fetot-icon': fetotIcon }
+    components: {
+			'fetot-icon': fetotIcon
+		}
 	}
 </script>
 
