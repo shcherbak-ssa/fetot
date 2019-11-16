@@ -15,7 +15,7 @@
 </template>
 
 <script>
-  import fetotCloseButton from '$fetot-view/buttons/fetot-close-button.vue';
+  import fetotCloseButton from '../components/buttons/fetot-close-button.vue';
   import menuHeader from './menu-header.vue';
 
 	export default {

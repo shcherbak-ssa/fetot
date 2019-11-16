@@ -8,8 +8,8 @@
 </template>
 
 <script>
-	import fetotTitle from '$fetot-view/text/fetot-title.vue';
-	import fetotIconClick from '$fetot-view/icons/fetot-icon-click.vue';
+	import fetotTitle from '../components/text/fetot-title.vue';
+	import fetotIconClick from '../components/icons/fetot-icon-click.vue';
 
 	export default {
 		name: 'block-header',

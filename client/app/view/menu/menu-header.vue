@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import fetotCloseIcon from '../icons/fetot-close-icon.vue';
+  import fetotCloseIcon from '../components/icons/fetot-close-icon.vue';
 
 	export default {
 		name: 'menu-header',

@@ -26,6 +26,7 @@ module.exports = (env) => {
 					'$fetot': path.resolve(appDirname, './fetot'),
 					'$fetot-scss': path.resolve(appDirname, './scss/src.scss'),
 					'$fetot-view': path.resolve(appDirname, './view'),
+					'$fetot-view-components': path.resolve(appDirname, './view/components'),
 					'$fetot-components': componentsDirname,
 					'$fetot-services': path.resolve(componentsDirname, './services'),
 					'$fetot-workers': path.resolve(componentsDirname, './workers'),
