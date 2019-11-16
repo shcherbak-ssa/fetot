@@ -1,11 +1,7 @@
 <template>
   <div class="block-footer w100 flex">
-    <div class="states">
-      <slot name="states"></slot>
-    </div>
-    <div class="date">
-      <slot name="date"></slot>
-    </div>
+    <slot name="states"></slot>
+    <slot name="date"></slot>
   </div>
 </template>
 
@@ -25,9 +21,5 @@
     height: 20px;
     justify-content: space-between;
     align-items: center;
-
-    .has-frame & {
-      display: none;
-    }
   }
 </style>

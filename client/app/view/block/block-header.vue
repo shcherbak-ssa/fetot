@@ -3,7 +3,7 @@
     <fetot-title>
       <slot></slot>
     </fetot-title>
-    <fetot-icon-click icon="&#xF141;"></fetot-icon-click>
+    <fetot-icon-click icon="&#xF141;" @fetot-icon-click="$emit('menu-event')"/>
   </div>
 </template>
 
@@ -37,7 +37,7 @@
       width: 32px;
       height: 32px;
 
-      [class*="block"]:hover & {
+      [class="block-container"]:hover & {
         opacity: 1;
       }
 

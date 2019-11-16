@@ -1,19 +1,23 @@
 <template>
-  <div class="common-block flexible bs br6px bg-fff hover_hov-sh">
-    <div class="border flex pr full">
-      <block-header>{{ block.title }}</block-header>
+  <div class="block-container flex pr flexible bs br6px bg-fff hover_hov-sh">
+    <block-header @menu-event="$emit('menu-event')">
+      <slot name="block-title"></slot>
+    </block-header>
 
-      <block-status-line></block-status-line>
+    <block-status-line></block-status-line>
 
-      <!--<component :is="setBlockContent"></component>-->
-      <div class="content cp pr" :class="textState" ref="content" @click.stop="contentClickHandler">
-        <div v-html="setBlockContent"></div>
-      </div>
-
-      <block-footer>
-        <template v-slot:date>{{ setBlockDate }}</template>
-      </block-footer>
+    <div class="content cp pr" :class="textState" ref="content" @click.stop="$emit('block-content-click')">
+      <slot name="block-content"></slot>
     </div>
+
+    <block-footer>
+      <template v-slot:states>
+        <slot name="block-states"></slot>
+      </template>
+      <template v-slot:date>
+        <slot name="block-date"></slot>
+      </template>
+    </block-footer>
   </div>
 </template>
 
@@ -22,10 +26,8 @@
   import blockStatusLine from './block-status-line.vue';
   import blockFooter from './block-footer.vue';
 
-  import blockViewWorker from '../../components/workers/block-view-worker';
-
 	export default {
-		name: 'common-block',
+		name: 'block-container',
     data() {
 			return {
 				textState: {
@@ -41,23 +43,10 @@
       'block-status-line': blockStatusLine,
       'block-footer': blockFooter
     },
-    methods: {
-	    contentClickHandler() {
-
-      }
-    },
-    computed: {
-	    setBlockContent() {
-	    	return blockViewWorker.preparingContent(this.block.data.content);
-      },
-      setBlockDate() {
-	    	return blockViewWorker.preparingDate(this.block.info.date)
-      }
-    },
     mounted() {
 	    const {content} = this.$refs;
 
-	    this.textState['text-overflow'] =
+	    this.textState['is-overflow'] =
 		    content.offsetHeight < content.children[0].offsetHeight
     }
 	}
@@ -66,8 +55,9 @@
 <style lang="scss" scoped>
   @import '$fetot-scss';
 
-  .common-block {
+  .block-container {
     flex-shrink: 0;
+    flex-direction: column;
     padding: 24px;
     margin-bottom: 24px;
     width: 360px;
@@ -79,9 +69,6 @@
       height: auto;
       max-height: 400px;
     }
-    .has-frame & {
-      //height: 32px;
-    }
 
     @media screen and (max-width: 1024px) {
       padding: 16px;
@@ -90,16 +77,13 @@
       width: 100%;
     }
   }
-  .border {
-    flex-direction: column;
-  }
   .content {
     color: $fetot-dark-gray;
     font: 16px 'roboto-medium';
     flex-grow: 1;
     overflow: hidden;
 
-    &.text-overflow::after {
+    &.is-overflow::after {
       background-image: linear-gradient(to top, #fff, transparent);
       bottom: 0;
       left: 0;
@@ -107,10 +91,6 @@
       width: 100%;
       height: 24px;
       @include psevdo-element;
-    }
-
-    .has-frame & {
-      display: none;
     }
   }
 </style>

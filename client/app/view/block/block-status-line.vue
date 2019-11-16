@@ -20,9 +20,5 @@
       background: $fetot-dark-gray-40;
       height: 2px;
     }
-
-    .has-frame & {
-      display: none;
-    }
   }
 </style>
