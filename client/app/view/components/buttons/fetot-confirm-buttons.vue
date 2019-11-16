@@ -1,9 +1,11 @@
 <template>
   <div class="fetot-confirm-buttons flex w100">
-    <confirm-button v-for="(item, index) in buttons"
-                    :key="index" :item="item"
-                    @confirm-event="confirmEventHandler">
-    </confirm-button>
+    <fetot-button @fetot-button-click="$emit('confirm-event', false)">
+      <fetot-icon icon="&#xE808;"></fetot-icon>
+    </fetot-button>
+    <fetot-button @fetot-button-click="$emit('confirm-event', true)">
+      <fetot-icon icon="&#xE807;"></fetot-icon>
+    </fetot-button>
   </div>
 </template>
 
@@ -13,30 +15,12 @@
 
 	export default {
 		name: 'fetot-confirm-buttons',
-    data() {
-			return {
-				buttons: [
-					{ icon: '&#xE808;', label: false },
-					{ icon: '&#xE807;', label: true }
-				]
-      }
-    },
-    components: {
-			'confirm-button': {
-				template: '<fetot-button @fetot-button-click="$emit(\'confirm-event\', item.label)">' +
-                    '<fetot-icon :icon="item.icon"></fetot-icon>' +
-                  '</fetot-button>',
-				props: { item: Object },
-				components: {
-					'fetot-button': fetotButton,
-					'fetot-icon': fetotIcon,
-        }
-			}
-    },
-    methods: {
-	    confirmEventHandler(label) {
-				this.$emit('confirm-event', label)
-      }
+		components: {
+			'fetot-button': fetotButton,
+			'fetot-icon': fetotIcon,
+		},
+    computed: {
+
     }
 	}
 </script>
@@ -49,7 +33,6 @@
 
     .fetot-button {
       font-size: 24px;
-      width: 92px;
       height: 36px;
     }
   }

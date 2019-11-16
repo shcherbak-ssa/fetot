@@ -1,15 +1,13 @@
 <template>
   <div class="modal-header w100 faic">
     <fetot-header-title :header="header"></fetot-header-title>
-    <fetot-close-icon @close-event="closeEventHandler"></fetot-close-icon>
+    <fetot-close-icon @close-event="$emit('close-event')"></fetot-close-icon>
   </div>
 </template>
 
 <script>
-  import fetotHeaderTitle from '$fetot-view/elements/fetot-header-title.vue';
-	import fetotCloseIcon from '$fetot-view/icons/fetot-close-icon.vue';
-
-  import eventsEmitterWorker from '$fetot-events-emitter';
+  import fetotHeaderTitle from '../components/elements/fetot-header-title.vue';
+	import fetotCloseIcon from '../components/icons/fetot-close-icon.vue';
 
 	export default {
 		name: 'modal-header',
@@ -19,12 +17,7 @@
 		components: {
 			'fetot-header-title': fetotHeaderTitle,
 			'fetot-close-icon': fetotCloseIcon,
-		},
-    methods: {
-	    closeEventHandler() {
-		    eventsEmitterWorker.getEmitter('app').emit('close-modal')
-      }
-    }
+		}
 	}
 </script>
 

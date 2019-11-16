@@ -1,11 +1,26 @@
 <template>
-  <div class="fetot-button br3px cp fc pr bfr-click" @click.stop="$emit('fetot-button-click')">
+  <div class="fetot-button br3px cp fc pr bfr-click"
+       :style="setButtonSize"
+       @click.stop="$emit('fetot-button-click')">
     <slot></slot>
   </div>
 </template>
 
 <script>
-  export default { name: 'fetot-button' }
+  export default {
+  	name: 'fetot-button',
+    props: {
+  		size: {
+  			type: Number,
+        default: 96
+      }
+    },
+    computed: {
+  		setButtonSize() {
+  			return { width: `${this.size}px` };
+      }
+    }
+  }
 </script>
 
 <style lang="scss">
