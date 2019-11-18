@@ -6,7 +6,8 @@
       <content-section>
         <template v-slot:title>Modules</template>
         <template v-slot:content>
-          <module-item v-for="(item, index) in modulesViewStore.home" :key="index" :item="item"
+          <module-item v-for="(item, index) in modulesViewStore.home"
+                       :key="index" :item="item"
                        @module-item-click="moduleItemClickHandler"
           />
         </template>
@@ -25,6 +26,7 @@
   import moduleItem from './module-item.vue';
 
   import modulesViewStore from '../../store/modules-view-store';
+  import currentModuleWorker from '../../components/workers/current-module-worker';
 
 	export default {
 		name: 'app-home',
@@ -49,7 +51,7 @@
 	    	isActive ? this.closeHome() : this.openHome()
       },
 	    moduleItemClickHandler(name) {
-	    	// currentModuleWorker.updateCurrentModule(name);
+	    	currentModuleWorker.updateCurrentModule(name);
 	    	this.closeButtonClickHandler();
       },
 			closeButtonClickHandler() {

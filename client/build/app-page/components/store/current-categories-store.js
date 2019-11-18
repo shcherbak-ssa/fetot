@@ -2,17 +2,16 @@
 
 /*** imports [begin] ***/
 
-import StoreInterface from '$fetot-store-interface';
-import {currentCategoriesStore} from './current-categories-worker';
+import StoreWorker from '$fetot-store-worker';
 
-import sendOutputMessageService from '../../services/send-output-message';
-import updateModuleDataService from '../../services/update-module-data';
+import sendOutputMessageService from '../services/send-output-message';
+import updateModuleDataService from '../services/update-module-data';
 
 /*** imports [end] ***/
 /*** init [begin] ***/
 
 const sendOutputMessage = sendOutputMessageService('category');
-const updateModuleData = updateModuleDataService('categories', currentCategoriesStore);
+const updateModuleData = updateModuleDataService('categories');
 
 /* store data */
 const state = {
@@ -60,18 +59,18 @@ const actions = {
 /*** init [end] ***/
 /*** exports [begin] ***/
 
-function createCurrentCategoryStore() {
-	StoreInterface.createStore('current-categories', {state, getters, mutations, actions})
+function createCurrentCategoriesStore() {
+	StoreWorker.createStore('current-categories', {state, getters, mutations, actions})
 }
 
 /*** exports [end] ***/
 /*** src [begin] ***/
 
 async function sendOutputMessageAndUpdateModuleData(type, message) {
-	updateModuleData();
+	updateModuleData( StoreWorker.getStore('current-categories') );
 	sendOutputMessage(type, message);
 }
 
 /*** src [end] ***/
 
-export default createCurrentCategoryStore;
+export {createCurrentCategoriesStore};

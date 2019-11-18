@@ -10,6 +10,9 @@ import OutputMessage from '$fetot-services/output-message';
 import StoreWorker from '$fetot-store-worker';
 
 import {createClientStore} from './components/store/client-store';
+import {createCurrentModuleStore} from './components/store/current-module-store';
+import {createCurrentBlocksStore} from './components/store/current-blocks-store';
+import {createCurrentCategoriesStore} from './components/store/current-categories-store';
 
 /*** imports [end] ***/
 /*** init [begin] ***/
@@ -18,16 +21,17 @@ import {createClientStore} from './components/store/client-store';
 Fetot.initStore();
 
 createClientStore();
+createCurrentModuleStore();
+createCurrentBlocksStore();
+createCurrentCategoriesStore();
 
 /* global registration of components */
-const requireComponent = require.context(
-	'$fetot-view', false, /\$[\w-]+\.vue$/);
+const requireComponent = require.context('../../app/view', true, /\$[\w-]+\.vue$/);
+console.log(requireComponent.keys());
 
 requireComponent.keys().forEach((filename) => {
 	const componentConfig = requireComponent(filename);
-	const componentName = filename
-		.replace(/^\.\/\$/, '')
-		.replace(/\.vue$/, '');
+	const componentName = filename.replace(/^\.\/[-\w]+\/\$/, '').replace(/\.vue$/, '');
 	
 	Vue.component(componentName, componentConfig.default || componentConfig)
 });

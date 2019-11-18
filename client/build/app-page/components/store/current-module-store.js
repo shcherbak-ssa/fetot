@@ -2,7 +2,7 @@
 
 /*** imports [begin] ***/
 
-import StoreInterface from '$fetot-store-interface';
+import StoreWorker from '$fetot-store-worker';
 
 /*** imports [end] ***/
 /*** init [begin] ***/
@@ -10,7 +10,6 @@ import StoreInterface from '$fetot-store-interface';
 const state = {
 	name: '',
 	config: {},
-	workers: {},
 	actives: {
 		category: -1,
 		block: -1
@@ -20,10 +19,9 @@ const state = {
 const getters = {};
 
 const mutations = {
-	UPDATE(state, {name, config, workers}) {
+	UPDATE(state, {name, config}) {
 		state.name = name;
 		state.config = {...config};
-		state.workers = {...workers};
 		
 		state.actives.category = -1;
 		state.actives.block = -1
@@ -45,12 +43,10 @@ const actions = {
 /*** init [end] ***/
 /*** exports [begin] ***/
 
-function initCurrentModuleStore() {
-	return StoreInterface.createStore('current-module', {
-		namespaced: true, state, getters, mutations, actions
-	});
+function createCurrentModuleStore() {
+	return StoreWorker.createStore('current-module', { state, getters, mutations, actions });
 }
 
 /*** exports [end] ***/
 
-export default initCurrentModuleStore;
+export {createCurrentModuleStore};

@@ -2,7 +2,10 @@
 
 /*** imports [begin] ***/
 
-import StoreInterface from '$fetot-store-interface';
+import StoreWorker from '$fetot-store-worker';
+
+import sendOutputMessageService from '../services/send-output-message';
+import updateModuleDataService from '../services/update-module-data';
 
 /*** imports [end] ***/
 /*** init [begin] ***/
@@ -48,11 +51,9 @@ const actions = {
 /*** exports [begin] ***/
 
 function createCurrentBlocksStore() {
-	return StoreInterface.createStore('current-blocks', {
-		namespaced: true, state, getters, mutations, actions
-	})
+	StoreWorker.createStore('current-blocks', { state, getters, mutations, actions })
 }
 
 /*** exports [end] ***/
 
-export default createCurrentBlocksStore;
+export {createCurrentBlocksStore};

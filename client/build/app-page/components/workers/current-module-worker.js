@@ -3,30 +3,26 @@
 /*** imports [begin] ***/
 
 import OutputMessage from '$fetot-services/output-message';
-
-import {clientStore} from '../client';
-import {currentCategoriesStore} from '../current-categories';
-import {currentBlocksStore} from '../current-blocks';
-
-import importModuleService from '../../services/import-module-service';
-
-import initCurrentModuleStore from './current-module-store';
+import StoreWorker from '$fetot-store-worker';
 
 /*** imports [end] ***/
-/*** init [begin] ***/
+/*** src [begin] ***/
 
-const currentModuleStore = initCurrentModuleStore();
+const clientStore = StoreWorker.getStore('client');
+const currentModuleStore = StoreWorker.getStore('current-module');
+const currentCategoriesStore = StoreWorker.getStore('current-categories');
+const currentBlocksStore = StoreWorker.getStore('current-blocks');
 
-/*** init [end] ***/
+/*** src [end] ***/
 /*** exports [begin] ***/
 
 const currentModuleWorker = {
 	async updateCurrentModule(name) {
 		if( currentModuleStore.state.name === name ) return ;
 		
-		const {categories, workers, blocks} = await this.changeModule(name);
+		const {categories, config, blocks} = await this.changeModule(name);
 		
-		currentModuleStore.actions.update({name, workers});
+		currentModuleStore.actions.update({name, config});
 		currentCategoriesStore.actions.update(categories);
 		currentBlocksStore.actions.update(blocks);
 	},
@@ -45,10 +41,10 @@ const currentModuleWorker = {
 		outputMessage.set('blocks', true);
 		
 		const {categories} = clientStore.state.modules[name];
-		const {config, workers} = await importModuleService(name);
+		const config = await importModule(name);
 		const {blocks} = await outputMessage.send();
 		
-		const $module = {categories, config, workers, blocks};
+		const $module = {categories, config, blocks};
 		await clientStore.actions.updateModule({name, $module});
 		
 		return $module;
@@ -56,5 +52,13 @@ const currentModuleWorker = {
 };
 
 /*** exports [end] ***/
+/*** src [begin] ***/
 
-export { currentModuleStore, currentModuleWorker };
+async function importModule(name) {
+	const $import = await import(`../../modules/${name}.js`);
+	return $import.default;
+}
+
+/*** src [end] ***/
+
+export default currentModuleWorker;

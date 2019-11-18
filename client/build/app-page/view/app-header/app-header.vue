@@ -3,7 +3,7 @@
     <hamburger-button :active="isActive" @hamburger-button-click="hamburgerButtonClickHandler"/>
 
     <transition name="change-module-title" mode="out-in">
-      <fetot-title>{{}}</fetot-title>
+      <fetot-title>{{ currentModuleName }}</fetot-title>
     </transition>
 
     <client-info></client-info>
@@ -33,10 +33,10 @@
       }
     },
     computed: {
-			// setCurrentModuleName() {
-			// 	const name = currentModuleStore.state.name;
-			// 	return this.isActive || !name ? '' : `${name[0].toUpperCase()}${name.slice(1)}`;
-      // }
+			currentModuleName() {
+				const name = StoreWorker.getStore('current-module').state.name;
+				return this.isActive || !name ? '' : `${name[0].toUpperCase()}${name.slice(1)}`;
+      }
     }
 	}
 </script>

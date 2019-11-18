@@ -2,14 +2,19 @@
 
 /*** imports [begin] ***/
 
-import {clientStore} from '../workers/client';
-import {currentModuleStore} from '../workers/current-module';
+import StoreWorker from '$fetot-store-worker';
 
 /*** imports [end] ***/
+/*** init [begin] ***/
+
+const clientStore = StoreWorker.getStore('client');
+const currentModuleStore = StoreWorker.getStore('current-module');
+
+/*** init [end] ***/
 /*** exports [begin] ***/
 
-function updateModuleDataService(key, store) {
-	return () => {
+function updateModuleDataService(key) {
+	return (store) => {
 		clientStore.actions.updateModuleKey({
 			name: currentModuleStore.state.name, key, value: store.state[key]
 		})

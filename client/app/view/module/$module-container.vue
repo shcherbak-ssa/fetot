@@ -21,6 +21,11 @@
     },
     components: {
 	    'create-block-button': createBlockButton,
+    },
+    computed: {
+			setState() {
+				return { 'has-frame': this.hasFrame }
+      }
     }
 	}
 </script>
