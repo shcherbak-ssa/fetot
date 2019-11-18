@@ -22,7 +22,7 @@
 </template>
 
 <script>
-  import fetotCloseButton from '$fetot-view/buttons/fetot-close-button.vue';
+  import fetotCloseButton from '$fetot-view-components/buttons/fetot-close-button.vue';
 
   import appHeader from '../app-header/app-header.vue';
   import contentSection from './content-section.vue';

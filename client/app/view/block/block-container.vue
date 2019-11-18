@@ -1,23 +1,30 @@
 <template>
-  <div class="block-container flex pr flexible bs br6px bg-fff hover_hov-sh">
+  <div class="block-container flex-col pr flexible bs br6px bg-fff hover_hov-sh">
     <block-header @menu-event="$emit('menu-event')">
       <slot name="block-title"></slot>
     </block-header>
 
-    <block-status-line></block-status-line>
+    <div class="workspace flex-col">
+      <slot name="block-menu"></slot>
 
-    <div class="content cp pr" :class="textState" ref="content" @click.stop="$emit('block-content-click')">
-      <slot name="block-content"></slot>
+      <div class="content flex-col">
+        <block-status-line></block-status-line>
+
+        <div class="data cp pr" :class="textState" ref="content" @click.stop="$emit('block-content-click')">
+          <slot name="block-content"></slot>
+        </div>
+
+        <block-footer>
+          <template v-slot:states>
+            <slot name="block-states"></slot>
+          </template>
+          <template v-slot:date>
+            <slot name="block-date"></slot>
+          </template>
+        </block-footer>
+
+      </div>
     </div>
-
-    <block-footer>
-      <template v-slot:states>
-        <slot name="block-states"></slot>
-      </template>
-      <template v-slot:date>
-        <slot name="block-date"></slot>
-      </template>
-    </block-footer>
   </div>
 </template>
 
@@ -57,7 +64,6 @@
 
   .block-container {
     flex-shrink: 0;
-    flex-direction: column;
     padding: 24px;
     margin-bottom: 24px;
     width: 360px;
@@ -77,20 +83,19 @@
       width: 100%;
     }
   }
-  .content {
+  .data {
     color: $fetot-dark-gray;
     font: 16px 'roboto-medium';
     flex-grow: 1;
     overflow: hidden;
-
-    &.is-overflow::after {
-      background-image: linear-gradient(to top, #fff, transparent);
-      bottom: 0;
-      left: 0;
-      z-index: 1;
-      width: 100%;
-      height: 24px;
-      @include psevdo-element;
-    }
+  }
+  .is-overflow::after {
+    background-image: linear-gradient(to top, #fff, transparent);
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 24px;
+    @include psevdo-element;
   }
 </style>

@@ -6,7 +6,7 @@
 </template>
 
 <script>
-	import fetotIcon from '$fetot-view/icons/fetot-icon.vue';
+	import fetotIcon from '$fetot-view-components/icons/fetot-icon.vue';
 
   export default {
 		name: 'module-item',

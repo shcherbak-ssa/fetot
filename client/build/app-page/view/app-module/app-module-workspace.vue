@@ -11,8 +11,6 @@
 </template>
 
 <script>
-  import commonBlock from '../block/common-block.vue';
-
   import {currentBlocksStore} from '../../components/workers/current-blocks';
   import {clientStore} from '../../components/workers/client';
 

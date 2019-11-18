@@ -3,16 +3,16 @@
     <div class="name">{{ client.fullname }}</div>
     <fetot-ava @fetot-ava-click="avaClickHandler" :fullname="client.fullname" size="46"/>
 
-    <menu-component v-if="isMenuOpen"
-                    :submenu="submenu" :list="appMenuService.list"
-                    @menu-event="menuEventHandler">
-    </menu-component>
+<!--    <menu-component v-if="isMenuOpen"-->
+<!--                    :submenu="submenu" :list="appMenuService.list"-->
+<!--                    @menu-event="menuEventHandler">-->
+<!--    </menu-component>-->
   </div>
 </template>
 
 <script>
-	import fetotAva from '$fetot-view/elements/fetot-ava.vue';
-	import menuComponent from '../menu/menu-component.vue';
+	import fetotAva from '$fetot-view-components/elements/fetot-ava.vue';
+	// import menuComponent from '../menu/menu-component.vue';
 
 	import {clientStore} from '../../components/workers/client';
 	import menuWorker from '../../components/workers/menu-worker';
@@ -30,7 +30,7 @@
 		},
     components: {
 			'fetot-ava': fetotAva,
-      'menu-component': menuComponent
+      // 'menu-component': menuComponent
     },
     methods: {
 	    avaClickHandler() {

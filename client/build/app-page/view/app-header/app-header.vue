@@ -11,7 +11,7 @@
 </template>
 
 <script>
-	import fetotTitle from '$fetot-view/text/fetot-title.vue';
+	import fetotTitle from '$fetot-view-components/text/fetot-title.vue';
 	import clientInfo from './client-info.vue';
 	import hamburgerButton from './hamburger-button.vue';
 

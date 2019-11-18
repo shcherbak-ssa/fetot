@@ -1,8 +1,6 @@
 <template>
   <div class="app-module pa bs flex" :class="setState">
     <div class="frame" v-if="hasFrame">
-      <component :is=""></component>
-      <frame-component :options="frameOptions"></frame-component>
     </div>
     <div class="blocks">
       <app-module-workspace></app-module-workspace>
@@ -29,15 +27,6 @@
 			return {
 				hasFrame: false,
         appEventsEmitter: eventsEmitterWorker.getEmitter('app'),
-
-        createBlockModalOptions: {
-					title: {},
-	        modalType: 'is-small',
-	        confirmHandler: '',
-	        contentData: {
-		        title: ''
-          }
-        }
       }
     },
     components: {
