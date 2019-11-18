@@ -1,5 +1,5 @@
 <template>
-  <div class="create-block-button cp fc  br50 bfr-click" @click.stop="$emit('create-block-event')">
+  <div class="create-block-button cp fc br50 bfr-click" @click.stop="$emit('create-block-event')">
     <fetot-icon icon="&#xE809;"></fetot-icon>
   </div>
 </template>
