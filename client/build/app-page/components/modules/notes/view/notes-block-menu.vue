@@ -12,17 +12,10 @@
 </template>
 
 <script>
-  import menuContainer from '$fetot-view/menu/menu-container.vue';
-  import menuItem from '$fetot-view/menu/menu-item.vue';
-
 	export default {
 		name: 'notes-block-menu',
     props: {
 			menu: Object
-    },
-    components: {
-			'menu-container': menuContainer,
-      'menu-item': menuItem
     },
     methods: {
 	    menuItemClickHandler(item) {

@@ -17,7 +17,6 @@
 </template>
 
 <script>
-  import blockContainer from '$fetot-view/block/block-container.vue';
   import notesBlockMenu from './notes-block-menu.vue';
 
   import drawBlockContent from '../components/draw-block-content';
@@ -34,7 +33,6 @@
 			block: Object
     },
     components: {
-			'block-container': blockContainer,
       'notes-block-menu': notesBlockMenu
     },
     computed: {
