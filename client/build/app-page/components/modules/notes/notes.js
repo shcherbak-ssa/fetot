@@ -2,14 +2,13 @@
 
 /*** imports [begin] ***/
 
-import notesConfig from './components/notes-config';
+import notesModuleView from './view/notes-module.vue';
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
 const notesModule = {
-	config: notesConfig,
-	workers: {}
+	view: notesModuleView
 };
 
 /*** exports [end] ***/

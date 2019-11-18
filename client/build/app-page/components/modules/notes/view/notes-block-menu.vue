@@ -3,7 +3,7 @@
     <template v-slot:menu-title>{{ menu.title }}</template>
 
     <template v-slot:menu-items>
-      <menu-item v-for="(item, index) in menu.items"
+      <menu-item v-for="(item, index) in menuItems"
                  :key="index" :item="item"
                  @menu-item-click="menuItemClickHandler">
       </menu-item>
@@ -12,10 +12,12 @@
 </template>
 
 <script>
+  import notesBlockMenuStore from '../store/notes-block-menu-store';
+
 	export default {
 		name: 'notes-block-menu',
     props: {
-			menu: Object
+			title: String
     },
     methods: {
 	    menuItemClickHandler(item) {
@@ -23,6 +25,11 @@
       },
 	    menuCloseEventHandler() {
 
+      }
+    },
+    computed: {
+			menuItems() {
+				return notesBlockMenuStore.items
       }
     }
 	}

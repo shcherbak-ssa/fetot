@@ -6,7 +6,7 @@
     <template v-slot:block-title>{{ block.title }}</template>
 
     <template v-slot:block-menu v-if="isMenuOpen">
-      <notes-block-menu :menu="block.menu"></notes-block-menu>
+      <notes-block-menu :title="block.title"></notes-block-menu>
     </template>
 
     <template v-slot:block-content>{{ drawContent }}</template>
