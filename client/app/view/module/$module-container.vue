@@ -17,7 +17,7 @@
 	export default {
 		name: 'module-container',
     props: {
-	    hasFrame: false,
+	    hasFrame: Boolean,
     },
     components: {
 	    'create-block-button': createBlockButton,
