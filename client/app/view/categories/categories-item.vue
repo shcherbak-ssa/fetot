@@ -1,14 +1,15 @@
 <template>
-  <div class="category-item pr fc cp" :class="setActive" @click="$emit('select-category-event', item.index)">
+  <div class="categories-item pr fc cp" :class="setActive"
+       @click="$emit('select-category-event', item.index)">
     {{ item.name.toUpperCase() }}
   </div>
 </template>
 
 <script>
-	import {currentModuleStore} from '../../components/workers/current-module';
+  import StoreInterface from '../../components/store-interface';
 
 	export default {
-		name: 'category-item',
+		name: 'categories-item',
     props: {
 			item: {
 				type: Object,
@@ -21,7 +22,7 @@
     },
 		computed: {
 			setActive() {
-				const activeCategory = currentModuleStore.state.actives.category;
+				const activeCategory = StoreInterface.getStore('client').actives.category;
 				return { 'is-active': activeCategory === this.item.index }
 			}
 		}
@@ -31,7 +32,7 @@
 <style lang="scss" scoped>
   @import '$fetot-scss';
 
-  .category-item {
+  .categories-item {
     color: $fetot-dark-blue;
     font: 18px 'roboto-medium';
     width: 120px;

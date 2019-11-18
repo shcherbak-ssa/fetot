@@ -2,40 +2,47 @@
 
 /*** exports [begin] ***/
 
-class StoreInterface {
-	constructor(path) {
-		this.state = StoreInterface.Store.state[path];
-		
-		this.getters = new Proxy({path}, {
-			get(target, prop) {
-				return (options) => {
-					let getter = [target.path, prop].join('/');
-					return StoreInterface.Store.getters[getter](options);
-				}
-			}
-		});
-		
-		this.actions = new Proxy({path}, {
-			get(target, prop) {
-				return async (options) => {
-					let dispatch = [target.path, prop].join('/');
-					return await StoreInterface.Store.dispatch(dispatch, options);
-				}
-			}
-		});
-	}
+const StoreInterface = {
+	store: {},
+	storeCollection: new Map(),
 	
-	/* static */
-	static Store = {};
-	static createStore(path, data) {
-		StoreInterface.Store.registerModule(path, data);
-		return new StoreInterface(path);
+	getStore(path) {
+		return this.storeCollection.get(path);
+	},
+	createStore(path, store) {
+		this.store.registerModule(path, { namespaced: true, ...store });
+		this.storeCollection.set(path, createInterfaceByProxy(path));
+	},
+	removeStore(path) {
+		this.store.unregisterModule(path);
+		this.storeCollection.delete(path);
 	}
-	static removeStore(path) {
-		StoreInterface.Store.unregisterModule(path)
-	}
-}
+};
 
 /*** exports [end] ***/
+/*** src [begin] ***/
+
+function createInterfaceByProxy(path) {
+	return new Proxy({}, {
+		get(target, prop) {
+			switch( true ) {
+				case prop.startsWith('$'):
+					return async (options) => {
+						const dispatch = [path, prop].join('/');
+						return await StoreInterface.store.dispatch(dispatch, options);
+					};
+				case prop.startsWith('get'):
+					return (options) => {
+						const getter = [path, prop].join('/');
+						return StoreInterface.store.getters[getter](options)
+					};
+				default:
+					return StoreInterface.store.state[path];
+			}
+		}
+	})
+}
+
+/*** src [end] ***/
 
 export default StoreInterface;

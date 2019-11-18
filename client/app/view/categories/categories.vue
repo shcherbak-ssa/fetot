@@ -9,24 +9,22 @@
     </categories-menu>
 
     <div class="content flex">
-      <category-item :isDefault="true" @select-category-event="selectCategoryHandler"/>
+      <categories-item :isDefault="true" @select-category-event="selectCategoryHandler"/>
 
-      <category-item v-for="(name, index) in getCategories"
+      <categories-item v-for="(name, index) in currentCategories"
                      :key="index" :item="{name, index}"
                      @select-category-event="selectCategoryHandler">
-      </category-item>
+      </categories-item>
     </div>
   </div>
 </template>
 
 <script>
-  import fetotIconClick from '$fetot-view/icons/fetot-icon-click.vue';
-
-  import categoryItem from './category-item.vue';
+  import fetotIconClick from '../components/icons/fetot-icon-click.vue';
+  import categoriesItem from './categories-item.vue';
   import categoriesMenu from './categories-menu.vue';
 
-  import {currentCategoriesStore} from '../../components/workers/current-categories';
-  import {currentModuleStore} from '../../components/workers/current-module';
+  import StoreInterface from '../../components/store-interface';
 
 	export default {
 		name: 'categories',
@@ -37,24 +35,17 @@
     },
     components: {
 	    'fetot-icon-click': fetotIconClick,
-			'category-item': categoryItem,
+			'categories-item': categoriesItem,
       'categories-menu': categoriesMenu
     },
     methods: {
 	    toggleMenuOpen() {
 		    this.isMenuOpen = !this.isMenuOpen;
 	    },
-
-			async selectCategoryHandler(index) {
-	    	await currentModuleStore.actions.updateActives({
-          key: 'category',
-          value: index
-	    	})
-      },
     },
     computed: {
-			getCategories() {
-				return currentCategoriesStore.state.categories
+			currentCategories() {
+				return StoreInterface.getStore('current-categories').categories
       }
     }
 	}
