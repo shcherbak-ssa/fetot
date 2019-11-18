@@ -20,17 +20,15 @@ const config = {
 			},
 			defaultBlock: {
 				title: 'How to use',
-				data: {
-					content: [
-						'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, illum?',
-						[
-							'Lorem ipsum dolor',
-							'Doloribus, eos nam.',
-							'Magnam, unde, voluptates.'
-						],
-						'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum, eveniet?'
-					]
-				},
+				content: [
+					'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, illum?',
+					[
+						'Lorem ipsum dolor',
+						'Doloribus, eos nam.',
+						'Magnam, unde, voluptates.'
+					],
+					'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum, eveniet?'
+				],
 				info: {
 					date: Date.now()
 				}
