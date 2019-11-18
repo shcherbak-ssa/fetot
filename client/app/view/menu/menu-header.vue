@@ -1,5 +1,5 @@
 <template>
-  <div class="menu-header w100 flex">
+  <div class="menu-header bs w100 faic">
     <fetot-title>
       <slot name="menu-header-title"></slot>
     </fetot-title>
@@ -24,7 +24,11 @@
   @import '$fetot-scss';
 
   .menu-header {
-    margin-bottom: 20px;
-    justify-content: right;
+    padding: 16px 24px;
+    justify-content: space-between;
+
+    .fetot-title {
+      font-size: 20px;
+    }
   }
 </style>

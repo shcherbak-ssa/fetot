@@ -1,7 +1,7 @@
 <template>
   <div class="menu-item pr bs cp w100 faic bfr-click" @click.stop="$emit('menu-item-click', item)">
     <fetot-icon :icon="item.icon"></fetot-icon>
-    <div class="title">{{ item.title }}</div>
+    <div class="title">{{ item.name }}</div>
   </div>
 </template>
 

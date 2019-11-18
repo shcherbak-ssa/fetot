@@ -1,12 +1,12 @@
 <template>
   <block-container
-          @block-contanet-click="blockContentClickHandler"
+          @block-content-click="blockContentClickHandler"
           @open-menu-event="openMenuEventHandler">
 
     <template v-slot:block-title>{{ block.title }}</template>
 
     <template v-slot:block-menu v-if="isMenuOpen">
-      <notes-block-menu :title="block.title"></notes-block-menu>
+      <notes-block-menu :title="block.title" @close-menu-event="closeMenuEventHandler"></notes-block-menu>
     </template>
 
     <template v-slot:block-content>
@@ -48,8 +48,19 @@
       }
     },
     methods: {
-	    openMenuEventHandler() {},
-	    blockContentClickHandler() {}
+	    /* menu */
+			openMenuEventHandler() {
+	    	console.log('open-menu-event');
+	    	this.isMenuOpen = true;
+      },
+	    closeMenuEventHandler() {
+		    console.log('close-menu-event');
+		    this.isMenuOpen = false;
+      },
+
+	    blockContentClickHandler() {
+	    	console.log('block-content-click-handler')
+      }
     }
 	}
 </script>

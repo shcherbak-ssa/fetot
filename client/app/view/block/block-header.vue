@@ -37,7 +37,7 @@
       width: 32px;
       height: 32px;
 
-      [class="block-container"]:hover & {
+      [class*="block-container"]:hover & {
         opacity: 1;
       }
 

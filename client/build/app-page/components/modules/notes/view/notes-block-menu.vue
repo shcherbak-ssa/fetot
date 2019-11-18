@@ -1,6 +1,6 @@
 <template>
-  <menu-container @menu-close-event="menuCloseEventHandler">
-    <template v-slot:menu-title>{{ menu.title }}</template>
+  <menu-container @close-menu-event="$emit('close-menu-event')">
+    <template v-slot:menu-title>{{ title }}</template>
 
     <template v-slot:menu-items>
       <menu-item v-for="(item, index) in menuItems"
