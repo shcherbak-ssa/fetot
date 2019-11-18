@@ -1,6 +1,6 @@
 <template>
   <div class="block-container flex-col pr flexible bs br6px bg-fff hover_hov-sh">
-    <block-header @menu-event="$emit('menu-event')">
+    <block-header @open-menu-event="$emit('open-menu-event')">
       <slot name="block-title"></slot>
     </block-header>
 

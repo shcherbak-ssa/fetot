@@ -1,10 +1,5 @@
 'use strict';
 
-/*** imports [begin] ***/
-
-import trueType from '$fetot-services/true-type';
-
-/*** imports [end] ***/
 /*** init [begin] ***/
 
 const listStyles = 'padding-left:30px;margin-bottom:10px';
@@ -12,16 +7,21 @@ const listStyles = 'padding-left:30px;margin-bottom:10px';
 /*** init [end] ***/
 /*** exports [begin] ***/
 
-const drawBlockContentService = {
-	getContentItemType(contentItem) {
-		return trueType.get(contentItem);
+const drawBlock = {
+	content: {
+		getParagraph(paragraph) {
+			return `<p style="margin-bottom: 10px;">${paragraph}</p>`
+		},
+		getList(list) {
+			return (typeof list[0] === 'boolean' )
+				? getNumberedList(list) : getMarkedList(list);
+		}
 	},
-	getParagraph(paragraph) {
-		return `<p style="margin-bottom: 10px;">${paragraph}</p>`
-	},
-	getList(list) {
-		return (typeof list[0] === 'boolean' )
-			? getNumberedList(list) : getMarkedList(list);
+	info: {
+		getDate(date) {
+			date = new Date(date);
+			return `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`
+		}
 	}
 };
 
@@ -41,4 +41,4 @@ function preparingListItems(list) {
 
 /*** src [end] ***/
 
-export default drawBlockContentService;
+export default drawBlock;

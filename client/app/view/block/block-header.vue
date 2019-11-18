@@ -3,7 +3,7 @@
     <fetot-title>
       <slot></slot>
     </fetot-title>
-    <fetot-icon-click icon="&#xF141;" @fetot-icon-click="$emit('menu-event')"/>
+    <fetot-icon-click icon="&#xF141;" @fetot-icon-click="$emit('open-menu-event')"/>
   </div>
 </template>
 
