@@ -3,7 +3,7 @@
     <hamburger-button :active="isActive" @hamburger-button-click="hamburgerButtonClickHandler"/>
 
     <transition name="change-module-title" mode="out-in">
-      <fetot-title>{{ setCurrentModuleName }}</fetot-title>
+      <fetot-title>{{}}</fetot-title>
     </transition>
 
     <client-info></client-info>
@@ -15,7 +15,7 @@
 	import clientInfo from './client-info.vue';
 	import hamburgerButton from './hamburger-button.vue';
 
-	import {currentModuleStore} from '../../components/workers/current-module';
+	import StoreWorker from '$fetot-store-worker';
 
 	export default {
 		name: 'app-header',
@@ -33,10 +33,10 @@
       }
     },
     computed: {
-			setCurrentModuleName() {
-				const name = currentModuleStore.state.name;
-				return this.isActive || !name ? '' : `${name[0].toUpperCase()}${name.slice(1)}`;
-      }
+			// setCurrentModuleName() {
+			// 	const name = currentModuleStore.state.name;
+			// 	return this.isActive || !name ? '' : `${name[0].toUpperCase()}${name.slice(1)}`;
+      // }
     }
 	}
 </script>

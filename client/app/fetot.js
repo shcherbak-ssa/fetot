@@ -5,34 +5,43 @@
 import Vue from 'vue/dist/vue';
 import Vuex from 'vuex';
 
-import './scss/main.scss';
 import fetotContainer from './view/fetot-container.vue';
 
-import initFetotEvents from './components/init-fetot-events';
-import StoreInterface from './components/store-interface';
+import StoreWorker from './components/workers/store-worker';
+import OutputMessage from './components/services/output-message';
 
 /*** imports [end] ***/
 /*** init [begin] ***/
 
-initFetotEvents();
+import './scss/main.scss';
+
+window.addEventListener("unload", function() {
+	const message = new OutputMessage({messageType: 'close'}).getMessage();
+	navigator.sendBeacon('/', JSON.stringify(message));
+}, false);
 
 /*** init [end] ***/
 /*** exports [begin] ***/
 
-async function initFetot() {
+function initStore() {
 	Vue.use(Vuex);
-	StoreInterface.Store = new Vuex.Store({modules: {}});
-	
+	StoreWorker.store = new Vuex.Store({modules: {}});
+}
+async function initFetot() {
 	return new Vue({
 		el: '#ftt',
-		data() {
-			return { pageComponent: '' }
-		},
 		template: '<fetot-container :pageComponent="pageComponent"/>',
-		components: { 'fetot-container': fetotContainer }
+		data() {
+			return {
+				pageComponent: ''
+			}
+		},
+		components: {
+			'fetot-container': fetotContainer
+		}
 	})
 }
 
 /*** exports [end] ***/
 
-export default { init: initFetot };
+export default { init: initFetot, initStore };

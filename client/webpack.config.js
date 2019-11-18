@@ -31,7 +31,7 @@ module.exports = (env) => {
 					'$fetot-services': path.resolve(componentsDirname, './services'),
 					'$fetot-workers': path.resolve(componentsDirname, './workers'),
 					'$fetot-events-emitter': path.resolve(componentsDirname, './events-emitter'),
-					'$fetot-store-interface': path.resolve(componentsDirname, './store-interface')
+					'$fetot-store-worker': path.resolve(componentsDirname, './workers/store-worker')
 				}
 			},
 		}

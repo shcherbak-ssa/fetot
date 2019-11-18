@@ -1,9 +1,8 @@
 <template>
   <div class="app-home bg-fff pa bs hover_hov-sh" :class="states">
-    <!-- content -->
     <app-header :isActive="states['is-active']" @hamburger-button-click="hamburgerButtonClickHandler"/>
 
-    <div class="workspace flex bs pa">
+    <div class="home flex bs pa">
       <content-section>
         <template v-slot:title>Modules</template>
         <template v-slot:content>
@@ -14,10 +13,7 @@
       </content-section>
     </div>
 
-    <!-- src -->
     <fetot-close-button @fetot-close-button-click="closeButtonClickHandler">close home</fetot-close-button>
-    <categories></categories>
-
   </div>
 </template>
 
@@ -27,10 +23,8 @@
   import appHeader from '../app-header/app-header.vue';
   import contentSection from './content-section.vue';
   import moduleItem from './module-item.vue';
-  import categories from '../categories/categories.vue';
 
   import modulesViewStore from '../../store/modules-view-store';
-  import {currentModuleWorker} from '../../components/workers/current-module';
 
 	export default {
 		name: 'app-home',
@@ -46,18 +40,16 @@
     },
     components: {
 			'fetot-close-button': fetotCloseButton,
-
 	    'app-header': appHeader,
       'module-item': moduleItem,
-      'content-section': contentSection,
-	    'categories': categories
+      'content-section': contentSection
     },
     methods: {
 	    hamburgerButtonClickHandler(isActive) {
 	    	isActive ? this.closeHome() : this.openHome()
       },
 	    moduleItemClickHandler(name) {
-	    	currentModuleWorker.updateCurrentModule(name);
+	    	// currentModuleWorker.updateCurrentModule(name);
 	    	this.closeButtonClickHandler();
       },
 			closeButtonClickHandler() {
@@ -116,14 +108,14 @@
       .fetot-close-button {
         opacity: 0;
       }
-      .workspace {
+      .home {
         transition: .4s;
         top: -60vh;
         opacity: 0;
       }
     }
   }
-  .workspace {
+  .home {
     padding-top: 32px;
     transition: .4s;
     width: calc(100% - 256px);

@@ -4,22 +4,18 @@
 
 import $localStorage from '../services/local-storage';
 import OutputMessage from '../services/output-message';
-import eventsEmitterWorker from '../events-emitter';
 
 /*** imports [end] ***/
 /*** exports [begin] ***/
 
-function connectionRequest(responseHandler) {
-	let client = $localStorage.item.has('client') ? $localStorage.item('client') : false;
-	let {type, connection} = currentPageOptions;
+function connectionRequest() {
+	const client = $localStorage.item.has('client') ? $localStorage.item('client') : false;
+	const {type, connection} = currentPageOptions;
 	
-	let outputMessage = new OutputMessage({messageType: 'connection', type});
+	const outputMessage = new OutputMessage({messageType: 'connection', type});
 	outputMessage.set('client', client).set('connection', connection);
 	
-	eventsEmitterWorker.getEmitter('fetot').emit('send-output-message', {
-		outputMessage,
-		handler: responseHandler
-	})
+	return outputMessage.send();
 }
 
 /*** exports [end] ***/

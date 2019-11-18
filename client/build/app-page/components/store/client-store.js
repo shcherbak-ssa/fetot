@@ -3,7 +3,7 @@
 /*** imports [begin] ***/
 
 import $localStorage from '$fetot-services/local-storage';
-import StoreInterface from '$fetot-store-interface';
+import StoreWorker from '$fetot-store-worker';
 
 /*** imports [end] ***/
 /*** init [begin] ***/
@@ -20,8 +20,9 @@ const mutations = {
 		state.config = {...config, ...$localStorage.item('client')};
 		
 		for( let [name, $module] of Object.entries(modules) )
-			state.modules[name] = {...$module, blocks: [], workers: { init: false }};
+			state.modules[name] = {...$module, blocks: [], init: false};
 	},
+	
 	UPDATE_MODULE(state, {name, $module}) {
 		state.modules[name] = {...$module}
 	},
@@ -34,6 +35,7 @@ const actions = {
 	async init(context, options) {
 		context.commit('INIT', options);
 	},
+	
 	async updateModule(context, options) {
 		context.commit('UPDATE_MODULE', options);
 	},
@@ -42,7 +44,7 @@ const actions = {
 	},
 	
 	hasModule(context, name) {
-		return 'init' in context.state.modules[name].workers;
+		return 'init' in context.state.modules[name];
 	}
 };
 
@@ -50,11 +52,9 @@ const actions = {
 /*** exports [begin] ***/
 
 function createClientStore() {
-	return StoreInterface.createStore('client', {
-		namespaced: true, state, getters, mutations, actions
-	})
+	StoreWorker.createStore('client', { state, getters, mutations, actions });
 }
 
 /*** exports [end] ***/
 
-export default createClientStore;
+export {createClientStore};
