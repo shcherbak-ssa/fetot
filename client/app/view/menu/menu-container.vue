@@ -1,6 +1,10 @@
 <template>
   <div class="menu-container flex-col w100 pa bs bg-fff br6px">
-    <menu-header @close-event="$emit('menu-close-event')"></menu-header>
+    <menu-header @close-event="$emit('menu-close-event')">
+      <template v-slot:menu-header-title>
+        <slot name="menu-title"></slot>
+      </template>
+    </menu-header>
 
     <div class="menu-content w100 flex-col">
       <slot name="submenu"></slot>
@@ -20,17 +24,9 @@
 
 	export default {
 		name: 'menu-container',
-    props: {
-			list: Array
-    },
     components: {
 			'fetot-close-button': fetotCloseButton,
       'menu-header': menuHeader
-    },
-    methods: {
-	    menuItemClickHandler(item) {
-	    	this.$emit('menu-event', item)
-      }
     }
 	}
 </script>
