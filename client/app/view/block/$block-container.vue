@@ -42,9 +42,6 @@
         }
       }
     },
-    props: {
-			block: Object
-    },
     components: {
 			'block-header': blockHeader,
       'block-status-line': blockStatusLine,
@@ -52,7 +49,6 @@
     },
     mounted() {
 	    const {content} = this.$refs;
-
 	    this.textState['is-overflow'] =
 		    content.offsetHeight < content.children[0].offsetHeight
     }

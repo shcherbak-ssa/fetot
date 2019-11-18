@@ -9,9 +9,13 @@
       <notes-block-menu :title="block.title"></notes-block-menu>
     </template>
 
-    <template v-slot:block-content>{{ drawContent }}</template>
+    <template v-slot:block-content>
+      <div v-html="drawContent"></div>
+    </template>
 
-    <template v-slot:block-date>{{ drawDate }}</template>
+    <template v-slot:block-date>
+      <div v-html="drawDate"></div>
+    </template>
 
   </block-container>
 </template>
@@ -40,7 +44,7 @@
 				return drawBlockContent(this.block.content)
       },
       drawDate() {
-				return drawBlockInfo.date(this.block.date);
+				return drawBlockInfo.date(this.block.info.date);
       }
     },
     methods: {

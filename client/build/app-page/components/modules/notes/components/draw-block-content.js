@@ -9,8 +9,7 @@ import drawBlockService from '$fetot-services/draw-block';
 /*** exports [begin] ***/
 
 function drawBlockContent(content) {
-	content = content.map(parseContentItem);
-	return content.join('');
+	return content.map(parseContentItem).join('');
 }
 
 /*** exports [end] ***/

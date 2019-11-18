@@ -1,7 +1,11 @@
 <template>
   <div class="block-footer w100 flex">
-    <slot name="states"></slot>
-    <slot name="date"></slot>
+    <slot name="states">
+      <div></div>
+    </slot>
+    <slot name="date">
+      <div></div>
+    </slot>
   </div>
 </template>
 
