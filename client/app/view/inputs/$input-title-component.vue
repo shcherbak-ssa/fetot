@@ -1,6 +1,7 @@
 <template>
   <div class="input-title-component bg-fff br3px w100 pr flex" :class="setState">
     <input type="text" class="input bs pr full" ref="input"
+           :value="input.value"
            @focus="focusHandler"
            @blur="blurHandler"
            @input="inputHandler"
@@ -33,8 +34,12 @@
     },
     methods: {
 	    inputHandler({target}) {
-	    	this.hasValue = target.value !== '';
-	    	this.$emit('input-title-event', target.value);
+	    	const {value} = target;
+
+	    	this.hasValue = value !== '';
+	    	this.input.value = value;
+
+	    	this.$emit('input-title-event', value);
       },
 
 	    focusHandler() {
@@ -53,7 +58,10 @@
       }
     },
     mounted() {
-			if( this.inFocus ) this.$refs.input.focus();
+			const {input} = this.$refs;
+
+			if( this.inFocus ) input.focus();
+			if( input.value !== '' ) this.hasValue = true;
     }
 	}
 </script>
@@ -64,10 +72,15 @@
   .input-title-component {
     height: 42px;
     transition: .2s;
-    font: 18px 'roboto-bold';
+    font: 24px 'roboto-bold';
 
     &.is-active, &:hover {
       @include static-shadow;
+
+      .fetot-icon {
+        left: -28px;
+        opacity: 1;
+      }
     }
     &.has-value {
       .ph {
@@ -79,11 +92,14 @@
 
   .fetot-icon {
     color: $fetot-dark-blue;
+    font-size: 16px;
     width: 24px;
     height: 24px;
+    transition: .2s;
     position: absolute;
     top: 9px;
-    left: -24px;
+    left: 24px;
+    opacity: 0;
   }
   .input {
     color: $fetot-dark-blue;

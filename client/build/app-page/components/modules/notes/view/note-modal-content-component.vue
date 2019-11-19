@@ -1,8 +1,9 @@
 <template>
   <div class="note-modal-content-component">
-    <input-title-component :in-focus="true"
-                           :input="{placeholder: 'Enter new note title'}"
-                           @input-title-event="inputTitleEventHandler">
+    <input-title-component
+            :in-focus="true"
+            :input="input"
+            @input-title-event="inputTitleEventHandler">
     </input-title-component>
   </div>
 </template>
@@ -14,6 +15,10 @@
 		name: 'note-modal-content-component',
 		data() {
 			return {
+				input: {
+					placeholder: 'Enter new note title',
+          value: ''
+        },
 				currentNoteStore: StoreWorker.getStore('current-note')
       }
     },

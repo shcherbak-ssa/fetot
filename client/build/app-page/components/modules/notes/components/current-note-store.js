@@ -23,6 +23,9 @@ const getters = {
 	},
 	content(state) {
 		return () => state.note.content;
+	},
+	date(state) {
+		return () => +state.note.info.date;
 	}
 };
 

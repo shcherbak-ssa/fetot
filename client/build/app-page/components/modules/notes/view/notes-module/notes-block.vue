@@ -14,17 +14,17 @@
     </template>
 
     <template v-slot:block-date>
-      <div v-html="drawDate"></div>
+      <fetot-date :date="noteDate"></fetot-date>
     </template>
 
   </block-container>
 </template>
 
 <script>
+  import fetotDate from '$fetot-view-components/elements/fetot-date.vue';
   import notesBlockMenu from './notes-block-menu.vue';
 
   import drawBlockContent from '../../components/draw-block-content';
-  import drawBlockInfo from '../../components/draw-block-info';
 
 	export default {
 		name: 'notes-block',
@@ -37,14 +37,15 @@
 			block: Object
     },
     components: {
+			'fetot-date': fetotDate,
       'notes-block-menu': notesBlockMenu
     },
     computed: {
 			drawContent() {
 				return drawBlockContent(this.block.content)
       },
-      drawDate() {
-				return drawBlockInfo.date(this.block.info.date);
+      noteDate() {
+				return this.block.info.date
       }
     },
     methods: {

@@ -1,8 +1,9 @@
 <template>
   <div class="modal-container full pa">
     <div class="modal bs br6px bg-fff pc flex-col" :class="options.modalType">
-      <modal-header :header="options.header"
-                    @close-event="$emit('close-modal-event')">
+      <modal-header
+              :header="options.header"
+              @close-event="$emit('close-modal-event')">
       </modal-header>
 
       <div class="modal-content bs w100">
@@ -46,6 +47,6 @@
     }
   }
   .modal-content {
-    padding: 42px;
+    padding: 42px 24px;
   }
 </style>

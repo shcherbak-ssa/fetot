@@ -10,10 +10,7 @@
   export default {
   	name: 'fetot-button',
     props: {
-  		size: {
-  			type: Number,
-        default: 96
-      }
+  		size: Number
     },
     computed: {
   		setButtonSize() {

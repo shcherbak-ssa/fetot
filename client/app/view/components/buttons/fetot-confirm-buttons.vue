@@ -1,9 +1,9 @@
 <template>
   <div class="fetot-confirm-buttons flex w100">
-    <fetot-button @fetot-button-click="$emit('confirm-event', false)">
+    <fetot-button :size="size" @fetot-button-click="$emit('confirm-event', false)">
       <fetot-icon icon="&#xE808;"></fetot-icon>
     </fetot-button>
-    <fetot-button @fetot-button-click="$emit('confirm-event', true)">
+    <fetot-button :size="size" @fetot-button-click="$emit('confirm-event', true)">
       <fetot-icon icon="&#xE807;"></fetot-icon>
     </fetot-button>
   </div>
@@ -15,6 +15,12 @@
 
 	export default {
 		name: 'fetot-confirm-buttons',
+		props: {
+			size: {
+				type: Number,
+				default: 96
+			}
+		},
 		components: {
 			'fetot-button': fetotButton,
 			'fetot-icon': fetotIcon,

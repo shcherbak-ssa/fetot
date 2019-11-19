@@ -1,6 +1,6 @@
 <template>
   <div class="note-modal-footer-component">
-    <fetot-confirm-buttons @confirm-event="confirmEventHandler"></fetot-confirm-buttons>
+    <fetot-confirm-buttons :size="132" @confirm-event="confirmEventHandler"></fetot-confirm-buttons>
   </div>
 </template>
 
@@ -21,4 +21,4 @@
 	}
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss"></style>

@@ -1,5 +1,7 @@
 <template>
   <div class="notes-frame-content bs">
+    <content-workspace-header></content-workspace-header>
+
     <div class="workspace"></div>
 
     <frame-tools
@@ -11,6 +13,7 @@
 </template>
 
 <script>
+  import contentWorkspaceHeader from './content-workspace-header.vue';
   import notesFrameToolsStore from '../../store/notes-frame-tools-store';
 
 	export default {
@@ -20,6 +23,9 @@
 				isFrameToolsActive: false,
 				tools: notesFrameToolsStore
       }
+    },
+    components: {
+			'content-workspace-header': contentWorkspaceHeader
     },
     methods: {
 	    toolsItemClickHandler(label) {
@@ -33,6 +39,6 @@
   @import '$fetot-scss';
 
   .notes-frame-content {
-    padding: 42px 96px;
+    padding: 24px 96px 42px;
   }
 </style>
