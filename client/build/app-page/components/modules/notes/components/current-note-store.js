@@ -17,7 +17,14 @@ const state = {
 	}
 };
 
-const getters = {};
+const getters = {
+	title(state) {
+		return state.note.title;
+	},
+	content(state) {
+		return state.note.content;
+	}
+};
 
 const mutations = {
 	UPDATE(state, data) {

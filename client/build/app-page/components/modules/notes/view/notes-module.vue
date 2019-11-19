@@ -33,7 +33,7 @@
 	    createNoteEventHandler() {
 	    	this.appEventsEmitter.emit(
 	    		'open-modal-event',
-          this.currentModuleStore.state.config.modalCreateBlockConfig
+          this.currentModuleStore.state.config.createNoteModalConfig
         );
 	    	this.notesEventsEmitter.on(
 	    		'create-note-confirm',
