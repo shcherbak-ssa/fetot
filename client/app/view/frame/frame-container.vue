@@ -3,10 +3,10 @@
     <frame-header :header="options.header"
                   @close-event="$emit('close-frame-event')">
     </frame-header>
-    <div class="container full">
-      <div class="content">
+    <div class="container">
+<!--      <div class="content">-->
         <slot name="frame-content"></slot>
-      </div>
+<!--      </div>-->
     </div>
   </div>
 </template>
@@ -31,17 +31,14 @@
   .frame-container {
     border-radius: 6px 6px 0 0;
     transition: .4s;
+    overflow: hidden;
     @include static-shadow;
 
     .container {
-      /*overflow: hidden;*/
-
-      .content {
-        height: 100%;
-        width: calc(100% + 17px);
-        overflow-y: scroll;
-        overflow-x: hidden;
-      }
+      height: calc(100% - 68px);
+      width: calc(100% + 17px);
+      overflow-y: scroll;
+      overflow-x: hidden;
     }
   }
 </style>
