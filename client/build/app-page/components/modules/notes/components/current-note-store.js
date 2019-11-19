@@ -19,10 +19,10 @@ const state = {
 
 const getters = {
 	title(state) {
-		return state.note.title;
+		return () => state.note.title;
 	},
 	content(state) {
-		return state.note.content;
+		return () => state.note.content;
 	}
 };
 

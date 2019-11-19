@@ -23,8 +23,8 @@
 <script>
   import notesBlockMenu from './notes-block-menu.vue';
 
-  import drawBlockContent from '../components/draw-block-content';
-  import drawBlockInfo from '../components/draw-block-info';
+  import drawBlockContent from '../../components/draw-block-content';
+  import drawBlockInfo from '../../components/draw-block-info';
 
 	export default {
 		name: 'notes-block',

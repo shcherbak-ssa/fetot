@@ -1,10 +1,12 @@
 <template>
-  <div class="frame-container bs w100 bg-fff hover_hov-sh">
+  <div class="frame-container bs full bg-fff hover_hov-sh">
     <frame-header :header="options.header"
                   @close-event="$emit('close-frame-event')">
     </frame-header>
-    <div class="content w100">
-      <slot name="frame-content"></slot>
+    <div class="container full">
+      <div class="content">
+        <slot name="frame-content"></slot>
+      </div>
     </div>
   </div>
 </template>
@@ -28,13 +30,18 @@
 
   .frame-container {
     border-radius: 6px 6px 0 0;
-    height: 100%;
     transition: .4s;
     @include static-shadow;
 
-    /*.content {*/
-    /*  overflow-y: scroll;*/
-    /*  overflow-x: hidden;*/
-    /*}*/
+    .container {
+      /*overflow: hidden;*/
+
+      .content {
+        height: 100%;
+        width: calc(100% + 17px);
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+    }
   }
 </style>

@@ -12,7 +12,7 @@
 </template>
 
 <script>
-  import notesBlockMenuStore from '../store/notes-block-menu-store';
+  import notesBlockMenuStore from '../../store/notes-block-menu-store';
 
 	export default {
 		name: 'notes-block-menu',
