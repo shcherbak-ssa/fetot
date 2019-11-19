@@ -3,10 +3,8 @@
     <frame-header :header="options.header"
                   @close-event="$emit('close-frame-event')">
     </frame-header>
-    <div class="container">
-<!--      <div class="content">-->
-        <slot name="frame-content"></slot>
-<!--      </div>-->
+    <div class="container pr">
+      <slot name="frame-content"></slot>
     </div>
   </div>
 </template>
