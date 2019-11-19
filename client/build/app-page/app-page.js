@@ -27,7 +27,6 @@ createCurrentCategoriesStore();
 
 /* global registration of components */
 const requireComponent = require.context('../../app/view', true, /\$[\w-]+\.vue$/);
-console.log(requireComponent.keys());
 
 requireComponent.keys().forEach((filename) => {
 	const componentConfig = requireComponent(filename);

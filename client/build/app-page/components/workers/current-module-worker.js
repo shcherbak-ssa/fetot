@@ -25,6 +25,8 @@ const currentModuleWorker = {
 		currentModuleStore.actions.update({name, config});
 		currentCategoriesStore.actions.update(categories);
 		currentBlocksStore.actions.update(blocks);
+		
+		config.init();
 	},
 	
 	async changeModule(name) {

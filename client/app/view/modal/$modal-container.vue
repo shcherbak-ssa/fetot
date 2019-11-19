@@ -1,7 +1,9 @@
 <template>
   <div class="modal-container full pa">
-    <div class="modal bs br6px bg-fff pc flex-col" :class="modalType">
-      <modal-header :header="header" @close-event="$emit('close-event')"></modal-header>
+    <div class="modal bs br6px bg-fff pc flex-col" :class="options.modalType">
+      <modal-header :header="options.header"
+                    @close-event="$emit('close-modal-event')">
+      </modal-header>
 
       <div class="modal-content bs w100">
         <slot name="modal-content"></slot>
@@ -20,8 +22,7 @@
 	export default {
 		name: 'modal-container',
     props: {
-			modalType: String,
-      header: Object
+			options: Object
     },
     components: {
 			'modal-header': modalHeader
@@ -44,7 +45,7 @@
       width: 420px;
     }
   }
-  .modal-content, .modal-footer {
+  .modal-content {
     padding: 42px;
   }
 </style>

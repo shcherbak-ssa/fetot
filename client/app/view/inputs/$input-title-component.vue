@@ -1,18 +1,17 @@
 <template>
   <div class="input-title-component bg-fff br3px w100 pr flex" :class="setState">
-    <input type="text" class="input bs pr full"
-           ref="input" :value="title"
+    <input type="text" class="input bs pr full" ref="input"
            @focus="focusHandler"
            @blur="blurHandler"
            @input="inputHandler"
     >
     <fetot-icon icon="&#xF1DC;"></fetot-icon>
-    <div class="ph">Title</div>
+    <div class="ph">{{ input.placeholder }}</div>
   </div>
 </template>
 
 <script>
-  import fetotIcon from '$fetot-view/icons/fetot-icon.vue';
+  import fetotIcon from '../components/icons/fetot-icon.vue';
 
 	export default {
 		name: 'input-title-component',
@@ -23,7 +22,7 @@
       }
     },
     props: {
-			title: String,
+			input: Object,
       inFocus: {
 				type: Boolean,
         default: false
