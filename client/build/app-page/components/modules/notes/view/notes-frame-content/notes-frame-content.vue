@@ -1,8 +1,7 @@
 <template>
   <div class="notes-frame-content bs">
-    <content-workspace-header></content-workspace-header>
-
-    <div class="workspace"></div>
+    <notes-frame-content-header></notes-frame-content-header>
+    <notes-frame-content-workspace></notes-frame-content-workspace>
 
     <frame-tools
             :tools="tools"
@@ -13,7 +12,9 @@
 </template>
 
 <script>
-  import contentWorkspaceHeader from './content-workspace-header.vue';
+  import notesFrameContentHeader from './notes-frame-content-header.vue';
+  import notesFrameContentWorkspace from './notes-frame-content-workspace.vue';
+
   import notesFrameToolsStore from '../../store/notes-frame-tools-store';
 
 	export default {
@@ -25,7 +26,8 @@
       }
     },
     components: {
-			'content-workspace-header': contentWorkspaceHeader
+			'notes-frame-content-header': notesFrameContentHeader,
+      'notes-frame-content-workspace': notesFrameContentWorkspace
     },
     methods: {
 	    toolsItemClickHandler(label) {

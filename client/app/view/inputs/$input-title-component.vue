@@ -6,13 +6,13 @@
            @blur="blurHandler"
            @input="inputHandler"
     >
-    <fetot-icon icon="&#xF1DC;"></fetot-icon>
+    <fetot-input-icon icon="&#xF1DC;"></fetot-input-icon>
     <div class="ph">{{ input.placeholder }}</div>
   </div>
 </template>
 
 <script>
-  import fetotIcon from '../components/icons/fetot-icon.vue';
+  import fetotInputIcon from '../components/icons/fetot-input-icon.vue';
 
 	export default {
 		name: 'input-title-component',
@@ -30,7 +30,7 @@
       }
     },
     components: {
-			'fetot-icon': fetotIcon
+			'fetot-input-icon': fetotInputIcon
     },
     methods: {
 	    inputHandler({target}) {
@@ -70,14 +70,16 @@
   @import '$fetot-scss';
 
   .input-title-component {
+    color: $fetot-dark-blue;
     height: 42px;
-    transition: .2s;
+    transition: .4s;
     font: 24px 'roboto-bold';
+    z-index: 1;
 
     &.is-active, &:hover {
       @include static-shadow;
 
-      .fetot-icon {
+      .fetot-input-icon {
         left: -28px;
         opacity: 1;
       }
@@ -89,23 +91,10 @@
       }
     }
   }
-
-  .fetot-icon {
-    color: $fetot-dark-blue;
-    font-size: 16px;
-    width: 24px;
-    height: 24px;
-    transition: .2s;
-    position: absolute;
-    top: 9px;
-    left: 24px;
-    opacity: 0;
-  }
   .input {
-    color: $fetot-dark-blue;
+    color: inherit;
     padding-left: 10px;
-    flex-grow: 1;
-    z-index: 1;
+    z-index: 2;
     @include form-element;
   }
   .ph {

@@ -1,5 +1,5 @@
 <template>
-  <div class="frame-header bs faic w100">
+  <div class="frame-header pr bs faic w100">
     <fetot-header-title :header="header"></fetot-header-title>
     <fetot-close-icon @close-event="$emit('close-event')"></fetot-close-icon>
   </div>
@@ -25,6 +25,7 @@
   @import '$fetot-scss';
 
   .frame-header {
+    z-index: 10;
     padding: 16px 24px;
     justify-content: space-between;
     @include static-shadow;

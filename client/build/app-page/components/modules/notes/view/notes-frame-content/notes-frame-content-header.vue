@@ -1,5 +1,5 @@
 <template>
-  <div class="content-workspace-header w100">
+  <div class="notes-frame-content-header w100">
     <div class="info w100 faic">
       <fetot-date :date="noteDate"></fetot-date>
       <div class="category"></div>
@@ -17,7 +17,7 @@
   import StoreWorker from '$fetot-store-worker';
 
 	export default {
-		name: 'content-workspace-header',
+		name: 'notes-frame-content-header',
     data() {
 			return {
 				currentNoteStore: StoreWorker.getStore('current-note')
@@ -48,7 +48,7 @@
 <style lang="scss" scoped>
   @import '$fetot-scss';
 
-  .content-workspace-header {
+  .notes-frame-content-header {
     margin-bottom: 24px;
   }
   .info {

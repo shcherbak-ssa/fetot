@@ -18,7 +18,8 @@ function drawBlockContent(content) {
 function parseContentItem(contentItem) {
 	switch( trueType.get(contentItem) ) {
 		case 'String':
-			return drawBlockService.content.getParagraph(contentItem);
+			return contentItem[0] === 'p'
+				? drawBlockService.content.getParagraph(contentItem.slice(1)) : '';
 		case 'Array':
 			return drawBlockService.content.getList(contentItem)
 	}
