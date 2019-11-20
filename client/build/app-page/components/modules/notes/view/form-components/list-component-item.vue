@@ -1,11 +1,11 @@
 <template>
   <input-container :data="setInputContainerData">
     <textarea-component
+            :value="value"
             :on-focus="onFocus"
             @textarea-focus="focusHandler"
             @textarea-blur="blurHandler"
             @textarea-input="inputHandler">
-      {{ value }}
     </textarea-component>
   </input-container>
 </template>
@@ -35,8 +35,5 @@
   .input-container {
     padding-left: 10px;
     margin-bottom: 10px;
-  }
-  .input {
-    @include form-element;
   }
 </style>

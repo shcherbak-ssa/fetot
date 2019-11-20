@@ -25,6 +25,7 @@
   import notesBlockMenu from './notes-block-menu.vue';
 
   import drawBlockContent from '../../components/draw-block-content';
+  import StoreWorker from '$fetot-store-worker';
 
 	export default {
 		name: 'notes-block',
@@ -51,16 +52,22 @@
     methods: {
 	    /* menu */
 			openMenuEventHandler() {
-	    	console.log('open-menu-event');
 	    	this.isMenuOpen = true;
+	    	this.setCurrentNoteStore();
       },
 	    closeMenuEventHandler() {
-		    console.log('close-menu-event');
 		    this.isMenuOpen = false;
       },
 
+      /* block */
 	    blockContentClickHandler() {
-	    	console.log('block-content-click-handler')
+	    	this.setCurrentNoteStore();
+	    	this.$emit('block-click-event')
+      },
+
+      /* src */
+      setCurrentNoteStore() {
+      	StoreWorker.getStore('current-note').actions.update(this.block);
       }
     }
 	}

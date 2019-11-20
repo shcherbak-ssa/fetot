@@ -1,10 +1,19 @@
 <template>
   <div class="notes-frame-content-workspace-item">
-    <paragraph-component v-if="type === 'paragraph'" :value="data"></paragraph-component>
+    <paragraph-component
+            v-if="type === 'paragraph'" :value="data"
+            @blur-event="paragraphBlurEventHandler">
+    </paragraph-component>
 
-    <list-component v-else-if="type === 'num-list'" :is-num="true" :list="data"></list-component>
+    <list-component
+            v-else-if="type === 'num-list'"
+            :is-num="true" :list="data">
+    </list-component>
 
-    <list-component v-else-if="type === 'mark-list'" :is-num="false" :list="data"></list-component>
+    <list-component
+            v-else-if="type === 'mark-list'"
+            :is-num="false" :list="data">
+    </list-component>
   </div>
 </template>
 
@@ -29,6 +38,11 @@
 			'paragraph-component': paragraphComponent,
       'list-component': listComponent
 		},
+    methods: {
+	    paragraphBlurEventHandler(value) {
+
+      }
+    },
     beforeMount() {
 			switch( trueType.get(this.item) ) {
 				case 'String':
@@ -36,10 +50,8 @@
 					this.data = this.item.slice(1);
 					break;
         case 'Array':
-        	this.type = this.item[0] ? 'num-list' : 'mark-list';
-        	if( this.type === 'num-list' ) this.item.shift();
-
-        	this.data = this.item;
+        	this.type = typeof this.item[0] === 'boolean' ? 'num-list' : 'mark-list';
+        	this.data = this.type === 'num-list' ? this.item.filter((it, i) => i !== 0) : this.item;
 			}
     }
 	}

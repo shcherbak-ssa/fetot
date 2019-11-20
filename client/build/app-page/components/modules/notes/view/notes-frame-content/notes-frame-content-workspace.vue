@@ -1,6 +1,9 @@
 <template>
   <div class="notes-frame-content-workspace w100">
-    <notes-frame-content-workspace-item item="pText"></notes-frame-content-workspace-item>
+    <notes-frame-content-workspace-item
+            v-for="(item, index) in noteContent"
+            :key="index" :item="item">
+    </notes-frame-content-workspace-item>
   </div>
 </template>
 
@@ -10,7 +13,7 @@
 
 	export default {
 		name: 'notes-frame-content-workspace',
-    date() {
+    data() {
 			return {
 				currentNoteStore: StoreWorker.getStore('current-note')
       }

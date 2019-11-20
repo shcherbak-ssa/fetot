@@ -9,6 +9,7 @@ import StoreWorker from '$fetot-store-worker';
 
 const state = {
 	note: {
+		id: '',
 		title: '',
 		content: [],
 		info: {

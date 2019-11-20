@@ -3,15 +3,14 @@
             ref="textarea"
             @input.stop="inputHandler"
             @focus.stop="$emit('textarea-focus')"
-            @blur.stop="$emit('textarea-blur', $event.target.value)">
-    <slot></slot>
-  </textarea>
+            @blur.stop="$emit('textarea-blur', $event.target.value)">{{ value }}</textarea>
 </template>
 
 <script>
 	export default {
 		name: 'textarea-component',
     props: {
+			value: String,
 			onFocus: Boolean
     },
     methods: {

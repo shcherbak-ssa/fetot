@@ -10,8 +10,10 @@
     </template>
 
     <template v-slot:module-blocks>
-      <notes-block v-for="(block, index) in currentBlocks"
-                   :key="index" :block="block">
+      <notes-block
+              v-for="(block, index) in currentBlocks"
+              :key="index" :block="block"
+              @block-click-event="openFrameHandler">
       </notes-block>
     </template>
   </module-container>
