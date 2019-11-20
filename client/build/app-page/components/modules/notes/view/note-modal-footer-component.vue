@@ -1,5 +1,5 @@
 <template>
-  <div class="note-modal-footer-component">
+  <div class="note-modal-footer-component bs">
     <fetot-confirm-buttons :size="132" @confirm-event="confirmEventHandler"></fetot-confirm-buttons>
   </div>
 </template>
@@ -21,4 +21,8 @@
 	}
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+  .note-modal-footer-component {
+    padding: 0 16px;
+  }
+</style>

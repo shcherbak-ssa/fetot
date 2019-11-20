@@ -1,13 +1,11 @@
 <template>
   <div class="notes-frame-content-workspace w100">
-    <paragraph text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, nam?"></paragraph>
-    <paragraph text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur dolorum ducimus ipsa iste quia quo."></paragraph>
-    <paragraph text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam cumque doloremque nisi odio quo veritatis."></paragraph>
+    <notes-frame-content-workspace-item item="pText"></notes-frame-content-workspace-item>
   </div>
 </template>
 
 <script>
-  import paragraph from '../form-components/paragraph.vue';
+  import notesFrameContentWorkspaceItem from './notes-frame-content-workspace-item.vue';
   import StoreWorker from '$fetot-store-worker';
 
 	export default {
@@ -18,7 +16,7 @@
       }
     },
     components: {
-			paragraph
+			'notes-frame-content-workspace-item': notesFrameContentWorkspaceItem
     },
     computed: {
 			noteContent() {

@@ -1,23 +1,22 @@
 <template>
-  <div class="paragraph w100 bs pr br6px bg-fff" :class="setState">
-    <textarea class="ta full"
+  <input-container :data="setInputContainerData">
+    <textarea class="ta w100"
               ref="textarea"
               @input="inputHandler"
               @focus="focusHandler"
               @blur="blurHandler">{{ text }}</textarea>
-
-    <fetot-input-icon icon="&#xE824;"></fetot-input-icon>
-  </div>
+  </input-container>
 </template>
 
 <script>
   import fetotInputIcon from '$fetot-view-components/icons/fetot-input-icon.vue';
 
 	export default {
-		name: 'paragraph',
+		name: 'paragraph-component',
     data() {
 			return {
 				isActive: false,
+        hasValue: false
       }
     },
     props: {
@@ -38,7 +37,8 @@
 	    	this.isActive = false;
         this.$emit('paragraph-blur', this.text)
       },
-      inputHandler() {
+      inputHandler({target}) {
+	    	this.hasValue = target.value !== '';
 	      this.textareaResize();
       },
 
@@ -51,12 +51,19 @@
       }
     },
     computed: {
-			setState() {
-				return { 'is-active': this.isActive }
-      }
+	    setInputContainerData() {
+		    return {
+			    icon: '&#xE824;',
+			    placeholder: 'Paragraph',
+			    isActive: this.isActive,
+			    hasValue: this.hasValue
+		    }
+	    }
     },
     mounted() {
 			if( this.onFocus ) this.$refs.textarea.focus();
+
+			this.hasValue = this.text !== '';
 	    this.textareaResize();
     }
 	}
@@ -65,30 +72,14 @@
 <style lang="scss" scoped>
   @import '$fetot-scss';
 
-  .paragraph {
-    color: $fetot-dark-gray;
-    font: 18px 'roboto-medium';
-    padding: 10px;
+  .input-container {
     margin-bottom: 6px;
-    transition: .4s;
-    z-index: 1;
-
-    &.is-active, &:hover {
-      @include static-shadow;
-
-      .fetot-input-icon {
-        left: -28px;
-        opacity: 1;
-      }
-    }
+    padding: 10px;
   }
   .fetot-input-icon {
     font-size: 20px;
   }
   .ta {
-    color: inherit;
-    font: inherit;
-    min-height: 42px;
     resize: none;
     @include form-element;
   }

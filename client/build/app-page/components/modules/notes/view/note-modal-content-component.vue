@@ -1,7 +1,7 @@
 <template>
   <div class="note-modal-content-component">
     <input-title-component
-            :in-focus="true"
+            :on-focus="true"
             :input="input"
             @input-title-event="inputTitleEventHandler">
     </input-title-component>
