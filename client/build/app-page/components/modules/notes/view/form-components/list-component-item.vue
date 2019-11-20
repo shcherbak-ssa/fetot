@@ -11,21 +11,21 @@
 </template>
 
 <script>
-  import textareaComponentMixin from './src/textarea-component-mixin';
+	import textareaComponentMixin from './src/textarea-component-mixin';
 
 	export default {
-		name: 'paragraph-component',
+		name: 'list-component-item',
 		mixins: [textareaComponentMixin],
-    computed: {
-	    setInputContainerData() {
-		    return {
-			    icon: '&#xE824;',
-			    placeholder: 'Paragraph',
-			    isActive: this.isActive,
-			    hasValue: this.hasValue
-		    }
-	    }
-    }
+		computed: {
+			setInputContainerData() {
+				return {
+					icon: '',
+					placeholder: 'List item',
+					isActive: this.isActive,
+					hasValue: this.hasValue
+				}
+			}
+		}
 	}
 </script>
 
@@ -33,10 +33,10 @@
   @import '$fetot-scss';
 
   .input-container {
-    margin-bottom: 6px;
-    padding: 10px;
+    padding-left: 10px;
+    margin-bottom: 10px;
   }
-  .fetot-input-icon {
-    font-size: 20px;
+  .input {
+    @include form-element;
   }
 </style>

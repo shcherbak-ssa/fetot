@@ -1,8 +1,9 @@
 <template>
-  <module-container :has-frame="hasFrame"
-                    :frame-options="frameOptions"
-                    @close-frame-event="closeFrameEventHandler"
-                    @create-block-event="createNoteEventHandler">
+  <module-container
+          :has-frame="hasFrame"
+          :frame-options="frameOptions"
+          @close-frame-event="closeFrameEventHandler"
+          @create-block-event="createNoteEventHandler">
 
     <template v-slot:module-frame-content>
       <notes-frame-content></notes-frame-content>
