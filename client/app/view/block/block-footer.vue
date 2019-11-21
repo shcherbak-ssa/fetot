@@ -19,7 +19,6 @@
   @import '$fetot-scss';
 
   .block-footer {
-    margin-top: 10px;
     height: 20px;
     justify-content: space-between;
     align-items: center;

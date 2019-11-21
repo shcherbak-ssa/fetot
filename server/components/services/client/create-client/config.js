@@ -16,7 +16,11 @@ const config = {
 		{
 			collectionItem: {
 				name: 'notes',
-				categories: []
+				categories: [],
+				settings: {
+					blocksSizeType: 0,
+					blocksCount: 1
+				}
 			},
 			defaultBlock: {
 				title: 'How to use',
@@ -31,6 +35,9 @@ const config = {
 				],
 				info: {
 					date: Date.now()
+				},
+				config: {
+					position: 1
 				}
 			}
 		}

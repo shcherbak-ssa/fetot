@@ -1,6 +1,8 @@
 <template>
   <block-container
-          @block-content-click="blockContentClickHandler"
+          :size-type="blocksSizeType"
+          :position="blockPosition"
+          @block-content-click="editNoteEventHandler"
           @open-menu-event="openMenuEventHandler">
 
     <template v-slot:block-title>{{ block.title }}</template>
@@ -29,14 +31,20 @@
   import fetotDate from '$fetot-view-components/elements/fetot-date.vue';
   import notesBlockMenu from './notes-block-menu.vue';
 
-  import drawBlockContent from '../../components/draw-block-content';
+  import eventsEmitterWorker from '$fetot-events-emitter';
   import StoreWorker from '$fetot-store-worker';
+
+  import drawBlockContent from '../../components/draw-block-content';
+  import {blocksPositions} from '../../../../workers/blocks-positions-worker';
 
 	export default {
 		name: 'notes-block',
     data() {
 			return {
-				isMenuOpen: false
+				isMenuOpen: false,
+
+        currentNoteStore: StoreWorker.getStore('current-note'),
+        notesEventsEmitter: eventsEmitterWorker.getEmitter('notes')
       }
     },
     props: {
@@ -52,7 +60,15 @@
       },
       noteDate() {
 				return this.block.info.date
-      }
+      },
+
+      /* block container props */
+      blocksSizeType() {
+      	return StoreWorker.getStore('current-module').getters.settingsByKey('blocksSizeType')
+      },
+	    blockPosition() {
+		    return blocksPositions === null ? {} : blocksPositions[ this.currentNoteStore.getters.position() ]
+	    }
     },
     methods: {
 	    /* menu */
@@ -67,22 +83,16 @@
       /* menu event */
 	    editNoteEventHandler() {
 	    	this.closeMenuEventHandler();
-	    	this.$emit('edit-note-event');
+	    	this.notesEventsEmitter.emit('edit-note-event');
       },
 	    deleteNoteEventHandler() {
 	    	this.closeMenuEventHandler();
-	    	this.$emit('delete-note-event', this.block.id)
-      },
-
-      /* block */
-	    blockContentClickHandler() {
-	    	this.setCurrentNoteStore();
-	    	this.$emit('edit-note-event')
+		    this.notesEventsEmitter.emit('delete-note-event', this.block.id);
       },
 
       /* src */
       setCurrentNoteStore() {
-      	StoreWorker.getStore('current-note').actions.update(this.block);
+      	this.currentNoteStore.actions.update(this.block);
       }
     }
 	}

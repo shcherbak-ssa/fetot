@@ -5,12 +5,6 @@
 import StoreWorker from '$fetot-store-worker';
 
 /*** imports [end] ***/
-/*** init [begin] ***/
-
-// const clientStore = StoreWorker.getStore('client');
-// const currentModuleStore = StoreWorker.getStore('current-module');
-
-/*** init [end] ***/
 /*** exports [begin] ***/
 
 function updateModuleDataService(key) {
@@ -19,7 +13,7 @@ function updateModuleDataService(key) {
 		const currentModuleStore = StoreWorker.getStore('current-module');
 		
 		clientStore.actions.updateModuleKey({
-			name: currentModuleStore.state.name, key, value: store.state[key]
+			name: currentModuleStore.getters.name(), key, value: store.state[key]
 		})
 	}
 }

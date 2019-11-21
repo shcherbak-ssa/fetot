@@ -1,13 +1,13 @@
 <template>
   <div class="module-container pa bs flex" :class="setState">
-    <div class="frame" v-if="hasFrame">
-      <frame-container :options="frameOptions" @close-frame-event="$emit('close-frame-event')">
-        <template v-slot:frame-content>
-          <slot name="module-frame-content"></slot>
-        </template>
-      </frame-container>
-    </div>
-    <div class="blocks w100 flex">
+<!--    <div class="frame" v-if="hasFrame">-->
+<!--      <frame-container :options="frameOptions" @close-frame-event="$emit('close-frame-event')">-->
+<!--        <template v-slot:frame-content>-->
+<!--          <slot name="module-frame-content"></slot>-->
+<!--        </template>-->
+<!--      </frame-container>-->
+<!--    </div>-->
+    <div class="blocks pr">
       <slot name="module-blocks"></slot>
     </div>
 
@@ -41,33 +41,33 @@
   @import '$fetot-scss';
 
   .module-container {
-    padding: 148px 128px 0;
+    padding: 140px 0 0;
     width: calc(100% + 17px);
     height: 100%;
     z-index: 1;
     overflow-y: scroll;
     overflow-x: hidden;
 
-    @media screen and (max-width: 1024px) {
-      width: 100%;
-    }
-    @media screen and (max-width: 419px) {
-      padding: 148px 6.25% 0;
-    }
-
     .blocks {
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
+      width: 1128px;
+      margin: 0 auto;
 
-    &.has-frame {
-      justify-content: space-around;
-
-      .frame {
-        width: 60%;
+      .has-frame & {
+        margin: 0;
+        position: absolute;
+        top: 128px;
+        right: calc((100vw - 1128px) / 2);
       }
-      .blocks {
-        width: 30%;
+
+      @media screen and (max-width: 1279px) {
+        width: 360px;
+
+        .has-frame & {
+          right: -350px;
+        }
+      }
+      @media screen and (max-width: 419px) {
+        width: 280px;
       }
     }
   }

@@ -1,12 +1,15 @@
 <template>
-  <div class="block-container flex-col pr flexible bs br6px bg-fff hover_hov-sh">
+  <div class="block-container pa bs br6px bg-fff hover_hov-sh"
+       :class="currentSize"
+       :style="position">
+
     <block-header @open-menu-event="$emit('open-menu-event')">
       <slot name="block-title"></slot>
     </block-header>
 
     <slot name="block-menu"></slot>
 
-    <div class="workspace flex-col">
+    <div class="workspace w100">
       <block-status-line></block-status-line>
 
       <div class="data cp pr" :class="textState" ref="content" @click.stop="$emit('block-content-click')">
@@ -39,10 +42,22 @@
         }
       }
     },
+    props: {
+			sizeType: Number,
+      position: {
+				type: Object,
+        default: {}
+      }
+    },
     components: {
 			'block-header': blockHeader,
       'block-status-line': blockStatusLine,
       'block-footer': blockFooter
+    },
+    computed: {
+	    currentSize() {
+	    	return ['is-normal', 'is-small', 'is-list', 'is-flexible',][this.sizeType];
+      }
     },
     mounted() {
 	    const {content} = this.$refs;
@@ -60,35 +75,59 @@
     padding: 24px;
     margin-bottom: 24px;
     width: 360px;
-    height: 222px;
     transition: .4s;
     @include static-shadow;
 
-    &.flexible {
+    &.is-normal {
+      height: 222px;
+    }
+    &.is-small {
+      height: 122px;
+
+      .data {
+        height: 0;
+        opacity: 0;
+        margin: 0;
+      }
+    }
+    &.is-flexible {
       height: auto;
       max-height: 400px;
     }
+    &.is-list {
+      height: 80px;
 
-    @media screen and (max-width: 1024px) {
-      padding: 16px;
+      .workspace {
+        height: 0;
+        opacity: 0;
+        margin: 0;
+      }
     }
-    @media screen and (max-width: 392px) {
+
+    @media screen and (max-width: 1279px) {
       width: 100%;
     }
+  }
+  .workspace {
+    transition: .4s;
+    overflow: hidden;
   }
   .data {
     color: $fetot-dark-gray;
     font: 16px 'roboto-medium';
     flex-grow: 1;
     overflow: hidden;
-  }
-  .is-overflow::after {
-    background-image: linear-gradient(to top, #fff, transparent);
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-    width: 100%;
-    height: 24px;
-    @include psevdo-element;
+    transition: .4s;
+    margin-bottom: 10px;
+
+    &.is-overflow::after {
+      background-image: linear-gradient(to top, #fff, transparent);
+      bottom: 0;
+      left: 0;
+      z-index: 1;
+      width: 100%;
+      height: 24px;
+      @include psevdo-element;
+    }
   }
 </style>

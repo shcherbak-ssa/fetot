@@ -34,7 +34,7 @@
     },
     computed: {
 			currentModuleName() {
-				const name = StoreWorker.getStore('current-module').state.name;
+				const name = StoreWorker.getStore('current-module').getters.name();
 				return this.isActive || !name ? '' : `${name[0].toUpperCase()}${name.slice(1)}`;
       }
     }

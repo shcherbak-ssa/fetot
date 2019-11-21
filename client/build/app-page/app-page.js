@@ -9,6 +9,7 @@ import connectionRequest from '$fetot-components/network/connection-request';
 import OutputMessage from '$fetot-services/output-message';
 import StoreWorker from '$fetot-store-worker';
 
+import {createPageStore} from './components/store/page-store';
 import {createClientStore} from './components/store/client-store';
 import {createCurrentModuleStore} from './components/store/current-module-store';
 import {createCurrentBlocksStore} from './components/store/current-blocks-store';
@@ -20,6 +21,7 @@ import {createCurrentCategoriesStore} from './components/store/current-categorie
 /* init store */
 Fetot.initStore();
 
+createPageStore();
 createClientStore();
 createCurrentModuleStore();
 createCurrentBlocksStore();

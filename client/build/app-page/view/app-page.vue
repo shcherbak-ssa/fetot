@@ -1,5 +1,5 @@
 <template>
-  <div class="app-page pr full">
+  <div class="app-page pr full" ref="page">
     <app-home></app-home>
     <component :is="currentModuleComponent"></component>
 
@@ -28,11 +28,14 @@
     data() {
 			return {
 				isModalOpen: false,
+
 				modalOptions: {},
         modalContentComponent: '',
         modalFooterComponent: '',
 
-        appEventsEmitter: eventsEmitterWorker.getEmitter('app')
+        appEventsEmitter: eventsEmitterWorker.getEmitter('app'),
+
+        documentWidth: ''
       }
     },
     components: {
@@ -54,10 +57,11 @@
     },
     computed: {
 	    currentModuleComponent() {
-	    	return StoreWorker.getStore('current-module').state.config.view || '';
+	    	return StoreWorker.getStore('current-module').getters.configByKey('view') || '';
       }
     },
     mounted() {
+	    window.onresize = StoreWorker.getStore('page').actions.updateDocumentWidth;
 			this.appEventsEmitter.on('open-modal-event', this.openModalEventHandler);
     }
 	}

@@ -14,6 +14,9 @@ const state = {
 		content: [],
 		info: {
 			date: 0
+		},
+		config: {
+			position: 1
 		}
 	}
 };
@@ -27,9 +30,6 @@ const getters = {
 			return note;
 		}
 	},
-	noteForDelete(state) {
-		return () => {}
-	},
 	title(state) {
 		return () => state.note.title;
 	},
@@ -38,6 +38,11 @@ const getters = {
 	},
 	date(state) {
 		return () => state.note.info.date;
+	},
+	
+	/* from config */
+	position(state) {
+		return () => state.note.config.position
 	}
 };
 

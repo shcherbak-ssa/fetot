@@ -20,9 +20,9 @@ const currentModuleWorker = {
 	async updateCurrentModule(name) {
 		if( currentModuleStore.state.name === name ) return ;
 		
-		const {categories, config, blocks} = await this.changeModule(name);
+		const {categories, settings, config, blocks} = await this.changeModule(name);
 		
-		currentModuleStore.actions.update({name, config});
+		currentModuleStore.actions.update({name, config, settings});
 		currentCategoriesStore.actions.update(categories);
 		currentBlocksStore.actions.update(blocks);
 		
@@ -42,11 +42,12 @@ const currentModuleWorker = {
 		
 		outputMessage.set('blocks', true);
 		
-		const {categories} = clientStore.state.modules[name];
 		const config = await importModule(name);
 		const {blocks} = await outputMessage.send();
 		
-		const $module = {categories, config, blocks};
+		let $module = clientStore.state.modules[name];
+		$module = {...$module, config, blocks};
+		
 		await clientStore.actions.updateModule({name, $module});
 		
 		return $module;

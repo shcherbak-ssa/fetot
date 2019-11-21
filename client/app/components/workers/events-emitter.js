@@ -42,6 +42,11 @@ const eventsEmitterWorker = {
 		
 		return emitter;
 	},
+	removeEmitter(name) {
+		if( !emitterCollection.has(name) ) return;
+		emitterCollection.delete(name);
+	},
+	
 	getEmitter(name) {
 		return emitterCollection.has(name) ? emitterCollection.get(name) : this.createEmitter(name)
 	}
