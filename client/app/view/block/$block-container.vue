@@ -4,26 +4,23 @@
       <slot name="block-title"></slot>
     </block-header>
 
+    <slot name="block-menu"></slot>
+
     <div class="workspace flex-col">
-      <slot name="block-menu"></slot>
+      <block-status-line></block-status-line>
 
-      <div class="content flex-col">
-        <block-status-line></block-status-line>
-
-        <div class="data cp pr" :class="textState" ref="content" @click.stop="$emit('block-content-click')">
-          <slot name="block-content"></slot>
-        </div>
-
-        <block-footer>
-          <template v-slot:states>
-            <slot name="block-states"></slot>
-          </template>
-          <template v-slot:date>
-            <slot name="block-date"></slot>
-          </template>
-        </block-footer>
-
+      <div class="data cp pr" :class="textState" ref="content" @click.stop="$emit('block-content-click')">
+        <slot name="block-content"></slot>
       </div>
+
+      <block-footer>
+        <template v-slot:states>
+          <slot name="block-states"></slot>
+        </template>
+        <template v-slot:date>
+          <slot name="block-date"></slot>
+        </template>
+      </block-footer>
     </div>
   </div>
 </template>

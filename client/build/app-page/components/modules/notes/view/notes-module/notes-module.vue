@@ -13,7 +13,8 @@
       <notes-block
               v-for="(block, index) in currentBlocks"
               :key="index" :block="block"
-              @block-click-event="openFrameHandler">
+              @edit-note-event="openFrameHandler"
+              @delete-note-event="deleteNoteEventHandler">
       </notes-block>
     </template>
   </module-container>
@@ -31,7 +32,9 @@
     data() {
 			return {
 				hasFrame: false,
+        currentFrameIsForCreate: false,
 
+        currentBlocksStore: StoreWorker.getStore('current-blocks'),
         currentModuleStore: StoreWorker.getStore('current-module'),
         currentNoteStore: StoreWorker.getStore('current-note'),
 
@@ -57,7 +60,9 @@
       },
 	    createNoteConfirmHandler(label) {
 	    	if( label ) {
-			    this.currentNoteStore.actions.updateInfoValue({ key: 'date', value: new Date() });
+			    this.currentNoteStore.actions.updateForCreate({date: new Date()});
+
+			    this.currentFrameIsForCreate = true;
 			    this.openFrameHandler();
 		    }
 
@@ -69,13 +74,28 @@
       openFrameHandler() {
       	this.hasFrame = true;
       },
-	    closeFrameEventHandler() {
+	    closeFrameEventHandler(toSaveNote = true) {
       	this.hasFrame = false;
+      	if( !toSaveNote ) return;
+
+      	if( this.currentFrameIsForCreate ) {
+		      const currentNote = this.currentNoteStore.getters.note();
+		      this.currentBlocksStore.actions.createBlock(currentNote);
+        }
+
+      	this.currentFrameIsForCreate = false;
+      },
+
+      /* note */
+	    async deleteNoteEventHandler(id) {
+	    	await this.currentBlocksStore.actions.deleteBlock(id);
       }
     },
     computed: {
 			currentBlocks() {
-				return StoreWorker.getStore('current-blocks').getters.getLikeArray();
+				const blocks = this.currentBlocksStore.state.blocks;
+				return Object.entries(blocks).map(([id, block]) => block);
+				// return this.currentBlocksStore.getters.getLikeArray();
       },
       frameOptions() {
 				const title = this.currentNoteStore.getters.title();

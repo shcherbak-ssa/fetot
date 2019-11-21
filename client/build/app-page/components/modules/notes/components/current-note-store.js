@@ -9,7 +9,7 @@ import StoreWorker from '$fetot-store-worker';
 
 const state = {
 	note: {
-		id: '',
+		id: 0,
 		title: '',
 		content: [],
 		info: {
@@ -19,6 +19,17 @@ const state = {
 };
 
 const getters = {
+	note(state) {
+		return () => {
+			const note = state.note;
+			note.info.date = +note.info.date;
+			
+			return note;
+		}
+	},
+	noteForDelete(state) {
+		return () => {}
+	},
 	title(state) {
 		return () => state.note.title;
 	},
@@ -26,7 +37,7 @@ const getters = {
 		return () => state.note.content;
 	},
 	date(state) {
-		return () => +state.note.info.date;
+		return () => state.note.info.date;
 	}
 };
 
@@ -34,6 +45,11 @@ const mutations = {
 	UPDATE(state, data) {
 		state.note = { ...data }
 	},
+	UPDATE_FOR_CREATE(state, {date}) {
+		const title = state.note.title;
+		state.note = { id: 0, title, content: [], info: { date: +date } }
+	},
+	
 	UPDATE_VALUE(state, {key, value}) {
 		state.note[key] = value;
 	},
@@ -46,6 +62,10 @@ const actions = {
 	async update(context, data) {
 		context.commit('UPDATE', data)
 	},
+	async updateForCreate(context, data) {
+		context.commit('UPDATE_FOR_CREATE', data)
+	},
+	
 	async updateValue(context, options) {
 		context.commit('UPDATE_VALUE', options)
 	},

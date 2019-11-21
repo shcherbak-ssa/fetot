@@ -32,8 +32,12 @@ class Connection {
 			case 'category':
 				return await this.categories(worker, message);
 			case 'block':
-				const result = await this.moduleMessageValidation(message);
-				if( typeof result === 'object' ) return result;
+				if( worker === 'delete' ) {
+					if( !message.id || typeof message.id !== 'string' ) return null
+				} else {
+					const result = await this.moduleMessageValidation(message);
+					if( typeof result === 'object' ) return result;
+				}
 				
 				// if( worker in this.moduleWorkers )
 				// 	message =

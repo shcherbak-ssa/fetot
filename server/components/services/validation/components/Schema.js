@@ -24,7 +24,7 @@ class Schema {
 		return Promise.all(Object.entries(object).map(this._parseItem.bind(this)));
 	}
 	async _parseItem([key, value]) {
-		if( !(key in this.schema) ) return Promise.reject('unknown key');
+		if( !(key in this.schema) ) return Promise.reject(`unknown key: ${key}`);
 		
 		let s = this.schema[key]; // current schema item
 		if( getTrueValueTypeof(s) === 'Schema' && getTrueValueTypeof(value) === 'Object' ) // control nesting

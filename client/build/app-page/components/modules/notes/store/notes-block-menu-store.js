@@ -20,7 +20,7 @@ const notesBlockMenuStore = {
 			label: 'move-to-folder'
 		},
 		{
-			name: 'Delete',
+			name: 'Delete note',
 			icon: '&#xF1F8;',
 			label: 'delete'
 		}

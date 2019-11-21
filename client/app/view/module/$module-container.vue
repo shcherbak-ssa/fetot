@@ -7,7 +7,7 @@
         </template>
       </frame-container>
     </div>
-    <div class="blocks">
+    <div class="blocks w100 flex">
       <slot name="module-blocks"></slot>
     </div>
 
@@ -56,7 +56,8 @@
     }
 
     .blocks {
-      width: 100%;
+      justify-content: space-between;
+      flex-wrap: wrap;
     }
 
     &.has-frame {

@@ -21,11 +21,15 @@
     },
     methods: {
 	    menuItemClickHandler(item) {
-	    	console.log('menu-item-click', item)
+	    	console.log('menu-item-click', item);
+        switch( item.label ) {
+          case 'edit':
+          	this.$emit('edit-note-event');
+          	break;
+          case 'delete':
+          	this.$emit('delete-note-event')
+        }
       },
-	    menuCloseEventHandler() {
-
-      }
     },
     computed: {
 			menuItems() {

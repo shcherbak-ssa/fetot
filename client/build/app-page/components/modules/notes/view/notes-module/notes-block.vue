@@ -6,7 +6,12 @@
     <template v-slot:block-title>{{ block.title }}</template>
 
     <template v-slot:block-menu v-if="isMenuOpen">
-      <notes-block-menu :title="block.title" @close-menu-event="closeMenuEventHandler"></notes-block-menu>
+      <notes-block-menu
+              :title="block.title"
+              @edit-note-event="editNoteEventHandler"
+              @delete-note-event="deleteNoteEventHandler"
+              @close-menu-event="closeMenuEventHandler">
+      </notes-block-menu>
     </template>
 
     <template v-slot:block-content>
@@ -59,10 +64,20 @@
 		    this.isMenuOpen = false;
       },
 
+      /* menu event */
+	    editNoteEventHandler() {
+	    	this.closeMenuEventHandler();
+	    	this.$emit('edit-note-event');
+      },
+	    deleteNoteEventHandler() {
+	    	this.closeMenuEventHandler();
+	    	this.$emit('delete-note-event', this.block.id)
+      },
+
       /* block */
 	    blockContentClickHandler() {
 	    	this.setCurrentNoteStore();
-	    	this.$emit('block-click-event')
+	    	this.$emit('edit-note-event')
       },
 
       /* src */

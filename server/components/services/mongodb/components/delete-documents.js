@@ -3,8 +3,9 @@
 /*** exports [begin] ***/
 
 const deleteDocuments = {
-	async deleteOneDocument() {
-	
+	async deleteOneDocument(query) {
+		const result = await this.collection.deleteOne(query);
+		return result.result;
 	},
 	async deleteManyDocuments() {
 	

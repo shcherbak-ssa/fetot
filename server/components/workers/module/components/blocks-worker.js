@@ -1,5 +1,10 @@
 'use strict';
 
+/*** imports [begin] ***/
+
+const {ObjectId} = require('mongodb');
+
+/*** imports [end] ***/
 /*** exports [begin] ***/
 
 const blocksWorker = {
@@ -20,13 +25,16 @@ const blocksWorker = {
 	
 	/* private */
 	async _createBlock(message) {
-		console.log('create-block: ', message);
+		delete message.id;
+		const block = await this.blocksCollection.insertOneDocument(message);
 		
-		const block = this.blocksCollection.insertOneDocument(message);
-		return { message: transformBlockID(block) }
+		return { message: { id: transformBlockID(block).id } }
 	},
-	async _deleteBlock(options) {
-		console.log(options)
+	async _deleteBlock({id}) {
+		id = ObjectId(id);
+		const result = await this.blocksCollection.deleteOneDocument({_id: id});
+		console.log('delete-block', result);
+		return null
 	},
 	async _updateBlock(options) {
 		console.log(options)
