@@ -43,6 +43,8 @@
 				isMenuOpen: false,
 
         currentNoteStore: StoreWorker.getStore('current-note'),
+        currentModuleStore: StoreWorker.getStore('current-module'),
+
         notesEventsEmitter: eventsEmitterWorker.getEmitter('notes')
       }
     },
@@ -62,11 +64,15 @@
 
       /* block container props */
       blocksSizeType() {
-      	return StoreWorker.getStore('current-module').getters.settingsByKey('blocksSizeType')
+	      return StoreWorker.getStore('current-module').getters.settingsByKey('blocksSizeType')
       },
 	    blockPosition() {
-      	console.log(blocksPositions[ this.currentNoteStore.getters.position() ]);
-		    return blocksPositions === null ? {} : blocksPositions[ this.currentNoteStore.getters.position() ]
+      	if( blocksPositions === null ) return {};
+
+      	const positions = this.currentModuleStore.getters.positions();
+        const currentBlockPositionIndex = positions.findIndex((item) => item === this.block.id);
+
+		    return blocksPositions[ currentBlockPositionIndex + 1 ]
 	    },
 
       /* menu */
@@ -86,16 +92,18 @@
 	    menuItemClickHandler(item) {
 		    switch( item.label ) {
 			    case 'edit':
-				    this.$emit('edit-note-event');
+				    this.editNoteEventHandler();
 				    break;
 			    case 'delete':
-				    this.$emit('delete-note-event')
+			    	this.deleteNoteEventHandler()
 		    }
 	    },
 
       /* menu event */
 	    editNoteEventHandler() {
 	    	this.closeMenuEventHandler();
+	    	this.setCurrentNoteStore();
+
 	    	this.notesEventsEmitter.emit('edit-note-event');
       },
 	    deleteNoteEventHandler() {

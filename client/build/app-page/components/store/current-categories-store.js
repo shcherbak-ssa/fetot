@@ -3,15 +3,12 @@
 /*** imports [begin] ***/
 
 import StoreWorker from '$fetot-store-worker';
-
 import sendOutputMessageService from '../services/send-output-message';
-import updateModuleDataService from '../services/update-module-data';
 
 /*** imports [end] ***/
 /*** init [begin] ***/
 
 const sendOutputMessage = sendOutputMessageService('category');
-const updateModuleData = updateModuleDataService('categories');
 
 /* store data */
 const state = {
@@ -43,16 +40,16 @@ const actions = {
 	
 	async createCategory(context, name) {
 		context.commit('CREATE_CATEGORY', name);
-		await sendOutputMessageAndUpdateModuleData('create', {name});
+		await sendOutputMessage('create', {name});
 	},
 	async deleteCategory(context, name) {
 		context.commit('DELETE_CATEGORY', name);
-		await sendOutputMessageAndUpdateModuleData('delete', {name});
+		await sendOutputMessage('delete', {name});
 	},
 	
 	async renameCategory(context, options) {
 		context.commit('RENAME_CATEGORY', options);
-		await sendOutputMessageAndUpdateModuleData('rename', options);
+		await sendOutputMessage('rename', options);
 	}
 };
 
@@ -64,13 +61,5 @@ function createCurrentCategoriesStore() {
 }
 
 /*** exports [end] ***/
-/*** src [begin] ***/
-
-async function sendOutputMessageAndUpdateModuleData(type, message) {
-	updateModuleData( StoreWorker.getStore('current-categories') );
-	sendOutputMessage(type, message);
-}
-
-/*** src [end] ***/
 
 export {createCurrentCategoriesStore};

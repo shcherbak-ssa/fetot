@@ -20,7 +20,8 @@ const config = {
 				settings: {
 					blocksSizeType: 0,
 					blocksCount: 1
-				}
+				},
+				positions: []
 			},
 			defaultBlock: {
 				title: 'How to use',
@@ -35,9 +36,6 @@ const config = {
 				],
 				info: {
 					date: Date.now()
-				},
-				config: {
-					position: 1
 				}
 			}
 		}

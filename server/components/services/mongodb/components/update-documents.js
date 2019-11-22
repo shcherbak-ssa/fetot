@@ -4,7 +4,8 @@
 
 const updateDocuments = {
 	async updateOneDocument(updated, updateObject) {
-		await this.collection.updateOne(updated, updateObject)
+		const result = await this.collection.updateOne(updated, updateObject);
+		return result.result;
 	},
 	async updateManyDocuments() {
 	

@@ -18,7 +18,7 @@ class Connection {
 		this.moduleWorkers = {};
 		this.moduleMessageValidation = {};
 		
-		this.moduleConfig = {};
+		this.moduleName = '';
 		this.blocksCollection = {};
 		this.clientDatabase = MongodbService.createDatabase(client_id);
 		this.clientModulesCollection = this.clientDatabase.collection('modules');
@@ -29,8 +29,12 @@ class Connection {
 		const [workerType, worker] = type.split('/');
 		
 		switch( workerType ) {
+			case 'module':
+				await this.$module(worker, message);
+				break;
 			case 'category':
-				return await this.categories(worker, message);
+				await this.categories(worker, message);
+				break;
 			case 'block':
 				if( worker === 'delete' ) {
 					if( !message.id || typeof message.id !== 'string' ) return null
@@ -62,7 +66,7 @@ class Connection {
 		this.moduleWorkers = workers;
 		this.moduleMessageValidation = validationService(schema);
 		
-		this.moduleConfig = await this.clientModulesCollection.findOneDocument({name});
+		this.moduleName = name;
 		this.blocksCollection = this.clientDatabase.collection(name);
 	}
 }

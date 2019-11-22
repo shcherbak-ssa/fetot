@@ -104,6 +104,7 @@
     }
     &.is-list {
       height: 80px;
+      cursor: pointer;
 
       .workspace {
         height: 0;

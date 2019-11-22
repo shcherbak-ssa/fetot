@@ -15,24 +15,20 @@ const categoriesWorker = {
 	
 	/* private */
 	async _createCategory({name}) {
-		await this._updateDocument({
+		await this.updateModulesCollection({
 			$push: { categories: name }
 		});
 	},
 	async _deleteCategory({name}) {
 		const categories = this._getCategories();
-		await this._updateDocument({
-			$set: {
-				categories: categories.filter((item) => item !== name)
-			}
+		await this.updateModulesCollection({
+			$set: { categories: categories.filter((item) => item !== name) }
 		});
 	},
 	async _renameCategory({index, name}) {
 		const categories = this._getCategories();
-		await this._updateDocument({
-			$set: {
-				categories: categories.map((item, i) => i === index ? name : item)
-			}
+		await this.updateModulesCollection({
+			$set: { categories: categories.map((item, i) => i === index ? name : item) }
 		});
 		console.log('rename category success: ', index, name);
 	},
@@ -41,9 +37,6 @@ const categoriesWorker = {
 	/* src */
 	_getCategories() {
 		return this.moduleConfig.categories;
-	},
-	async _updateDocument(updateObject) {
-		await this.clientModulesCollection.updateOneDocument(this.moduleConfig, updateObject);
 	}
 };
 

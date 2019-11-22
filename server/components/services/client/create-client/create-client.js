@@ -35,7 +35,11 @@ async function createModulesCollections(database) {
 		await clientModulesCollection.insertOneDocument(collectionItem);
 		
 		const currentModuleCollection = database.collection(collectionItem.name);
-		await currentModuleCollection.insertOneDocument(defaultBlock);
+		const document = await currentModuleCollection.insertOneDocument(defaultBlock);
+		
+		await clientModulesCollection.updateOneDocument(collectionItem, {
+			$push: { positions: document._id }
+		})
 	}))
 }
 

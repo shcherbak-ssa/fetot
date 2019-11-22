@@ -20,6 +20,7 @@
 		name: 'notes-frame-content-header',
     data() {
 			return {
+				currentBlocksStore: StoreWorker.getStore('current-blocks'),
 				currentNoteStore: StoreWorker.getStore('current-note')
       }
     },
@@ -28,7 +29,12 @@
     },
     methods: {
 	    inputTitleEventHandler(value) {
-	    	this.currentNoteStore.actions.updateValue({ key: 'title', value })
+	    	this.currentNoteStore.actions.updateValue({ key: 'title', value });
+
+	    	const noteID = this.currentNoteStore.state.note.id;
+	    	if( noteID !== 0 ) this.currentBlocksStore.actions.updateBlockTitle({
+          id: noteID, title: value
+	    	})
       }
     },
     computed: {

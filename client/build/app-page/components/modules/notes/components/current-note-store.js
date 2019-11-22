@@ -14,9 +14,6 @@ const state = {
 		content: [],
 		info: {
 			date: 0
-		},
-		config: {
-			position: 1
 		}
 	}
 };
@@ -39,11 +36,6 @@ const getters = {
 	date(state) {
 		return () => state.note.info.date;
 	},
-	
-	/* from config */
-	position(state) {
-		return () => state.note.config.position
-	}
 };
 
 const mutations = {
@@ -52,7 +44,7 @@ const mutations = {
 	},
 	UPDATE_FOR_CREATE(state, {date}) {
 		const title = state.note.title;
-		state.note = { id: 0, title, content: [], info: { date: +date } }
+		state.note = {id: 0, title, content: [], info: { date: +date }}
 	},
 	
 	UPDATE_VALUE(state, {key, value}) {

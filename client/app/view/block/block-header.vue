@@ -41,6 +41,9 @@
       [class*="block-container"]:hover & {
         opacity: 1;
       }
+      [class*="is-list"] & {
+        display: none;
+      }
 
       @media screen and (max-width: 1024px) {
         opacity: 1;

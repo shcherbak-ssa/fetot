@@ -25,9 +25,6 @@ const mutations = {
 	
 	UPDATE_MODULE(state, {name, $module}) {
 		state.modules[name] = {...$module}
-	},
-	UPDATE_MODULE_KEY(state, {name, key, value}) {
-		state.modules[name][key] = value;
 	}
 };
 
@@ -38,9 +35,6 @@ const actions = {
 	
 	async updateModule(context, options) {
 		context.commit('UPDATE_MODULE', options);
-	},
-	async updateModuleKey(context, options) {
-		context.commit('UPDATE_MODULE_KEY', options);
 	},
 	
 	hasModule(context, name) {

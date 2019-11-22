@@ -8,7 +8,8 @@ import StoreWorker from '$fetot-store-worker';
 /*** init [begin] ***/
 
 const state = {
-	documentWidth: getDocumentWidth()
+	documentWidth: getDocumentWidth(),
+	frameState: 0, // is-default
 };
 
 const getters = {};
@@ -16,6 +17,9 @@ const getters = {};
 const mutations = {
 	UPDATE_DOCUMENT_WIDTH(state, width) {
 		state.documentWidth = width;
+	},
+	UPDATE_FRAME_STATE(state, currentState) {
+		state.frameState = currentState;
 	}
 };
 
@@ -23,6 +27,9 @@ const actions = {
 	async updateDocumentWidth(context) {
 		const documentWidth = getDocumentWidth();
 		context.commit('UPDATE_DOCUMENT_WIDTH', documentWidth)
+	},
+	async updateFrameState(context, currentState) {
+		context.commit('UPDATE_FRAME_STATE', currentState)
 	}
 };
 
@@ -37,7 +44,7 @@ function createPageStore() {
 /*** src [begin] ***/
 
 function getDocumentWidth() {
-	return document.documentElement.clientWidth || document.body.offsetWidth
+	return document.documentElement.clientWidth|| document.body.offsetWidth
 }
 
 /*** src [end] ***/

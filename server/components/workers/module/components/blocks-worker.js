@@ -28,11 +28,13 @@ const blocksWorker = {
 		delete message.id;
 		const block = await this.blocksCollection.insertOneDocument(message);
 		
+		console.log('create-block', block);
 		return { message: { id: transformBlockID(block).id } }
 	},
 	async _deleteBlock({id}) {
 		id = ObjectId(id);
 		const result = await this.blocksCollection.deleteOneDocument({_id: id});
+		
 		console.log('delete-block', result);
 		return null
 	},

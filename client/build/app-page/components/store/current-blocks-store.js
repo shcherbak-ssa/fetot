@@ -3,15 +3,12 @@
 /*** imports [begin] ***/
 
 import StoreWorker from '$fetot-store-worker';
-
 import sendOutputMessageService from '../services/send-output-message';
-import updateModuleDataService from '../services/update-module-data';
 
 /*** imports [end] ***/
 /*** init [begin] ***/
 
 const sendOutputMessage = sendOutputMessageService('block');
-const updateModuleData = updateModuleDataService('blocks');
 
 let currentBlocksStore = {};
 
@@ -38,6 +35,9 @@ const mutations = {
 		block.id = id;
 		state.blocks[id] = block;
 	},
+	UPDATE_BLOCK_TITLE(state, {id, title}) {
+		state.blocks[id].title = title
+	},
 	
 	CREATE_BLOCK(state, block) {
 		state.blocks[block.id] = block;
@@ -51,21 +51,24 @@ const actions = {
 	async update(context, blocks) {
 		context.commit('UPDATE', blocks);
 	},
+	async updateBlockTitle(context, options) {
+		context.commit('UPDATE_BLOCK_TITLE', options)
+	},
 	
-	async createBlock(context, block) {
+	async createBlock({commit, state}, block) {
 		block.id = '0';
-		context.commit('CREATE_BLOCK', block);
+		commit('CREATE_BLOCK', block);
 		
-		const response = await sendOutputMessage('create', block);
-		context.commit('UPDATE_BLOCK_ID', response.id);
+		const {id} = await sendOutputMessage('create', block);
+		commit('UPDATE_BLOCK_ID', id);
 		
-		updateModuleData( currentBlocksStore );
+		await updateCurrentModuleData('create', id, 1);
 	},
 	async deleteBlock(context, block_id) {
 		context.commit('DELETE_BLOCK', block_id);
 		
 		sendOutputMessage('delete', {id: block_id});
-		updateModuleData( currentBlocksStore )
+		await updateCurrentModuleData('delete', block_id, -1);
 	}
 };
 
@@ -80,9 +83,24 @@ function createCurrentBlocksStore() {
 /*** exports [end] ***/
 /*** src [begin] ***/
 
-async function sendOutputMessageAndUpdateModuleData(type, message) {
-	const response = await sendOutputMessage(type, message);
-	updateModuleData( StoreWorker.getStore('current-blocks') );
+async function updateCurrentModuleData(label, id, settingsValue) {
+	const currentModuleStore = StoreWorker.getStore('current-module');
+	
+	currentModuleStore.actions.updateSettingsByKey({
+		key: 'blocksCount', value: settingsValue
+	});
+	
+	let positions = currentModuleStore.getters.positions();
+	
+	switch( label ) {
+		case 'create':
+			positions.unshift(id);
+			break;
+		case 'delete':
+			positions = positions.filter((item) => item !== id);
+	}
+	
+	currentModuleStore.actions.updatePositions(positions);
 }
 
 /*** src [end] ***/

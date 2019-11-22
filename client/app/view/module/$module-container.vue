@@ -1,12 +1,8 @@
 <template>
   <div class="module-container pa bs flex" :class="setState">
-<!--    <div class="frame" v-if="hasFrame">-->
-<!--      <frame-container :options="frameOptions" @close-frame-event="$emit('close-frame-event')">-->
-<!--        <template v-slot:frame-content>-->
-<!--          <slot name="module-frame-content"></slot>-->
-<!--        </template>-->
-<!--      </frame-container>-->
-<!--    </div>-->
+
+    <slot name="module-frame"></slot>
+
     <div class="blocks pr">
       <slot name="module-blocks"></slot>
     </div>
@@ -16,17 +12,14 @@
 </template>
 
 <script>
-  import frameContainer from '../frame/frame-container.vue';
   import createBlockButton from './create-block-button.vue';
 
 	export default {
 		name: 'module-container',
     props: {
-	    hasFrame: Boolean,
-      frameOptions: Object
+	    hasFrame: Boolean
     },
     components: {
-			'frame-container': frameContainer,
 	    'create-block-button': createBlockButton,
     },
     computed: {
@@ -49,25 +42,26 @@
     overflow-x: hidden;
 
     .blocks {
+      transition: .4s;
       width: 1128px;
       margin: 0 auto;
 
-      .has-frame & {
-        margin: 0;
-        position: absolute;
-        top: 128px;
-        right: calc((100vw - 1128px) / 2);
-      }
-
       @media screen and (max-width: 1279px) {
         width: 360px;
-
-        .has-frame & {
-          right: -350px;
-        }
       }
       @media screen and (max-width: 419px) {
         width: 280px;
+      }
+    }
+    &.has-frame .blocks {
+      width: 360px;
+      margin: 0;
+      position: absolute;
+      top: 140px;
+      right: calc((100vw - 1128px) / 2);
+
+      @media screen and (max-width: 1279px) {
+        right: -350px;
       }
     }
   }

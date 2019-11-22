@@ -5,12 +5,14 @@
 import OutputMessage from '$fetot-services/output-message';
 import StoreWorker from '$fetot-store-worker';
 
+import updateModuleData from '../services/update-module-data';
+
 /*** imports [end] ***/
 /*** src [begin] ***/
 
 const clientStore = StoreWorker.getStore('client');
 const currentModuleStore = StoreWorker.getStore('current-module');
-const currentCategoriesStore = StoreWorker.getStore('current-categories');
+// const currentCategoriesStore = StoreWorker.getStore('current-categories');
 const currentBlocksStore = StoreWorker.getStore('current-blocks');
 
 /*** src [end] ***/
@@ -20,13 +22,15 @@ const currentModuleWorker = {
 	async updateCurrentModule(name) {
 		if( currentModuleStore.getters.name() === name ) return ;
 		
-		const {categories, settings, config, blocks} = await this.changeModule(name);
+		if( currentModuleStore.state.isFirst ) await currentModuleStore.actions.updateIsFirst();
+		else await updateModuleData();
 		
-		currentModuleStore.actions.update({name, config, settings});
-		currentCategoriesStore.actions.update(categories);
+		const [$module, blocks] = await this.changeModule(name);
+		
 		currentBlocksStore.actions.update(blocks);
+		currentModuleStore.actions.update({name, ...$module});
 		
-		config.init();
+		$module.config.init();
 	},
 	
 	async changeModule(name) {
@@ -45,12 +49,10 @@ const currentModuleWorker = {
 		const config = await importModule(name);
 		const {blocks} = await outputMessage.send();
 		
-		let $module = clientStore.state.modules[name];
-		$module = {...$module, config, blocks};
+		const $module = {...clientStore.state.modules[name], config};
+		await clientStore.actions.updateModule({name, $module: {...$module, blocks}});
 		
-		await clientStore.actions.updateModule({name, $module});
-		
-		return $module;
+		return [$module, blocks];
 	}
 };
 

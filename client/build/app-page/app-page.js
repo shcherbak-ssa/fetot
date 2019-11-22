@@ -13,7 +13,7 @@ import {createPageStore} from './components/store/page-store';
 import {createClientStore} from './components/store/client-store';
 import {createCurrentModuleStore} from './components/store/current-module-store';
 import {createCurrentBlocksStore} from './components/store/current-blocks-store';
-import {createCurrentCategoriesStore} from './components/store/current-categories-store';
+// import {createCurrentCategoriesStore} from './components/store/current-categories-store';
 
 /*** imports [end] ***/
 /*** init [begin] ***/
@@ -25,7 +25,7 @@ createPageStore();
 createClientStore();
 createCurrentModuleStore();
 createCurrentBlocksStore();
-createCurrentCategoriesStore();
+// createCurrentCategoriesStore();
 
 /* global registration of components */
 const requireComponent = require.context('../../app/view', true, /\$[\w-]+\.vue$/);
