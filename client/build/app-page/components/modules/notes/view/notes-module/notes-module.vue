@@ -18,7 +18,7 @@
     <template v-slot:module-blocks>
       <notes-block
               v-for="(block, index) in currentBlocks"
-              :key="index" :block="block">
+              :key="index" :index="index" :block="block">
       </notes-block>
     </template>
 
@@ -31,8 +31,6 @@
 
   import StoreWorker from '$fetot-store-worker';
   import eventsEmitterWorker from '$fetot-events-emitter';
-
-  import {updateBlocksPositions, removeBlocksPositions} from '../../../../workers/blocks-positions-worker';
 
 	export default {
 		name: 'notes-module',
@@ -85,9 +83,13 @@
 
       	this.lastBlocksSizeType = this.currentModuleStore.getters.settingsByKey('blocksSizeType');
       	this.currentModuleStore.actions.updateSettingsByKey({key: 'blocksSizeType', value: 2});
+
+	      this.pageStore.actions.removeBlocksPositions()
       },
 	    closeFrameEventHandler(toSaveNote = true) {
       	this.hasFrame = false;
+
+		    this.updateBlocksPositions();
 		    this.currentModuleStore.actions.updateSettingsByKey({
           key: 'blocksSizeType', value: this.lastBlocksSizeType
 		    });
@@ -113,7 +115,12 @@
       /* others */
 	    changeSizeTypeEventHandler(sizeType) {
 	    	this.currentModuleStore.actions.updateSettingsByKey({key: 'blocksSizeType', value: sizeType})
-	    }
+	    },
+      updateBlocksPositions() {
+	      this.pageStore.state.documentWidth < 1280
+		      ? this.pageStore.actions.removeBlocksPositions()
+		      : this.pageStore.actions.updateBlocksPositions()
+      }
     },
     computed: {
 			/* module */
@@ -137,8 +144,7 @@
     },
 
     beforeMount() {
-	    this.pageStore.state.documentWidth < 1280
-        ? removeBlocksPositions() : updateBlocksPositions()
+	    this.updateBlocksPositions()
     },
     mounted() {
 			this.notesEventsEmitter
@@ -152,6 +158,4 @@
 	}
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

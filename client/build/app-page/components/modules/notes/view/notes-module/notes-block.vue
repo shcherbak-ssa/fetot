@@ -34,7 +34,6 @@
 
   import notesBlockMenuStore from '../../store/notes-block-menu-store';
   import drawBlockContent from '../../components/draw-block-content';
-  import {blocksPositions} from '../../../../workers/blocks-positions-worker';
 
 	export default {
 		name: 'notes-block',
@@ -42,6 +41,7 @@
 			return {
 				isMenuOpen: false,
 
+				pageStore: StoreWorker.getStore('page'),
         currentNoteStore: StoreWorker.getStore('current-note'),
         currentModuleStore: StoreWorker.getStore('current-module'),
 
@@ -49,7 +49,8 @@
       }
     },
     props: {
-			block: Object
+			block: Object,
+      index: Number,
     },
     components: {
 			'fetot-date': fetotDate
@@ -67,12 +68,12 @@
 	      return StoreWorker.getStore('current-module').getters.settingsByKey('blocksSizeType')
       },
 	    blockPosition() {
-      	if( blocksPositions === null ) return {};
+      	if( this.pageStore.state.blocksPositions === null ) return { index: this.index };
 
       	const positions = this.currentModuleStore.getters.positions();
         const currentBlockPositionIndex = positions.findIndex((item) => item === this.block.id);
 
-		    return blocksPositions[ currentBlockPositionIndex + 1 ]
+		    return this.pageStore.state.blocksPositions[ currentBlockPositionIndex + 1 ]
 	    },
 
       /* menu */

@@ -1,7 +1,8 @@
 <template>
   <div class="block-container pa bs br6px bg-fff hover_hov-sh"
        :class="currentSize"
-       :style="position">
+       :style="currentPosition"
+       ref="currentBlock">
 
     <block-header @open-menu-event="$emit('open-menu-event')">
       {{ title }}
@@ -43,9 +44,8 @@
 		name: 'block-container',
     data() {
 			return {
-				textState: {
-					'is-overflow': false
-        }
+				currentPosition: {},
+				textState: { 'is-overflow': false },
       }
     },
     props: {
@@ -64,16 +64,45 @@
 				const {content} = this.$refs;
 				this.textState['is-overflow'] =
 					content.offsetHeight < content.children[0].offsetHeight
-      }
+      },
+
+      /* position */
+	    updateCurrentPosition() {
+		    let overBlockHeight = 0;
+	    	let isFromFirst = true;
+		    let {left, index} = this.position;
+
+		    if( left === undefined ) {
+			    left = 0;
+
+          if( index !== 0 ) {
+	          index -= 1;
+	          isFromFirst = false;
+          }
+		    } else {
+			    if( index >= 3 ) {
+				    index -= 3;
+				    isFromFirst = false;
+			    }
+		    }
+
+		    if( !isFromFirst ) {
+			    const {children} = this.$refs.currentBlock.parentElement;
+			    overBlockHeight = children[index].offsetHeight + 24;
+		    }
+
+		    this.currentPosition = { left, top: overBlockHeight + 'px' };
+	    },
     },
     computed: {
 	    currentSize() {
 	    	if( this.isMenuOpen ) return 'is-menu-open';
 	    	return ['is-normal', 'is-small', 'is-list', 'is-flexible',][this.sizeType];
-      }
+      },
     },
     mounted() {
-	    this.updateTextState()
+	    this.updateTextState();
+	    this.updateCurrentPosition();
     },
     updated() {
 			this.updateTextState()
