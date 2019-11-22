@@ -67,6 +67,7 @@
       	return StoreWorker.getStore('current-module').getters.settingsByKey('blocksSizeType')
       },
 	    blockPosition() {
+      	console.log(blocksPositions[ this.currentNoteStore.getters.position() ]);
 		    return blocksPositions === null ? {} : blocksPositions[ this.currentNoteStore.getters.position() ]
 	    }
     },
@@ -98,6 +99,4 @@
 	}
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

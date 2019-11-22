@@ -24,6 +24,7 @@
   @import '$fetot-scss';
 
   .block-header {
+    margin-bottom: 10px;
     height: 32px;
     align-items: center;
     justify-content: space-between;

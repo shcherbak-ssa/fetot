@@ -18,7 +18,7 @@ const currentBlocksStore = StoreWorker.getStore('current-blocks');
 
 const currentModuleWorker = {
 	async updateCurrentModule(name) {
-		if( currentModuleStore.state.name === name ) return ;
+		if( currentModuleStore.getters.name() === name ) return ;
 		
 		const {categories, settings, config, blocks} = await this.changeModule(name);
 		

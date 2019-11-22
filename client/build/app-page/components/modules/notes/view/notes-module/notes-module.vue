@@ -25,7 +25,7 @@
   import StoreWorker from '$fetot-store-worker';
   import eventsEmitterWorker from '$fetot-events-emitter';
 
-  import {updateBlocksPositions} from '../../../../workers/blocks-positions-worker';
+  import {updateBlocksPositions, removeBlocksPositions} from '../../../../workers/blocks-positions-worker';
 
 	export default {
 		name: 'notes-module',
@@ -99,12 +99,15 @@
       },
       currentBlocks() {
       	const blocks = this.currentBlocksStore.state.blocks;
-      	return Object.entries(blocks).map(([id, block]) => block);
+        return Object.entries(blocks).map(([id, block]) => block).sort((it2, it1) => {
+      		return it2.config.position - it1.config.position;
+        });
       }
     },
 
     beforeMount() {
-	    updateBlocksPositions( !(this.pageStore.state.documentWidth < 1280) )
+	    this.pageStore.state.documentWidth < 1280
+        ? removeBlocksPositions() : updateBlocksPositions()
     },
     mounted() {
 			this.notesEventsEmitter

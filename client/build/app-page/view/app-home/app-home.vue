@@ -51,7 +51,7 @@
 	    	isActive ? this.closeHome() : this.openHome()
       },
 	    moduleItemClickHandler(name) {
-	    	currentModuleWorker.updateCurrentModule(name);
+		    currentModuleWorker.updateCurrentModule(name);
 	    	this.closeButtonClickHandler();
       },
 			closeButtonClickHandler() {

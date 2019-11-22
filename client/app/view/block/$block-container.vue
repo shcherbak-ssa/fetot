@@ -10,7 +10,7 @@
     <slot name="block-menu"></slot>
 
     <div class="workspace w100">
-      <block-status-line></block-status-line>
+<!--      <block-status-line></block-status-line>-->
 
       <div class="data cp pr" :class="textState" ref="content" @click.stop="$emit('block-content-click')">
         <slot name="block-content"></slot>
@@ -38,16 +38,13 @@
     data() {
 			return {
 				textState: {
-					'text-overflow': false
+					'is-overflow': false
         }
       }
     },
     props: {
 			sizeType: Number,
-      position: {
-				type: Object,
-        default: {}
-      }
+      position: Object
     },
     components: {
 			'block-header': blockHeader,
@@ -71,7 +68,6 @@
   @import '$fetot-scss';
 
   .block-container {
-    flex-shrink: 0;
     padding: 24px;
     margin-bottom: 24px;
     width: 360px;
@@ -80,6 +76,10 @@
 
     &.is-normal {
       height: 222px;
+
+      .data {
+        height: 102px;
+      }
     }
     &.is-small {
       height: 122px;
@@ -115,7 +115,6 @@
   .data {
     color: $fetot-dark-gray;
     font: 16px 'roboto-medium';
-    flex-grow: 1;
     overflow: hidden;
     transition: .4s;
     margin-bottom: 10px;

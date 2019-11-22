@@ -22,23 +22,30 @@ let blocksPositions = null;
 /*** init [end] ***/
 /*** exports [begin] ***/
 
-function updateBlocksPositions(removeBlockPositions = false) {
-	if( removeBlockPositions ) return blocksPositions = null;
-	
-	const blocksCount = currentModuleStore.state.config.settings.blocksCount;
+function removeBlocksPositions() {
+	blocksPositions = null;
+}
+function updateBlocksPositions() {
+	const blocksCount = currentModuleStore.getters.settingsByKey('blocksCount');
 	const blocksHeight = getCurrentBlockHeightByCurrentBlockSizeType(
-		currentModuleStore.state.config.settings.blocksSizeType
+		currentModuleStore.getters.settingsByKey('blocksSizeType')
 	);
 	
+	// console.log('blocks-count:', blocksCount);
+	// console.log('blocks-height:', blocksHeight);
+	
 	const blocksConfigs = getBlocksConfigs(blocksCount);
-	const topPosition = blocksHeight === undefined ? undefined : blocksHeight + 24;
+	const topPositionIncrement = blocksHeight === undefined ? undefined : blocksHeight + 24;
+	
+	// console.log('blocks-config:', blocksConfigs);
+	// console.log('topPositionIncrement:', topPositionIncrement);
 	
 	const blocksPositionsList = new Array(blocksCount + 1);
 	blocksConfigs.forEach(({left, indexList}) => {
-		indexList.forEach((index) => {
+		indexList.forEach((index, i) => {
 			blocksPositionsList[index] = {
 				left: left + 'px',
-				top: topPosition + 'px' }
+				top: topPositionIncrement * i + 'px' } // just do it
 		})
 	});
 	
@@ -92,12 +99,14 @@ function preparingRightSideBlocksConfig(count) {
 
 /* create index list */
 function createIndexList(count, number) {
-	const indexNumber = (n) => 3 * n + number;
-	const indexList = new Array(count);
+	const indexList = [];
 	
-	return indexList.map((it, i) => indexNumber(i));
+	for( let i = 0; i < count; i += 1 )
+		indexList[i] = 3 * i + number;
+	
+	return indexList;
 }
 
 /*** src [end] ***/
 
-export {blocksPositions, updateBlocksPositions};
+export {blocksPositions, updateBlocksPositions, removeBlocksPositions};
