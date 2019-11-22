@@ -46,11 +46,11 @@
       height: calc(100% - 140px);
     }
     &.is-full-screen {
-      position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
+      z-index: 9999;
     }
 
     .container {
