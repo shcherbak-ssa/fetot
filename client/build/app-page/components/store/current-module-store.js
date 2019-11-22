@@ -59,6 +59,14 @@ const actions = {
 	async update(context, options) {
 		context.commit('UPDATE', options);
 	},
+	async updateIsFirst(context) {
+		context.commit('UPDATE_IS_FIRST');
+	},
+	
+	async updatePositions(context, positions) {
+		context.commit('UPDATE_POSITIONS', positions);
+		sendOutputMessage('update-positions', {positions});
+	},
 	async updateSettingsByKey({commit, getters}, options) {
 		const {key, value} = options;
 		
@@ -73,15 +81,6 @@ const actions = {
 		commit('UPDATE_SETTINGS_BY_KEY', options);
 		sendOutputMessage('update-settings', options);
 	},
-	
-	async updateIsFirst(context) {
-		context.commit('UPDATE_IS_FIRST');
-	},
-	
-	async updatePositions(context, positions) {
-		context.commit('UPDATE_POSITIONS', positions);
-		sendOutputMessage('update-positions', {positions});
-	}
 };
 
 /*** init [end] ***/

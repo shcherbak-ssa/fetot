@@ -1,5 +1,9 @@
 <template>
-  <module-container :has-frame="hasFrame" @create-block-event="createNoteEventHandler">
+  <module-container
+          :has-frame="hasFrame"
+          :size-type="currentSizeType"
+          @create-block-event="createNoteEventHandler"
+          @change-size-type-event="changeSizeTypeEventHandler">
 
     <template v-slot:module-frame>
       <frame-container
@@ -104,9 +108,19 @@
 	    },
 	    async deleteNoteEventHandler(id) {
 	    	await this.currentBlocksStore.actions.deleteBlock(id);
-      }
+      },
+
+      /* others */
+	    changeSizeTypeEventHandler(sizeType) {
+	    	this.currentModuleStore.actions.updateSettingsByKey({key: 'blocksSizeType', value: sizeType})
+	    }
     },
     computed: {
+			/* module */
+      currentSizeType() {
+      	return this.currentModuleStore.getters.settingsByKey('blocksSizeType');
+      },
+
 			/* frame */
 	    frameState() {
 	    	return this.pageStore.state.frameState

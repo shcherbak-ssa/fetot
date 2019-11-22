@@ -59,6 +59,13 @@
       // 'block-status-line': blockStatusLine,
       'block-footer': blockFooter
     },
+    methods: {
+			updateTextState() {
+				const {content} = this.$refs;
+				this.textState['is-overflow'] =
+					content.offsetHeight < content.children[0].offsetHeight
+      }
+    },
     computed: {
 	    currentSize() {
 	    	if( this.isMenuOpen ) return 'is-menu-open';
@@ -66,9 +73,10 @@
       }
     },
     mounted() {
-	    const {content} = this.$refs;
-	    this.textState['is-overflow'] =
-		    content.offsetHeight < content.children[0].offsetHeight
+	    this.updateTextState()
+    },
+    updated() {
+			this.updateTextState()
     }
 	}
 </script>
@@ -104,7 +112,6 @@
     }
     &.is-list {
       height: 80px;
-      cursor: pointer;
 
       .workspace {
         height: 0;

@@ -8,19 +8,33 @@
     </div>
 
     <create-block-button @create-block-event="$emit('create-block-event')"></create-block-button>
+
+    <change-blocks-size-type-buttons
+            :size-type="sizeType"
+            @change-size-type-event="changeSizeTypeEventHandler">
+    </change-blocks-size-type-buttons>
   </div>
 </template>
 
 <script>
   import createBlockButton from './create-block-button.vue';
+  import changeBlocksSizeTypeButtons from './change-blocks-size-type-buttons.vue';
 
 	export default {
 		name: 'module-container',
     props: {
+			sizeType: Number,
 	    hasFrame: Boolean
     },
     components: {
 	    'create-block-button': createBlockButton,
+      'change-blocks-size-type-buttons': changeBlocksSizeTypeButtons,
+    },
+    methods: {
+	    changeSizeTypeEventHandler(sizeType) {
+	    	if( this.sizeType === sizeType ) return;
+	    	this.$emit('change-size-type-event', sizeType)
+      }
     },
     computed: {
 			setState() {
