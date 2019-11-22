@@ -1,19 +1,18 @@
 <template>
   <block-container
+          :title="block.title"
+          :is-menu-open="isMenuOpen"
           :size-type="blocksSizeType"
           :position="blockPosition"
           @block-content-click="editNoteEventHandler"
-          @open-menu-event="openMenuEventHandler">
+          @open-menu-event="openMenuEventHandler"
+          @close-menu-event="closeMenuEventHandler">
 
-    <template v-slot:block-title>{{ block.title }}</template>
-
-    <template v-slot:block-menu v-if="isMenuOpen">
-      <notes-block-menu
-              :title="block.title"
-              @edit-note-event="editNoteEventHandler"
-              @delete-note-event="deleteNoteEventHandler"
-              @close-menu-event="closeMenuEventHandler">
-      </notes-block-menu>
+    <template v-slot:block-menu-items>
+      <menu-item v-for="(item, index) in menuItems"
+                 :key="index" :item="item"
+                 @menu-item-click="menuItemClickHandler">
+      </menu-item>
     </template>
 
     <template v-slot:block-content>
@@ -29,11 +28,11 @@
 
 <script>
   import fetotDate from '$fetot-view-components/elements/fetot-date.vue';
-  import notesBlockMenu from './notes-block-menu.vue';
 
   import eventsEmitterWorker from '$fetot-events-emitter';
   import StoreWorker from '$fetot-store-worker';
 
+  import notesBlockMenuStore from '../../store/notes-block-menu-store';
   import drawBlockContent from '../../components/draw-block-content';
   import {blocksPositions} from '../../../../workers/blocks-positions-worker';
 
@@ -51,8 +50,7 @@
 			block: Object
     },
     components: {
-			'fetot-date': fetotDate,
-      'notes-block-menu': notesBlockMenu
+			'fetot-date': fetotDate
     },
     computed: {
 			drawContent() {
@@ -69,6 +67,11 @@
 	    blockPosition() {
       	console.log(blocksPositions[ this.currentNoteStore.getters.position() ]);
 		    return blocksPositions === null ? {} : blocksPositions[ this.currentNoteStore.getters.position() ]
+	    },
+
+      /* menu */
+	    menuItems() {
+		    return notesBlockMenuStore.items
 	    }
     },
     methods: {
@@ -80,6 +83,15 @@
 	    closeMenuEventHandler() {
 		    this.isMenuOpen = false;
       },
+	    menuItemClickHandler(item) {
+		    switch( item.label ) {
+			    case 'edit':
+				    this.$emit('edit-note-event');
+				    break;
+			    case 'delete':
+				    this.$emit('delete-note-event')
+		    }
+	    },
 
       /* menu event */
 	    editNoteEventHandler() {

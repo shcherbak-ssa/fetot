@@ -31,7 +31,6 @@
     margin: 0 20px 20px 0;
     justify-content: center;
     transition: .2s;
-    @include static-shadow;
 
     @media screen and (max-width: 670px) {
       font-size: 20px;

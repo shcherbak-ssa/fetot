@@ -25,6 +25,8 @@
 
 // hover styles => hov
 .hover_hov-sh {
+  @include static-shadow;
+
   &:hover {
     @include hover-shadow;
   }

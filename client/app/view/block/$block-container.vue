@@ -4,10 +4,16 @@
        :style="position">
 
     <block-header @open-menu-event="$emit('open-menu-event')">
-      <slot name="block-title"></slot>
+      {{ title }}
     </block-header>
 
-    <slot name="block-menu"></slot>
+    <menu-container v-if="isMenuOpen" @close-menu-event="$emit('close-menu-event')">
+      <template v-slot:menu-title>{{ title }}</template>
+
+      <template v-slot:menu-items>
+        <slot name="block-menu-items"></slot>
+      </template>
+    </menu-container>
 
     <div class="workspace w100">
 <!--      <block-status-line></block-status-line>-->
@@ -30,7 +36,7 @@
 
 <script>
   import blockHeader from './block-header.vue';
-  import blockStatusLine from './block-status-line.vue';
+  // import blockStatusLine from './block-status-line.vue';
   import blockFooter from './block-footer.vue';
 
 	export default {
@@ -43,16 +49,19 @@
       }
     },
     props: {
+			title: String,
+      isMenuOpen: Boolean,
 			sizeType: Number,
       position: Object
     },
     components: {
 			'block-header': blockHeader,
-      'block-status-line': blockStatusLine,
+      // 'block-status-line': blockStatusLine,
       'block-footer': blockFooter
     },
     computed: {
 	    currentSize() {
+	    	if( this.isMenuOpen ) return 'is-menu-open';
 	    	return ['is-normal', 'is-small', 'is-list', 'is-flexible',][this.sizeType];
       }
     },
@@ -72,7 +81,6 @@
     margin-bottom: 24px;
     width: 360px;
     transition: .4s;
-    @include static-shadow;
 
     &.is-normal {
       height: 222px;
@@ -101,6 +109,16 @@
         height: 0;
         opacity: 0;
         margin: 0;
+      }
+    }
+    &.is-menu-open {
+      height: 300px;
+
+      .data {
+        opacity: 0
+      }
+      .menu-container {
+        box-shadow: none;
       }
     }
 
