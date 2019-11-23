@@ -5,8 +5,10 @@
             @close-event="$emit('close-frame-event')">
     </frame-header>
     <div class="container pr">
-      <slot></slot>
+      <slot name="frame-content"></slot>
     </div>
+
+    <slot name="frame-src"></slot>
   </div>
 </template>
 

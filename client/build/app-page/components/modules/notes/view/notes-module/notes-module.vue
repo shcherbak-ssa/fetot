@@ -11,7 +11,8 @@
               :frame-state="frameState"
               :options="frameOptions"
               @close-frame-event="closeFrameEventHandler">
-        <notes-frame-content></notes-frame-content>
+
+
       </frame-container>
     </template>
 
@@ -104,8 +105,8 @@
 		    this.hasFrame = false;
 		    this.currentFrameIsForCreate = false;
 
-		    this.updateBlocksPositions();
 		    this.updateCurrentBlocks();
+		    this.currentNoteStore.actions.clean();
       },
 
       /* note handlers */
@@ -114,21 +115,19 @@
 	    },
 	    async deleteNoteEventHandler(id) {
 	    	await this.currentBlocksStore.actions.deleteBlock(id);
+		    this.updateCurrentBlocks();
       },
 
       /* others */
 	    changeSizeTypeEventHandler(sizeType) {
 	    	this.currentModuleStore.actions.updateSettingsByKey({key: 'blocksSizeType', value: sizeType})
 	    },
-      updateBlocksPositions() {
+      updateCurrentBlocks() {
 	      this.pageStore.state.documentWidth < 1280
 		      ? this.pageStore.actions.removeBlocksPositions()
-		      : this.pageStore.actions.updateBlocksPositions()
-      },
-      updateCurrentBlocks() {
-	      setTimeout(() => {
-		      this.currentBlocks = this.currentBlocksStore.getters.getLikeArray();
-        }, 10)
+		      : this.pageStore.actions.updateBlocksPositions();
+
+	      this.currentBlocks = this.currentBlocksStore.getters.getLikeArray();
       }
     },
     computed: {
@@ -152,9 +151,6 @@
       }
     },
 
-    beforeMount() {
-	    this.updateBlocksPositions()
-    },
     mounted() {
 			this.updateCurrentBlocks();
 

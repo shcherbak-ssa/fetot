@@ -7,14 +7,12 @@ import StoreWorker from '$fetot-store-worker';
 /*** imports [end] ***/
 /*** init [begin] ***/
 
+const cleanNote = {id: '0', title: '', content: [], info: {date: 0}};
+
+/* store data */
 const state = {
 	note: {
-		id: '0',
-		title: '',
-		content: [],
-		info: {
-			date: 0
-		}
+		...cleanNote
 	}
 };
 
@@ -39,6 +37,10 @@ const getters = {
 };
 
 const mutations = {
+	CLEAN(state) {
+		state.note = { ...cleanNote }
+	},
+	
 	UPDATE(state, data) {
 		state.note = { ...data }
 	},
@@ -56,6 +58,10 @@ const mutations = {
 };
 
 const actions = {
+	async clean(context) {
+		context.commit('CLEAN')
+	},
+	
 	async update(context, data) {
 		context.commit('UPDATE', data)
 	},
