@@ -1,8 +1,9 @@
 <template>
   <div class="block-container pa bs br6px bg-fff hover_hov-sh"
        :class="currentSize"
+       :data-height="currentHeight"
        :style="setCurrentPosition"
-       ref="currentBlock">
+       ref="currentBlock" >
 
     <block-header @open-menu-event="$emit('open-menu-event')">
       {{ title }}
@@ -40,13 +41,16 @@
   // import blockStatusLine from './block-status-line.vue';
   import blockFooter from './block-footer.vue';
 
+  import blockConfigStore from './src/block-config-store';
+
 	export default {
 		name: 'block-container',
     data() {
 			return {
 				isMounted: false,
-				currentPosition: {},
-				textState: { 'is-overflow': false },
+        sizeAndHeight: blockConfigStore.sizeAndHeight,
+
+        textState: { 'is-overflow': false },
       }
     },
     props: {
@@ -66,36 +70,38 @@
 				this.textState['is-overflow'] =
 					content.offsetHeight < content.children[0].offsetHeight
       },
-
-      /* position */
-    },
-    watch: {
-			position() {
-				this.$forceUpdate();
+      getCurrentSizeAndHeightObject(type) {
+				return this.sizeAndHeight[ this.isMenuOpen ? 4 : this.sizeType ]
       }
     },
     computed: {
 	    currentSize() {
-	    	if( this.isMenuOpen ) return 'is-menu-open';
-	    	return ['is-normal', 'is-small', 'is-list', 'is-flexible',][this.sizeType];
+	    	return this.sizeAndHeight[ this.isMenuOpen ? 4 : this.sizeType ].size;
+      },
+      currentHeight() {
+	    	const {height} = this.sizeAndHeight[ this.isMenuOpen ? 4 : this.sizeType ];
+	    	return height === undefined ? '' : height;
       },
 	    setCurrentPosition() {
 	    	if( !this.isMounted ) return {};
 
-		    const {children} = this.$refs.currentBlock.parentElement;
-
 		    let overBlockHeight = 0;
 		    let {left, index, rawIndex} = this.position;
+		    console.log('position', this.position);
 
 		    if( left === undefined ) {
 			    left = 0;
 
 			    if( index !== 0 ) {
-				    overBlockHeight = (children[index - 1].offsetHeight + 24) * index;
+			    	const elem = this.$refs.currentBlock.parentElement.children[index - 1];
+				    overBlockHeight = (+elem.getAttribute('data-height') + 24) * index;
 			    }
 		    } else {
 			    if( index >= 3 ) {
-				    overBlockHeight = (children[index - 3].offsetHeight + 24) * rawIndex(index);
+				    const elem = this.$refs.currentBlock.parentElement.children[index - 3];
+				    overBlockHeight = (+elem.getAttribute('data-height') + 24) * rawIndex(index + 1);
+
+				    console.log('top', overBlockHeight)
 			    }
 		    }
 

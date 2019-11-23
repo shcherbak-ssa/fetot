@@ -17,7 +17,7 @@
 
     <template v-slot:module-blocks>
       <notes-block
-              v-for="(block, index) in currentBlocks"
+              v-for="(block, index) in setCurrentBlocks"
               :key="index" :index="index" :block="block">
       </notes-block>
     </template>
@@ -39,6 +39,7 @@
 				hasFrame: false,
         currentFrameIsForCreate: false,
         lastBlocksSizeType: 0,
+        currentBlocks: [],
 
         pageStore: StoreWorker.getStore('page'),
         currentBlocksStore: StoreWorker.getStore('current-blocks'),
@@ -87,7 +88,6 @@
       	});
 
 	      this.pageStore.actions.removeBlocksPositions();
-        this.appEventsEmitter.emit('force-update-notes')
       },
 	    async closeFrameEventHandler(toSaveNote = true) {
       	if( !toSaveNote ) return;
@@ -105,7 +105,7 @@
 		    this.currentFrameIsForCreate = false;
 
 		    this.updateBlocksPositions();
-		    this.appEventsEmitter.emit('force-update-notes');
+		    this.updateCurrentBlocks();
       },
 
       /* note handlers */
@@ -124,6 +124,11 @@
 	      this.pageStore.state.documentWidth < 1280
 		      ? this.pageStore.actions.removeBlocksPositions()
 		      : this.pageStore.actions.updateBlocksPositions()
+      },
+      updateCurrentBlocks() {
+	      setTimeout(() => {
+		      this.currentBlocks = this.currentBlocksStore.getters.getLikeArray();
+        }, 10)
       }
     },
     computed: {
@@ -142,8 +147,8 @@
       },
 
       /* blocks */
-      currentBlocks() {
-      	return this.currentBlocksStore.getters.getLikeArray();
+      setCurrentBlocks() {
+	      return this.currentBlocks
       }
     },
 
@@ -151,13 +156,19 @@
 	    this.updateBlocksPositions()
     },
     mounted() {
-			this.notesEventsEmitter
+			this.updateCurrentBlocks();
+
+	    this.appEventsEmitter.on('force-update-notes', this.updateCurrentBlocks);
+
+      this.notesEventsEmitter
         .on('edit-note-event', this.editNoteEventHandler)
-        .on('delete-note-event', this.deleteNoteEventHandler)
+        .on('delete-note-event', this.deleteNoteEventHandler);
     },
     destroyed() {
 			StoreWorker.removeStore('current-note');
 			eventsEmitterWorker.removeEmitter('notes');
+
+	    this.appEventsEmitter.remove('force-update-notes', this.updateCurrentBlocks);
     }
 	}
 </script>

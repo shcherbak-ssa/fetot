@@ -28,8 +28,6 @@ class Connection {
 		if( type === 'change-module' ) return await this._changeModule(message);
 		const [workerType, worker] = type.split('/');
 		
-		console.log(type, message);
-		
 		switch( workerType ) {
 			case 'module':
 				await this.$module(worker, message);

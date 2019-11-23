@@ -66,7 +66,7 @@
 
       /* block container props */
       blocksSizeType() {
-	      return StoreWorker.getStore('current-module').getters.settingsByKey('blocksSizeType')
+	      return this.currentModuleStore.getters.settingsByKey('blocksSizeType')
       },
 	    blockPosition() {
       	if( this.pageStore.state.blocksPositions === null ) return { index: this.index };
@@ -116,16 +116,7 @@
       setCurrentNoteStore() {
       	this.currentNoteStore.actions.update(this.block);
       },
-      forceUpdateNote() {
-      	this.$forceUpdate()
-      },
     },
-    mounted() {
-			this.appEventsEmitter.on('force-update-notes', this.forceUpdateNote);
-    },
-    destroyed() {
-			this.appEventsEmitter.remove('force-update-notes', this.forceUpdateNote);
-    }
 	}
 </script>
 
