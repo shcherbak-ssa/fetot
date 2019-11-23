@@ -14,7 +14,7 @@ function getBlocksPositionsConfigs(blocksCount) {
 	const remains = blocksCount % 3;
 	const full = (blocksCount - remains) / 3;
 	
-	const optionalParams = remains !== 0 && (remains === 1) ? [1] : [1, 1];
+	const optionalParams = remains !== 0 ? (remains === 1 ? [1] : [1, 1]) : [];
 	return preparingBlocksConfig(full,  ...optionalParams);
 }
 
@@ -32,18 +32,21 @@ function preparingBlocksConfig(full, leftSideRemain = 0, centerRemain = 0) {
 function preparingLeftSideBlocksConfig(count) {
 	return {
 		left: 0,
+		rawIndex: getRawIndexFunction(1),
 		indexList: createIndexList(count, 1)
 	}
 }
 function preparingCenterBlocksConfig(count) {
 	return {
 		left: 384,
+		rawIndex: getRawIndexFunction(2),
 		indexList: createIndexList(count, 2)
 	}
 }
 function preparingRightSideBlocksConfig(count) {
 	return {
 		left: 768,
+		rawIndex: getRawIndexFunction(3),
 		indexList: createIndexList(count, 3)
 	}
 }
@@ -56,6 +59,11 @@ function createIndexList(count, number) {
 		indexList[i] = 3 * i + number;
 	
 	return indexList;
+}
+
+/* others */
+function getRawIndexFunction(number) {
+	return (index) => (index - number) / 3
 }
 
 /*** src [end] ***/

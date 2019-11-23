@@ -82,26 +82,30 @@
       	this.hasFrame = true;
 
       	this.lastBlocksSizeType = this.currentModuleStore.getters.settingsByKey('blocksSizeType');
-      	this.currentModuleStore.actions.updateSettingsByKey({key: 'blocksSizeType', value: 2});
+      	this.currentModuleStore.actions.updateSettingsByKey({
+          key: 'blocksSizeType', value: 2, sendToServer: false
+      	});
 
-	      this.pageStore.actions.removeBlocksPositions()
+	      this.pageStore.actions.removeBlocksPositions();
+        this.appEventsEmitter.emit('force-update-notes')
       },
-	    closeFrameEventHandler(toSaveNote = true) {
-      	this.hasFrame = false;
-
-		    this.updateBlocksPositions();
-		    this.currentModuleStore.actions.updateSettingsByKey({
-          key: 'blocksSizeType', value: this.lastBlocksSizeType
-		    });
-
+	    async closeFrameEventHandler(toSaveNote = true) {
       	if( !toSaveNote ) return;
 
       	if( this.currentFrameIsForCreate ) {
 		      const currentNote = this.currentNoteStore.getters.note();
-		      this.currentBlocksStore.actions.createBlock(currentNote);
+		      await this.currentBlocksStore.actions.createBlock(currentNote);
         }
 
-      	this.currentFrameIsForCreate = false;
+		    await this.currentModuleStore.actions.updateSettingsByKey({
+			    key: 'blocksSizeType', value: this.lastBlocksSizeType, sendToServer: false
+		    });
+
+		    this.hasFrame = false;
+		    this.currentFrameIsForCreate = false;
+
+		    this.updateBlocksPositions();
+		    this.appEventsEmitter.emit('force-update-notes');
       },
 
       /* note handlers */

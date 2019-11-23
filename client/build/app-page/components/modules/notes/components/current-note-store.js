@@ -9,7 +9,7 @@ import StoreWorker from '$fetot-store-worker';
 
 const state = {
 	note: {
-		id: 0,
+		id: '0',
 		title: '',
 		content: [],
 		info: {
@@ -44,7 +44,7 @@ const mutations = {
 	},
 	UPDATE_FOR_CREATE(state, {date}) {
 		const title = state.note.title;
-		state.note = {id: 0, title, content: [], info: { date: +date }}
+		state.note = {id: '0', title, content: [], info: { date: +date }}
 	},
 	
 	UPDATE_VALUE(state, {key, value}) {

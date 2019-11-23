@@ -65,12 +65,12 @@ const actions = {
 	
 	async updatePositions(context, positions) {
 		context.commit('UPDATE_POSITIONS', positions);
-		sendOutputMessage('update-positions', {positions});
+		await sendOutputMessage('update-positions', {positions});
 	},
 	async updateSettingsByKey({commit, getters}, options) {
-		const {key, value} = options;
+		const {key, value, sendToServer = true} = options;
 		
-		if( key === 'blocksSizeType' && value === 2 )
+		if( key === 'blocksSizeType' && !sendToServer )
 			return commit('UPDATE_SETTINGS_BY_KEY', options);
 		
 		if( key === 'blocksCount' ) {
@@ -79,7 +79,7 @@ const actions = {
 		}
 		
 		commit('UPDATE_SETTINGS_BY_KEY', options);
-		sendOutputMessage('update-settings', options);
+		await sendOutputMessage('update-settings', options);
 	},
 };
 

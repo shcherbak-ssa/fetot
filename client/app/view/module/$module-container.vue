@@ -7,9 +7,13 @@
       <slot name="module-blocks"></slot>
     </div>
 
-    <create-block-button @create-block-event="$emit('create-block-event')"></create-block-button>
+    <create-block-button
+            :has-frame="hasFrame"
+            @create-block-event="$emit('create-block-event')">
+    </create-block-button>
 
     <change-blocks-size-type-buttons
+            :has-frame="hasFrame"
             :size-type="sizeType"
             @change-size-type-event="changeSizeTypeEventHandler">
     </change-blocks-size-type-buttons>

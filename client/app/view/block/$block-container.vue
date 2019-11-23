@@ -1,7 +1,7 @@
 <template>
   <div class="block-container pa bs br6px bg-fff hover_hov-sh"
        :class="currentSize"
-       :style="currentPosition"
+       :style="setCurrentPosition"
        ref="currentBlock">
 
     <block-header @open-menu-event="$emit('open-menu-event')">
@@ -44,6 +44,7 @@
 		name: 'block-container',
     data() {
 			return {
+				isMounted: false,
 				currentPosition: {},
 				textState: { 'is-overflow': false },
       }
@@ -67,42 +68,45 @@
       },
 
       /* position */
-	    updateCurrentPosition() {
-		    let overBlockHeight = 0;
-	    	let isFromFirst = true;
-		    let {left, index} = this.position;
-
-		    if( left === undefined ) {
-			    left = 0;
-
-          if( index !== 0 ) {
-	          index -= 1;
-	          isFromFirst = false;
-          }
-		    } else {
-			    if( index >= 3 ) {
-				    index -= 3;
-				    isFromFirst = false;
-			    }
-		    }
-
-		    if( !isFromFirst ) {
-			    const {children} = this.$refs.currentBlock.parentElement;
-			    overBlockHeight = children[index].offsetHeight + 24;
-		    }
-
-		    this.currentPosition = { left, top: overBlockHeight + 'px' };
-	    },
+    },
+    watch: {
+			position() {
+				this.$forceUpdate();
+      }
     },
     computed: {
 	    currentSize() {
 	    	if( this.isMenuOpen ) return 'is-menu-open';
 	    	return ['is-normal', 'is-small', 'is-list', 'is-flexible',][this.sizeType];
       },
+	    setCurrentPosition() {
+	    	if( !this.isMounted ) return {};
+
+		    const {children} = this.$refs.currentBlock.parentElement;
+
+		    let overBlockHeight = 0;
+		    let {left, index, rawIndex} = this.position;
+
+		    if( left === undefined ) {
+			    left = 0;
+
+			    if( index !== 0 ) {
+				    overBlockHeight = (children[index - 1].offsetHeight + 24) * index;
+			    }
+		    } else {
+			    if( index >= 3 ) {
+				    overBlockHeight = (children[index - 3].offsetHeight + 24) * rawIndex(index);
+			    }
+		    }
+
+		    return { left, top: overBlockHeight + 'px' };
+	    },
     },
     mounted() {
 	    this.updateTextState();
-	    this.updateCurrentPosition();
+	    this.$nextTick(() => {
+	    	this.isMounted = true;
+      })
     },
     updated() {
 			this.updateTextState()

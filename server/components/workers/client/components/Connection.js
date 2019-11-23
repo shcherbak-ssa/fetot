@@ -28,6 +28,8 @@ class Connection {
 		if( type === 'change-module' ) return await this._changeModule(message);
 		const [workerType, worker] = type.split('/');
 		
+		console.log(type, message);
+		
 		switch( workerType ) {
 			case 'module':
 				await this.$module(worker, message);
@@ -42,9 +44,6 @@ class Connection {
 					const result = await this.moduleMessageValidation(message);
 					if( typeof result === 'object' ) return result;
 				}
-				
-				// if( worker in this.moduleWorkers )
-				// 	message =
 				
 				return await this.blocks(worker, message);
 		}

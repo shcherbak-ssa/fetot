@@ -45,7 +45,8 @@
         currentNoteStore: StoreWorker.getStore('current-note'),
         currentModuleStore: StoreWorker.getStore('current-module'),
 
-        notesEventsEmitter: eventsEmitterWorker.getEmitter('notes')
+				appEventsEmitter: eventsEmitterWorker.getEmitter('app'),
+        notesEventsEmitter: eventsEmitterWorker.getEmitter('notes'),
       }
     },
     props: {
@@ -69,11 +70,7 @@
       },
 	    blockPosition() {
       	if( this.pageStore.state.blocksPositions === null ) return { index: this.index };
-
-      	const positions = this.currentModuleStore.getters.positions();
-        const currentBlockPositionIndex = positions.findIndex((item) => item === this.block.id);
-
-		    return this.pageStore.state.blocksPositions[ currentBlockPositionIndex + 1 ]
+		    return this.pageStore.state.blocksPositions[ this.index + 1 ]
 	    },
 
       /* menu */
@@ -86,9 +83,12 @@
 			openMenuEventHandler() {
 	    	this.isMenuOpen = true;
 	    	this.setCurrentNoteStore();
+
+				this.appEventsEmitter.emit('force-update-notes');
       },
 	    closeMenuEventHandler() {
 		    this.isMenuOpen = false;
+		    this.appEventsEmitter.emit('force-update-notes');
       },
 	    menuItemClickHandler(item) {
 		    switch( item.label ) {
@@ -115,7 +115,16 @@
       /* src */
       setCurrentNoteStore() {
       	this.currentNoteStore.actions.update(this.block);
-      }
+      },
+      forceUpdateNote() {
+      	this.$forceUpdate()
+      },
+    },
+    mounted() {
+			this.appEventsEmitter.on('force-update-notes', this.forceUpdateNote);
+    },
+    destroyed() {
+			this.appEventsEmitter.remove('force-update-notes', this.forceUpdateNote);
     }
 	}
 </script>

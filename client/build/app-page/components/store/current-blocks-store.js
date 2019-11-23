@@ -19,7 +19,10 @@ const state = {
 
 const getters = {
 	getLikeArray(state) {
-		return () => Object.entries(state.blocks).map(([id, block]) => block);
+		return () => {
+			const positions = StoreWorker.getStore('current-module').getters.positions();
+			return positions.map((id) => state.blocks[id]);
+		}
 	}
 };
 
@@ -27,13 +30,6 @@ const mutations = {
 	UPDATE(state, blocks) {
 		const parsedBlocks = blocks.map((block) => [block.id, block]);
 		state.blocks = { ...Object.fromEntries(parsedBlocks) };
-	},
-	UPDATE_BLOCK_ID(state, id) {
-		const block = state.blocks['0'];
-		delete state.blocks['0'];
-		
-		block.id = id;
-		state.blocks[id] = block;
 	},
 	UPDATE_BLOCK_TITLE(state, {id, title}) {
 		state.blocks[id].title = title
@@ -56,19 +52,17 @@ const actions = {
 	},
 	
 	async createBlock({commit, state}, block) {
-		block.id = '0';
-		commit('CREATE_BLOCK', block);
-		
 		const {id} = await sendOutputMessage('create', block);
-		commit('UPDATE_BLOCK_ID', id);
-		
 		await updateCurrentModuleData('create', id, 1);
+		
+		block.id = id;
+		commit('CREATE_BLOCK', block)
 	},
 	async deleteBlock(context, block_id) {
+		await updateCurrentModuleData('delete', block_id, -1);
 		context.commit('DELETE_BLOCK', block_id);
 		
 		sendOutputMessage('delete', {id: block_id});
-		await updateCurrentModuleData('delete', block_id, -1);
 	}
 };
 
@@ -86,7 +80,7 @@ function createCurrentBlocksStore() {
 async function updateCurrentModuleData(label, id, settingsValue) {
 	const currentModuleStore = StoreWorker.getStore('current-module');
 	
-	currentModuleStore.actions.updateSettingsByKey({
+	await currentModuleStore.actions.updateSettingsByKey({
 		key: 'blocksCount', value: settingsValue
 	});
 	
@@ -100,7 +94,7 @@ async function updateCurrentModuleData(label, id, settingsValue) {
 			positions = positions.filter((item) => item !== id);
 	}
 	
-	currentModuleStore.actions.updatePositions(positions);
+	await currentModuleStore.actions.updatePositions(positions);
 }
 
 /*** src [end] ***/

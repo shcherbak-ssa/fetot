@@ -1,5 +1,5 @@
 <template>
-  <div class="change-blocks-size-type-buttons pa flex-col">
+  <div class="change-blocks-size-type-buttons flex-col" :class="setState">
     <div class="change-button cp pr bfr-click bg-fff fc br50"
          :class="{ 'is-active': item.type === sizeType }"
          v-for="(item, index) in store"
@@ -17,7 +17,8 @@
 	export default {
 		name: 'change-blocks-size-type-buttons',
     props: {
-			sizeType: Number
+			sizeType: Number,
+      hasFrame: Boolean
     },
     components: {
 			'fetot-icon': fetotIcon
@@ -25,7 +26,10 @@
     computed: {
 			store() {
 				return changeBlocksSizeTypeStore
-      }
+      },
+	    setState() {
+		    return { 'has-frame': this.hasFrame }
+	    }
     }
 	}
 </script>
@@ -34,8 +38,14 @@
   @import '$fetot-scss';
 
   .change-blocks-size-type-buttons {
+    position: fixed;
     top: 140px;
     right: 22px;
+    transition: .4s;
+
+    &.has-frame {
+      right: -56px;
+    }
 
     .change-button {
       margin-bottom: 16px;

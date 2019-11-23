@@ -51,9 +51,9 @@ const actions = {
 		const blocksConfigs = getBlocksPositionsConfigs(blocksCount);
 		
 		const blocksPositions = new Array(blocksCount + 1);
-		blocksConfigs.forEach(({left, indexList}) => {
+		blocksConfigs.forEach(({left, indexList, rawIndex}) => {
 			indexList.forEach((index, i) => {
-				blocksPositions[index] = { left: left + 'px', index: index - 1}
+				blocksPositions[index] = { left: left + 'px', index: index - 1, rawIndex }
 			})
 		});
 		

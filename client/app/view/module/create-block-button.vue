@@ -1,5 +1,8 @@
 <template>
-  <div class="create-block-button cp fc br50 bfr-click" @click.stop="$emit('create-block-event')">
+  <div class="create-block-button cp fc br50 bfr-click"
+       :class="setState"
+       @click.stop="$emit('create-block-event')">
+
     <fetot-icon icon="&#xE809;"></fetot-icon>
   </div>
 </template>
@@ -9,8 +12,16 @@
 
 	export default {
 		name: 'create-block-button',
+    props: {
+			hasFrame: Boolean
+    },
     components: {
 			'fetot-icon': fetotIcon
+    },
+    computed: {
+			setState() {
+				return { 'has-frame': this.hasFrame }
+      }
     }
 	}
 </script>
@@ -33,6 +44,9 @@
 
     &:hover {
       background: $fetot-dark-blue;
+    }
+    &.has-frame {
+      right: -56px;
     }
 
     @media screen and (max-width: 1024px) {

@@ -1,5 +1,5 @@
 <template>
-  <div class="frame-container pa bs bg-fff hover_hov-sh" :class="setState">
+  <div class="frame-container bs bg-fff hover_hov-sh" :class="setState">
     <frame-header
             :header="options.header"
             @close-event="$emit('close-frame-event')">
@@ -34,6 +34,7 @@
   @import '$fetot-scss';
 
   .frame-container {
+    position: fixed;
     border-radius: 6px 6px 0 0;
     transition: .4s;
     overflow: hidden;
